@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/Flutter_beavy_icon%2520%25281%2529_hDKTYFC.png",
+    "description": "Ecco cosa ti aspetta:\n\n🎤 Talk 1\n\n🧠 \"Dal trasloco al codice: un'app open source per non perdere (quasi) nulla\"\n\n👨‍💻 Salvatore Esposito – Sr. Front-End Developer @ Codemotion\n\nQuando la vita ti mette davanti a un trasloco con figli, cane e scatoloni… puoi scegliere il caos o il codice. Salvatore ci racconta come ha trasformato un problema reale in una soluzione concreta, creando un'app per etichettare, catalogare e scansionare ogni pacco con QR code. Una storia tra vita vissuta e sviluppo software, tutta da ascoltare.\n\n🎤 Talk 2\n\n🧪 \"Flutter Tests: perché sono importanti e come si creano\"\n\n👨‍💻 Carlo Lucera – GDE for Flutter, Team Lead @ Pvotal Technologies\n\nScrivere test in Flutter non è solo una buona pratica, è una garanzia per la qualità del codice. Carlo ci guida tra best practice, tipologie di test e strumenti per scrivere test efficaci nel mondo Flutter.\n\n🎟 Ingresso gratuito, ma i posti sono limitati!\n\nNetworking, chiacchiere tech e community vibes assicurate.\n\nNon mancare, porta un amico o collega — e tanta voglia di imparare!",
+    "end": "2025-04-12T19:30:00+02:00",
+    "id": "bevy:91081",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "flutter-catania-meetup-aprile-25",
+    "source": {
+      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutter-catania-meetup-aprile-25/",
+      "type": "bevy"
+    },
+    "start": "2025-04-12T17:30:00+02:00",
+    "title": "Flutter Catania Meetup - Aprile '25",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutter-catania-meetup-aprile-25/",
+    "venue": {
+      "address": "197 Via Antonino di Sangiuliano",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose Srl"
+    }
+  }
+]

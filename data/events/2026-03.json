@@ -1,0 +1,33 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "🤝 Come community sappiamo che ogni singola persona e ogni singola azione ha le potenzialità di ridefinire il possibile fino a renderlo reale, così per noi l’#6marzo diventa il momento perfetto per creare incontro, scambio, condivisione, crescita e opportunità.\n\n📆 Quindi non prendete impegni giorno 6 Marzo perché vi aspettiamo alle 18:30 presso i locali di AITHO, in Via Cardinale Dusmet, ex Dogana, Catania\n\n👥Programma \n\n18:30 - Check-in \n19:00 - Presentazione GDG Catania e IWD \n19:20 - Panel: Diventare sviluppatrice oggi: scelte, sfide e prospettive @ AITHO \n20:30 - Chiusura",
+    "end": "2026-03-06T20:30:00+01:00",
+    "id": "bevy:116436",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "iwd-international-womens-day-catania-26",
+    "source": {
+      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-iwd-international-womens-day-catania-26/",
+      "type": "bevy"
+    },
+    "start": "2026-03-06T18:30:00+01:00",
+    "title": "IWD - International Women's Day Catania '26",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-iwd-international-womens-day-catania-26/",
+    "venue": {
+      "address": "Snc Via Cardinale Dusmet",
+      "city": "Catania",
+      "name": "Aitho Software Factory"
+    }
+  }
+]

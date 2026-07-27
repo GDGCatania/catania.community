@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/photo_5913420203197318743_y_sutO2UU.jpg",
+    "description": "Natale significa solo una cosa: XMASYNC del GDG Catania.\n\nAnche quest'anno a ridosso delle feste vogliamo invitarvi a un aperitivo natalizio per brindare assieme, scambiarsi gli auguri e rafforzare il legame della nostra community sempre più grande 🫂\n\nUn'occasione per rivedersi dopo il successo della DevFest 2025 e continuare a divertirsi e fare network tra giochi, gadget e buona compagnia!\n\n ⛔️ Vietato l'ingresso a chi non ha un cappello di natale trash e il biglietto... ma soprattutto a chi viene senza cappello 🤶",
+    "end": "2025-12-20T20:30:00+01:00",
+    "id": "bevy:108569",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "xmasync-2025-un-brindisi-col-gdg",
+    "source": {
+      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-xmasync-2025-un-brindisi-col-gdg/",
+      "type": "bevy"
+    },
+    "start": "2025-12-20T17:30:00+01:00",
+    "title": "XMASYNC 2025 - Un brindisi col GDG!",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-xmasync-2025-un-brindisi-col-gdg/",
+    "venue": {
+      "address": "197 Via Antonino di Sangiuliano",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose Srl"
+    }
+  }
+]

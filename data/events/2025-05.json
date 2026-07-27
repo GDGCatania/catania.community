@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/IOE25%2520Bevy%2520Thumbnail%2520-%2520Editable%2520Location_ASNLpUE.png",
+    "description": "🍻 La birra ghiacciata è la cosa più buona al mondo... Sì, ma quale?\n\nSiamo curiosi di sapere qual è la tua birra preferita, ma soprattutto vogliamo assaggiarla.\n\nQuando? Al #watchparty della #GoogleIO di quest'anno!\n\nVoi portate le vostre birre preferite, noi mettiamo la location, lo spirito del GDG Catania e altre birre per vivere assieme un altro momento di condivisione, formazione e network 🥳\n\n🎥 Vi aspettiamo il 20 Maggio alle 18.30 da CreationDose\n\nN.B. possono entrare birre senza persone, ma non persone senza birre 🤣",
+    "end": "2025-05-20T22:00:00+02:00",
+    "id": "bevy:95599",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "google-i-o-extended-catania-2025-watch-party",
+    "source": {
+      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-extended-catania-2025-watch-party/",
+      "type": "bevy"
+    },
+    "start": "2025-05-20T18:30:00+02:00",
+    "title": "Google I/O Extended Catania 2025 - Watch Party",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-extended-catania-2025-watch-party/",
+    "venue": {
+      "address": "197 Via Antonino di Sangiuliano",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose Srl"
+    }
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "🖥 Flutter Catania Meetup – Aprile '26\n\n📍 Centro Atena, Via Fimia 34 – Catania\n\n📅 Sabato 18 Aprile · 17:30 → 20:30\n\nTorna il meetup della community Flutter di Catania.\n\nUn pomeriggio per confrontarsi, fare networking e parlare di Flutter con altri developer locali. Porta i tuoi progetti, le tue domande e la voglia di condividere.\n\nRegistrati e porta un collega!\n\n👇 Hai qualcosa da raccontare? È arrivato il momento di proporlo! 👇\n🔗 https://sessionize.com/flutter-catania-meetup",
+    "end": "2026-04-18T20:30:00+02:00",
+    "id": "bevy:119593",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "flutter-catania-meetup-aprile-26",
+    "source": {
+      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutter-catania-meetup-aprile-26/",
+      "type": "bevy"
+    },
+    "start": "2026-04-18T17:30:00+02:00",
+    "title": "Flutter Catania Meetup - Aprile '26",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutter-catania-meetup-aprile-26/",
+    "venue": {
+      "address": "34 Via Fimia",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5250131,
+        "lon": 15.0846532
+      },
+      "name": "Nuova Acropoli Catania | Centro Atena"
+    }
+  }
+]

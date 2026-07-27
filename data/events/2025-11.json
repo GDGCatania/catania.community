@@ -1,0 +1,74 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_6GwwMRk",
+    "description": "L'enciclopedia online Wikipedia e i suoi progetti fratelli sono una risorsa essenziale per diffondere la conoscenza e documentare il patrimonio storico e culturale. Arricchita ogni giorno da volontari che dedicano il loro tempo a ricercare e aggiungere informazioni, Wikipedia offre una base di conoscenza accessibile a tutti su Internet, gratuita e riutilizzabile. E potete partecipare anche voi!\n\nDurante questa presentazione seguita da un laboratorio pratico, scopriremo insieme come funziona Wikipedia, chi sono i volontari che aggiungono dei contenuti e quali sono le regole per assicurarsi di trovare informazioni affidabili. Insieme, impareremo come aggiungere informazioni su Wikipedia, sul tema dell’architettura e la storia di Catania.\n\nScopriremo anche due altri progetti della famiglia di Wikipedia: Wikimedia Commons, una collezione di foto e video sotto licenza libera che ci possono servire a illustrare le voci di Wikipedia o i vostri siti web, e Wikidata, un database con cui creare elenchi, mappe e altri strumenti utili.\n\nIngresso libero e gratuito. Ragazzi benvenuti dai 12 anni in su.\n\nPer poter partecipare attivamente al laboratorio, è necessario portare il proprio laptop o eventualmente tablet.",
+    "end": "2025-11-05T21:00:00+01:00",
+    "id": "bevy:105745",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "laboratorio-wikipedia-partecipare-allenciclopedia-collaborativa-e-scoprire",
+    "source": {
+      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-laboratorio-wikipedia-partecipare-allenciclopedia-collaborativa-e-scoprire-altri-progetti/",
+      "type": "bevy"
+    },
+    "start": "2025-11-05T19:00:00+01:00",
+    "title": "Laboratorio Wikipedia: Partecipare all’enciclopedia collaborativa e scoprire altri progetti",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-laboratorio-wikipedia-partecipare-allenciclopedia-collaborativa-e-scoprire-altri-progetti/",
+    "venue": {
+      "address": "197 Via Antonino di Sangiuliano",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose Srl"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_soiZ8au",
+    "description": "➡️ Programma ⬅️\n\nTi ricordi cosa stavi facendo 15 anni fa? 🤔\nForse andavi al liceo; forse eri impegnato a salvare la principessa Peach; forse streammavi la prima puntata di The Walking Dead o forse avevi convinto i tuoi amici a investire in una nuova scintillante moneta virtuale, il Bitcoin...\n\nNoi del GDG Catania, 15 anni fa, stavamo premendo per la prima volta F5 avviando quel programma che evento dopo evento, anno dopo anno, meet up dopo meet up, è diventata la community più calda e vivace del sud Italia.\n\nBuon compleanno GDG Catania! 🎂\n\nE cosa c'è di meglio che festeggiare assieme durante la prossima DevFest?\nInviare Bitcoin ai lead del GDG Nulla!\n\nQuindi rimanete connessi per scoprire tutte le info della DevFest 2025!\nNovembre è alle porte e noi siamo carichi!",
+    "end": "2025-11-15T23:00:00+01:00",
+    "id": "bevy:98789",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "devfest-catania-2025",
+    "source": {
+      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2025/",
+      "type": "bevy"
+    },
+    "start": "2025-11-15T09:00:00+01:00",
+    "title": "DevFest Catania 2025",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2025/",
+    "venue": {
+      "address": "2 Via Cardinale Dusmet",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.7313618,
+        "lon": 15.1590476
+      },
+      "name": "Vecchia Dogana"
+    }
+  }
+]
