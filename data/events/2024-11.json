@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/DF24-Bevy-Thumbnail-Evergreen-Circle_zvmzRfy.png",
+    "description": "DevFest Catania 2024: Revolution AI (e non solo)!\n\nIl 16 e 17 novembre, preparati a immergerti nel cuore dell'innovazione tecnologica alla DevFest Catania 2024!\n\nNon solo AI: esploreremo le ultime tendenze tech, dalle applicazioni pratiche alle novità più entusiasmanti del settore.\n\nQuesto evento, creato dalle community per le community di tutto il territorio catanese, ti offre l'opportunità unica di condividere le tue passioni, imparare da esperti e connetterti con altri appassionati di tecnologia.\n\nNon perdere l'occasione di far parte di questa straordinaria rivoluzione! Prendi subito il tuo biglietto e preparati a essere ispirato.\n\n🚀 Il futuro è nelle tue mani! 🚀\n\n****************************************************************\n\nDevFest Catania 2024: Revolution AI and Beyond!\n\nOn November 16th and 17th, get ready to dive into the heart of technological innovation at DevFest Catania 2024!\n\nNot just AI: we'll explore the latest tech trends, from practical applications to the most exciting new developments in the industry.\n\nCreated by the community for the community, this event is a unique opportunity to share your passions, learn from experts, and network with other tech enthusiasts.\n\nDon't miss your chance to be a part of this extraordinary revolution! Get your ticket now and get ready to be inspired.\n\n🚀 The future is in your hands! 🚀\n\nModalità di partecipazione al Workshop\n\nIl workshop è a numero chiuso e per partecipare è necessario prenotare il proprio posto. Attraverso il link Eventbrite potrete ottenere un biglietto, totalmente gratuito, valido solo per la partecipazione al workshop selezionato.\n\nIl biglietto d'ingresso per la DevFest rimane obbligatorio per accedere alla struttura ed è requisito per la partecipazione a ogni workshop.\n\nDay 1\n\nDay 2",
+    "end": "2024-11-17T18:00:00+01:00",
+    "id": "bevy:68032",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "devfest-catania-2024-revolution-ai",
+    "source": {
+      "fetchedAt": "2026-07-27T23:49:51.859Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2024-revolution-ai/",
+      "type": "bevy"
+    },
+    "start": "2024-11-16T09:30:00+01:00",
+    "title": "DevFest Catania 2024 \"Revolution AI\"",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2024-revolution-ai/",
+    "venue": {
+      "address": "Via Ursino 58",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5097051,
+        "lon": 15.0979326
+      },
+      "name": "Via Ursino, 58"
+    }
+  }
+]

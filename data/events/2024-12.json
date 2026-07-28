@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/photo_5913420203197318743_y_sutO2UU.jpg",
+    "description": "Natale significa solo una cosa: XMASYNC del GDG Catania.\n\nAnche quest'anno a ridosso delle feste vogliamo invitarvi a un aperitivo natalizio per brindare assieme, scambiarsi gli auguri e rafforzare il legame della nostra community sempre più grande 🫂\n\nUn'occasione per rivedersi dopo il successo della DevFest 2024 e continuare a divertirsi e fare network tra giochi, gadget e buona compagnia!\n\n📍Vi aspettiamo il 7 dicembre dalle 17:30 alle 20:30 da CreationDose in Via Antonino di Sangiuliano 197, Catania\n\n ⛔️ Vietato l'ingresso a chi non ha un cappello di natale trash e il biglietto... ma soprattutto a chi viene senza cappello 🤶",
+    "end": "2024-12-07T20:30:00+01:00",
+    "id": "bevy:79131",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "xmasync-2024-un-brindisi-col-gdg",
+    "source": {
+      "fetchedAt": "2026-07-27T23:49:51.859Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-xmasync-2024-un-brindisi-col-gdg/",
+      "type": "bevy"
+    },
+    "start": "2024-12-07T17:30:00+01:00",
+    "title": "XMASYNC 2024 - Un brindisi col GDG!",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-xmasync-2024-un-brindisi-col-gdg/",
+    "venue": {
+      "address": "Via Antonino di Sangiuliano 197",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose Srl"
+    }
+  }
+]

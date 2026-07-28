@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/photo1709925862.jpeg",
+    "description": "Siete pronti a esplorare le profondità delle applicazioni Angular a livello enterprise? Unitevi a noi in un esclusivo Aperitech dove ci addentreremo nei segreti di NGRX, lo state manager preferito in ambito enterprise per Angular. Durante l'evento, scoprirete i vantaggi dell'utilizzo di questa potente libreria, esploreremo insieme le recenti API introdotte nella versione 17, metteremo in pratica diverse strategie di debugging e molto altro. Non perdete questa fantastica occasione per arricchire le vostre competenze su Angular in un contesto informale e stimolante!",
+    "end": "2024-03-15T21:00:00+01:00",
+    "id": "bevy:62516",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "aperitech-con-fabio-biondi-state-management-con-angular-e-ngrx-17",
+    "source": {
+      "fetchedAt": "2026-07-27T23:49:51.859Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-aperitech-con-fabio-biondi-state-management-con-angular-e-ngrx-17/",
+      "type": "bevy"
+    },
+    "start": "2024-03-15T18:00:00+01:00",
+    "title": "Aperitech con Fabio Biondi: State Management con Angular e NGRX 17",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-aperitech-con-fabio-biondi-state-management-con-angular-e-ngrx-17/",
+    "venue": {
+      "address": "Viale Africa 31",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.512206,
+        "lon": 15.1033077
+      },
+      "name": "Paradigma"
+    }
+  }
+]

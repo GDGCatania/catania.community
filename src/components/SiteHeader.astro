@@ -1,0 +1,141 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { normalizePath } from '../lib/urls';
+import { t } from '../i18n';
+import { ROUTES } from '../lib/site';
+
+const path = normalizePath(Astro.url.pathname);
+
+// "Spaces" is in the design but deferred to v2: better no menu entry at all
+// than one that leads to a 404.
+const nav = [
+  {
+    href: ROUTES.home,
+    label: t('nav.events'),
+    active: path === '/' || path.startsWith(ROUTES.events),
+  },
+  {
+    href: ROUTES.communities,
+    label: t('nav.communities'),
+    active: path.startsWith(ROUTES.communities),
+  },
+];
+---
+
+<header class="site-header">
+  <div class="container inner">
+    <a class="brand" href={ROUTES.home}>
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__name">catania.community</span>
+    </a>
+
+    <nav class="nav" aria-label={t('site.sections')}>
+      {
+        nav.map((item) => (
+          <a href={item.href} aria-current={item.active ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="actions">
+      <ThemeToggle />
+      <a class="btn btn--primary cta" href={ROUTES.submit}>
+        {t('nav.addCommunity')}
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: 64px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--ink);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+
+  .brand__mark {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--accent);
+    box-shadow: inset 0 0 0 3px var(--bg);
+  }
+
+  .brand__name {
+    font-size: var(--step-0);
+  }
+
+  .nav {
+    display: flex;
+    gap: var(--space-4);
+    margin-inline-start: auto;
+  }
+
+  .nav a {
+    color: var(--ink-2);
+    font-size: var(--step--1);
+    font-weight: 600;
+    padding-block: var(--space-1);
+  }
+
+  .nav a:hover {
+    color: var(--ink);
+  }
+
+  .nav a[aria-current='page'] {
+    color: var(--ink);
+    box-shadow: inset 0 -2px 0 var(--accent);
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1080px) {
+    .cta {
+      display: none;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .inner {
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      padding-block: var(--space-3);
+    }
+    .nav {
+      order: 3;
+      width: 100%;
+      margin-inline-start: 0;
+      border-top: 1px solid var(--border-soft);
+      padding-top: var(--space-3);
+    }
+    .actions {
+      margin-inline-start: auto;
+    }
+  }
+</style>

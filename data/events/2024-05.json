@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/IO%2520extended%25202024%2520Catania%2520Bevy%2520thumbnail.png",
+    "description": "Google I/O è l'evento annuale organizzato da Google per presentare le ultime novità.\n\nQuest'anno faremo un Watch Party e parleremo insieme delle ultime novità presentate durante la conferenza ed entreremo in collegamento con le altre community italiane del GDG.",
+    "end": "2024-05-14T21:00:00+02:00",
+    "id": "bevy:66647",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "google-i-o-extended-catania-2024-watch-party",
+    "source": {
+      "fetchedAt": "2026-07-27T23:49:51.859Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-extended-catania-2024-watch-party/",
+      "type": "bevy"
+    },
+    "start": "2024-05-14T18:00:00+02:00",
+    "title": "Google I/O Extended Catania 2024 - Watch Party",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-extended-catania-2024-watch-party/",
+    "venue": {
+      "address": "Via Antonino di Sangiuliano 197",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose Srl"
+    }
+  }
+]

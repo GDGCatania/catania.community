@@ -1,0 +1,92 @@
+name: Nuova community
+description: Aggiungi una community all'agenda di Catania
+title: 'Nuova community: '
+labels: [nuova-community]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Grazie. Da questa segnalazione nasce automaticamente una pull request con il
+        file già pronto: al merge la community è online e i suoi eventi iniziano ad
+        arrivare da soli.
+
+        Se preferisci non usare GitHub, c'è il [modulo sul sito](https://catania.community/segnala).
+
+  - type: input
+    id: name
+    attributes:
+      label: Nome della community
+      placeholder: Python Catania
+    validations:
+      required: true
+
+  - type: input
+    id: tagline
+    attributes:
+      label: In una riga
+      description: Cosa fate, detto in poche parole.
+      placeholder: Dati, backend e automazione. Un incontro al mese.
+
+  - type: dropdown
+    id: categories
+    attributes:
+      label: Argomenti
+      multiple: true
+      options: [tech, design, impresa, cultura, sociale]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Dove vi trovate di solito
+      options:
+        - citta
+        - provincia
+        - online
+    validations:
+      required: true
+
+  - type: input
+    id: events_url
+    attributes:
+      label: Dove pubblicate gli eventi
+      description: >-
+        La pagina da cui leggere gli eventi. Funzionano in automatico i feed .ics,
+        gdg.community.dev, Luma, Gancio e Mobilizon. Meetup ed Eventbrite hanno
+        chiuso le API pubbliche: da lì dobbiamo copiare a mano.
+      placeholder: https://
+    validations:
+      required: true
+
+  - type: input
+    id: ics_url
+    attributes:
+      label: Feed .ics, se ce l'avete
+      description: È il modo migliore per restare aggiornati senza che dobbiate fare nulla.
+      placeholder: https://.../events.ics
+
+  - type: input
+    id: website
+    attributes:
+      label: Sito
+      placeholder: https://
+
+  - type: textarea
+    id: contacts
+    attributes:
+      label: Altri contatti
+      description: Telegram, Instagram, LinkedIn, Mastodon… uno per riga.
+      placeholder: |
+        https://t.me/...
+        https://instagram.com/...
+
+  - type: checkboxes
+    id: conferma
+    attributes:
+      label: Conferma
+      options:
+        - label: >-
+            So che i dati inseriti finiscono in un repository pubblico con licenza ODbL,
+            e che questo sito non gestisce iscrizioni né biglietti.
+          required: true

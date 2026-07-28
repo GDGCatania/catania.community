@@ -1,0 +1,275 @@
+---
+import { CATEGORIES } from '../lib/schema';
+import { t } from '../i18n';
+
+export interface Props {
+  /** Categories actually present in the events: no filter leads to nothing. */
+  availableCategories: string[];
+}
+
+const { availableCategories } = Astro.props;
+const categories = CATEGORIES.filter((category) => availableCategories.includes(category));
+---
+
+<form
+  class="filters"
+  data-filters
+  aria-label={t('filters.aria')}
+  data-i18n-count-one={t('event.oneEvent')}
+  data-i18n-count-many={t('event.nEvents', { count: '__n__' })}
+>
+  <span class="eyebrow label">{t('filters.label')}</span>
+
+  <div class="group" role="group" aria-label={t('filters.period')}>
+    <button type="button" aria-pressed="false" data-filter="window" data-value="30">{t('filters.next30')}</button>
+  </div>
+
+  <div class="group" role="group" aria-label={t('filters.where')}>
+    <button type="button" aria-pressed="false" data-filter="area" data-value="citta">{t('area.citta')}</button>
+    <button type="button" aria-pressed="false" data-filter="area" data-value="provincia">{t('area.provincia')}</button>
+    <button type="button" aria-pressed="false" data-filter="area" data-value="online">{t('area.online')}</button>
+  </div>
+
+  <div class="group" role="group" aria-label={t('filters.cost')}>
+    <button type="button" aria-pressed="false" data-filter="price" data-value="free">{t('filters.freeOnly')}</button>
+  </div>
+
+  {
+    categories.length > 0 && (
+      <div class="group" role="group" aria-label={t('filters.topic')}>
+        {categories.map((category) => (
+          <button type="button" aria-pressed="false" data-filter="category" data-value={category}>
+            {t(`category.${category}`)}
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  <button type="button" class="reset" data-filter-reset hidden>{t('filters.reset')}</button>
+</form>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    padding-block: var(--space-4);
+    border-block: 1px solid var(--border);
+  }
+
+  .label {
+    margin-right: var(--space-1);
+  }
+
+  .group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .group + .group {
+    padding-left: var(--space-3);
+    border-left: 1px solid var(--border);
+  }
+
+  button {
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-2);
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    padding: 5px 12px;
+    transition:
+      background var(--transition),
+      border-color var(--transition),
+      color var(--transition);
+  }
+
+  button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  button[aria-pressed='true'] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+
+  .reset {
+    margin-left: auto;
+    border-style: dashed;
+  }
+
+  @media (max-width: 720px) {
+    .group + .group {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .reset {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Client-side filtering over HTML that is already on the page.
+   * The list is server-rendered (indexable, and readable without JavaScript):
+   * here we only hide the rows that fail the filters, realign the per-day
+   * counters, and tell the map and the calendar through a custom event.
+   */
+  type Group = 'window' | 'area' | 'price' | 'category';
+
+  // Copy translated at build time and read back from data attributes. A
+  // `define:vars` script would be inlined verbatim, losing the TypeScript
+  // transform this file relies on.
+  const countLabel = (count: number): string => {
+    const one = form?.dataset.i18nCountOne ?? '1';
+    const many = form?.dataset.i18nCountMany ?? '__n__';
+    return count === 1 ? one : many.replace('__n__', String(count));
+  };
+
+  const form = document.querySelector<HTMLFormElement>('[data-filters]');
+  const rows = [...document.querySelectorAll<HTMLElement>('[data-event-row]')];
+  const dayGroups = [...document.querySelectorAll<HTMLElement>('[data-day-group]')];
+  const emptyState = document.querySelector<HTMLElement>('[data-empty-state]');
+  const resetButton = document.querySelector<HTMLButtonElement>('[data-filter-reset]');
+
+  if (form && rows.length > 0) {
+    const selected: Record<Group, Set<string>> = {
+      window: new Set(),
+      area: new Set(),
+      price: new Set(),
+      category: new Set(),
+    };
+
+    // aria-pressed comes from the markup already, so screen readers announce
+    // the right state even before this script runs.
+    const buttons = [...form.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+
+    function matches(row: HTMLElement, todayIso: string, horizonIso: string): boolean {
+      if (selected.area.size > 0 && !selected.area.has(row.dataset.area ?? '')) return false;
+      if (selected.price.has('free') && row.dataset.price !== 'free') return false;
+
+      if (selected.category.size > 0) {
+        const rowCategories = (row.dataset.categories ?? '').split(' ').filter(Boolean);
+        if (!rowCategories.some((category) => selected.category.has(category))) return false;
+      }
+
+      if (selected.window.has('30')) {
+        const day = row.dataset.day ?? '';
+        // Lexicographic compare on YYYY-MM-DD: correct, and timezone-free.
+        if (day < todayIso || day > horizonIso) return false;
+      }
+
+      return true;
+    }
+
+    function apply(): void {
+      const now = new Date();
+      const todayIso = isoDay(now);
+      const horizonIso = isoDay(new Date(now.getTime() + 30 * 86_400_000));
+
+      let visible = 0;
+      for (const row of rows) {
+        const ok = matches(row, todayIso, horizonIso);
+        row.hidden = !ok;
+        if (ok) visible++;
+      }
+
+      // A day with no visible events must not leave an orphan heading.
+      for (const group of dayGroups) {
+        const count = group.querySelectorAll('[data-event-row]:not([hidden])').length;
+        group.hidden = count === 0;
+        const counter = group.querySelector<HTMLElement>('[data-day-count]');
+        if (counter) counter.textContent = countLabel(count);
+      }
+
+      if (emptyState) emptyState.hidden = visible > 0;
+
+      const active = Object.values(selected).some((set) => set.size > 0);
+      if (resetButton) resetButton.hidden = !active;
+
+      syncUrl();
+      document.dispatchEvent(
+        new CustomEvent('agenda:filter', { detail: { visible, total: rows.length } })
+      );
+    }
+
+    function isoDay(date: Date): string {
+      return new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/Rome',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }).format(date);
+    }
+
+    function syncUrl(): void {
+      const params = new URLSearchParams();
+      for (const [group, values] of Object.entries(selected)) {
+        if (values.size > 0) params.set(group, [...values].join(','));
+      }
+      const query = params.toString();
+      // replaceState: filters must not clog up the back button.
+      history.replaceState(null, '', query ? `?${query}` : location.pathname);
+    }
+
+    function readUrl(): void {
+      const params = new URLSearchParams(location.search);
+      for (const group of Object.keys(selected) as Group[]) {
+        const raw = params.get(group);
+        if (!raw) continue;
+        for (const value of raw.split(',')) {
+          if (!value) continue;
+          selected[group].add(value);
+          const button = buttons.find(
+            (b) => b.dataset.filter === group && b.dataset.value === value
+          );
+          button?.setAttribute('aria-pressed', 'true');
+        }
+      }
+    }
+
+    form.addEventListener('click', (clickEvent) => {
+      const button = (clickEvent.target as HTMLElement).closest<HTMLButtonElement>('[data-filter]');
+      if (!button) return;
+
+      const group = button.dataset.filter as Group;
+      const value = button.dataset.value ?? '';
+      const set = selected[group];
+
+      if (set.has(value)) {
+        set.delete(value);
+        button.setAttribute('aria-pressed', 'false');
+      } else {
+        set.add(value);
+        button.setAttribute('aria-pressed', 'true');
+      }
+
+      apply();
+    });
+
+    resetButton?.addEventListener('click', () => {
+      for (const set of Object.values(selected)) set.clear();
+      for (const button of buttons) button.setAttribute('aria-pressed', 'false');
+      apply();
+    });
+
+    // Picking a day in the calendar scrolls the list to that day.
+    document.addEventListener('agenda:selectday', (dayEvent) => {
+      const day = (dayEvent as CustomEvent<{ day: string | null }>).detail.day;
+      const target = day
+        ? dayGroups.find((group) => group.dataset.dayGroup === day)
+        : dayGroups[0];
+      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    readUrl();
+    apply();
+  }
+</script>

@@ -18,7 +18,7 @@
     },
     "slug": "xmasync-2025-un-brindisi-col-gdg",
     "source": {
-      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "fetchedAt": "2026-07-27T23:49:51.859Z",
       "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-xmasync-2025-un-brindisi-col-gdg/",
       "type": "bevy"
     },
@@ -26,7 +26,7 @@
     "title": "XMASYNC 2025 - Un brindisi col GDG!",
     "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-xmasync-2025-un-brindisi-col-gdg/",
     "venue": {
-      "address": "197 Via Antonino di Sangiuliano",
+      "address": "Via Antonino di Sangiuliano 197",
       "city": "Catania",
       "geo": {
         "lat": 37.50498,

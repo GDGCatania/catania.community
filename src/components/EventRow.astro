@@ -1,0 +1,187 @@
+---
+import Badge from './Badge.astro';
+import { formatTime } from '../lib/events';
+import { ROUTES } from '../lib/site';
+import { t } from '../i18n';
+import type { Community, Event } from '../lib/schema';
+
+export interface Props {
+  event: Event;
+  community?: Community;
+  /** Number shown in the bullet; matches the pin on the map. */
+  index: number;
+}
+
+const { event, community, index } = Astro.props;
+
+const where = event.online
+  ? t('status.online')
+  : [event.venue?.name, event.venue?.city].filter(Boolean).join(', ');
+---
+
+<article
+  class="row"
+  data-event-row
+  data-index={index}
+  data-day={event.start.slice(0, 10)}
+  data-area={event.area}
+  data-price={event.price.type}
+  data-categories={event.categories.join(' ')}
+  data-lat={event.venue?.geo?.lat}
+  data-lon={event.venue?.geo?.lon}
+  data-title={event.title}
+  data-slug={event.slug}
+>
+  <span class="pin mono" aria-hidden="true">{index}</span>
+
+  <time class="time mono" datetime={event.start}>{formatTime(event.start)}</time>
+
+  <div class="body">
+    <h3 class="title">
+      <a href={ROUTES.event(event.slug)}>{event.title}</a>
+    </h3>
+
+    <p class="meta">
+      {community ? <span class="org">{community.name}</span> : null}
+      {community && where ? <span class="dot" aria-hidden="true">·</span> : null}
+      {where ? <span>{where}</span> : null}
+    </p>
+
+    <div class="badges">
+      {event.cancelled ? <Badge variant="paid" label={t('status.cancelled')} /> : null}
+      <Badge variant={event.price.type} label={t(`price.${event.price.type}`)} />
+      {event.online ? <Badge variant="online" label={t('status.online')} /> : null}
+      {
+        event.categories.map((category) => (
+          <Badge variant="category" label={t(`category.${category}`)} />
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="action">
+    <a class="btn btn--ghost" href={event.url} rel="noopener nofollow" target="_blank">
+      {t('event.goTo')} <span aria-hidden="true">→</span>
+    </a>
+    {
+      event.seatsLeft !== undefined ? (
+        <span class="seats mono">{t('event.seatsLeft', { count: event.seatsLeft })}</span>
+      ) : null
+    }
+  </div>
+</article>
+
+<style>
+  .row {
+    display: grid;
+    grid-template-columns: 26px 58px 1fr auto;
+    gap: var(--space-4);
+    align-items: start;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .row[hidden] {
+    display: none;
+  }
+
+  .pin {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: var(--radius-pill);
+    background: var(--surface-raised);
+    border: 1px solid var(--border-strong);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-2);
+    margin-top: 2px;
+  }
+
+  .row[data-highlight] .pin {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff8f2;
+  }
+
+  .time {
+    font-size: var(--step-1);
+    font-weight: 500;
+    color: var(--ink);
+    padding-top: 1px;
+  }
+
+  .title {
+    font-size: var(--step-1);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+  }
+
+  .title a {
+    color: var(--ink);
+  }
+
+  .title a:hover {
+    color: var(--accent);
+  }
+
+  .meta {
+    margin-top: var(--space-1);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .org {
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+
+  .badges {
+    margin-top: var(--space-2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-2);
+    text-align: right;
+  }
+
+  .seats {
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 720px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+      padding: var(--space-4) 0;
+    }
+
+    .pin {
+      display: none;
+    }
+
+    .time {
+      font-size: var(--step--1);
+      font-family: var(--font-mono);
+      color: var(--ink-3);
+    }
+
+    .action {
+      align-items: flex-start;
+      text-align: left;
+      margin-top: var(--space-2);
+    }
+  }
+</style>

@@ -1,0 +1,235 @@
+---
+import { t } from '../i18n';
+
+export interface Props {
+  /** Height of the map box. */
+  height?: string;
+  caption?: string;
+}
+
+const { height = '320px', caption = t('map.caption') } = Astro.props;
+---
+
+<div class="map-card">
+  <div class="map-frame" style={`--map-height: ${height}`}>
+    <div
+      id="event-map"
+      data-event-map
+      role="application"
+      aria-label={caption}
+      data-i18n-details={t('map.details')}
+      data-i18n-offscreen-one={t('map.offscreenOne')}
+      data-i18n-offscreen-many={t('map.offscreenMany', { count: '__n__' })}
+      data-i18n-attribution={t('map.osmAttribution')}
+    ></div>
+    <p class="map-fallback" data-map-fallback>{t('map.noScript')}</p>
+    <span class="offscreen mono" data-map-offscreen hidden></span>
+  </div>
+
+  <div class="map-foot">
+    <span class="eyebrow">{caption}</span>
+    <span class="attribution">
+      © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a>
+    </span>
+  </div>
+</div>
+
+<style>
+  .map-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+    overflow: hidden;
+  }
+
+  .map-frame {
+    position: relative;
+    height: var(--map-height);
+    background: var(--surface-alt);
+  }
+
+  #event-map {
+    height: 100%;
+    width: 100%;
+  }
+
+  /* OSM tiles are light: in the dark theme we invert them while keeping the
+     colours readable. Not as good as a purpose-built dark tile set, but it
+     avoids a blinding white map in the middle of a dark page.
+     The whole selector must sit inside :global(): Leaflet creates
+     .leaflet-tile-pane at runtime, so it never carries Astro's scoping
+     attribute. */
+  :global(:root[data-theme='dark'] .leaflet-tile-pane) {
+    filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9);
+  }
+
+  .map-fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: var(--space-5);
+    text-align: center;
+    font-size: var(--step--1);
+    color: var(--ink-3);
+  }
+
+  .offscreen {
+    position: absolute;
+    left: var(--space-3);
+    bottom: var(--space-3);
+    z-index: 500;
+    font-size: 11px;
+    background: var(--surface-raised);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    padding: 4px 10px;
+    color: var(--ink-2);
+  }
+
+  .map-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+
+  .attribution {
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  /* Numbered markers matching the bullets in the list. A divIcon also sidesteps
+     the classic broken-path problem with Leaflet's PNG icons under a bundler. */
+  :global(.cc-pin) {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff8f2;
+    border: 2px solid var(--surface-raised);
+    box-shadow: var(--shadow-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  :global(.leaflet-container) {
+    background: var(--surface-alt);
+    font-family: var(--font-sans);
+  }
+</style>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+
+  const container = document.querySelector<HTMLElement>('[data-event-map]');
+  const fallback = document.querySelector<HTMLElement>('[data-map-fallback]');
+  const offscreenBadge = document.querySelector<HTMLElement>('[data-map-offscreen]');
+
+  if (container) {
+    if (fallback) fallback.hidden = true;
+
+    // Copy translated at build time and handed over through data attributes:
+    // a `define:vars` script would be inlined verbatim, losing both the bundler
+    // (so no `import L`) and the TypeScript transform.
+    const i18n = {
+      details: container.dataset.i18nDetails ?? '',
+      offscreenOne: container.dataset.i18nOffscreenOne ?? '',
+      offscreenMany: container.dataset.i18nOffscreenMany ?? '',
+      attribution: container.dataset.i18nAttribution ?? '',
+    };
+
+    // Centred on Catania: a default is needed when nothing is geolocated.
+    const map = L.map(container, { scrollWheelZoom: false }).setView([37.5079, 15.083], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: i18n.attribution,
+    }).addTo(map);
+
+    const markers = new Map<string, L.Marker>();
+    const layer = L.layerGroup().addTo(map);
+
+    function render(): void {
+      layer.clearLayers();
+      markers.clear();
+
+      const rows = [...document.querySelectorAll<HTMLElement>('[data-event-row]')].filter(
+        (row) => !row.hidden
+      );
+
+      const points: L.LatLngExpression[] = [];
+      let withoutCoordinates = 0;
+
+      for (const row of rows) {
+        const lat = Number(row.dataset.lat);
+        const lon = Number(row.dataset.lon);
+
+        if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+          withoutCoordinates++;
+          continue;
+        }
+
+        const index = row.dataset.index ?? '';
+        const marker = L.marker([lat, lon], {
+          icon: L.divIcon({
+            className: '',
+            html: `<span class="cc-pin">${index}</span>`,
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
+          }),
+          title: row.dataset.title ?? '',
+        });
+
+        marker.bindPopup(
+          `<strong>${escapeHtml(row.dataset.title ?? '')}</strong><br>` +
+            `<a href="/events/${encodeURIComponent(row.dataset.slug ?? '')}">${i18n.details}</a>`
+        );
+
+        marker.on('mouseover', () => row.setAttribute('data-highlight', ''));
+        marker.on('mouseout', () => row.removeAttribute('data-highlight'));
+
+        marker.addTo(layer);
+        markers.set(index, marker);
+        points.push([lat, lon]);
+      }
+
+      if (points.length > 0) {
+        map.fitBounds(L.latLngBounds(points).pad(0.2), { maxZoom: 15 });
+      }
+
+      // Online events, and those whose address did not resolve, have no pin.
+      // Saying so is more honest than letting the map look complete.
+      if (offscreenBadge) {
+        offscreenBadge.hidden = withoutCoordinates === 0;
+        offscreenBadge.textContent =
+          withoutCoordinates === 1
+            ? i18n.offscreenOne
+            : i18n.offscreenMany.replace('__n__', String(withoutCoordinates));
+      }
+    }
+
+    function escapeHtml(value: string): string {
+      const div = document.createElement('div');
+      div.textContent = value;
+      return div.innerHTML;
+    }
+
+    // Hovering a row in the list opens the matching pin.
+    for (const row of document.querySelectorAll<HTMLElement>('[data-event-row]')) {
+      row.addEventListener('mouseenter', () => {
+        const marker = markers.get(row.dataset.index ?? '');
+        marker?.openPopup();
+      });
+    }
+
+    document.addEventListener('agenda:filter', render);
+    render();
+  }
+</script>

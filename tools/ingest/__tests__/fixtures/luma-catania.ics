@@ -1,0 +1,87 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//catania.community//fixture//IT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Community Catania
+BEGIN:VTIMEZONE
+TZID:Europe/Rome
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:evt-estate@example.org
+DTSTAMP:20260701T120000Z
+DTSTART;TZID=Europe/Rome:20260728T190000
+DTEND;TZID=Europe/Rome:20260728T220000
+SUMMARY:AperiTech #42 — Agenti LLM in produzione
+DESCRIPTION:<p>Tre interventi brevi su cosa si rompe davvero.</p><p>Aperitivo offerto.</p>
+LOCATION:Fablab Catania, Via Vittorio Emanuele II 12, Catania
+URL:https://example.org/eventi/aperitech-42
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-inverno@example.org
+DTSTAMP:20260701T120000Z
+DTSTART;TZID=Europe/Rome:20261215T183000
+DTEND;TZID=Europe/Rome:20261215T203000
+SUMMARY:Retrospettiva di fine anno
+DESCRIPTION:Bilancio del 2026.
+LOCATION:Monastero dei Benedettini, Piazza Dante 32, Catania
+URL:https://example.org/eventi/retro-2026
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-online@example.org
+DTSTAMP:20260701T120000Z
+DTSTART;TZID=Europe/Rome:20260805T210000
+DTEND;TZID=Europe/Rome:20260805T220000
+SUMMARY:Chiacchierata online sul Fediverso
+DESCRIPTION:Ci vediamo in chiamata.
+LOCATION:https://meet.jit.si/catania-fediverso
+URL:https://example.org/eventi/fediverso
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-annullato@example.org
+DTSTAMP:20260701T120000Z
+DTSTART;TZID=Europe/Rome:20260810T180000
+SUMMARY:Workshop annullato
+LOCATION:Biblioteca Zelantea, Acireale
+URL:https://example.org/eventi/annullato
+STATUS:CANCELLED
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-giornata@example.org
+DTSTAMP:20260701T120000Z
+DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20260902
+SUMMARY:Giornata del software libero
+LOCATION:Villa Bellini
+URL:https://example.org/eventi/software-libero
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-passato@example.org
+DTSTAMP:20250101T120000Z
+DTSTART;TZID=Europe/Rome:20250110T190000
+SUMMARY:Evento troppo vecchio
+LOCATION:Fablab Catania
+URL:https://example.org/eventi/vecchio
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-senza-titolo@example.org
+DTSTAMP:20260701T120000Z
+DTSTART;TZID=Europe/Rome:20260820T190000
+SUMMARY:
+LOCATION:Ovunque
+END:VEVENT
+END:VCALENDAR

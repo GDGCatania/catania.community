@@ -1,0 +1,376 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Badge from '../../components/Badge.astro';
+import VenueMap from '../../components/VenueMap.astro';
+import { getAllEvents, getCommunityMap, formatDateLong, formatTime } from '../../lib/events';
+import { breadcrumbJsonLd, eventJsonLd } from '../../lib/jsonld';
+import { absoluteUrl } from '../../lib/urls';
+import { t } from '../../i18n';
+import { ISSUE_URLS, ROUTES } from '../../lib/site';
+
+export const getStaticPaths = (async () => {
+  const [events, communities] = await Promise.all([getAllEvents(), getCommunityMap()]);
+
+  // Past events keep their page too: they stay indexed and make up the
+  // community's archive.
+  return events.map((event) => ({
+    params: { slug: event.slug },
+    props: { event, community: communities.get(event.communityId) },
+  }));
+}) satisfies GetStaticPaths;
+
+// Prop types come from getStaticPaths; redeclaring them here would only
+// duplicate them.
+const { event, community } = Astro.props;
+
+const canonical = absoluteUrl(Astro.url.pathname, Astro.site);
+const isPast = new Date(event.end ?? event.start) < new Date();
+
+const jsonLd = [
+  eventJsonLd(event, community, canonical),
+  breadcrumbJsonLd([
+    { name: t('nav.events'), path: ROUTES.home },
+    { name: event.title, path: ROUTES.event(event.slug) },
+  ]),
+];
+
+const description = event.description
+  ? event.description.slice(0, 155)
+  : t('eventPage.metaFallback', {
+      title: event.title,
+      date: formatDateLong(event.start),
+      city: event.venue?.city ?? 'Catania',
+      community: community?.name ?? 'Catania',
+    });
+
+const when = `${formatDateLong(event.start)}, ${formatTime(event.start)}${
+  event.end ? ` – ${formatTime(event.end)}` : ''
+}`;
+
+const address = [event.venue?.address, event.venue?.city].filter(Boolean).join(', ');
+---
+
+<BaseLayout
+  title={event.title}
+  description={description}
+  jsonLd={jsonLd}
+  ogImage={event.coverImage ?? '/og-default.png'}
+>
+  <div class="container">
+    <nav class="crumbs" aria-label={t('site.sections')}>
+      <a href={ROUTES.home}>{t('eventPage.breadcrumb')}</a>
+    </nav>
+  </div>
+
+  {
+    event.coverImage && (
+      <div class="container">
+        <img class="cover" src={event.coverImage} alt="" width="1200" height="420" loading="eager" />
+      </div>
+    )
+  }
+
+  <div class="container layout">
+    <article class="main">
+      {
+        (isPast || event.cancelled) && (
+          <p class="notice" role="status">
+            {event.cancelled ? t('eventPage.cancelledNotice') : t('eventPage.pastNotice')}
+          </p>
+        )
+      }
+
+      <header class="head">
+        {
+          community && (
+            <p class="org">
+              <a href={ROUTES.community(community.id)}>{community.name}</a>
+              {community.since ? (
+                <span class="since">{t('eventPage.communitySince', { year: community.since })}</span>
+              ) : null}
+            </p>
+          )
+        }
+
+        <h1>{event.title}</h1>
+
+        <div class="badges">
+          <Badge variant={event.price.type} label={t(`price.${event.price.type}`)} />
+          {event.online ? <Badge variant="online" label={t('status.online')} /> : null}
+          {
+            event.categories.map((category) => (
+              <Badge variant="category" label={t(`category.${category}`)} />
+            ))
+          }
+          <Badge variant="neutral" label={event.language} />
+          {event.beginnerFriendly ? (
+            <Badge variant="neutral" label={t('eventPage.beginnerFriendly')} />
+          ) : null}
+        </div>
+      </header>
+
+      {
+        event.description && (
+          <div class="prose">
+            {event.description.split('\n\n').map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        )
+      }
+
+      {
+        !event.online && event.venue && (
+          <section class="where">
+            <h2>{t('eventPage.where')}</h2>
+            {event.venue.geo && <VenueMap venue={event.venue} />}
+            <p class="venue">
+              <strong>{event.venue.name}</strong>
+              {address ? <><br />{address}</> : null}
+            </p>
+          </section>
+        )
+      }
+    </article>
+
+    <aside class="side">
+      <div class="card">
+        <div class="field">
+          <span class="eyebrow">{t('eventPage.when')}</span>
+          <p class="when">{when}</p>
+        </div>
+
+        <hr />
+
+        <div class="field">
+          <span class="eyebrow">{t('eventPage.admission')}</span>
+          <p>
+            {t(`price.${event.price.type}`)}
+            {event.price.type === 'paid' && event.price.amount ? ` · ${event.price.amount} €` : ''}
+            {event.seatsLeft !== undefined
+              ? ` · ${t('event.seatsLeft', { count: event.seatsLeft })}`
+              : ''}
+          </p>
+        </div>
+
+        <a class="btn btn--primary wide" href={event.url} rel="noopener nofollow" target="_blank">
+          {t('event.goTo')} <span aria-hidden="true">→</span>
+        </a>
+        <p class="hint">{t('eventPage.registrationHint')}</p>
+
+        <hr />
+
+        <div class="field">
+          <span class="eyebrow">{t('eventPage.addToCalendar')}</span>
+          <div class="cal">
+            <a class="btn btn--ghost" href={ROUTES.eventIcs(event.slug)}>.ics</a>
+            <a
+              class="btn btn--ghost"
+              rel="noopener"
+              target="_blank"
+              href={`https://calendar.google.com/calendar/render?${new URLSearchParams({
+                action: 'TEMPLATE',
+                text: event.title,
+                dates: `${new Date(event.start).toISOString().replace(/[-:]/g, '').slice(0, 15)}Z/${new Date(
+                  event.end ?? new Date(new Date(event.start).getTime() + 7_200_000).toISOString()
+                )
+                  .toISOString()
+                  .replace(/[-:]/g, '')
+                  .slice(0, 15)}Z`,
+                details: `Dettagli: ${event.url}`,
+                location: event.online ? 'Online' : [event.venue?.name, address].filter(Boolean).join(', '),
+              })}`}
+            >
+              Google
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {
+        community && (
+          <div class="card">
+            <span class="eyebrow">{t('eventPage.organiser')}</span>
+            <p class="orgname">{community.name}</p>
+            {community.tagline ? <p class="hint">{community.tagline}</p> : null}
+            <a class="btn btn--ghost" href={ROUTES.community(community.id)}>
+              {t('eventPage.seeCommunity')}
+            </a>
+          </div>
+        )
+      }
+
+      <p class="source">
+        {t('eventPage.dataSource')}{' '}
+        <a href={ISSUE_URLS.correction(`Correzione: ${event.title}`)}>{t('eventPage.reportIt')}</a>.
+      </p>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  .crumbs {
+    padding-top: var(--space-5);
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  .cover {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 420;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-4);
+    border: 1px solid var(--border);
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: var(--space-6);
+    align-items: start;
+    padding-block: var(--space-5) var(--space-6);
+  }
+
+  .notice {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .head h1 {
+    font-size: var(--step-4);
+    margin-block: var(--space-2);
+  }
+
+  .org {
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  .since {
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+
+  .prose {
+    margin-top: var(--space-5);
+    max-width: var(--measure);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    color: var(--ink-2);
+    font-size: var(--step-0);
+    line-height: 1.65;
+  }
+
+  .where {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .where h2 {
+    font-size: var(--step-2);
+  }
+
+  .venue {
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  .venue strong {
+    color: var(--ink);
+    font-size: var(--step-0);
+  }
+
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    position: sticky;
+    top: 84px;
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    width: 100%;
+  }
+
+  .when {
+    font-size: var(--step-0);
+    font-weight: 600;
+  }
+
+  .orgname {
+    font-size: var(--step-1);
+    font-weight: 700;
+  }
+
+  hr {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid var(--border-soft);
+    margin: 0;
+  }
+
+  .wide {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+
+  .cal {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .source {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .side {
+      position: static;
+    }
+  }
+</style>

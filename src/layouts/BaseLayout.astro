@@ -1,0 +1,103 @@
+---
+import '../styles/base.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { absoluteUrl } from '../lib/urls';
+import { locale, localeTag, t } from '../i18n';
+import { ROUTES } from '../lib/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Absolute path of the OG image, relative to the site root. */
+  ogImage?: string;
+  /** JSON-LD to inject into <head>. */
+  jsonLd?: object | object[];
+  noindex?: boolean;
+}
+
+const { title, description, ogImage = '/og-default.png', jsonLd, noindex = false } = Astro.props;
+
+const canonical = absoluteUrl(Astro.url.pathname, Astro.site);
+const ogUrl = new URL(ogImage, Astro.site).href;
+const fullTitle = title === 'catania.community' ? title : `${title} · catania.community`;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="catania.community" />
+    <meta property="og:locale" content={localeTag.replace('-', '_')} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="preload" href="/fonts/archivo-2.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={t('feed.rssTitle')}
+      href={ROUTES.feedRss}
+    />
+    <link
+      rel="alternate"
+      type="text/calendar"
+      title={t('feed.calendarName')}
+      href={ROUTES.feedIcs}
+    />
+
+    {
+      jsonLd && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(jsonLd)}
+        />
+      )
+    }
+
+    {/* Applies the theme before the first paint: without this, anyone who chose
+        dark sees a flash of light. Must stay inline and blocking. */}
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('cc-theme');
+          if (saved === 'light' || saved === 'dark') {
+            document.documentElement.dataset.theme = saved;
+          } else {
+            document.documentElement.dataset.theme = window.matchMedia(
+              '(prefers-color-scheme: dark)'
+            ).matches
+              ? 'dark'
+              : 'light';
+          }
+        } catch (e) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">{t('site.skipToContent')}</a>
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

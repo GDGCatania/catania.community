@@ -1,0 +1,107 @@
+name: From report to pull request
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  create-pr:
+    if: github.event.label.name == 'nuova-community'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Generate the YAML file from the report
+        id: generate
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -o pipefail
+          # The body goes through stdin: inlining it would expose it to shell
+          # interpretation.
+          if ! SLUG=$(printf '%s' "$ISSUE_BODY" | npx tsx tools/issue-to-yaml.ts 2> /tmp/err.txt); then
+            {
+              echo "error=$(cat /tmp/err.txt)"
+            } >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+
+      - name: Check the project still builds with the new community
+        run: |
+          npm test
+          npm run build
+
+      - name: Open the pull request
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLUG: ${{ steps.generate.outputs.slug }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          BRANCH="community/$SLUG"
+          git config user.name  'catania-community-bot'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -b "$BRANCH"
+          git add "sources/communities/$SLUG.yml"
+          git commit -m "community: aggiunge $SLUG (closes #$ISSUE)"
+          git push -u origin "$BRANCH"
+
+          cat > /tmp/pr-body.md <<'EOF'
+          Generata automaticamente da una segnalazione.
+
+          **Prima del merge, controllare:**
+
+          - [ ] I link portano davvero alla community giusta
+          - [ ] Gli argomenti scelti sono sensati
+          - [ ] Se l'adapter è `bevy`, il campo `chapter` è stato compilato con l'id
+                numerico (si legge da `https://gdg.community.dev/<slug>/`, cercando
+                `chapter/<id>`) e la riga `_todo` è stata rimossa
+          - [ ] Se la piattaforma è Meetup o Eventbrite, l'adapter è `manual`: quelle
+                API non sono più pubbliche
+
+          Al merge la community è online e i suoi eventi vengono raccolti al run successivo.
+          EOF
+          printf '\nChiude #%s\n' "$ISSUE" >> /tmp/pr-body.md
+
+          URL=$(gh pr create \
+            --title "Nuova community: $SLUG" \
+            --body-file /tmp/pr-body.md \
+            --base main \
+            --head "$BRANCH")
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: Comment on the report
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = ${{ toJSON(steps.pr.outputs.url) }};
+            const failure = ${{ toJSON(steps.generate.outputs.error) }};
+
+            const body = pr
+              ? `Grazie. La segnalazione è diventata una pull request: ${pr}\n\nAl merge la community sarà online e i suoi eventi verranno raccolti automaticamente.`
+              : [
+                  "Non sono riuscito a generare il file automaticamente.",
+                  failure ? `\n\`\`\`\n${failure}\n\`\`\`` : '',
+                  '\nNiente di grave: la segnalazione resta valida e la lavoriamo a mano.',
+                ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });

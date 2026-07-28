@@ -1,27 +1,33 @@
 {
-  "14aviacesarebeccariacataniaitalia": {
-    "lat": 37.515083,
-    "lon": 15.0758541
+  "aithosoftwarefactorycataniaitalia": null,
+  "vecchiadoganacataniaitalia": {
+    "lat": 37.5008196,
+    "lon": 15.092701
   },
-  "197viaantoninodisangiulianocataniaitalia": {
+  "viaantoninodisangiuliano197cataniaitalia": {
     "lat": 37.50498,
     "lon": 15.0895881
   },
-  "2viacardinaledusmetcataniaitalia": {
-    "lat": 37.7313618,
-    "lon": 15.1590476
+  "viacardinaledusmet2cataniaitalia": null,
+  "viacardinaledusmetsnccataniaitalia": null,
+  "viacesarebeccaria14acataniaitalia": {
+    "lat": 37.515083,
+    "lon": 15.0758541
   },
-  "31vialeafricacataniaitalia": {
-    "lat": 37.512206,
-    "lon": 15.1033077
-  },
-  "34viafimiacataniaitalia": {
+  "viafimia34cataniaitalia": {
     "lat": 37.5250131,
     "lon": 15.0846532
   },
-  "sncviacardinaledusmetcataniaitalia": null,
+  "vialeafrica31cataniaitalia": {
+    "lat": 37.512206,
+    "lon": 15.1033077
+  },
   "vialeafrica31ecataniaitalia": {
     "lat": 37.51033,
     "lon": 15.1021602
+  },
+  "viaursino58cataniaitalia": {
+    "lat": 37.5097051,
+    "lon": 15.0979326
   }
 }

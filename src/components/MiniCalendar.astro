@@ -1,0 +1,205 @@
+---
+import { localDayKey, eventCount } from '../lib/events';
+import { localeTag, t } from '../i18n';
+
+export interface Props {
+  /** Events per day, keyed by `YYYY-MM-DD`. */
+  counts: Record<string, number>;
+  /** Month to render (`YYYY-MM`). Defaults to the current one. */
+  month?: string;
+}
+
+const now = new Date();
+const { counts, month = localDayKey(now).slice(0, 7) } = Astro.props;
+
+const [year, monthNumber] = month.split('-').map(Number);
+const first = new Date(Date.UTC(year!, monthNumber! - 1, 1));
+const daysInMonth = new Date(Date.UTC(year!, monthNumber!, 0)).getUTCDate();
+
+// getUTCDay(): 0 = Sunday. The week starts on Monday here.
+const leadingBlanks = (first.getUTCDay() + 6) % 7;
+
+const monthLabel = new Intl.DateTimeFormat(localeTag, {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(first);
+
+const todayKey = localDayKey(now);
+
+const cells = [
+  ...Array.from({ length: leadingBlanks }, () => null),
+  ...Array.from({ length: daysInMonth }, (_, i) => {
+    const day = i + 1;
+    const key = `${month}-${String(day).padStart(2, '0')}`;
+    return { day, key, count: counts[key] ?? 0, isToday: key === todayKey };
+  }),
+];
+
+const totalInMonth = Object.entries(counts)
+  .filter(([key]) => key.startsWith(month))
+  .reduce((sum, [, count]) => sum + count, 0);
+---
+
+<section class="calendar" aria-label={t('calendar.aria', { month: monthLabel })}>
+  <header>
+    <h3 class="month">{monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1)}</h3>
+    <span class="eyebrow">{eventCount(totalInMonth)}</span>
+  </header>
+
+  <div class="weekdays" aria-hidden="true">
+    {t('calendar.weekdays').split(',').map((initial) => <span>{initial}</span>)}
+  </div>
+
+  <div class="grid">
+    {
+      cells.map((cell) =>
+        cell === null ? (
+          <span class="cell cell--blank"></span>
+        ) : cell.count > 0 ? (
+          <button
+            type="button"
+            class:list={['cell', 'cell--has', { 'cell--today': cell.isToday }]}
+            data-calendar-day={cell.key}
+            aria-label={t('calendar.dayAria', { day: cell.day, events: eventCount(cell.count) })}
+          >
+            {cell.day}
+            <span class="dots" aria-hidden="true">
+              {Array.from({ length: Math.min(cell.count, 3) }, () => (
+                <span class="dot"></span>
+              ))}
+            </span>
+          </button>
+        ) : (
+          <span class:list={['cell', { 'cell--today': cell.isToday }]}>{cell.day}</span>
+        )
+      )
+    }
+  </div>
+
+  <p class="legend">
+    <span class="dot" aria-hidden="true"></span>
+    {t('calendar.legend')}
+  </p>
+</section>
+
+<style>
+  .calendar {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+    padding: var(--space-4);
+  }
+
+  header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .month {
+    font-size: var(--step-0);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .weekdays,
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .weekdays span {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+    padding-bottom: var(--space-2);
+  }
+
+  .cell {
+    position: relative;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-3);
+    padding: 0;
+  }
+
+  .cell--blank {
+    border: 0;
+  }
+
+  .cell--has {
+    color: var(--ink);
+    font-weight: 700;
+    border-color: var(--border);
+    background: var(--surface);
+    cursor: pointer;
+  }
+
+  .cell--has:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .cell--today {
+    box-shadow: inset 0 0 0 1px var(--accent);
+    color: var(--accent);
+  }
+
+  .dots {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-soft);
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  .legend .dot {
+    width: 4px;
+    height: 4px;
+  }
+</style>
+
+<script>
+  // Clicking a day with events scrolls to that day's heading. The calendar is
+  // a navigation aid, not a hidden filter.
+  for (const cell of document.querySelectorAll<HTMLElement>('[data-calendar-day]')) {
+    cell.addEventListener('click', () => {
+      document.dispatchEvent(
+        new CustomEvent('agenda:selectday', { detail: { day: cell.dataset.calendarDay } })
+      );
+    });
+  }
+</script>

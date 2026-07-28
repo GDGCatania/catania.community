@@ -18,7 +18,7 @@
     },
     "slug": "laboratorio-wikipedia-partecipare-allenciclopedia-collaborativa-e-scoprire",
     "source": {
-      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "fetchedAt": "2026-07-27T23:49:51.859Z",
       "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-laboratorio-wikipedia-partecipare-allenciclopedia-collaborativa-e-scoprire-altri-progetti/",
       "type": "bevy"
     },
@@ -26,7 +26,7 @@
     "title": "Laboratorio Wikipedia: Partecipare all’enciclopedia collaborativa e scoprire altri progetti",
     "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-laboratorio-wikipedia-partecipare-allenciclopedia-collaborativa-e-scoprire-altri-progetti/",
     "venue": {
-      "address": "197 Via Antonino di Sangiuliano",
+      "address": "Via Antonino di Sangiuliano 197",
       "city": "Catania",
       "geo": {
         "lat": 37.50498,
@@ -54,7 +54,7 @@
     },
     "slug": "devfest-catania-2025",
     "source": {
-      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "fetchedAt": "2026-07-27T23:49:51.859Z",
       "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2025/",
       "type": "bevy"
     },
@@ -62,11 +62,11 @@
     "title": "DevFest Catania 2025",
     "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2025/",
     "venue": {
-      "address": "2 Via Cardinale Dusmet",
+      "address": "Via Cardinale Dusmet 2",
       "city": "Catania",
       "geo": {
-        "lat": 37.7313618,
-        "lon": 15.1590476
+        "lat": 37.5008196,
+        "lon": 15.092701
       },
       "name": "Vecchia Dogana"
     }

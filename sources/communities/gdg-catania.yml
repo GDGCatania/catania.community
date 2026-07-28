@@ -1,0 +1,22 @@
+# Dati verificati su https://gdg.community.dev/gdg-catania/ il 2026-07-27.
+# Il chapter id serve all'adapter bevy: l'API ignora `chapter_slug`.
+id: gdg-catania
+name: GDG Catania
+tagline: Sviluppo, cloud e mobile intorno alle tecnologie Google.
+description: >-
+  Google Developer Group di Catania. Gruppo indipendente: le attività e le opinioni
+  espresse non sono collegate a Google. Organizza meetup, giornate di formazione e
+  le tappe catanesi di iniziative internazionali come l'International Women's Day.
+categories:
+  - tech
+area: citta
+language: Italiano
+members: 916
+links:
+  website: https://gdgcatania.org
+  instagram: https://www.instagram.com/gdgcatania
+  linkedin: https://www.linkedin.com/company/gdg-catania
+ingest:
+  - type: bevy
+    chapter: 587
+active: true

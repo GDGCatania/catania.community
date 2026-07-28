@@ -1,0 +1,57 @@
+---
+export interface Props {
+  variant?: 'free' | 'donation' | 'paid' | 'category' | 'online' | 'neutral';
+  label: string;
+}
+
+const { variant = 'neutral', label } = Astro.props;
+---
+
+<span class:list={['badge', `badge--${variant}`]}>{label}</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .badge--free {
+    color: var(--free-ink);
+    background: var(--free-bg);
+    border-color: var(--free-border);
+  }
+
+  .badge--donation {
+    color: var(--donation-ink);
+    background: var(--donation-bg);
+    border-color: var(--donation-border);
+  }
+
+  .badge--paid,
+  .badge--neutral {
+    color: var(--ink-2);
+    background: transparent;
+    border-color: var(--border-strong);
+  }
+
+  .badge--category {
+    color: var(--ink-2);
+    background: var(--surface-raised);
+    border-color: var(--border);
+  }
+
+  .badge--online {
+    color: var(--online-ink);
+    background: transparent;
+    border-color: currentColor;
+  }
+</style>

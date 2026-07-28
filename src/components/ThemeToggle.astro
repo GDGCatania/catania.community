@@ -1,0 +1,83 @@
+---
+import { t } from '../i18n';
+---
+
+{/* Two segments, the active one filled. The initial state is written by the
+    inline script in BaseLayout; here we only keep aria-checked in sync. */}
+<div class="theme-toggle" role="radiogroup" aria-label={t('site.themeLabel')}>
+  <button type="button" data-theme-value="light" role="radio" aria-checked="false">
+    {t('site.themeLight')}
+  </button>
+  <button type="button" data-theme-value="dark" role="radio" aria-checked="false">
+    {t('site.themeDark')}
+  </button>
+</div>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    gap: 2px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+  }
+
+  .theme-toggle button {
+    border: 0;
+    background: transparent;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: var(--radius-pill);
+    transition:
+      background var(--transition),
+      color var(--transition);
+  }
+
+  .theme-toggle button[aria-checked='true'] {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .theme-toggle button:not([aria-checked='true']):hover {
+    color: var(--ink);
+  }
+</style>
+
+<script>
+  const groups = document.querySelectorAll<HTMLElement>('.theme-toggle');
+
+  function paint(theme: string) {
+    for (const group of groups) {
+      for (const btn of group.querySelectorAll<HTMLButtonElement>('[data-theme-value]')) {
+        btn.setAttribute('aria-checked', String(btn.dataset.themeValue === theme));
+      }
+    }
+  }
+
+  function apply(theme: 'light' | 'dark') {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem('cc-theme', theme);
+    } catch {
+      // Safari in private browsing: the theme still holds for this session.
+    }
+    paint(theme);
+  }
+
+  for (const group of groups) {
+    group.addEventListener('click', (event) => {
+      const btn = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-theme-value]');
+      const value = btn?.dataset.themeValue;
+      if (value === 'light' || value === 'dark') apply(value);
+    });
+  }
+
+  paint(document.documentElement.dataset.theme ?? 'light');
+</script>

@@ -1,0 +1,102 @@
+---
+import type { Venue } from '../lib/schema';
+import { t } from '../i18n';
+
+export interface Props {
+  venue: Venue;
+}
+
+const { venue } = Astro.props;
+const geo = venue.geo;
+---
+
+{
+  geo && (
+    <div
+      class="venue-map"
+      data-venue-map
+      data-lat={geo.lat}
+      data-lon={geo.lon}
+      data-name={venue.name}
+      data-attribution={t('map.osmAttribution')}
+      role="application"
+      aria-label={`Mappa di ${venue.name}`}
+    >
+      <noscript>
+        <a
+          class="static-link"
+          href={`https://www.openstreetmap.org/?mlat=${geo.lat}&mlon=${geo.lon}#map=17/${geo.lat}/${geo.lon}`}
+          rel="noopener"
+        >
+          Apri {venue.name} su OpenStreetMap →
+        </a>
+      </noscript>
+    </div>
+  )
+}
+
+<style>
+  .venue-map {
+    height: 260px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-alt);
+    overflow: hidden;
+  }
+
+  .static-link {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    padding: var(--space-4);
+    text-align: center;
+    font-size: var(--step--1);
+  }
+
+  :global(:root[data-theme='dark'] .venue-map .leaflet-tile-pane) {
+    filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9);
+  }
+
+  :global(.venue-map .leaflet-container) {
+    background: var(--surface-alt);
+  }
+
+  :global(.cc-pin-single) {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--surface-raised);
+    box-shadow: var(--shadow-sm);
+  }
+</style>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+
+  const container = document.querySelector<HTMLElement>('[data-venue-map]');
+  // Translated at build time and read back from the data attribute: this
+  // script is bundled, so it cannot import the dictionaries.
+  const attributionText = container?.dataset.attribution ?? '';
+  const lat = Number(container?.dataset.lat);
+  const lon = Number(container?.dataset.lon);
+
+  if (container && Number.isFinite(lat) && Number.isFinite(lon)) {
+    const map = L.map(container, {
+      scrollWheelZoom: false,
+      // A single location: zoom controls are enough, the rest is noise.
+      attributionControl: true,
+    }).setView([lat, lon], 16);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: attributionText,
+    }).addTo(map);
+
+    L.marker([lat, lon], {
+      icon: L.divIcon({ className: '', html: '<span class="cc-pin-single"></span>', iconSize: [20, 20], iconAnchor: [10, 10] }),
+      title: container.dataset.name ?? '',
+    }).addTo(map);
+  }
+</script>

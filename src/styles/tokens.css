@@ -1,0 +1,153 @@
+/*
+ * Design token — catania.community
+ * Estratti dal design di riferimento (Claude Design, "Catania Community").
+ * Ogni colore vive solo qui: i componenti usano esclusivamente le custom property.
+ */
+
+:root {
+  /* --- Tipografia --- */
+  --font-sans: 'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --step--1: 0.8125rem; /* 13px — eyebrow, meta */
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-2: 1.375rem;
+  --step-3: 1.75rem;
+  --step-4: clamp(2rem, 1.5rem + 2.2vw, 2.75rem);
+  --step-5: clamp(2.25rem, 1.4rem + 3.6vw, 3.5rem);
+
+  --tracking-eyebrow: 0.14em;
+  --tracking-display: -0.03em;
+
+  /* --- Spaziatura e forma --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+  --space-8: 4rem;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  --measure: 68ch;
+  --container: 1240px;
+
+  /* --- Badge semantici: stessa tinta nei due temi, sfondo variabile --- */
+  --free-ink: #1e5c46;
+  --free-bg: #eaf6f0;
+  --free-border: #3e9c7f;
+  --donation-ink: #7a5a16;
+  --donation-bg: #fbf3e2;
+  --donation-border: #d8a241;
+  --online-ink: #6e4b8a;
+
+  --transition: 140ms ease;
+}
+
+/* --- Tema chiaro (default) --- */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #e6ddce;
+  --surface: #f4efe7;
+  --surface-raised: #fbf7f1;
+  --surface-alt: #fff8f2;
+
+  --border: #dcd1c0;
+  --border-soft: #e4dacb;
+  --border-strong: #c0b4a4;
+  --rule: #c9bca9;
+
+  --ink: #17120f;
+  --ink-2: #5f544b;
+  --ink-3: #8a7c70;
+
+  --accent: #e0532b;
+  --accent-hover: #c9451f;
+  --accent-soft: #ff8a5c;
+  --accent-wash: rgba(224, 83, 43, 0.08);
+
+  --shadow-sm: 0 1px 2px rgba(23, 18, 15, 0.06);
+  --shadow-md: 0 6px 20px rgba(23, 18, 15, 0.08);
+}
+
+/* --- Tema scuro --- */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #14100e;
+  --surface: #1c1714;
+  --surface-raised: #2c2521;
+  --surface-alt: #3a312b;
+
+  --border: #3a312b;
+  --border-soft: #2c2521;
+  --border-strong: #4a403a;
+  --rule: #5a4e46;
+
+  --ink: #f4efe7;
+  --ink-2: #c6baae;
+  --ink-3: #9a8d82;
+
+  --accent: #ff6a3d;
+  --accent-hover: #ff8a5c;
+  --accent-soft: #ff8a5c;
+  --accent-wash: rgba(255, 106, 61, 0.12);
+
+  --free-ink: #7fd1b3;
+  --free-bg: rgba(62, 156, 127, 0.16);
+  --free-border: #2f7a63;
+  --donation-ink: #e8bd6b;
+  --donation-bg: rgba(216, 162, 65, 0.14);
+  --donation-border: #b7822a;
+  --online-ink: #c3a2e0;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Chi non ha ancora scelto un tema segue il sistema. Lo script inline in
+   BaseLayout scrive data-theme prima del paint, quindi questo blocco copre
+   solo il caso in cui il JS sia disabilitato. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    --bg: #14100e;
+    --surface: #1c1714;
+    --surface-raised: #2c2521;
+    --surface-alt: #3a312b;
+
+    --border: #3a312b;
+    --border-soft: #2c2521;
+    --border-strong: #4a403a;
+    --rule: #5a4e46;
+
+    --ink: #f4efe7;
+    --ink-2: #c6baae;
+    --ink-3: #9a8d82;
+
+    --accent: #ff6a3d;
+    --accent-hover: #ff8a5c;
+    --accent-soft: #ff8a5c;
+    --accent-wash: rgba(255, 106, 61, 0.12);
+
+    --free-ink: #7fd1b3;
+    --free-bg: rgba(62, 156, 127, 0.16);
+    --free-border: #2f7a63;
+    --donation-ink: #e8bd6b;
+    --donation-bg: rgba(216, 162, 65, 0.14);
+    --donation-border: #b7822a;
+    --online-ink: #c3a2e0;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
+  }
+}

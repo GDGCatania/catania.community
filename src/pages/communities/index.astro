@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Badge from '../../components/Badge.astro';
+import { getCommunities, getUpcomingEvents, formatDayMonth, formatNumber } from '../../lib/events';
+import { breadcrumbJsonLd } from '../../lib/jsonld';
+import { t } from '../../i18n';
+import { ISSUE_URLS, ROUTES } from '../../lib/site';
+
+const [communities, upcoming] = await Promise.all([getCommunities(), getUpcomingEvents()]);
+
+const nextByCommunity = new Map<string, (typeof upcoming)[number]>();
+for (const event of upcoming) {
+  if (!nextByCommunity.has(event.communityId)) nextByCommunity.set(event.communityId, event);
+}
+
+const active = communities.filter((community) => community.active);
+---
+
+<BaseLayout
+  title={
+    active.length === 1 ? t('communities.titleOne') : t('communities.title', { count: active.length })
+  }
+  description={t('communities.metaDescription')}
+  jsonLd={breadcrumbJsonLd([
+    { name: t('nav.events'), path: ROUTES.home },
+    { name: t('nav.communities'), path: ROUTES.communities },
+  ])}
+>
+  <div class="container head">
+    <div>
+      <h1>
+        {active.length === 1
+          ? t('communities.titleOne')
+          : t('communities.title', { count: active.length })}
+      </h1>
+      <p class="lede">{t('communities.intro')}</p>
+    </div>
+    <a class="btn btn--primary" href={ROUTES.submit}>{t('communities.addYours')}</a>
+  </div>
+
+  <div class="container">
+    <ul class="grid">
+      {
+        active.map((community) => {
+          const next = nextByCommunity.get(community.id);
+          return (
+            <li class="card">
+              <a class="name" href={ROUTES.community(community.id)}>
+                {community.name}
+              </a>
+              {community.tagline ? <p class="tagline">{community.tagline}</p> : null}
+
+              <div class="badges">
+                {community.categories.map((category) => (
+                  <Badge variant="category" label={t(`category.${category}`)} />
+                ))}
+                <Badge variant="neutral" label={t(`area.${community.area}`)} />
+              </div>
+
+              <p class="meta mono">
+                {community.members
+                  ? t('communities.members', { count: formatNumber(community.members) })
+                  : null}
+                {community.members && next ? ' · ' : null}
+                {next
+                  ? t('communities.next', { date: formatDayMonth(next.start) })
+                  : t('communities.noUpcoming')}
+              </p>
+            </li>
+          );
+        })
+      }
+
+      <li class="card card--cta">
+        <p class="name">{t('communities.ctaTitle')}</p>
+        <p class="tagline">{t('communities.ctaBody')}</p>
+        <div class="ctas">
+          <a class="btn btn--primary" href={ROUTES.submit}>{t('communities.ctaButton')}</a>
+          <a class="btn btn--ghost" href={ISSUE_URLS.newCommunity} rel="noopener">
+            {t('communities.ctaGithub')}
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+    padding-block: var(--space-7) var(--space-5);
+  }
+
+  .head h1 {
+    font-size: var(--step-4);
+    margin-bottom: var(--space-3);
+  }
+
+  .grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .card--cta {
+    background: var(--surface);
+    border-style: dashed;
+  }
+
+  .name {
+    font-size: var(--step-1);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  a.name:hover {
+    color: var(--accent);
+  }
+
+  .tagline {
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    line-height: 1.55;
+    flex-grow: 1;
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-1);
+  }
+
+  .meta {
+    font-size: 11px;
+    color: var(--ink-3);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .ctas {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-top: var(--space-2);
+  }
+</style>

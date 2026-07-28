@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventRow from '../components/EventRow.astro';
+import FilterBar from '../components/FilterBar.astro';
+import EventMap from '../components/EventMap.astro';
+import MiniCalendar from '../components/MiniCalendar.astro';
+import {
+  getUpcomingEvents,
+  getCommunityMap,
+  getCommunities,
+  groupByDay,
+  eventsPerDay,
+  eventCount,
+} from '../lib/events';
+import { ROUTES } from '../lib/site';
+import { t } from '../i18n';
+
+const now = new Date();
+const events = await getUpcomingEvents(now);
+const communities = await getCommunityMap();
+const allCommunities = await getCommunities();
+
+const days = groupByDay(events, now);
+const counts = eventsPerDay(events);
+const availableCategories = [...new Set(events.flatMap((event) => event.categories))];
+
+// The running index ties a row in the list to its pin on the map.
+let pin = 0;
+const numbered = new Map(events.map((event) => [event.id, ++pin]));
+
+const description =
+  events.length > 0
+    ? t('home.metaDescriptionCount', { count: events.length })
+    : t('home.metaDescription');
+
+const communityCount =
+  allCommunities.length === 1
+    ? t('communities.titleOne')
+    : t('communities.title', { count: allCommunities.length });
+---
+
+<BaseLayout title={t('home.title')} description={description}>
+  <section class="container hero">
+    <h1>{t('home.headline')}<br /><span>{t('home.headlineAccent')}</span></h1>
+    <p class="lede">{t('home.intro')}</p>
+  </section>
+
+  <div class="container">
+    <FilterBar availableCategories={availableCategories} />
+  </div>
+
+  <div class="container layout">
+    <div class="agenda">
+      {
+        days.map((day) => (
+          <section class="day" data-day-group={day.key}>
+            <header class="day-head">
+              <h2 class="day-label">{day.label}</h2>
+              <span class="eyebrow" data-day-count>
+                {eventCount(day.events.length)}
+              </span>
+            </header>
+
+            {day.events.map((event) => (
+              <EventRow
+                event={event}
+                community={communities.get(event.communityId)}
+                index={numbered.get(event.id) ?? 0}
+              />
+            ))}
+          </section>
+        ))
+      }
+
+      <p class="empty" data-empty-state hidden={events.length > 0}>
+        {
+          events.length === 0 ? (
+            <>
+              {t('home.emptyNoEvents')} <a href={ROUTES.submit}>{t('home.emptyNoEventsLink')}</a>.
+            </>
+          ) : (
+            t('home.emptyFiltered')
+          )
+        }
+      </p>
+    </div>
+
+    <aside class="side">
+      <EventMap />
+      <MiniCalendar counts={counts} />
+
+      <section class="promo">
+        <h2>{communityCount}</h2>
+        <p>{t('home.communitiesCta')}</p>
+        <a class="btn btn--primary" href={ROUTES.communities}>{t('home.communitiesLink')}</a>
+      </section>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--space-7) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .hero h1 span {
+    color: var(--accent);
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: var(--space-6);
+    align-items: start;
+    padding-block: var(--space-5);
+  }
+
+  .day + .day {
+    margin-top: var(--space-5);
+  }
+
+  .day[hidden] {
+    display: none;
+  }
+
+  .day-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .day-label {
+    font-size: var(--step-0);
+    font-weight: 700;
+    letter-spacing: 0;
+    min-width: 0; /* Without this a long title squeezes the counter out. */
+  }
+
+  .day-head .eyebrow {
+    flex-shrink: 0;
+  }
+
+  .empty {
+    padding: var(--space-6) 0;
+    color: var(--ink-2);
+    max-width: var(--measure);
+  }
+
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    position: sticky;
+    top: 84px;
+  }
+
+  .promo {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    align-items: flex-start;
+  }
+
+  .promo h2 {
+    font-size: var(--step-2);
+  }
+
+  .promo p {
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .promo .btn {
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 1000px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    /* On narrow screens the list comes first: events are why people open the
+       site, the map and the calendar are context. */
+    .side {
+      position: static;
+    }
+  }
+</style>

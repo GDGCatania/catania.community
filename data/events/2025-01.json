@@ -18,7 +18,7 @@
     },
     "slug": "flutterinproduction-extended-catania",
     "source": {
-      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "fetchedAt": "2026-07-27T23:49:51.859Z",
       "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutterinproduction-extended-catania/",
       "type": "bevy"
     },
@@ -26,7 +26,7 @@
     "title": "#FlutterInProduction Extended Catania",
     "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutterinproduction-extended-catania/",
     "venue": {
-      "address": "31 Viale Africa",
+      "address": "Viale Africa 31",
       "city": "Catania",
       "geo": {
         "lat": 37.512206,
@@ -54,7 +54,7 @@
     },
     "slug": "global-game-jam-2025",
     "source": {
-      "fetchedAt": "2026-07-27T22:12:05.270Z",
+      "fetchedAt": "2026-07-27T23:49:51.859Z",
       "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-global-game-jam-2025/",
       "type": "bevy"
     },

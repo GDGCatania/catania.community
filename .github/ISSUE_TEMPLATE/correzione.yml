@@ -1,0 +1,35 @@
+name: Correzione di un dato
+description: Un evento o una community ha un dato sbagliato
+title: 'Correzione: '
+labels: [correzione]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        I dati arrivano dalle pagine pubbliche delle community, quindi ogni tanto
+        sono incompleti o sbagliati. Le correzioni inserite qui hanno la
+        **precedenza sui crawler**: una volta applicate non vengono più sovrascritte.
+
+  - type: input
+    id: page
+    attributes:
+      label: Pagina interessata
+      description: Incolla l'indirizzo della pagina su catania.community.
+      placeholder: https://catania.community/eventi/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Cosa non torna
+      placeholder: L'orario è le 19:00 ma l'evento inizia alle 18:30.
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Dove si vede il dato giusto
+      description: Un link alla fonte ufficiale ci permette di correggere subito.
+      placeholder: https://

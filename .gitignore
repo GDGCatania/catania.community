@@ -1,0 +1,13 @@
+.idea
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+*.log
+npm-debug.log*
+.DS_Store
+.wrangler/
+coverage/
+.playwright-mcp/

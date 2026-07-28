@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/Google-IO-2024_MgjEHek.jpg",
+    "description": "Ci vediamo Domenica 21 alle ore 17:30 \n\nDa CreationDose, in Via Antonino di Sangiuliano, 197\n\n \n\nVogliamo salutarvi prima della pausa estiva e parlarvi di quello che abbiamo imparato durante il Google I/O Connect. \n\n \n\nCosa vi aspetta? \n\nLIVE CODING: \n\n- Raffaele Barone > Introduction to Gemini\n\n- Carlo Lucera > Flutter & Gemini\n\n \n\nE dopo? 🍻🍕 \n\nNoi del GDG Catania ci sposteremo da Piazza Scammacca per trascorrere una piacevole serata! \n\nAttenzione: per chi vorrà raggiungerci i posti sono limitati, assicuratevi di prenotare il vostro biglietto+\"DINNER\"! 🤓\n\n \n\nP.S. La serata sarà a carico dei partecipanti, un piccolo investimento per una serata indimenticabile! 😉 \n\n \n\nPrenotate subito il vostro posto! 🏃‍♂️🏃‍♀️",
+    "end": "2024-07-21T20:00:00+02:00",
+    "id": "bevy:68639",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "google-io-reconnect-da-berlino-a-catania",
+    "source": {
+      "fetchedAt": "2026-07-27T23:49:51.859Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-reconnect-da-berlino-a-catania/",
+      "type": "bevy"
+    },
+    "start": "2024-07-21T17:30:00+02:00",
+    "title": "Google IO ReConnect - Da Berlino a Catania!",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-reconnect-da-berlino-a-catania/",
+    "venue": {
+      "address": "Via Antonino di Sangiuliano 197",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose Srl"
+    }
+  }
+]

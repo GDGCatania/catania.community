@@ -1,0 +1,336 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Badge from '../../components/Badge.astro';
+import {
+  getCommunities,
+  getEventsByCommunity,
+  formatDayMonth,
+  formatTime,
+  formatNumber,
+} from '../../lib/events';
+import { breadcrumbJsonLd, communityJsonLd } from '../../lib/jsonld';
+import { absoluteUrl } from '../../lib/urls';
+import { t } from '../../i18n';
+import { ISSUE_URLS, ROUTES } from '../../lib/site';
+
+export const getStaticPaths = (async () => {
+  const communities = await getCommunities();
+
+  return Promise.all(
+    communities.map(async (community) => {
+      const { upcoming, past } = await getEventsByCommunity(community.id);
+      return { params: { slug: community.id }, props: { community, upcoming, past } };
+    })
+  );
+}) satisfies GetStaticPaths;
+
+// Prop types come from getStaticPaths; redeclaring them here would only
+// duplicate them.
+const { community, upcoming, past } = Astro.props;
+const canonical = absoluteUrl(Astro.url.pathname, Astro.site);
+
+const linkLabels: Record<string, string> = {
+  website: t('community.linkWebsite'),
+  meetup: 'Meetup',
+  luma: 'Luma',
+  eventbrite: 'Eventbrite',
+  telegram: 'Telegram',
+  instagram: 'Instagram',
+  linkedin: 'LinkedIn',
+  mastodon: 'Mastodon',
+  github: 'GitHub',
+};
+
+const links = Object.entries(community.links).filter(
+  ([key, value]) => key !== 'email' && typeof value === 'string'
+) as Array<[string, string]>;
+
+const description =
+  community.description?.slice(0, 155) ??
+  t('community.metaFallback', { name: community.name, count: upcoming.length });
+---
+
+<BaseLayout
+  title={community.name}
+  description={description}
+  jsonLd={[
+    communityJsonLd(community, canonical),
+    breadcrumbJsonLd([
+      { name: t('nav.communities'), path: ROUTES.communities },
+      { name: community.name, path: ROUTES.community(community.id) },
+    ]),
+  ]}
+>
+  <div class="container">
+    <nav class="crumbs" aria-label={t('site.sections')}>
+      <a href={ROUTES.communities}>{t('community.breadcrumb')}</a>
+    </nav>
+  </div>
+
+  <header class="container head">
+    <h1>{community.name}</h1>
+    {community.description ? <p class="lede">{community.description}</p> : null}
+
+    <div class="badges">
+      {
+        community.categories.map((category) => (
+          <Badge variant="category" label={t(`category.${category}`)} />
+        ))
+      }
+      <Badge variant="neutral" label={t(`area.${community.area}`)} />
+      {community.cadence ? <Badge variant="neutral" label={community.cadence} /> : null}
+    </div>
+
+    {
+      links.length > 0 && (
+        <div class="links">
+          {links.map(([key, url]) => (
+            <a class="btn btn--ghost" href={url} rel="noopener" target="_blank">
+              {linkLabels[key] ?? key} →
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </header>
+
+  <div class="container layout">
+    <div class="main">
+      <section>
+        <h2>{t('community.upcoming')}</h2>
+        {
+          upcoming.length === 0 ? (
+            <p class="empty">{t('community.noUpcoming')}</p>
+          ) : (
+            <ul class="events">
+              {upcoming.map((event) => (
+                <li>
+                  <span class="date mono">
+                    {formatDayMonth(event.start)}
+                    <span class="hour">{formatTime(event.start)}</span>
+                  </span>
+                  <span class="info">
+                    <a href={ROUTES.event(event.slug)}>{event.title}</a>
+                    <span class="place">
+                      {event.online ? t('status.online') : (event.venue?.name ?? t('community.venueTbc'))}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </section>
+
+      {
+        past.length > 0 && (
+          <section class="archive">
+            <h2>{t('community.past')}</h2>
+            <ul class="events events--past">
+              {past.map((event) => (
+                <li>
+                  <span class="date mono">{formatDayMonth(event.start)}</span>
+                  <span class="info">
+                    <a href={ROUTES.event(event.slug)}>{event.title}</a>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </div>
+
+    <aside class="side">
+      <div class="card">
+        {
+          community.cadence && (
+            <div class="field">
+              <span class="eyebrow">{t('community.cadence')}</span>
+              <p>{community.cadence}</p>
+            </div>
+          )
+        }
+        <div class="field">
+          <span class="eyebrow">{t('community.language')}</span>
+          <p>{community.language}</p>
+        </div>
+        {
+          community.usualVenue && (
+            <div class="field">
+              <span class="eyebrow">{t('community.usualVenue')}</span>
+              <p>{community.usualVenue}</p>
+            </div>
+          )
+        }
+        {
+          community.members && (
+            <div class="field">
+              <span class="eyebrow">{t('community.membersLabel')}</span>
+              <p>{formatNumber(community.members)}</p>
+            </div>
+          )
+        }
+        {
+          community.since && (
+            <div class="field">
+              <span class="eyebrow">{t('community.since')}</span>
+              <p>{community.since}</p>
+            </div>
+          )
+        }
+      </div>
+
+      <p class="source">
+        {t('eventPage.dataSource')}{' '}
+        <a href={ISSUE_URLS.correction(`Correzione: ${community.name}`)} rel="noopener">
+          {t('community.reportOnGithub')}
+        </a>.
+      </p>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  .crumbs {
+    padding-top: var(--space-5);
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  .head {
+    padding-block: var(--space-5) var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .head h1 {
+    font-size: var(--step-4);
+  }
+
+  .badges,
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: var(--space-6);
+    align-items: start;
+    padding-block: var(--space-4) var(--space-6);
+  }
+
+  h2 {
+    font-size: var(--step-2);
+    padding-bottom: var(--space-2);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .archive {
+    margin-top: var(--space-6);
+  }
+
+  .events {
+    list-style: none;
+    padding: 0;
+  }
+
+  .events li {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border-soft);
+    align-items: baseline;
+  }
+
+  .date {
+    font-size: var(--step--1);
+    font-weight: 700;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hour {
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+
+  .events--past .date {
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .info a {
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  .info a:hover {
+    color: var(--accent);
+  }
+
+  .place {
+    font-size: var(--step--1);
+    color: var(--ink-3);
+  }
+
+  .empty {
+    padding: var(--space-4) 0;
+    color: var(--ink-2);
+    max-width: var(--measure);
+  }
+
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    position: sticky;
+    top: 84px;
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .field p {
+    font-size: var(--step--1);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .source {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .side {
+      position: static;
+    }
+  }
+</style>
