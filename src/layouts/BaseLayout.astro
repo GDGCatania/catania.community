@@ -3,7 +3,8 @@ import '../styles/base.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { absoluteUrl } from '../lib/urls';
-import { locale, localeTag, t } from '../i18n';
+import { locale, localeTag } from '../i18n';
+import * as m from '../paraglide/messages.js';
 import { ROUTES } from '../lib/site';
 
 export interface Props {
@@ -50,13 +51,13 @@ const fullTitle = title === 'catania.community' ? title : `${title} · catania.c
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={t('feed.rssTitle')}
+      title={m.feed_rssTitle()}
       href={ROUTES.feedRss}
     />
     <link
       rel="alternate"
       type="text/calendar"
-      title={t('feed.calendarName')}
+      title={m.feed_calendarName()}
       href={ROUTES.feedIcs}
     />
 
@@ -93,7 +94,7 @@ const fullTitle = title === 'catania.community' ? title : `${title} · catania.c
   </head>
 
   <body>
-    <a class="skip-link" href="#main">{t('site.skipToContent')}</a>
+    <a class="skip-link" href="#main">{m.site_skipToContent()}</a>
     <SiteHeader />
     <main id="main">
       <slot />

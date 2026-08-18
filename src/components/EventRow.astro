@@ -2,7 +2,8 @@
 import Badge from './Badge.astro';
 import { formatTime } from '../lib/events';
 import { ROUTES } from '../lib/site';
-import { t } from '../i18n';
+import * as m from '../paraglide/messages.js';
+import { categoryLabel, priceLabel } from '../i18n/labels';
 import type { Community, Event } from '../lib/schema';
 
 export interface Props {
@@ -15,7 +16,7 @@ export interface Props {
 const { event, community, index } = Astro.props;
 
 const where = event.online
-  ? t('status.online')
+  ? m.status_online()
   : [event.venue?.name, event.venue?.city].filter(Boolean).join(', ');
 ---
 
@@ -48,12 +49,12 @@ const where = event.online
     </p>
 
     <div class="badges">
-      {event.cancelled ? <Badge variant="paid" label={t('status.cancelled')} /> : null}
-      <Badge variant={event.price.type} label={t(`price.${event.price.type}`)} />
-      {event.online ? <Badge variant="online" label={t('status.online')} /> : null}
+      {event.cancelled ? <Badge variant="paid" label={m.status_cancelled()} /> : null}
+      <Badge variant={event.price.type} label={priceLabel[event.price.type]()} />
+      {event.online ? <Badge variant="online" label={m.status_online()} /> : null}
       {
         event.categories.map((category) => (
-          <Badge variant="category" label={t(`category.${category}`)} />
+          <Badge variant="category" label={categoryLabel[category]()} />
         ))
       }
     </div>
@@ -61,11 +62,11 @@ const where = event.online
 
   <div class="action">
     <a class="btn btn--ghost" href={event.url} rel="noopener nofollow" target="_blank">
-      {t('event.goTo')} <span aria-hidden="true">→</span>
+      {m.event_goTo()} <span aria-hidden="true">→</span>
     </a>
     {
       event.seatsLeft !== undefined ? (
-        <span class="seats mono">{t('event.seatsLeft', { count: event.seatsLeft })}</span>
+        <span class="seats mono">{m.event_seatsLeft({ count: event.seatsLeft })}</span>
       ) : null
     }
   </div>

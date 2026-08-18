@@ -1,15 +1,15 @@
 ---
-import { t } from '../i18n';
+import * as m from '../paraglide/messages.js';
 ---
 
 {/* Two segments, the active one filled. The initial state is written by the
     inline script in BaseLayout; here we only keep aria-checked in sync. */}
-<div class="theme-toggle" role="radiogroup" aria-label={t('site.themeLabel')}>
+<div class="theme-toggle" role="radiogroup" aria-label={m.site_themeLabel()}>
   <button type="button" data-theme-value="light" role="radio" aria-checked="false">
-    {t('site.themeLight')}
+    {m.site_themeLight()}
   </button>
   <button type="button" data-theme-value="dark" role="radio" aria-checked="false">
-    {t('site.themeDark')}
+    {m.site_themeDark()}
   </button>
 </div>
 

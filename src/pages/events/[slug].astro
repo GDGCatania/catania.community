@@ -6,8 +6,10 @@ import VenueMap from '../../components/VenueMap.astro';
 import { getAllEvents, getCommunityMap, formatDateLong, formatTime } from '../../lib/events';
 import { breadcrumbJsonLd, eventJsonLd } from '../../lib/jsonld';
 import { absoluteUrl } from '../../lib/urls';
-import { t } from '../../i18n';
+import * as m from '../../paraglide/messages.js';
+import { categoryLabel, priceLabel } from '../../i18n/labels';
 import { ISSUE_URLS, ROUTES } from '../../lib/site';
+import Message from '../../components/Message.astro';
 
 export const getStaticPaths = (async () => {
   const [events, communities] = await Promise.all([getAllEvents(), getCommunityMap()]);
@@ -30,14 +32,14 @@ const isPast = new Date(event.end ?? event.start) < new Date();
 const jsonLd = [
   eventJsonLd(event, community, canonical),
   breadcrumbJsonLd([
-    { name: t('nav.events'), path: ROUTES.home },
+    { name: m.nav_events(), path: ROUTES.home },
     { name: event.title, path: ROUTES.event(event.slug) },
   ]),
 ];
 
 const description = event.description
   ? event.description.slice(0, 155)
-  : t('eventPage.metaFallback', {
+  : m.eventPage_metaFallback({
       title: event.title,
       date: formatDateLong(event.start),
       city: event.venue?.city ?? 'Catania',
@@ -58,8 +60,8 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
   ogImage={event.coverImage ?? '/og-default.png'}
 >
   <div class="container">
-    <nav class="crumbs" aria-label={t('site.sections')}>
-      <a href={ROUTES.home}>{t('eventPage.breadcrumb')}</a>
+    <nav class="crumbs" aria-label={m.site_sections()}>
+      <a href={ROUTES.home}>{m.eventPage_breadcrumb()}</a>
     </nav>
   </div>
 
@@ -76,7 +78,7 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
       {
         (isPast || event.cancelled) && (
           <p class="notice" role="status">
-            {event.cancelled ? t('eventPage.cancelledNotice') : t('eventPage.pastNotice')}
+            {event.cancelled ? m.eventPage_cancelledNotice() : m.eventPage_pastNotice()}
           </p>
         )
       }
@@ -87,7 +89,7 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
             <p class="org">
               <a href={ROUTES.community(community.id)}>{community.name}</a>
               {community.since ? (
-                <span class="since">{t('eventPage.communitySince', { year: community.since })}</span>
+                <span class="since">{m.eventPage_communitySince({ year: community.since })}</span>
               ) : null}
             </p>
           )
@@ -96,16 +98,16 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
         <h1>{event.title}</h1>
 
         <div class="badges">
-          <Badge variant={event.price.type} label={t(`price.${event.price.type}`)} />
-          {event.online ? <Badge variant="online" label={t('status.online')} /> : null}
+          <Badge variant={event.price.type} label={priceLabel[event.price.type]()} />
+          {event.online ? <Badge variant="online" label={m.status_online()} /> : null}
           {
             event.categories.map((category) => (
-              <Badge variant="category" label={t(`category.${category}`)} />
+              <Badge variant="category" label={categoryLabel[category]()} />
             ))
           }
           <Badge variant="neutral" label={event.language} />
           {event.beginnerFriendly ? (
-            <Badge variant="neutral" label={t('eventPage.beginnerFriendly')} />
+            <Badge variant="neutral" label={m.eventPage_beginnerFriendly()} />
           ) : null}
         </div>
       </header>
@@ -123,7 +125,7 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
       {
         !event.online && event.venue && (
           <section class="where">
-            <h2>{t('eventPage.where')}</h2>
+            <h2>{m.eventPage_where()}</h2>
             {event.venue.geo && <VenueMap venue={event.venue} />}
             <p class="venue">
               <strong>{event.venue.name}</strong>
@@ -137,32 +139,32 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
     <aside class="side">
       <div class="card">
         <div class="field">
-          <span class="eyebrow">{t('eventPage.when')}</span>
+          <span class="eyebrow">{m.eventPage_when()}</span>
           <p class="when">{when}</p>
         </div>
 
         <hr />
 
         <div class="field">
-          <span class="eyebrow">{t('eventPage.admission')}</span>
+          <span class="eyebrow">{m.eventPage_admission()}</span>
           <p>
-            {t(`price.${event.price.type}`)}
+            {priceLabel[event.price.type]()}
             {event.price.type === 'paid' && event.price.amount ? ` · ${event.price.amount} €` : ''}
             {event.seatsLeft !== undefined
-              ? ` · ${t('event.seatsLeft', { count: event.seatsLeft })}`
+              ? ` · ${m.event_seatsLeft({ count: event.seatsLeft })}`
               : ''}
           </p>
         </div>
 
         <a class="btn btn--primary wide" href={event.url} rel="noopener nofollow" target="_blank">
-          {t('event.goTo')} <span aria-hidden="true">→</span>
+          {m.event_goTo()} <span aria-hidden="true">→</span>
         </a>
-        <p class="hint">{t('eventPage.registrationHint')}</p>
+        <p class="hint">{m.eventPage_registrationHint()}</p>
 
         <hr />
 
         <div class="field">
-          <span class="eyebrow">{t('eventPage.addToCalendar')}</span>
+          <span class="eyebrow">{m.eventPage_addToCalendar()}</span>
           <div class="cal">
             <a class="btn btn--ghost" href={ROUTES.eventIcs(event.slug)}>.ics</a>
             <a
@@ -191,19 +193,21 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
       {
         community && (
           <div class="card">
-            <span class="eyebrow">{t('eventPage.organiser')}</span>
+            <span class="eyebrow">{m.eventPage_organiser()}</span>
             <p class="orgname">{community.name}</p>
             {community.tagline ? <p class="hint">{community.tagline}</p> : null}
             <a class="btn btn--ghost" href={ROUTES.community(community.id)}>
-              {t('eventPage.seeCommunity')}
+              {m.eventPage_seeCommunity()}
             </a>
           </div>
         )
       }
 
       <p class="source">
-        {t('eventPage.dataSource')}{' '}
-        <a href={ISSUE_URLS.correction(`Correzione: ${event.title}`)}>{t('eventPage.reportIt')}</a>.
+        <Message
+          of={m.eventPage_dataSource}
+          links={{ report: ISSUE_URLS.correction(`Correzione: ${event.title}`) }}
+        />
       </p>
     </aside>
   </div>

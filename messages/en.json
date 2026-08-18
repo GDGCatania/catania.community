@@ -1,0 +1,233 @@
+{
+  "area_citta": "Catania city",
+  "area_online": "Online",
+  "area_provincia": "Province",
+  "calendar_aria": "Calendar for {month}",
+  "calendar_dayAria": "{day}: {events}",
+  "calendar_legend": "one dot = one event that day",
+  "calendar_weekdays": "M,T,W,T,F,S,S",
+  "category_cultura": "Culture",
+  "category_design": "Design",
+  "category_impresa": "Business",
+  "category_sociale": "Social",
+  "category_tech": "Tech",
+  "communities_addYours": "Add yours →",
+  "communities_count": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
+      "match": {
+        "countPlural=one": "{count} community",
+        "countPlural=other": "{count} communities"
+      }
+    }
+  ],
+  "communities_ctaBody": "A name, a link and where you publish your events. From then on we import them twice a day.",
+  "communities_ctaButton": "Submit a community",
+  "communities_ctaGithub": "On GitHub",
+  "communities_ctaTitle": "Your community here",
+  "communities_intro": "Who organises what, and how often. If one is missing, open a report: we usually add it within a few days.",
+  "communities_members": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural",
+        "local n = count: number"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
+      "match": {
+        "countPlural=one": "{n} member",
+        "countPlural=other": "{n} members"
+      }
+    }
+  ],
+  "communities_metaDescription": "Who runs events in Catania and its province: tech, design, culture, business and social. An open list, maintained by the communities themselves.",
+  "communities_next": "next on {date}",
+  "communities_noUpcoming": "nothing scheduled",
+  "community_breadcrumb": "← All communities",
+  "community_cadence": "Rhythm",
+  "community_language": "Language",
+  "community_linkWebsite": "Community website",
+  "community_membersLabel": "Members",
+  "community_metaFallback": "{name}: events, rhythm and contacts. {count} events coming up in Catania.",
+  "community_noUpcoming": "Nothing scheduled at the moment. We check the sources twice a day: as soon as they publish, it shows up here on its own.",
+  "community_past": "Past events",
+  "community_since": "Active since",
+  "community_upcoming": "Upcoming events",
+  "community_usualVenue": "Usual venue",
+  "community_venueTbc": "Venue to be confirmed",
+  "eventPage_addToCalendar": "Add to calendar",
+  "eventPage_admission": "Admission",
+  "eventPage_beginnerFriendly": "Beginner friendly",
+  "eventPage_breadcrumb": "← All events",
+  "eventPage_cancelledNotice": "This event was cancelled.",
+  "eventPage_communitySince": " · community since {year}",
+  "eventPage_dataSource": "Imported from the community’s public pages. Something off? {#link to=$report}Report it{/link}.",
+  "eventPage_metaFallback": "{title} — {date} in {city}. Organised by {community}.",
+  "eventPage_organiser": "Organised by",
+  "eventPage_pastNotice": "This event has already taken place. We keep it online as the community’s archive.",
+  "eventPage_registrationHint": "Registration happens on the community’s own site. We do not handle tickets here.",
+  "eventPage_seeCommunity": "See the community →",
+  "eventPage_when": "When",
+  "eventPage_where": "Where",
+  "event_count": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
+      "match": {
+        "countPlural=one": "{count} event",
+        "countPlural=other": "{count} events"
+      }
+    }
+  ],
+  "event_goTo": "Go to the event",
+  "event_seatsLeft": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
+      "match": {
+        "countPlural=one": "{count} seat left",
+        "countPlural=other": "{count} seats left"
+      }
+    }
+  ],
+  "event_today": "Today",
+  "event_tomorrow": "Tomorrow",
+  "feed_at": "{date} at {time}",
+  "feed_calendarName": "Catania community events",
+  "feed_detailsAt": "Details and registration: {url}",
+  "feed_organiser": "Organised by: {name}",
+  "feed_rssDescription": "Meetups, workshops and gatherings from the communities of Catania and its province.",
+  "feed_rssTitle": "Catania community events",
+  "feed_where": "Where: {place}",
+  "filters_aria": "Filter events",
+  "filters_cost": "Cost",
+  "filters_freeOnly": "Free only",
+  "filters_label": "Filter",
+  "filters_next30": "Next 30 days",
+  "filters_period": "Period",
+  "filters_reset": "Clear",
+  "filters_topic": "Topic",
+  "filters_where": "Where",
+  "footer_about": "What the communities of Catania and its province are organising. We are a mirror: sign-ups and tickets stay on the organisers’ own platforms.",
+  "footer_addCommunity": "Add a community",
+  "footer_calendar": "Calendar .ics",
+  "footer_contribute": "Contribute",
+  "footer_json": "JSON data",
+  "footer_license": "Code {#link to=$code}AGPL-3.0{/link}, {#link to=$data}data ODbL 1.0{/link}. Maps © {#link to=$osm}OpenStreetMap{/link} contributors.",
+  "footer_licenses": "Licences",
+  "footer_madeIn": "free software, made in Catania",
+  "footer_openFormats": "Open formats",
+  "footer_reportError": "Report a mistake",
+  "footer_rss": "RSS feed",
+  "footer_sourceCode": "Source code",
+  "home_communitiesCta": "Who organises what, and how often. If one is missing, a name and a link are enough — we take it from there.",
+  "home_communitiesLink": "See the communities →",
+  "home_empty": "Nothing scheduled right now. The crawlers check the sources twice a day; if you are organising something, {#link to=$submit}tell us about it{/link}.",
+  "home_emptyFiltered": "No events match the filters you picked.",
+  "home_headline": "Everything happening in Catania.",
+  "home_headlineAccent": "On one page.",
+  "home_intro": "Events from the communities of the city and the province. We are a mirror: tickets and sign-ups stay where they already are.",
+  "home_metaDescription": "Events from the communities of Catania and its province, gathered on a single page.",
+  "home_metaDescriptionCount": "{count} upcoming events from the communities of Catania and its province: meetups, workshops and talks. Updated automatically.",
+  "home_title": "catania.community",
+  "map_caption": "OpenStreetMap",
+  "map_details": "See details",
+  "map_noScript": "The map needs JavaScript. Every event is listed next to it anyway.",
+  "map_offscreen": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
+      "match": {
+        "countPlural=one": "{count} event without a location on the map",
+        "countPlural=other": "{count} events without a location on the map"
+      }
+    }
+  ],
+  "map_openIn": "Open {name} on OpenStreetMap →",
+  "map_osmAttribution": "© OpenStreetMap contributors",
+  "nav_addCommunity": "Add your community",
+  "nav_communities": "Communities",
+  "nav_events": "Events",
+  "notFound_body": "It might be an event removed at the source, or a mistyped address. Past events stay online, so if you were after something old it should still be there.",
+  "notFound_eyebrow": "Error 404",
+  "notFound_title": "This page is not here.",
+  "notFound_toCommunities": "See the communities",
+  "notFound_toEvents": "Go to the events",
+  "price_donation": "Pay what you want",
+  "price_free": "Free",
+  "price_paid": "Paid",
+  "site_languageLabel": "Language",
+  "site_name": "catania.community",
+  "site_sections": "Sections",
+  "site_skipToContent": "Skip to content",
+  "site_tagline": "What the Catania tech and culture communities are up to",
+  "site_themeDark": "Dark",
+  "site_themeLabel": "Site theme",
+  "site_themeLight": "Light",
+  "status_cancelled": "Cancelled",
+  "status_online": "Online",
+  "submit_button": "Send",
+  "submit_buttonIssue": "I would rather open an issue",
+  "submit_contactHelp": "This ends up in a public GitHub issue along with the rest. Leave it blank if you would rather stay anonymous.",
+  "submit_eventsHelp": "This is the part that matters most. If you have an .ics feed or a page on gdg.community.dev, Luma, Gancio or Mobilizon, we read it automatically. Meetup and Eventbrite have closed their APIs, so those we copy by hand.",
+  "submit_failed": "I could not send it. ",
+  "submit_failedLink": "Open the issue on GitHub with your answers already filled in →",
+  "submit_fieldArea": "Where you usually meet",
+  "submit_fieldContact": "Email or handle",
+  "submit_fieldContactPlaceholder": "Only if you want a reply",
+  "submit_fieldContacts": "Other contacts",
+  "submit_fieldContactsPlaceholder": "Telegram, Instagram, website…",
+  "submit_fieldEventsUrl": "Main link",
+  "submit_fieldIcsUrl": ".ics feed, if you have one",
+  "submit_fieldName": "Name",
+  "submit_fieldTagline": "In one line",
+  "submit_fieldTaglinePlaceholder": "What you do, in a few words",
+  "submit_fieldTopics": "Topics",
+  "submit_fixBody": "Wrong date, changed venue, cancelled event: open a correction and we fix it by hand — corrections take precedence over the crawlers.",
+  "submit_fixButton": "Report a correction →",
+  "submit_fixTitle": "Reporting a mistake",
+  "submit_intro": "A name, a link and where you publish your events. From then on we import them twice a day, with nothing for you to remember.",
+  "submit_metaDescription": "Add your community to the Catania events calendar. No GitHub account needed: a name, a link and where you publish your events.",
+  "submit_missing": "Missing {fields}.",
+  "submit_missingName": "the name",
+  "submit_missingTopics": "at least one topic",
+  "submit_missingUrl": "the main link",
+  "submit_next1": "Your report becomes a public issue on the repository.",
+  "submit_next2": "An automation turns it into a pull request with the file ready to go.",
+  "submit_next3": "Once merged, the community is live and its events start arriving on their own.",
+  "submit_nextHint": "It all happens in the open: no private moderation, the whole history is in the repository.",
+  "submit_nextTitle": "What happens next",
+  "submit_noScript": "This form needs JavaScript. You can still {#link to=$issue}open an issue on GitHub{/link}, which is exactly what the form does for you.",
+  "submit_ok": "Done, thanks. Your report has been recorded.",
+  "submit_okWithLink": "Done. Your report is now a public issue — the link is below.",
+  "submit_openIssue": " Open the issue →",
+  "submit_required": "required",
+  "submit_sectionCommunity": "The community",
+  "submit_sectionContact": "So we can reach you",
+  "submit_sectionEvents": "Where you publish your events",
+  "submit_sending": "Sending…",
+  "submit_title": "Add your community"
+}

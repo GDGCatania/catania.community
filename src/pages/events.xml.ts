@@ -2,7 +2,8 @@ import type { APIRoute } from 'astro';
 import { getCommunityMap, getUpcomingEvents, formatDateLong, formatTime } from '../lib/events';
 
 import { SITE_URL, ROUTES } from '../lib/site';
-import { localeTag, t } from '../i18n';
+import { localeTag } from '../i18n';
+import * as m from '../paraglide/messages.js';
 
 function escapeXml(value: string): string {
   return value
@@ -21,13 +22,13 @@ export const GET: APIRoute = async () => {
     .map((event) => {
       const community = communities.get(event.communityId);
       const where = event.online
-        ? t('status.online')
+        ? m.status_online()
         : [event.venue?.name, event.venue?.city].filter(Boolean).join(', ');
 
       const summary = [
-        t('feed.at', { date: formatDateLong(event.start), time: formatTime(event.start) }),
-        where ? t('feed.where', { place: where }) : null,
-        community ? t('feed.organiser', { name: community.name }) : null,
+        m.feed_at({ date: formatDateLong(event.start), time: formatTime(event.start) }),
+        where ? m.feed_where({ place: where }) : null,
+        community ? m.feed_organiser({ name: community.name }) : null,
         event.description,
       ]
         .filter(Boolean)
@@ -49,9 +50,9 @@ export const GET: APIRoute = async () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXml(t('feed.rssTitle'))}</title>
+    <title>${escapeXml(m.feed_rssTitle())}</title>
     <link>${SITE_URL}</link>
-    <description>${escapeXml(t('feed.rssDescription'))}</description>
+    <description>${escapeXml(m.feed_rssDescription())}</description>
     <language>${localeTag}</language>
     <atom:link href="${SITE_URL}${ROUTES.feedRss}" rel="self" type="application/rss+xml" />
 ${items}

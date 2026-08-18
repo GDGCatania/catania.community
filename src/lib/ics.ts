@@ -1,5 +1,5 @@
 import type { Community, Event } from './schema';
-import { t } from '../i18n';
+import * as m from '../paraglide/messages.js';
 
 /**
  * Outgoing iCalendar generation.
@@ -65,15 +65,15 @@ export function eventToVevent(event: Event, community?: Community): string[] {
 
   const description = [
     event.description,
-    community ? t('feed.organiser', { name: community.name }) : null,
-    t('feed.detailsAt', { url: event.url }),
+    community ? m.feed_organiser({ name: community.name }) : null,
+    m.feed_detailsAt({ url: event.url }),
   ]
     .filter(Boolean)
     .join('\n\n');
   lines.push(`DESCRIPTION:${escapeText(description)}`);
 
   const location = event.online
-    ? t('status.online')
+    ? m.status_online()
     : [event.venue?.name, event.venue?.address, event.venue?.city].filter(Boolean).join(', ');
   if (location) lines.push(`LOCATION:${escapeText(location)}`);
 

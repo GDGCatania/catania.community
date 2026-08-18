@@ -11,3 +11,6 @@ npm-debug.log*
 .wrangler/
 coverage/
 .playwright-mcp/
+
+# generato da paraglide (compilato a ogni build)
+src/paraglide/

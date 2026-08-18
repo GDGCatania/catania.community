@@ -1,5 +1,5 @@
 ---
-import { t } from '../i18n';
+import * as m from '../paraglide/messages.js';
 
 export interface Props {
   /** Height of the map box. */
@@ -7,7 +7,7 @@ export interface Props {
   caption?: string;
 }
 
-const { height = '320px', caption = t('map.caption') } = Astro.props;
+const { height = '320px', caption = m.map_caption() } = Astro.props;
 ---
 
 <div class="map-card">
@@ -17,12 +17,8 @@ const { height = '320px', caption = t('map.caption') } = Astro.props;
       data-event-map
       role="application"
       aria-label={caption}
-      data-i18n-details={t('map.details')}
-      data-i18n-offscreen-one={t('map.offscreenOne')}
-      data-i18n-offscreen-many={t('map.offscreenMany', { count: '__n__' })}
-      data-i18n-attribution={t('map.osmAttribution')}
     ></div>
-    <p class="map-fallback" data-map-fallback>{t('map.noScript')}</p>
+    <p class="map-fallback" data-map-fallback>{m.map_noScript()}</p>
     <span class="offscreen mono" data-map-offscreen hidden></span>
   </div>
 
@@ -127,6 +123,8 @@ const { height = '320px', caption = t('map.caption') } = Astro.props;
 <script>
   import L from 'leaflet';
   import 'leaflet/dist/leaflet.css';
+  // Tree-shakeable message functions: only these three end up in the bundle.
+  import { map_details, map_offscreen, map_osmAttribution } from '../paraglide/messages.js';
 
   const container = document.querySelector<HTMLElement>('[data-event-map]');
   const fallback = document.querySelector<HTMLElement>('[data-map-fallback]');
@@ -135,22 +133,12 @@ const { height = '320px', caption = t('map.caption') } = Astro.props;
   if (container) {
     if (fallback) fallback.hidden = true;
 
-    // Copy translated at build time and handed over through data attributes:
-    // a `define:vars` script would be inlined verbatim, losing both the bundler
-    // (so no `import L`) and the TypeScript transform.
-    const i18n = {
-      details: container.dataset.i18nDetails ?? '',
-      offscreenOne: container.dataset.i18nOffscreenOne ?? '',
-      offscreenMany: container.dataset.i18nOffscreenMany ?? '',
-      attribution: container.dataset.i18nAttribution ?? '',
-    };
-
     // Centred on Catania: a default is needed when nothing is geolocated.
     const map = L.map(container, { scrollWheelZoom: false }).setView([37.5079, 15.083], 13);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: i18n.attribution,
+      attribution: map_osmAttribution(),
     }).addTo(map);
 
     const markers = new Map<string, L.Marker>();
@@ -189,7 +177,7 @@ const { height = '320px', caption = t('map.caption') } = Astro.props;
 
         marker.bindPopup(
           `<strong>${escapeHtml(row.dataset.title ?? '')}</strong><br>` +
-            `<a href="/events/${encodeURIComponent(row.dataset.slug ?? '')}">${i18n.details}</a>`
+            `<a href="/events/${encodeURIComponent(row.dataset.slug ?? '')}">${map_details()}</a>`
         );
 
         marker.on('mouseover', () => row.setAttribute('data-highlight', ''));
@@ -208,10 +196,7 @@ const { height = '320px', caption = t('map.caption') } = Astro.props;
       // Saying so is more honest than letting the map look complete.
       if (offscreenBadge) {
         offscreenBadge.hidden = withoutCoordinates === 0;
-        offscreenBadge.textContent =
-          withoutCoordinates === 1
-            ? i18n.offscreenOne
-            : i18n.offscreenMany.replace('__n__', String(withoutCoordinates));
+        offscreenBadge.textContent = map_offscreen({ count: withoutCoordinates });
       }
     }
 

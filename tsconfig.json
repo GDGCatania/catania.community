@@ -10,5 +10,5 @@
     "verbatimModuleSyntax": true
   },
   "include": [".astro/types.d.ts", "src/**/*", "tools/**/*", "*.mjs", "*.ts"],
-  "exclude": ["dist", "node_modules", "apps/submit-worker"]
+  "exclude": ["dist", "node_modules", "apps/submit-worker", "src/paraglide"]
 }

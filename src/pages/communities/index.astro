@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Badge from '../../components/Badge.astro';
-import { getCommunities, getUpcomingEvents, formatDayMonth, formatNumber } from '../../lib/events';
+import { getCommunities, getUpcomingEvents, formatDayMonth } from '../../lib/events';
 import { breadcrumbJsonLd } from '../../lib/jsonld';
-import { t } from '../../i18n';
+import * as m from '../../paraglide/messages.js';
+import { areaLabel, categoryLabel } from '../../i18n/labels';
 import { ISSUE_URLS, ROUTES } from '../../lib/site';
 
 const [communities, upcoming] = await Promise.all([getCommunities(), getUpcomingEvents()]);
@@ -17,25 +18,19 @@ const active = communities.filter((community) => community.active);
 ---
 
 <BaseLayout
-  title={
-    active.length === 1 ? t('communities.titleOne') : t('communities.title', { count: active.length })
-  }
-  description={t('communities.metaDescription')}
+  title={m.communities_count({ count: active.length })}
+  description={m.communities_metaDescription()}
   jsonLd={breadcrumbJsonLd([
-    { name: t('nav.events'), path: ROUTES.home },
-    { name: t('nav.communities'), path: ROUTES.communities },
+    { name: m.nav_events(), path: ROUTES.home },
+    { name: m.nav_communities(), path: ROUTES.communities },
   ])}
 >
   <div class="container head">
     <div>
-      <h1>
-        {active.length === 1
-          ? t('communities.titleOne')
-          : t('communities.title', { count: active.length })}
-      </h1>
-      <p class="lede">{t('communities.intro')}</p>
+      <h1>{m.communities_count({ count: active.length })}</h1>
+      <p class="lede">{m.communities_intro()}</p>
     </div>
-    <a class="btn btn--primary" href={ROUTES.submit}>{t('communities.addYours')}</a>
+    <a class="btn btn--primary" href={ROUTES.submit}>{m.communities_addYours()}</a>
   </div>
 
   <div class="container">
@@ -52,19 +47,17 @@ const active = communities.filter((community) => community.active);
 
               <div class="badges">
                 {community.categories.map((category) => (
-                  <Badge variant="category" label={t(`category.${category}`)} />
+                  <Badge variant="category" label={categoryLabel[category]()} />
                 ))}
-                <Badge variant="neutral" label={t(`area.${community.area}`)} />
+                <Badge variant="neutral" label={areaLabel[community.area]()} />
               </div>
 
               <p class="meta mono">
-                {community.members
-                  ? t('communities.members', { count: formatNumber(community.members) })
-                  : null}
+                {community.members ? m.communities_members({ count: community.members }) : null}
                 {community.members && next ? ' · ' : null}
                 {next
-                  ? t('communities.next', { date: formatDayMonth(next.start) })
-                  : t('communities.noUpcoming')}
+                  ? m.communities_next({ date: formatDayMonth(next.start) })
+                  : m.communities_noUpcoming()}
               </p>
             </li>
           );
@@ -72,12 +65,12 @@ const active = communities.filter((community) => community.active);
       }
 
       <li class="card card--cta">
-        <p class="name">{t('communities.ctaTitle')}</p>
-        <p class="tagline">{t('communities.ctaBody')}</p>
+        <p class="name">{m.communities_ctaTitle()}</p>
+        <p class="tagline">{m.communities_ctaBody()}</p>
         <div class="ctas">
-          <a class="btn btn--primary" href={ROUTES.submit}>{t('communities.ctaButton')}</a>
+          <a class="btn btn--primary" href={ROUTES.submit}>{m.communities_ctaButton()}</a>
           <a class="btn btn--ghost" href={ISSUE_URLS.newCommunity} rel="noopener">
-            {t('communities.ctaGithub')}
+            {m.communities_ctaGithub()}
           </a>
         </div>
       </li>

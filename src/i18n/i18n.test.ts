@@ -1,75 +1,128 @@
 import { describe, expect, test } from 'vitest';
-import { it as italian } from './it';
-import { en } from './en';
-import { interpolate, useTranslations, LOCALES, LOCALE_TAGS } from './index';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import * as m from '../paraglide/messages.js';
+import { locales } from '../paraglide/runtime.js';
 
-describe('dictionaries', () => {
-  test('English covers every Italian key', () => {
-    expect(Object.keys(en).sort()).toEqual(Object.keys(italian).sort());
-  });
+const ROOT = path.resolve(process.cwd(), 'messages');
 
-  /**
-   * An empty string is almost always a forgotten translation. The one honest
-   * exception is a fragment that a language simply does not need: Italian says
-   * "Mappe © collaboratori OpenStreetMap", English "Maps © OpenStreetMap
-   * contributors", so the trailing fragment exists only in English.
-   */
-  const MAY_BE_EMPTY = new Set(['footer.licenseMapsSuffix']);
+type Variant = { declarations?: string[]; selectors?: string[]; match: Record<string, string> };
+type Message = string | Variant[];
 
-  test('no entry is left empty by accident', () => {
-    for (const [key, value] of Object.entries({ ...italian, ...en })) {
-      if (MAY_BE_EMPTY.has(key)) continue;
-      expect(value.trim(), `empty value for ${key}`).not.toBe('');
-    }
-  });
+function load(locale: string): Record<string, Message> {
+  return JSON.parse(readFileSync(path.join(ROOT, `${locale}.json`), 'utf8'));
+}
 
-  /**
-   * A placeholder that exists in one language but not the other means a number
-   * or a name silently disappears from the page once the site is rebuilt in
-   * that language. The type checker cannot catch it, so this test does.
-   */
-  test('placeholders match across languages', () => {
-    const placeholders = (value: string) =>
-      [...value.matchAll(/\{(\w+)\}/g)].map((match) => match[1]).sort();
+const dictionaries = Object.fromEntries(locales.map((locale) => [locale, load(locale)]));
 
-    for (const key of Object.keys(italian) as Array<keyof typeof italian>) {
-      expect(placeholders(en[key]), `placeholder mismatch on ${key}`).toEqual(
-        placeholders(italian[key])
+/** Every string a message can produce, variants flattened. */
+function patterns(message: Message): string[] {
+  return typeof message === 'string' ? [message] : message.flatMap((v) => Object.values(v.match));
+}
+
+const placeholders = (text: string) =>
+  [...text.matchAll(/\{([a-zA-Z][\w]*)\}/g)].map((match) => match[1]).sort();
+
+const linkTargets = (text: string) =>
+  [...text.matchAll(/\{#\w+\s+to=\$(\w+)/g)].map((match) => match[1]).sort();
+
+describe('message files', () => {
+  test('every locale defines the same messages', () => {
+    const [reference, ...rest] = locales;
+    for (const locale of rest) {
+      expect(Object.keys(dictionaries[locale]!).sort(), `keys differ in ${locale}.json`).toEqual(
+        Object.keys(dictionaries[reference!]!).sort()
       );
     }
   });
 
-  test('every locale has a BCP 47 tag for Intl', () => {
-    for (const code of LOCALES) {
-      expect(LOCALE_TAGS[code]).toMatch(/^[a-z]{2}-[A-Z]{2}$/);
-      // Throws on an invalid tag, which is the point of the assertion.
-      expect(() => new Intl.DateTimeFormat(LOCALE_TAGS[code])).not.toThrow();
+  test('no message is left empty', () => {
+    for (const locale of locales) {
+      for (const [key, message] of Object.entries(dictionaries[locale]!)) {
+        for (const pattern of patterns(message)) {
+          expect(pattern.trim(), `empty pattern for ${key} in ${locale}.json`).not.toBe('');
+        }
+      }
+    }
+  });
+
+  test('placeholders match across locales', () => {
+    const [reference, ...rest] = locales;
+    for (const key of Object.keys(dictionaries[reference!]!)) {
+      const expected = patterns(dictionaries[reference!]![key]!).flatMap(placeholders).sort();
+      for (const locale of rest) {
+        const actual = patterns(dictionaries[locale]![key]!).flatMap(placeholders).sort();
+        expect(new Set(actual), `placeholder mismatch on ${key} in ${locale}.json`).toEqual(
+          new Set(expected)
+        );
+      }
+    }
+  });
+
+  test('inline links match across locales', () => {
+    const [reference, ...rest] = locales;
+    for (const key of Object.keys(dictionaries[reference!]!)) {
+      const expected = patterns(dictionaries[reference!]![key]!).flatMap(linkTargets).sort();
+      for (const locale of rest) {
+        const actual = patterns(dictionaries[locale]![key]!).flatMap(linkTargets).sort();
+        expect(actual, `link mismatch on ${key} in ${locale}.json`).toEqual(expected);
+      }
+    }
+  });
+
+  test('plural messages cover the same categories in every locale', () => {
+    const [reference, ...rest] = locales;
+    for (const [key, message] of Object.entries(dictionaries[reference!]!)) {
+      if (typeof message === 'string') continue;
+      const expected = message.flatMap((v) => Object.keys(v.match)).sort();
+      for (const locale of rest) {
+        const other = dictionaries[locale]![key]!;
+        expect(typeof other, `${key} is a variant in ${reference} but not in ${locale}`).not.toBe(
+          'string'
+        );
+        const actual = (other as Variant[]).flatMap((v) => Object.keys(v.match)).sort();
+        expect(actual, `plural categories differ on ${key} in ${locale}.json`).toEqual(expected);
+      }
     }
   });
 });
 
-describe('useTranslations', () => {
-  test('returns the string for the requested language', () => {
-    expect(useTranslations('it')('nav.events')).toBe('Eventi');
-    expect(useTranslations('en')('nav.events')).toBe('Events');
+describe('compiled messages', () => {
+  test('plural forms come from Intl.PluralRules, not a hand-rolled check', () => {
+    expect(m.event_count({ count: 1 })).toBe('1 evento');
+    expect(m.event_count({ count: 0 })).toBe('0 eventi');
+    expect(m.event_count({ count: 7 })).toBe('7 eventi');
+    expect(m.event_seatsLeft({ count: 1 })).toBe('1 posto rimasto');
   });
 
-  test('substitutes placeholders', () => {
-    expect(useTranslations('en')('event.seatsLeft', { count: 12 })).toBe('12 seats left');
-    expect(useTranslations('it')('event.seatsLeft', { count: 12 })).toBe('12 posti rimasti');
+  test('numbers are formatted for the locale', () => {
+    // Italian groups only from five digits: 1240 stays bare, 12400 gets a dot.
+    expect(m.communities_members({ count: 1240 })).toBe('1240 iscritti');
+    expect(m.communities_members({ count: 12400 })).toBe('12.400 iscritti');
   });
 
-  test('leaves an unknown placeholder visible instead of printing "undefined"', () => {
-    expect(interpolate('{count} seats left', {})).toBe('{count} seats left');
+  test('a sentence with inline links exposes its parts with resolved targets', () => {
+    const parts = m.footer_license.parts({
+      code: 'https://example.org/code',
+      data: 'https://example.org/data',
+      osm: 'https://example.org/osm',
+    });
+
+    const targets = parts
+      .filter((part) => part.type === 'markup-start')
+      .map((part) => (part as { options?: Record<string, unknown> }).options?.to);
+
+    expect(targets).toEqual([
+      'https://example.org/code',
+      'https://example.org/data',
+      'https://example.org/osm',
+    ]);
   });
 
-  test('the whole interface resolves in both languages', () => {
-    // Guards against a key that exists but blows up when interpolated.
-    for (const code of LOCALES) {
-      const translate = useTranslations(code);
-      for (const key of Object.keys(italian) as Array<keyof typeof italian>) {
-        expect(typeof translate(key)).toBe('string');
-      }
-    }
+  test('the same sentence read as plain text drops the markup', () => {
+    const text = m.footer_license({ code: 'a', data: 'b', osm: 'c' });
+
+    expect(text).toContain('AGPL-3.0');
+    expect(text).not.toContain('{#link');
   });
 });

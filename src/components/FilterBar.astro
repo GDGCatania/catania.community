@@ -1,6 +1,7 @@
 ---
 import { CATEGORIES } from '../lib/schema';
-import { t } from '../i18n';
+import * as m from '../paraglide/messages.js';
+import { categoryLabel } from '../i18n/labels';
 
 export interface Props {
   /** Categories actually present in the events: no filter leads to nothing. */
@@ -14,39 +15,37 @@ const categories = CATEGORIES.filter((category) => availableCategories.includes(
 <form
   class="filters"
   data-filters
-  aria-label={t('filters.aria')}
-  data-i18n-count-one={t('event.oneEvent')}
-  data-i18n-count-many={t('event.nEvents', { count: '__n__' })}
+  aria-label={m.filters_aria()}
 >
-  <span class="eyebrow label">{t('filters.label')}</span>
+  <span class="eyebrow label">{m.filters_label()}</span>
 
-  <div class="group" role="group" aria-label={t('filters.period')}>
-    <button type="button" aria-pressed="false" data-filter="window" data-value="30">{t('filters.next30')}</button>
+  <div class="group" role="group" aria-label={m.filters_period()}>
+    <button type="button" aria-pressed="false" data-filter="window" data-value="30">{m.filters_next30()}</button>
   </div>
 
-  <div class="group" role="group" aria-label={t('filters.where')}>
-    <button type="button" aria-pressed="false" data-filter="area" data-value="citta">{t('area.citta')}</button>
-    <button type="button" aria-pressed="false" data-filter="area" data-value="provincia">{t('area.provincia')}</button>
-    <button type="button" aria-pressed="false" data-filter="area" data-value="online">{t('area.online')}</button>
+  <div class="group" role="group" aria-label={m.filters_where()}>
+    <button type="button" aria-pressed="false" data-filter="area" data-value="citta">{m.area_citta()}</button>
+    <button type="button" aria-pressed="false" data-filter="area" data-value="provincia">{m.area_provincia()}</button>
+    <button type="button" aria-pressed="false" data-filter="area" data-value="online">{m.area_online()}</button>
   </div>
 
-  <div class="group" role="group" aria-label={t('filters.cost')}>
-    <button type="button" aria-pressed="false" data-filter="price" data-value="free">{t('filters.freeOnly')}</button>
+  <div class="group" role="group" aria-label={m.filters_cost()}>
+    <button type="button" aria-pressed="false" data-filter="price" data-value="free">{m.filters_freeOnly()}</button>
   </div>
 
   {
     categories.length > 0 && (
-      <div class="group" role="group" aria-label={t('filters.topic')}>
+      <div class="group" role="group" aria-label={m.filters_topic()}>
         {categories.map((category) => (
           <button type="button" aria-pressed="false" data-filter="category" data-value={category}>
-            {t(`category.${category}`)}
+            {categoryLabel[category]()}
           </button>
         ))}
       </div>
     )
   }
 
-  <button type="button" class="reset" data-filter-reset hidden>{t('filters.reset')}</button>
+  <button type="button" class="reset" data-filter-reset hidden>{m.filters_reset()}</button>
 </form>
 
 <style>
@@ -116,6 +115,11 @@ const categories = CATEGORIES.filter((category) => availableCategories.includes(
 </style>
 
 <script>
+  // Paraglide messages are plain, tree-shakeable functions: the bundled client
+  // script imports the two it needs, which also gets the plural rules right
+  // without reimplementing them here.
+  import { event_count } from '../paraglide/messages.js';
+
   /**
    * Client-side filtering over HTML that is already on the page.
    * The list is server-rendered (indexable, and readable without JavaScript):
@@ -124,14 +128,6 @@ const categories = CATEGORIES.filter((category) => availableCategories.includes(
    */
   type Group = 'window' | 'area' | 'price' | 'category';
 
-  // Copy translated at build time and read back from data attributes. A
-  // `define:vars` script would be inlined verbatim, losing the TypeScript
-  // transform this file relies on.
-  const countLabel = (count: number): string => {
-    const one = form?.dataset.i18nCountOne ?? '1';
-    const many = form?.dataset.i18nCountMany ?? '__n__';
-    return count === 1 ? one : many.replace('__n__', String(count));
-  };
 
   const form = document.querySelector<HTMLFormElement>('[data-filters]');
   const rows = [...document.querySelectorAll<HTMLElement>('[data-event-row]')];
@@ -186,7 +182,7 @@ const categories = CATEGORIES.filter((category) => availableCategories.includes(
         const count = group.querySelectorAll('[data-event-row]:not([hidden])').length;
         group.hidden = count === 0;
         const counter = group.querySelector<HTMLElement>('[data-day-count]');
-        if (counter) counter.textContent = countLabel(count);
+        if (counter) counter.textContent = event_count({ count });
       }
 
       if (emptyState) emptyState.hidden = visible > 0;

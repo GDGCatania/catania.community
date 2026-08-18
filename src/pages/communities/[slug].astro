@@ -11,8 +11,10 @@ import {
 } from '../../lib/events';
 import { breadcrumbJsonLd, communityJsonLd } from '../../lib/jsonld';
 import { absoluteUrl } from '../../lib/urls';
-import { t } from '../../i18n';
+import * as m from '../../paraglide/messages.js';
+import { areaLabel, categoryLabel } from '../../i18n/labels';
 import { ISSUE_URLS, ROUTES } from '../../lib/site';
+import Message from '../../components/Message.astro';
 
 export const getStaticPaths = (async () => {
   const communities = await getCommunities();
@@ -31,7 +33,7 @@ const { community, upcoming, past } = Astro.props;
 const canonical = absoluteUrl(Astro.url.pathname, Astro.site);
 
 const linkLabels: Record<string, string> = {
-  website: t('community.linkWebsite'),
+  website: m.community_linkWebsite(),
   meetup: 'Meetup',
   luma: 'Luma',
   eventbrite: 'Eventbrite',
@@ -48,7 +50,7 @@ const links = Object.entries(community.links).filter(
 
 const description =
   community.description?.slice(0, 155) ??
-  t('community.metaFallback', { name: community.name, count: upcoming.length });
+  m.community_metaFallback({ name: community.name, count: upcoming.length });
 ---
 
 <BaseLayout
@@ -57,14 +59,14 @@ const description =
   jsonLd={[
     communityJsonLd(community, canonical),
     breadcrumbJsonLd([
-      { name: t('nav.communities'), path: ROUTES.communities },
+      { name: m.nav_communities(), path: ROUTES.communities },
       { name: community.name, path: ROUTES.community(community.id) },
     ]),
   ]}
 >
   <div class="container">
-    <nav class="crumbs" aria-label={t('site.sections')}>
-      <a href={ROUTES.communities}>{t('community.breadcrumb')}</a>
+    <nav class="crumbs" aria-label={m.site_sections()}>
+      <a href={ROUTES.communities}>{m.community_breadcrumb()}</a>
     </nav>
   </div>
 
@@ -75,10 +77,10 @@ const description =
     <div class="badges">
       {
         community.categories.map((category) => (
-          <Badge variant="category" label={t(`category.${category}`)} />
+          <Badge variant="category" label={categoryLabel[category]()} />
         ))
       }
-      <Badge variant="neutral" label={t(`area.${community.area}`)} />
+      <Badge variant="neutral" label={areaLabel[community.area]()} />
       {community.cadence ? <Badge variant="neutral" label={community.cadence} /> : null}
     </div>
 
@@ -98,10 +100,10 @@ const description =
   <div class="container layout">
     <div class="main">
       <section>
-        <h2>{t('community.upcoming')}</h2>
+        <h2>{m.community_upcoming()}</h2>
         {
           upcoming.length === 0 ? (
-            <p class="empty">{t('community.noUpcoming')}</p>
+            <p class="empty">{m.community_noUpcoming()}</p>
           ) : (
             <ul class="events">
               {upcoming.map((event) => (
@@ -113,7 +115,7 @@ const description =
                   <span class="info">
                     <a href={ROUTES.event(event.slug)}>{event.title}</a>
                     <span class="place">
-                      {event.online ? t('status.online') : (event.venue?.name ?? t('community.venueTbc'))}
+                      {event.online ? m.status_online() : (event.venue?.name ?? m.community_venueTbc())}
                     </span>
                   </span>
                 </li>
@@ -126,7 +128,7 @@ const description =
       {
         past.length > 0 && (
           <section class="archive">
-            <h2>{t('community.past')}</h2>
+            <h2>{m.community_past()}</h2>
             <ul class="events events--past">
               {past.map((event) => (
                 <li>
@@ -147,19 +149,19 @@ const description =
         {
           community.cadence && (
             <div class="field">
-              <span class="eyebrow">{t('community.cadence')}</span>
+              <span class="eyebrow">{m.community_cadence()}</span>
               <p>{community.cadence}</p>
             </div>
           )
         }
         <div class="field">
-          <span class="eyebrow">{t('community.language')}</span>
+          <span class="eyebrow">{m.community_language()}</span>
           <p>{community.language}</p>
         </div>
         {
           community.usualVenue && (
             <div class="field">
-              <span class="eyebrow">{t('community.usualVenue')}</span>
+              <span class="eyebrow">{m.community_usualVenue()}</span>
               <p>{community.usualVenue}</p>
             </div>
           )
@@ -167,7 +169,7 @@ const description =
         {
           community.members && (
             <div class="field">
-              <span class="eyebrow">{t('community.membersLabel')}</span>
+              <span class="eyebrow">{m.community_membersLabel()}</span>
               <p>{formatNumber(community.members)}</p>
             </div>
           )
@@ -175,7 +177,7 @@ const description =
         {
           community.since && (
             <div class="field">
-              <span class="eyebrow">{t('community.since')}</span>
+              <span class="eyebrow">{m.community_since()}</span>
               <p>{community.since}</p>
             </div>
           )
@@ -183,10 +185,11 @@ const description =
       </div>
 
       <p class="source">
-        {t('eventPage.dataSource')}{' '}
-        <a href={ISSUE_URLS.correction(`Correzione: ${community.name}`)} rel="noopener">
-          {t('community.reportOnGithub')}
-        </a>.
+        <Message
+          of={m.eventPage_dataSource}
+          links={{ report: ISSUE_URLS.correction(`Correzione: ${community.name}`) }}
+          rel="noopener"
+        />
       </p>
     </aside>
   </div>

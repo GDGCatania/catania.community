@@ -73,15 +73,43 @@ in the wrong place.
 
 ## Languages
 
-The site ships in **one language at a time**, resolved at build time. There is no locale segment in
+The site ships in **one language at a time**, resolved at build time by
+[Paraglide](https://inlang.com/m/gerre34r/library-inlang-paraglideJs). There is no locale segment in
 the URLs and no runtime switching, which keeps every page cleanly indexable.
 
-- `src/i18n/config.ts` — the single line that selects the language.
-- `src/i18n/it.ts`, `src/i18n/en.ts` — the dictionaries. Italian is the reference; English is typed
-  against it, so a missing key is a build error rather than a blank label in production.
+- `project.inlang/settings.json` — `baseLocale` selects the language the site is built in.
+- `messages/it.json`, `messages/en.json` — the messages, in the inlang message format. Plain JSON, so
+  they can be handed to [Weblate](https://weblate.org), Crowdin or
+  [Fink](https://inlang.com/m/tdozzpar/app-inlang-finkLocalizationEditor) without anyone having to
+  edit TypeScript.
 
-To ship in English, set `SITE_LOCALE = 'en'` and rebuild. To add a language, copy a dictionary and
-register it in `src/i18n/index.ts`.
+To ship in English, set `"baseLocale": "en"` and rebuild. To add a language, add it to `locales`,
+drop a `messages/<code>.json` next to the others, and map its `Intl` tag in `src/i18n/index.ts`.
+
+Messages are compiled into typed, tree-shakeable functions under `src/paraglide/` (generated, not
+committed). Two features are worth knowing about:
+
+**Plurals** use `Intl.PluralRules`, so a language with more than two plural categories — Polish,
+Russian, Arabic — works without touching any code:
+
+```json
+"event_count": [{
+  "declarations": ["input count", "local countPlural = count: plural"],
+  "selectors": ["countPlural"],
+  "match": { "countPlural=one": "{count} evento", "countPlural=other": "{count} eventi" }
+}]
+```
+
+**Links live inside the sentence**, not around it:
+
+```json
+"footer_license": "Mappe © collaboratori {#link to=$osm}OpenStreetMap{/link}."
+```
+
+Rendered with `<Message of={m.footer_license} links={{ osm: '…' }} />`. This is what lets English say
+"Maps © OpenStreetMap contributors" while Italian says "Mappe © collaboratori OpenStreetMap": the
+translator moves the link, instead of the sentence structure being frozen by the code. URLs stay out
+of the message files — they are configuration, not copy.
 
 Event titles, descriptions and venue names are **not** translated: they belong to the communities
 that published them and stay in their own language.

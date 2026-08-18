@@ -2,21 +2,23 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../lib/jsonld';
 import { CATEGORIES, AREAS } from '../lib/schema';
-import { t } from '../i18n';
+import * as m from '../paraglide/messages.js';
+import { areaLabel, categoryLabel } from '../i18n/labels';
 import { ISSUE_URLS, ROUTES } from '../lib/site';
+import Message from '../components/Message.astro';
 ---
 
 <BaseLayout
-  title={t('submit.title')}
-  description={t('submit.metaDescription')}
+  title={m.submit_title()}
+  description={m.submit_metaDescription()}
   jsonLd={breadcrumbJsonLd([
-    { name: t('nav.events'), path: ROUTES.home },
-    { name: t('submit.title'), path: ROUTES.submit },
+    { name: m.nav_events(), path: ROUTES.home },
+    { name: m.submit_title(), path: ROUTES.submit },
   ])}
 >
   <div class="container head">
-    <h1>{t('submit.title')}</h1>
-    <p class="lede">{t('submit.intro')}</p>
+    <h1>{m.submit_title()}</h1>
+    <p class="lede">{m.submit_intro()}</p>
   </div>
 
   <div class="container layout">
@@ -25,44 +27,44 @@ import { ISSUE_URLS, ROUTES } from '../lib/site';
   data-submit-form
   novalidate
   data-i18n={JSON.stringify({
-    missing: t('submit.missing', { fields: '__f__' }),
-    missingName: t('submit.missingName'),
-    missingUrl: t('submit.missingUrl'),
-    missingTopics: t('submit.missingTopics'),
-    sending: t('submit.sending'),
-    okWithLink: t('submit.okWithLink'),
-    ok: t('submit.ok'),
-    openIssue: t('submit.openIssue'),
-    failed: t('submit.failed'),
-    failedLink: t('submit.failedLink'),
+    missing: m.submit_missing({ fields: '__f__' }),
+    missingName: m.submit_missingName(),
+    missingUrl: m.submit_missingUrl(),
+    missingTopics: m.submit_missingTopics(),
+    sending: m.submit_sending(),
+    okWithLink: m.submit_okWithLink(),
+    ok: m.submit_ok(),
+    openIssue: m.submit_openIssue(),
+    failed: m.submit_failed(),
+    failedLink: m.submit_failedLink(),
   })}
 >
       <fieldset>
-        <legend class="eyebrow">{t('submit.sectionCommunity')}</legend>
+        <legend class="eyebrow">{m.submit_sectionCommunity()}</legend>
 
         <label>
-          <span class="label">{t('submit.fieldName')} <em>{t('submit.required')}</em></span>
+          <span class="label">{m.submit_fieldName()} <em>{m.submit_required()}</em></span>
           <input type="text" name="name" required maxlength="120" placeholder="Python Catania" />
         </label>
 
         <label>
-          <span class="label">{t('submit.fieldTagline')}</span>
+          <span class="label">{m.submit_fieldTagline()}</span>
           <input
             type="text"
             name="tagline"
             maxlength="200"
-            placeholder={t('submit.fieldTaglinePlaceholder')}
+            placeholder={m.submit_fieldTaglinePlaceholder()}
           />
         </label>
 
         <label>
-          <span class="label">{t('submit.fieldTopics')} <em>{t('submit.required')}</em></span>
+          <span class="label">{m.submit_fieldTopics()} <em>{m.submit_required()}</em></span>
           <span class="checks">
             {
               CATEGORIES.map((category) => (
                 <label class="check">
                   <input type="checkbox" name="categories" value={category} />
-                  {t(`category.${category}`)}
+                  {categoryLabel[category]()}
                 </label>
               ))
             }
@@ -70,13 +72,13 @@ import { ISSUE_URLS, ROUTES } from '../lib/site';
         </label>
 
         <label>
-          <span class="label">{t('submit.fieldArea')}</span>
+          <span class="label">{m.submit_fieldArea()}</span>
           <span class="checks">
             {
               AREAS.map((area) => (
                 <label class="check">
                   <input type="radio" name="area" value={area} checked={area === 'citta'} />
-                  {t(`area.${area}`)}
+                  {areaLabel[area]()}
                 </label>
               ))
             }
@@ -85,11 +87,11 @@ import { ISSUE_URLS, ROUTES } from '../lib/site';
       </fieldset>
 
       <fieldset>
-        <legend class="eyebrow">{t('submit.sectionEvents')}</legend>
-        <p class="help">{t('submit.eventsHelp')}</p>
+        <legend class="eyebrow">{m.submit_sectionEvents()}</legend>
+        <p class="help">{m.submit_eventsHelp()}</p>
 
         <label>
-          <span class="label">{t('submit.fieldEventsUrl')} <em>{t('submit.required')}</em></span>
+          <span class="label">{m.submit_fieldEventsUrl()} <em>{m.submit_required()}</em></span>
           <input
             type="url"
             name="eventsUrl"
@@ -99,29 +101,29 @@ import { ISSUE_URLS, ROUTES } from '../lib/site';
         </label>
 
         <label>
-          <span class="label">{t('submit.fieldIcsUrl')}</span>
+          <span class="label">{m.submit_fieldIcsUrl()}</span>
           <input type="url" name="icsUrl" placeholder="https://…/events.ics" />
         </label>
 
         <label>
-          <span class="label">{t('submit.fieldContacts')}</span>
-          <input type="text" name="contacts" maxlength="300" placeholder={t('submit.fieldContactsPlaceholder')} />
+          <span class="label">{m.submit_fieldContacts()}</span>
+          <input type="text" name="contacts" maxlength="300" placeholder={m.submit_fieldContactsPlaceholder()} />
         </label>
       </fieldset>
 
       <fieldset>
-        <legend class="eyebrow">{t('submit.sectionContact')}</legend>
+        <legend class="eyebrow">{m.submit_sectionContact()}</legend>
         <label>
-          <span class="label">{t('submit.fieldContact')}</span>
-          <input type="text" name="contact" maxlength="200" placeholder={t('submit.fieldContactPlaceholder')} />
-          <span class="help">{t('submit.contactHelp')}</span>
+          <span class="label">{m.submit_fieldContact()}</span>
+          <input type="text" name="contact" maxlength="200" placeholder={m.submit_fieldContactPlaceholder()} />
+          <span class="help">{m.submit_contactHelp()}</span>
         </label>
       </fieldset>
 
       <div class="actions">
-        <button class="btn btn--primary" type="submit">{t('submit.button')}</button>
+        <button class="btn btn--primary" type="submit">{m.submit_button()}</button>
         <a class="btn btn--ghost" href={ISSUE_URLS.newCommunity} rel="noopener">
-          {t('submit.buttonIssue')}
+          {m.submit_buttonIssue()}
         </a>
       </div>
 
@@ -129,28 +131,27 @@ import { ISSUE_URLS, ROUTES } from '../lib/site';
 
       <noscript>
         <p class="notice">
-          {t('submit.noScript')}{' '}
-          <a href={ISSUE_URLS.newCommunity}>{t('communities.ctaGithub')}</a>
+          <Message of={m.submit_noScript} links={{ issue: ISSUE_URLS.newCommunity }} />
         </p>
       </noscript>
     </form>
 
     <aside class="side">
       <div class="card">
-        <h2>{t('submit.nextTitle')}</h2>
+        <h2>{m.submit_nextTitle()}</h2>
         <ol>
-          <li>{t('submit.next1')}</li>
-          <li>{t('submit.next2')}</li>
-          <li>{t('submit.next3')}</li>
+          <li>{m.submit_next1()}</li>
+          <li>{m.submit_next2()}</li>
+          <li>{m.submit_next3()}</li>
         </ol>
-        <p class="hint">{t('submit.nextHint')}</p>
+        <p class="hint">{m.submit_nextHint()}</p>
       </div>
 
       <div class="card">
-        <h2>{t('submit.fixTitle')}</h2>
-        <p class="hint">{t('submit.fixBody')}</p>
+        <h2>{m.submit_fixTitle()}</h2>
+        <p class="hint">{m.submit_fixBody()}</p>
         <a class="btn btn--ghost" href={ISSUE_URLS.correction('Correzione: ')} rel="noopener">
-          {t('submit.fixButton')}
+          {m.submit_fixButton()}
         </a>
       </div>
     </aside>

@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { paraglideVitePlugin } from '@inlang/paraglide-js';
 
 export default defineConfig({
   site: 'https://catania.community',
@@ -16,8 +17,20 @@ export default defineConfig({
     format: 'file',
   },
   vite: {
+    plugins: [
+      // Compiles messages/{locale}.json into tree-shakeable functions.
+      // `strategy: ['baseLocale']` means: always use the language set as
+      // `baseLocale` in project.inlang/settings.json. One language per build,
+      // resolved at compile time, nothing about i18n reaching the browser.
+      paraglideVitePlugin({
+        project: './project.inlang',
+        outdir: './src/paraglide',
+        strategy: ['baseLocale'],
+        emitTsDeclarations: true,
+      }),
+    ],
     build: {
-      // Le island sono piccole e poche: un chunk in meno da scaricare.
+      // The islands are few and small: one less chunk to download.
       assetsInlineLimit: 2048,
     },
   },

@@ -3,7 +3,8 @@ import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import { CommunitySchema, EventFileSchema, type Community, type Event } from './schema';
 import { TIMEZONE } from './site';
-import { localeTag, t } from '../i18n';
+import { localeTag } from '../i18n';
+import * as m from '../paraglide/messages.js';
 
 /**
  * Loads the data at build time. This runs in Node during `astro build`, never
@@ -149,8 +150,8 @@ function dayLabel(key: string, todayKey: string, tomorrowKey: string): string {
     timeZone: 'UTC',
   }).format(date);
 
-  if (key === todayKey) return `${t('event.today')} · ${formatted}`;
-  if (key === tomorrowKey) return `${t('event.tomorrow')} · ${formatted}`;
+  if (key === todayKey) return `${m.event_today()} · ${formatted}`;
+  if (key === tomorrowKey) return `${m.event_tomorrow()} · ${formatted}`;
   return capitalise(formatted);
 }
 
@@ -212,7 +213,7 @@ export function eventsPerDay(events: Event[]): Record<string, number> {
   return counts;
 }
 
-/** "1 event" / "N events", picked from the dictionary. */
+/** "1 event" / "N events" — plural category chosen by Intl.PluralRules. */
 export function eventCount(count: number): string {
-  return count === 1 ? t('event.oneEvent') : t('event.nEvents', { count });
+  return m.event_count({ count });
 }

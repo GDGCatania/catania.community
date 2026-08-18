@@ -1,5 +1,6 @@
 ---
-import { t } from '../i18n';
+import * as m from '../paraglide/messages.js';
+import Message from './Message.astro';
 import { REPO_URL, ROUTES } from '../lib/site';
 
 const year = new Date().getFullYear();
@@ -9,45 +10,47 @@ const year = new Date().getFullYear();
   <div class="container inner">
     <div class="col">
       <p class="eyebrow">catania.community</p>
-      <p class="note">{t('footer.about')}</p>
+      <p class="note">{m.footer_about()}</p>
     </div>
 
     <div class="col">
-      <p class="eyebrow">{t('footer.openFormats')}</p>
+      <p class="eyebrow">{m.footer_openFormats()}</p>
       <ul>
-        <li><a href={ROUTES.feedIcs}>{t('footer.calendar')}</a></li>
-        <li><a href={ROUTES.feedRss}>{t('footer.rss')}</a></li>
-        <li><a href={ROUTES.feedJson}>{t('footer.json')}</a></li>
+        <li><a href={ROUTES.feedIcs}>{m.footer_calendar()}</a></li>
+        <li><a href={ROUTES.feedRss}>{m.footer_rss()}</a></li>
+        <li><a href={ROUTES.feedJson}>{m.footer_json()}</a></li>
       </ul>
     </div>
 
     <div class="col">
-      <p class="eyebrow">{t('footer.contribute')}</p>
+      <p class="eyebrow">{m.footer_contribute()}</p>
       <ul>
-        <li><a href={ROUTES.submit}>{t('footer.addCommunity')}</a></li>
-        <li><a href={`${REPO_URL}/issues`}>{t('footer.reportError')}</a></li>
-        <li><a href={REPO_URL}>{t('footer.sourceCode')}</a></li>
+        <li><a href={ROUTES.submit}>{m.footer_addCommunity()}</a></li>
+        <li><a href={`${REPO_URL}/issues`}>{m.footer_reportError()}</a></li>
+        <li><a href={REPO_URL}>{m.footer_sourceCode()}</a></li>
       </ul>
     </div>
 
     <div class="col">
-      <p class="eyebrow">{t('footer.licenses')}</p>
-      {/* Built from separate keys rather than splitting one sentence: word
-          order around the links differs between languages. The explicit spaces
-          matter too — since Astro 7 `compressHTML` follows JSX rules and eats
-          the whitespace at the end of a line. */}
+      <p class="eyebrow">{m.footer_licenses()}</p>
+      {/* One whole sentence with the links inside it, so a translator can move
+          them: Italian says "Mappe © collaboratori OpenStreetMap", English
+          "Maps © OpenStreetMap contributors". */}
       <p class="note">
-        {t('footer.licenseCode')}{' '}
-        <a href={`${REPO_URL}/blob/main/LICENSE`}>AGPL-3.0</a>,{' '}
-        <a href={`${REPO_URL}/blob/main/LICENSE-DATA`}>{t('footer.dataLicense')}</a>.{' '}
-        {t('footer.licenseMapsPrefix')}{' '}
-        <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>{t('footer.licenseMapsSuffix')}.
+        <Message
+          of={m.footer_license}
+          links={{
+            code: `${REPO_URL}/blob/main/LICENSE`,
+            data: `${REPO_URL}/blob/main/LICENSE-DATA`,
+            osm: 'https://www.openstreetmap.org/copyright',
+          }}
+        />
       </p>
     </div>
   </div>
 
   <div class="container bottom">
-    <span class="mono">{year} · {t('footer.madeIn')}</span>
+    <span class="mono">{year} · {m.footer_madeIn()}</span>
   </div>
 </footer>
 

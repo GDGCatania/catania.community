@@ -1,0 +1,77 @@
+---
+/**
+ * Renders a translated message that contains inline markup.
+ *
+ * Messages keep whole sentences, links included:
+ *
+ *   "footer_license": "Codice {#link to=$code}AGPL-3.0{/link}. Mappe © collaboratori {#link to=$osm}OpenStreetMap{/link}."
+ *
+ * This matters because word order around a link changes between languages —
+ * Italian writes "Mappe © collaboratori OpenStreetMap", English "Maps ©
+ * OpenStreetMap contributors". Splitting the sentence into prefix/suffix keys
+ * would freeze one language's grammar onto every other one, and leave a
+ * translator staring at fragments with no context.
+ *
+ * URLs stay out of the message files on purpose: they are configuration, not
+ * copy, and a translator should never have to keep them in sync.
+ *
+ * `parts()` is Paraglide's framework-agnostic API. We build real elements from
+ * it rather than an HTML string, so escaping is Astro's job and no message can
+ * inject markup.
+ */
+interface MessagePart {
+  type: string;
+  value?: string;
+  name?: string;
+  options?: Record<string, unknown>;
+}
+
+/**
+ * Structural shape of a compiled Paraglide message. Kept deliberately loose:
+ * each generated function carries its own precise input type, and pinning one
+ * of them here would make the component usable with a single message.
+ */
+interface MessageFn {
+  parts: (inputs: never, options?: never) => MessagePart[];
+}
+
+export interface Props {
+  of: MessageFn;
+  links?: Record<string, string>;
+  inputs?: Record<string, unknown>;
+  rel?: string;
+  target?: string;
+}
+
+const { of: message, links = {}, inputs = {}, rel, target } = Astro.props;
+
+const parts = message.parts({ ...links, ...inputs } as never);
+
+type Node = { kind: 'text'; text: string } | { kind: 'link'; text: string; href: string };
+
+const nodes: Node[] = [];
+let openHref: string | null = null;
+
+for (const part of parts) {
+  if (part.type === 'markup-start' && part.name === 'link') {
+    openHref = typeof part.options?.to === 'string' ? part.options.to : null;
+  } else if (part.type === 'markup-end' && part.name === 'link') {
+    openHref = null;
+  } else if (part.type === 'text' && part.value) {
+    if (openHref) nodes.push({ kind: 'link', text: part.value, href: openHref });
+    else nodes.push({ kind: 'text', text: part.value });
+  }
+}
+---
+
+{
+  nodes.map((node) =>
+    node.kind === 'link' ? (
+      <a href={node.href} rel={rel} target={target}>
+        {node.text}
+      </a>
+    ) : (
+      <Fragment>{node.text}</Fragment>
+    )
+  )
+}

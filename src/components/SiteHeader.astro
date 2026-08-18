@@ -1,7 +1,7 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 import { normalizePath } from '../lib/urls';
-import { t } from '../i18n';
+import * as m from '../paraglide/messages.js';
 import { ROUTES } from '../lib/site';
 
 const path = normalizePath(Astro.url.pathname);
@@ -11,12 +11,12 @@ const path = normalizePath(Astro.url.pathname);
 const nav = [
   {
     href: ROUTES.home,
-    label: t('nav.events'),
+    label: m.nav_events(),
     active: path === '/' || path.startsWith(ROUTES.events),
   },
   {
     href: ROUTES.communities,
-    label: t('nav.communities'),
+    label: m.nav_communities(),
     active: path.startsWith(ROUTES.communities),
   },
 ];
@@ -29,7 +29,7 @@ const nav = [
       <span class="brand__name">catania.community</span>
     </a>
 
-    <nav class="nav" aria-label={t('site.sections')}>
+    <nav class="nav" aria-label={m.site_sections()}>
       {
         nav.map((item) => (
           <a href={item.href} aria-current={item.active ? 'page' : undefined}>
@@ -42,7 +42,7 @@ const nav = [
     <div class="actions">
       <ThemeToggle />
       <a class="btn btn--primary cta" href={ROUTES.submit}>
-        {t('nav.addCommunity')}
+        {m.nav_addCommunity()}
       </a>
     </div>
   </div>

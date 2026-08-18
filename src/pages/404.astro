@@ -1,21 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { t } from '../i18n';
+import * as m from '../paraglide/messages.js';
 import { ROUTES } from '../lib/site';
 ---
 
 <BaseLayout
-  title={t('notFound.title')}
-  description={t('notFound.body').slice(0, 155)}
+  title={m.notFound_title()}
+  description={m.notFound_body().slice(0, 155)}
   noindex={true}
 >
   <div class="container wrap">
-    <p class="eyebrow">{t('notFound.eyebrow')}</p>
-    <h1>{t('notFound.title')}</h1>
-    <p class="lede">{t('notFound.body')}</p>
+    <p class="eyebrow">{m.notFound_eyebrow()}</p>
+    <h1>{m.notFound_title()}</h1>
+    <p class="lede">{m.notFound_body()}</p>
     <div class="actions">
-      <a class="btn btn--primary" href={ROUTES.home}>{t('notFound.toEvents')}</a>
-      <a class="btn btn--ghost" href={ROUTES.communities}>{t('notFound.toCommunities')}</a>
+      <a class="btn btn--primary" href={ROUTES.home}>{m.notFound_toEvents()}</a>
+      <a class="btn btn--ghost" href={ROUTES.communities}>{m.notFound_toCommunities()}</a>
     </div>
   </div>
 </BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import { localDayKey, eventCount } from '../lib/events';
-import { localeTag, t } from '../i18n';
+import { localeTag } from '../i18n';
+import * as m from '../paraglide/messages.js';
 
 export interface Props {
   /** Events per day, keyed by `YYYY-MM-DD`. */
@@ -41,14 +42,14 @@ const totalInMonth = Object.entries(counts)
   .reduce((sum, [, count]) => sum + count, 0);
 ---
 
-<section class="calendar" aria-label={t('calendar.aria', { month: monthLabel })}>
+<section class="calendar" aria-label={m.calendar_aria({ month: monthLabel })}>
   <header>
     <h3 class="month">{monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1)}</h3>
     <span class="eyebrow">{eventCount(totalInMonth)}</span>
   </header>
 
   <div class="weekdays" aria-hidden="true">
-    {t('calendar.weekdays').split(',').map((initial) => <span>{initial}</span>)}
+    {m.calendar_weekdays().split(',').map((initial) => <span>{initial}</span>)}
   </div>
 
   <div class="grid">
@@ -61,7 +62,7 @@ const totalInMonth = Object.entries(counts)
             type="button"
             class:list={['cell', 'cell--has', { 'cell--today': cell.isToday }]}
             data-calendar-day={cell.key}
-            aria-label={t('calendar.dayAria', { day: cell.day, events: eventCount(cell.count) })}
+            aria-label={m.calendar_dayAria({ day: cell.day, events: eventCount(cell.count) })}
           >
             {cell.day}
             <span class="dots" aria-hidden="true">
@@ -79,7 +80,7 @@ const totalInMonth = Object.entries(counts)
 
   <p class="legend">
     <span class="dot" aria-hidden="true"></span>
-    {t('calendar.legend')}
+    {m.calendar_legend()}
   </p>
 </section>
 

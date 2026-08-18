@@ -13,7 +13,8 @@ import {
   eventCount,
 } from '../lib/events';
 import { ROUTES } from '../lib/site';
-import { t } from '../i18n';
+import Message from '../components/Message.astro';
+import * as m from '../paraglide/messages.js';
 
 const now = new Date();
 const events = await getUpcomingEvents(now);
@@ -30,19 +31,16 @@ const numbered = new Map(events.map((event) => [event.id, ++pin]));
 
 const description =
   events.length > 0
-    ? t('home.metaDescriptionCount', { count: events.length })
-    : t('home.metaDescription');
+    ? m.home_metaDescriptionCount({ count: events.length })
+    : m.home_metaDescription();
 
-const communityCount =
-  allCommunities.length === 1
-    ? t('communities.titleOne')
-    : t('communities.title', { count: allCommunities.length });
+const communityCount = m.communities_count({ count: allCommunities.length });
 ---
 
-<BaseLayout title={t('home.title')} description={description}>
+<BaseLayout title={m.home_title()} description={description}>
   <section class="container hero">
-    <h1>{t('home.headline')}<br /><span>{t('home.headlineAccent')}</span></h1>
-    <p class="lede">{t('home.intro')}</p>
+    <h1>{m.home_headline()}<br /><span>{m.home_headlineAccent()}</span></h1>
+    <p class="lede">{m.home_intro()}</p>
   </section>
 
   <div class="container">
@@ -75,11 +73,9 @@ const communityCount =
       <p class="empty" data-empty-state hidden={events.length > 0}>
         {
           events.length === 0 ? (
-            <>
-              {t('home.emptyNoEvents')} <a href={ROUTES.submit}>{t('home.emptyNoEventsLink')}</a>.
-            </>
+            <Message of={m.home_empty} links={{ submit: ROUTES.submit }} />
           ) : (
-            t('home.emptyFiltered')
+            m.home_emptyFiltered()
           )
         }
       </p>
@@ -91,8 +87,8 @@ const communityCount =
 
       <section class="promo">
         <h2>{communityCount}</h2>
-        <p>{t('home.communitiesCta')}</p>
-        <a class="btn btn--primary" href={ROUTES.communities}>{t('home.communitiesLink')}</a>
+        <p>{m.home_communitiesCta()}</p>
+        <a class="btn btn--primary" href={ROUTES.communities}>{m.home_communitiesLink()}</a>
       </section>
     </aside>
   </div>
