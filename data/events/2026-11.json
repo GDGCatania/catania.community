@@ -1,0 +1,34 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_46Ypuu5",
+    "description": "IT: 🇮🇹\n\nCi siamo. Il compilatore del GDG Catania è di nuovo attivo e stiamo scrivendo il codice per la DevFest Catania 2026!\n\nCosa ci sarà quest'anno? Non possiamo ancora svelarvi tutto, ma preparatevi a parlare di AI, Web, Cloud, Mobile e molto, molto altro. Stiamo preparando un programma pazzesco fatto dalle community, per le community.\n\n🎟️ I biglietti non sono ancora disponibili e il programma è in modalità \"under construction\", ma fidatevi: non vorrete perdervela.\n\nSeguici sui nostri canali per non perderti i prossimi annunci, la Call for Papers e l'apertura delle registrazioni!\n\nEN: 🇬🇧\nHere we go. The GDG Catania compiler is up and running again, and we’re writing the code for DevFest Catania 2026!\n\nWhat’s in store for this year? We can't reveal everything just yet, but get ready to talk about AI, Web, Cloud, Mobile, and much, much more. We’re building a mind-blowing schedule, made by the community, for the community.\n\n🎟️ Tickets aren't available yet and the program is under construction, but trust us: you won't want to miss it.\n\nFollow us on our channels so you don't miss the upcoming announcements, the Call for Papers, and the opening of registrations!",
+    "end": "2026-11-15T17:00:00+01:00",
+    "id": "bevy:128373",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "devfest-catania-2026",
+    "source": {
+      "fetchedAt": "2026-09-10T08:59:07.270Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2026/",
+      "type": "bevy"
+    },
+    "start": "2026-11-14T11:00:00+01:00",
+    "title": "DevFest Catania 2026",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2026/",
+    "venue": {
+      "address": "TBD",
+      "city": "Catania",
+      "name": "TBD"
+    }
+  }
+]
