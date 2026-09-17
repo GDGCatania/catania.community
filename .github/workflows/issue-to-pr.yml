@@ -57,7 +57,10 @@ jobs:
           git checkout -b "$BRANCH"
           git add "sources/communities/$SLUG.yml"
           git commit -m "feat(community): add $SLUG (closes #$ISSUE)"
-          git push -u origin "$BRANCH"
+          # `community/<slug>` is reserved for this bot and its content is derived
+          # from the issue on every run, so replacing the branch is safe. It is also
+          # what lets a retry work after a failed run left a branch behind.
+          git push --force -u origin "$BRANCH"
 
           cat > /tmp/pr-body.md <<'EOF'
           Generata automaticamente da una segnalazione.
@@ -69,18 +72,22 @@ jobs:
           - [ ] Se l'adapter è `bevy`, il campo `chapter` è stato compilato con l'id
                 numerico (si legge da `https://gdg.community.dev/<slug>/`, cercando
                 `chapter/<id>`) e la riga `_todo` è stata rimossa
-          - [ ] Se la piattaforma è Meetup o Eventbrite, l'adapter è `manual`: quelle
-                API non sono più pubbliche
+          - [ ] Se l'adapter è `jsonld`, l'indirizzo in `list` è davvero la pagina degli
+                eventi del gruppo, e `npm run ingest -- --source <slug> --dry-run` la
+                legge (zero eventi è normale se non hanno nulla in programma)
 
           Al merge la community è online e i suoi eventi vengono raccolti al run successivo.
           EOF
           printf '\nChiude #%s\n' "$ISSUE" >> /tmp/pr-body.md
 
+          # On a retry the pull request may already be open; the force push above
+          # has just updated it, so reuse it instead of failing.
           URL=$(gh pr create \
             --title "Nuova community: $SLUG" \
             --body-file /tmp/pr-body.md \
             --base main \
-            --head "$BRANCH")
+            --head "$BRANCH" 2>/dev/null) || URL=$(gh pr view "$BRANCH" --json url --jq .url)
+
           echo "url=$URL" >> "$GITHUB_OUTPUT"
 
       - name: Comment on the report
@@ -89,15 +96,37 @@ jobs:
         with:
           script: |
             const pr = ${{ toJSON(steps.pr.outputs.url) }};
+            const slug = ${{ toJSON(steps.generate.outputs.slug) }};
             const failure = ${{ toJSON(steps.generate.outputs.error) }};
+            const repo = `${context.repo.owner}/${context.repo.repo}`;
 
-            const body = pr
-              ? `Grazie. La segnalazione è diventata una pull request: ${pr}\n\nAl merge la community sarà online e i suoi eventi verranno raccolti automaticamente.`
-              : [
-                  "Non sono riuscito a generare il file automaticamente.",
-                  failure ? `\n\`\`\`\n${failure}\n\`\`\`` : '',
-                  '\nNiente di grave: la segnalazione resta valida e la lavoriamo a mano.',
-                ].join('\n');
+            // Three outcomes, not two. Reporting "I could not generate the file"
+            // when the file is written, committed and pushed sends whoever reported
+            // the community looking for a problem that is not there.
+            let body;
+
+            if (pr) {
+              body = [
+                `Grazie. La segnalazione è diventata una pull request: ${pr}`,
+                '',
+                'Al merge la community sarà online e i suoi eventi verranno raccolti automaticamente.',
+              ].join('\n');
+            } else if (slug) {
+              body = [
+                'Grazie. Il file della community è pronto sul branch',
+                `[\`community/${slug}\`](https://github.com/${repo}/tree/community/${slug}),`,
+                'ma non sono riuscito ad aprire la pull request da solo.',
+                '',
+                `**[Aprila qui](https://github.com/${repo}/compare/main...community/${slug}?expand=1)**:`,
+                'il lavoro è fatto, manca un clic.',
+              ].join('\n');
+            } else {
+              body = [
+                'Non sono riuscito a generare il file dalla segnalazione.',
+                failure ? `\n\`\`\`\n${failure}\n\`\`\`` : '',
+                '\nNiente di grave: la segnalazione resta valida e la lavoriamo a mano.',
+              ].join('\n');
+            }
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
