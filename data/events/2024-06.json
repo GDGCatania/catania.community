@@ -1,0 +1,28 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/event-301402271.jpg",
+    "description": "La community Python Catania si incontra per condividere le esperienze e i talk del PyCon Italia 2024.",
+    "id": "pycatania:301402271",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "meetup-python-catania-after-pycon-italia-2024",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/301402271/",
+      "type": "pycatania"
+    },
+    "start": "2024-06-17T18:30:00+02:00",
+    "title": "Meetup Python Catania - After PyCon Italia 2024",
+    "url": "https://www.meetup.com/python-catania/events/301402271/"
+  }
+]

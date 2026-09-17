@@ -5,6 +5,32 @@
     "categories": [
       "tech"
     ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/09-12-2025-oh-oh-oh/event-312066711.jpg",
+    "description": "Edizione natalizia speciale della community Python Catania: presentazione agli studenti universitari, ultime novità Python e PyDinner finale.",
+    "id": "pycatania:312066711",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "meetup-python-catania-ho-ho-python-code",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/312066711/",
+      "type": "pycatania"
+    },
+    "start": "2025-12-09T18:30:00+01:00",
+    "title": "Meetup Python Catania - Ho! Ho! Python Code! 🎅🎄",
+    "url": "https://www.meetup.com/python-catania/events/312066711/"
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
     "communityId": "gdg-catania",
     "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/photo_5913420203197318743_y_sutO2UU.jpg",
     "description": "Natale significa solo una cosa: XMASYNC del GDG Catania.\n\nAnche quest'anno a ridosso delle feste vogliamo invitarvi a un aperitivo natalizio per brindare assieme, scambiarsi gli auguri e rafforzare il legame della nostra community sempre più grande 🫂\n\nUn'occasione per rivedersi dopo il successo della DevFest 2025 e continuare a divertirsi e fare network tra giochi, gadget e buona compagnia!\n\n ⛔️ Vietato l'ingresso a chi non ha un cappello di natale trash e il biglietto... ma soprattutto a chi viene senza cappello 🤶",

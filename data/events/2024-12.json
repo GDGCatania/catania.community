@@ -5,6 +5,32 @@
     "categories": [
       "tech"
     ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/event-304691223.jpg",
+    "description": "Natale si avvicina ed è arrivato il momento di incontrare la community di Python Catania per stare insieme e condividere del buon codice sorgente.",
+    "id": "pycatania:304691223",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "meetup-python-catania-all-i-want-for-christmas-is-python",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/304691223/",
+      "type": "pycatania"
+    },
+    "start": "2024-12-06T18:30:00+01:00",
+    "title": "Meetup Python Catania - All I Want For Christmas is Python! 🎅",
+    "url": "https://www.meetup.com/python-catania/events/304691223/"
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
     "communityId": "gdg-catania",
     "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/photo_5913420203197318743_y_sutO2UU.jpg",
     "description": "Natale significa solo una cosa: XMASYNC del GDG Catania.\n\nAnche quest'anno a ridosso delle feste vogliamo invitarvi a un aperitivo natalizio per brindare assieme, scambiarsi gli auguri e rafforzare il legame della nostra community sempre più grande 🫂\n\nUn'occasione per rivedersi dopo il successo della DevFest 2024 e continuare a divertirsi e fare network tra giochi, gadget e buona compagnia!\n\n📍Vi aspettiamo il 7 dicembre dalle 17:30 alle 20:30 da CreationDose in Via Antonino di Sangiuliano 197, Catania\n\n ⛔️ Vietato l'ingresso a chi non ha un cappello di natale trash e il biglietto... ma soprattutto a chi viene senza cappello 🤶",

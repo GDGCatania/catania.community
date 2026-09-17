@@ -33,5 +33,31 @@
       },
       "name": "Nuova Acropoli Catania | Centro Atena"
     }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/23-04-2026/event-314071729.jpg",
+    "description": "La community di Python Catania si incontra in un nuovo fantastico Meetup per stare insieme e condividere del buon codice sorgente. Che tu sia uno sviluppatore principiante o esperto di Python, questo evento fa per te!",
+    "id": "pycatania:314071729",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "from-catania-import-pycciotti",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/314071729/",
+      "type": "pycatania"
+    },
+    "start": "2026-04-23T18:30:00+02:00",
+    "title": "from catania import pycciotti 🙈🙉🙊",
+    "url": "https://www.meetup.com/python-catania/events/314071729/"
   }
 ]

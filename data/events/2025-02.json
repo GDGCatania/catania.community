@@ -1,0 +1,28 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/22-02-2025/event-306025381.jpg",
+    "description": "La community di Python Catania si incontra nel primo meetup del 2025 per stare insieme e condividere del buon codice sorgente.",
+    "id": "pycatania:306025381",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "meetup-python-catania-carnival-party-time",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/306025381/",
+      "type": "pycatania"
+    },
+    "start": "2025-02-22T18:30:00+01:00",
+    "title": "Meetup Python Catania - Carnival Party Time",
+    "url": "https://www.meetup.com/python-catania/events/306025381/"
+  }
+]

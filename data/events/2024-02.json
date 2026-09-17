@@ -1,0 +1,28 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/event-298457913.jpg",
+    "description": "La community di Python Catania si incontra nuovamente per condividere insieme le novità legate al mondo del linguaggio Python e prepararsi al PyCon Italia 2024.",
+    "id": "pycatania:298457913",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "python-meetup-catania-back-to-python-future",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/298457913/",
+      "type": "pycatania"
+    },
+    "start": "2024-02-01T18:30:00+01:00",
+    "title": "Python Meetup Catania - Back to Python Future",
+    "url": "https://www.meetup.com/python-catania/events/298457913/"
+  }
+]

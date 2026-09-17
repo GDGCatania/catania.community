@@ -1,5 +1,5 @@
 {
-  "lastChangeAt": "2026-09-10T08:59:07.270Z",
+  "lastChangeAt": "2026-09-17T08:31:13.443Z",
   "preservedFromFailedSources": 0,
   "sources": [
     {
@@ -8,7 +8,14 @@
       "ok": true,
       "skipped": 0,
       "type": "bevy"
+    },
+    {
+      "community": "python-catania",
+      "events": 0,
+      "ok": true,
+      "skipped": 0,
+      "type": "pycatania"
     }
   ],
-  "totalEvents": 19
+  "totalEvents": 31
 }
