@@ -56,7 +56,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git checkout -b "$BRANCH"
           git add "sources/communities/$SLUG.yml"
-          git commit -m "community: aggiunge $SLUG (closes #$ISSUE)"
+          git commit -m "feat(community): add $SLUG (closes #$ISSUE)"
           git push -u origin "$BRANCH"
 
           cat > /tmp/pr-body.md <<'EOF'

@@ -12,8 +12,10 @@ const report = JSON.parse(readFileSync(new URL('../data/ingest-report.json', imp
 const ok = report.sources.filter((source) => source.ok);
 const failed = report.sources.filter((source) => !source.ok);
 
+const count = (n, noun) => `${n} ${noun}${n === 1 ? '' : 's'}`;
+
 const lines = [
-  `dati: ${report.totalEvents} eventi da ${ok.length} font${ok.length === 1 ? 'e' : 'i'}`,
+  `chore(data): ${count(report.totalEvents, 'event')} from ${count(ok.length, 'source')}`,
   '',
 ];
 
@@ -22,9 +24,9 @@ for (const source of ok) {
 }
 
 if (failed.length > 0) {
-  lines.push('', 'Fonti in errore (dati precedenti conservati):');
+  lines.push('', 'Sources that failed (their previous data is kept):');
   for (const source of failed) {
-    lines.push(`  ${source.community} via ${source.type}: ${source.error ?? 'errore ignoto'}`);
+    lines.push(`  ${source.community} via ${source.type}: ${source.error ?? 'unknown error'}`);
   }
 }
 
