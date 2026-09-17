@@ -2,9 +2,9 @@
 import { parseArgs } from 'node:util';
 import {
   CommunitySchema,
+  CuratedVenueSchema,
   ManualEventFileSchema,
   OverrideSchema,
-  VenueSchema,
   type Community,
   type Event,
   type ManualEvent,
@@ -93,7 +93,7 @@ async function main(): Promise<number> {
 
   const [communitiesAll, venues, manualEvents, overrides] = await Promise.all([
     loadYamlDir(PATHS.communities, CommunitySchema),
-    loadYamlDir(PATHS.venues, VenueSchema),
+    loadYamlDir(PATHS.venues, CuratedVenueSchema),
     loadManualEvents(),
     loadOverrides(),
   ]);

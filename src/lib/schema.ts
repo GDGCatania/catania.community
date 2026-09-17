@@ -53,6 +53,10 @@ export const VenueSchema = z.object({
   notes: z.string().max(500).optional(),
 });
 
+export const CuratedVenueSchema = VenueSchema.extend({
+  aliases: z.array(z.string().min(1).max(200)).optional(),
+});
+
 export const PriceSchema = z.object({
   type: z.enum(PRICE_TYPES),
   amount: z.number().nonnegative().optional(),
@@ -196,6 +200,7 @@ export type Area = z.infer<typeof AreaSchema>;
 export type SourceType = z.infer<typeof SourceTypeSchema>;
 export type Geo = z.infer<typeof GeoSchema>;
 export type Venue = z.infer<typeof VenueSchema>;
+export type CuratedVenue = z.infer<typeof CuratedVenueSchema>;
 export type Price = z.infer<typeof PriceSchema>;
 export type Links = z.infer<typeof LinksSchema>;
 export type IngestConfig = z.infer<typeof IngestConfigSchema>;
