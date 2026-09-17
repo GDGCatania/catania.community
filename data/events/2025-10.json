@@ -6,9 +6,10 @@
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/pythobrata-10-2025/event-311306942.jpg",
-    "description": "Il mese di Ottobre è l'ideale per festeggiare l'arrivo dell'autunno e organizzare un nuovo meetup della community Python Catania, dove condividere nuove tecnologie, buon codice sorgente e sempre nuove iniziative.",
-    "id": "pycatania:311306942",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/530594049/676x676.jpg",
+    "description": "Ciao Pycciotti!\n\nIl mese di Ottobre è l'ideale per festeggiare l'arrivo dell'autunno 🌰🍷🎉 e l'occasione per organizzare un nuovo meetup della community…",
+    "end": "2025-10-30T21:00:00+01:00",
+    "id": "jsonld:meetup:311306942",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -17,12 +18,21 @@
     },
     "slug": "meetup-python-catania-pythobrata-2025",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:22:37.643Z",
       "ref": "https://www.meetup.com/python-catania/events/311306942/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
-    "start": "2025-10-30T18:30:00+01:00",
-    "title": "Meetup Python Catania - PythObrata 2025 🌰🍷",
-    "url": "https://www.meetup.com/python-catania/events/311306942/"
+    "start": "2025-10-30T19:00:00+01:00",
+    "title": "Meetup Python Catania - PythObrata 2025 🌰🍷🌰",
+    "url": "https://www.meetup.com/python-catania/events/311306942/",
+    "venue": {
+      "address": "Via Antonino di Sangiuliano, 197, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose"
+    }
   }
 ]

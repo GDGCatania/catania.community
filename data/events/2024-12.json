@@ -6,9 +6,10 @@
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/event-304691223.jpg",
-    "description": "Natale si avvicina ed è arrivato il momento di incontrare la community di Python Catania per stare insieme e condividere del buon codice sorgente.",
-    "id": "pycatania:304691223",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/524831707/676x676.jpg",
+    "description": "Ciao!\n\noh oh oh...🎅🏻...Natale si avvicina ed è arrivato il momento di iniziare a pensare ai regali. Ma è anche tempo di incontrare la community di…",
+    "end": "2024-12-06T20:30:00+01:00",
+    "id": "jsonld:meetup:304691223",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -17,13 +18,22 @@
     },
     "slug": "meetup-python-catania-all-i-want-for-christmas-is-python",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:20:20.024Z",
       "ref": "https://www.meetup.com/python-catania/events/304691223/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
     "start": "2024-12-06T18:30:00+01:00",
-    "title": "Meetup Python Catania - All I Want For Christmas is Python! 🎅",
-    "url": "https://www.meetup.com/python-catania/events/304691223/"
+    "title": "Meetup Python Catania - All I Want For Christmas is Python!",
+    "url": "https://www.meetup.com/python-catania/events/304691223/",
+    "venue": {
+      "address": "Via Antonino di Sangiuliano, 197, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose"
+    }
   },
   {
     "area": "citta",

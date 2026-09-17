@@ -41,9 +41,10 @@
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/23-04-2026/event-314071729.jpg",
-    "description": "La community di Python Catania si incontra in un nuovo fantastico Meetup per stare insieme e condividere del buon codice sorgente. Che tu sia uno sviluppatore principiante o esperto di Python, questo evento fa per te!",
-    "id": "pycatania:314071729",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/533492634/676x676.jpg",
+    "description": "Ciao!\n\nla community di Python Catania si incontra in un nuovo fantastico Meetup per stare insieme e condividire del buon codice sorgente. ❤️🐘🐍\n\nChe tu…",
+    "end": "2026-04-23T20:30:00+02:00",
+    "id": "jsonld:meetup:314071729",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -52,12 +53,21 @@
     },
     "slug": "from-catania-import-pycciotti",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:20:20.024Z",
       "ref": "https://www.meetup.com/python-catania/events/314071729/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
     "start": "2026-04-23T18:30:00+02:00",
     "title": "from catania import pycciotti 🙈🙉🙊",
-    "url": "https://www.meetup.com/python-catania/events/314071729/"
+    "url": "https://www.meetup.com/python-catania/events/314071729/",
+    "venue": {
+      "address": "via Dusmet, 50, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5019346,
+        "lon": 15.094753
+      },
+      "name": "AITHO"
+    }
   }
 ]

@@ -6,9 +6,10 @@
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/27-02-2026/event-313050179.jpg",
-    "description": "La community di Python Catania si incontra per il primo meetup del 2026 con un talk su Python e Digital Humanities, le novità di PyCon Italia 2026 e tanto networking.",
-    "id": "pycatania:313050179",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/532463733/676x676.jpg",
+    "description": "Ciao!\n\nla community di Python Catania si incontra, nel primo meetup del 2026\n, per stare insieme e condividire del buon codice sorgente. ❤️🐘🐍\n\nChe tu…",
+    "end": "2026-02-27T20:30:00+01:00",
+    "id": "jsonld:meetup:313050179",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -17,12 +18,21 @@
     },
     "slug": "meetup-python-catania-python-coding-festival",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:20:20.024Z",
       "ref": "https://www.meetup.com/python-catania/events/313050179/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
     "start": "2026-02-27T18:30:00+01:00",
     "title": "Meetup Python Catania - Python Coding Festival 🎶",
-    "url": "https://www.meetup.com/python-catania/events/313050179/"
+    "url": "https://www.meetup.com/python-catania/events/313050179/",
+    "venue": {
+      "address": "viale Africa 31, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.512206,
+        "lon": 15.1033077
+      },
+      "name": "Paradigma SpA"
+    }
   }
 ]

@@ -42,9 +42,10 @@
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/14-07-2026/event-315327982.jpg",
-    "description": "La community di Python Catania si incontra per un nuovo meetup dal titolo \"After PyCon Italia 2026\": condivisione dell'esperienza al PyCon Italia 2026, talk preparati dai nostri esperti su Python e spazio alla creatività.",
-    "id": "pycatania:315327982",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/534855157/676x676.jpg",
+    "description": "Ciao!\n\nLa community Python Catania 🐘🐍 si incontra nuovamente il\n\n**📅** **14/07/2026 📅**\n\nper un nuovo strabiliante meetup dove passare del buon tempo…",
+    "end": "2026-07-14T20:30:00+02:00",
+    "id": "jsonld:meetup:315327982",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -53,12 +54,21 @@
     },
     "slug": "meetup-python-catania-after-pycon-italia-2026",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:20:20.024Z",
       "ref": "https://www.meetup.com/python-catania/events/315327982/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
     "start": "2026-07-14T18:30:00+02:00",
     "title": "Meetup Python Catania - After PyCon Italia 2026",
-    "url": "https://www.meetup.com/python-catania/events/315327982/"
+    "url": "https://www.meetup.com/python-catania/events/315327982/",
+    "venue": {
+      "address": "viale Africa 31, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.512206,
+        "lon": 15.1033077
+      },
+      "name": "Paradigma SpA"
+    }
   }
 ]
