@@ -151,6 +151,9 @@ Italian because they are the contribution surface for local organisers.
 
 Every report becomes a pull request with the YAML file already written: merging it is the approval.
 
+Working on the code instead? [CONTRIBUTING.md](CONTRIBUTING.md) covers the setup, how to add a
+community or an adapter, who owns `data/`, and the commit and branch conventions.
+
 ## Licences
 
 - **Code**: [AGPL-3.0-or-later](LICENSE)
