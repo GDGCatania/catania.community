@@ -54,7 +54,6 @@ Available adapters:
 | `bevy`       | GDG and other chapters on the Bevy platform (public API, no auth) |
 | `ics`        | Luma, public Google Calendars, Gancio, Mobilizon, Nextcloud       |
 | `jsonld`     | Meetup, Eventbrite, and any site publishing schema.org Event      |
-| `pycatania`  | The JSON feed Python Catania publishes on its own site            |
 | `manual`     | Events curated by hand in the repository                          |
 
 **Meetup and Eventbrite have no public API, but their pages are structured.** Both publish complete
@@ -75,16 +74,6 @@ page, accepted only for hosts with a discovery rule in the adapter. Two things t
   extracted from the HTML. A group with nothing scheduled and a page whose layout changed both yield
   zero links, so a listing strategy first proves the page is the one it asked for, and throws when it
   is not rather than reporting "no events".
-
-**`pycatania` is a first-party feed.** Python Catania runs on Meetup, but the organisers keep their
-site open at [PythonCatania/PythonCatania.github.io](https://github.com/PythonCatania/PythonCatania.github.io)
-and publish `public/data/events.json`, with the canonical Meetup link in every entry. Two caveats are
-baked into the adapter rather than hidden:
-
-- **It is an archive.** An entry appears _after_ the meetup — it always carries `attendees` and a photo
-  gallery. A normal run therefore collects nothing, and that is not a failure.
-- **`date` carries no time.** The adapter publishes at the `defaultTime` declared in the community's
-  YAML (18:30, their usual start) and prefers a per-entry `time` the moment the feed provides one.
 
 **Backfilling the archive.** Past events are never re-read by the daily run, which only looks back to
 yesterday. To import an archive once:

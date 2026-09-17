@@ -17,12 +17,11 @@ export const PRICE_TYPES = ['free', 'donation', 'paid'] as const;
 
 /**
  * Precedence when the same event arrives twice: the first one wins.
- * `pycatania` sits just below `manual` because it is also a hand-curated feed —
- * written by the organisers themselves, only hosted on their site instead of here.
- * `jsonld` sits last because it is read from a page rather than from an API or a
- * feed: where a platform offers both, the structured endpoint is the one to trust.
+ * `jsonld` sits last because it is read from a page rather than from an API or
+ * a feed: where a platform offers both, the structured endpoint is the one to
+ * trust.
  */
-export const SOURCE_PRIORITY = ['override', 'manual', 'pycatania', 'bevy', 'ics', 'jsonld'] as const;
+export const SOURCE_PRIORITY = ['override', 'manual', 'bevy', 'ics', 'jsonld'] as const;
 
 export const CategorySchema = z.enum(CATEGORIES);
 export const AreaSchema = z.enum(AREAS);
@@ -93,20 +92,6 @@ export const IngestConfigSchema = z.discriminatedUnion('type', [
     titleFilter: z.string().optional(),
   }),
   z.object({
-    type: z.literal('pycatania'),
-    /** The JSON archive Python Catania publishes and maintains on its own site. */
-    url: z.url().default('https://catania.python.it/data/events.json'),
-    /**
-     * Their entries carry a date but no time. This is the community's usual
-     * start, used until the feed provides a `time` of its own — an approximation
-     * declared in the open, not a guess buried in the code.
-     */
-    defaultTime: z
-      .string()
-      .regex(/^\d{2}:\d{2}$/, 'defaultTime must be HH:MM')
-      .default('18:30'),
-  }),
-  z.object({
     type: z.literal('jsonld'),
     /**
      * A listing page to discover event URLs from. Only hosts with a checked
@@ -141,7 +126,7 @@ export const CommunitySchema = z.object({
 });
 
 export const EventSchema = z.object({
-  /** Stable and derived from the source: `bevy:12345`, `ics:<uid>`, `manual:<slug>`, `pycatania:<id>`. */
+  /** Stable and derived from the source: `bevy:12345`, `ics:<uid>`, `manual:<slug>`, `jsonld:meetup:<id>`. */
   id: z.string().min(1).max(200),
   slug: SlugSchema,
   title: z.string().min(1).max(300),
