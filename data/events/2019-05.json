@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Anche quest'anno il GDG Catania organizza la Google I/O Extended.\nCi riuniremo per scoprire tutte le novità Google rivelate durante il keynote e per divertirci insieme.\nSpeech formativi, giochi a premi e tantissimi gadget vi aspettano!\n\n L'evento si terrà in aula ANILE il 14 maggio ed in AULA MAGNA il 15 maggio\n\n Programma:\n\n Martedì 14 Maggio - aula ANILE\n• 15.30: Check-in\n• 16.00: Presentazione GDG e benvenuto\n• 16:30: Overview Google I/O 2019\n• 17:00: \"Introduzione pratica ad Angular\" - Alessio Sferro\n• 17:30: Coffee break\n• 17:45: Panel\n• 18:00: Attività ricreative a premi\n• 18:30: Conclusione\n\n Mercoledì 15 Maggio - aula MAGNA\n• 15.30: Check-in\n• 16.00: Presentazione GDG e benvenuto\n• 16:30: \"Obfuscation.www\" - Valentina Di Mauro\n• 17:00: \"Software-defined Networks. Un nuovo approccio alle architetture di rete\" - Fabio Arceri\n• 17:30: Coffee break\n• 17:45: Panel\n• 18:00: Attività ricreative a premi\n• 18:30: Conclusione\n\n Hashtag ufficiale dell’evento: #io19extended #gdgctstories",
+    "end": "2019-05-15T18:30:00+02:00",
+    "id": "bevy:3932",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "google-i-o-extended-2019-catania",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-extended-2019-catania/",
+      "type": "bevy"
+    },
+    "start": "2019-05-14T15:30:00+02:00",
+    "title": "Google I/O Extended 2019 - Catania",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-extended-2019-catania/"
+  }
+]

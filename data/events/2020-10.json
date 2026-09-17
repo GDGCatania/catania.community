@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Anche quest’anno torna la DevFest, in una nuova veste nazionale, coordinata globalmente e totalmente online.\n\nDevFest 2020 riunirà migliaia di sviluppatori dalla passione condivisa per le tecnologie Google e non per un weekend epico in cui le comunità di tutto il mondo si uniranno per connettersi, imparare e, soprattutto, divertirsi.\n\nUnisciti anche te il 17 e il 18 ottobre per la più grande conferenza tecnologica virtuale distribuita mai creata!\n\n🎫 Registrazione gratuita → gdg.community.dev/e/mjmb5j/\n\nUn evento totalmente online e interattivo con talk, discussioni a tema tech, giochi e divertimento.\n\nDue giorni in cui affrontare 7 aree tematiche:\n\n☁ Cloud Computing\n\n🤖 Machine Learning\n\n💻 Front-end\n\n📱 Mobile\n\n📊 Marketing\n\n🌍 Diversity & Inclusion\n\n😎 Soft Skill\n\n🎤 CALL FOR SPEAKER\n\nVuoi essere tra gli speaker di questo evento?\n\nLa Call for Speaker è aperta, proponi il tuo talk tra le 7 aree tematiche.\n\nDeadline fissata per il 30 Settembre… affrettati!\n\n❓ INFO E FAQ\n\nQuando: sabato 17 e domenica 18 ottobre\n\nOrario: mattina e pomeriggio (TBD)\n\nDove: online (piattaforma TBD)\n\nCosto: gratis\n\nAlcune track tematiche saranno tenute in parallelo\n\nRegistrazioni ➡ gdg.community.dev\n\nSito web ➡ devfest.it\n\nLeggi il codice di condotta \n\nHashtag ufficiali: #devfestitalia #devfestita20 #devfest2020 #gdgfun\n\nScopri le altre DevFest europee ➡ devfesteurope.com\n\n👩‍💻 PROGRAMMA (in costruzione)\n\nFabio Biondi\n\n(Microsoft MVP | Google Expert in Web Technologies & Angular)\n\n“State management in Angular e NGRX (live-coding)”\n\nLuca Mezzalira\n\n(VP of Architecture at DAZN | Google Developer Expert | London Javascript Community Expert)\n\n“Micro-Frontends Decisions Framework”\n\nGiulia Villirilli\n\n(Certified coach for leadership and transformation)\n\n“Coaching boosts your daily life”\n\nElisa Contessotto\n\n(Formatrice, SEOZoom)\n\n“Come trovare il Principe Azzurro: un esempio di keyword research a lieto fine”\n\n...e molti altri in arrivo!",
+    "end": "2020-10-18T17:00:00+02:00",
+    "id": "bevy:30468",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "devfest-italia-2020",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-italia-2020/",
+      "type": "bevy"
+    },
+    "start": "2020-10-17T10:00:00+02:00",
+    "title": "DevFest Italia 2020",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-italia-2020/"
+  }
+]

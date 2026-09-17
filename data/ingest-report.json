@@ -1,21 +1,21 @@
 {
-  "lastChangeAt": "2026-09-17T08:31:13.443Z",
+  "lastChangeAt": "2026-09-17T11:29:50.393Z",
   "preservedFromFailedSources": 0,
   "sources": [
     {
       "community": "gdg-catania",
-      "events": 1,
+      "events": 59,
       "ok": true,
       "skipped": 0,
       "type": "bevy"
     },
     {
       "community": "python-catania",
-      "events": 0,
+      "events": 12,
       "ok": true,
       "skipped": 0,
       "type": "pycatania"
     }
   ],
-  "totalEvents": 31
+  "totalEvents": 71
 }

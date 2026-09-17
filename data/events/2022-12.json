@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/EventThumb.png",
+    "description": "Il GDG Catania ritorna con la DevFest Catania 2022!\n\nLa DevFest è la più attesa conferenza tecnologica annuale organizzata su misura per tutti gli appassionati e professionisti dell'ambito tecnologico. \n\nSi esploreranno nuove tecnologie e frontiere del mondo tech, con ampie occasioni di dibattito e networking con player del settore e con la community di sviluppatori locale.\n\nSe ti appassiona imparare qualcosa di nuovo, scoprire nuove opportunità ed ampliare il tuo network non puoi mancare alla DevFest Catania 2022!\n\nL'evento si svolgerà il 10 e l'11 Dicembre presso la sede di CreationDose in Via Antonino di S. Giuliano 197, 95131 Catania, vi aspettiamo! 😎",
+    "end": "2022-12-11T16:00:31+01:00",
+    "id": "bevy:48140",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "devfest-catania-2022",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2022/",
+      "type": "bevy"
+    },
+    "start": "2022-12-10T10:00:00+01:00",
+    "title": "DevFest Catania 2022",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2022/",
+    "venue": {
+      "address": "Via Antonino di S. Giuliano, 197",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose Srl"
+    }
+  }
+]

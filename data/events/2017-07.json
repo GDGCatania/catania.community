@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Annuncio\n\n Il GDG Catania è lieto di invitarvi a questo ultimo e spettacolare Open Meetup della stagione, un evento pensato per regalare a voi, che siete la community più bella della città, un momento di condivisione e di sorprese finali ;-)\n\n Qualche anticipazione? Rivivremo insieme le attività organizzate in quest'ultimo anno, vi presenteremo i nuovi lead, vi daremo delle anticipazioni sui prossimi eventi ed iniziative, e... \n\n ...non vi resta che partecipare per sapere il resto!\n\n Stay hungry, stay googlish ;-)\n\n Contenuti\n\n Struttura attività • Canali di comunicazione • Recap[masked] • Piano[masked]",
+    "end": "2017-07-27T19:45:00+02:00",
+    "id": "bevy:3917",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "gdg-catania-open-meetup-season-closing-meeting",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-catania-open-meetup-season-closing-meeting/",
+      "type": "bevy"
+    },
+    "start": "2017-07-27T17:45:00+02:00",
+    "title": "GDG Catania Open Meetup -- Season Closing Meeting",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-catania-open-meetup-season-closing-meeting/"
+  }
+]

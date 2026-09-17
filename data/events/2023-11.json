@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/DF23-Bevy-EventThumb-Yellow%25402x_vw6Gj34.png",
+    "description": "Il GDG Catania ritorna con la DevFest Catania 2023!\n\nLa DevFest è la più attesa conferenza tecnologica annuale organizzata su misura per tutti gli appassionati e professionisti dell'ambito tecnologico.\n\nSi esploreranno nuove tecnologie e frontiere del mondo tech, con ampie occasioni di dibattito e networking con player del settore e con la community di sviluppatori locale.\n\nSe ti appassiona imparare qualcosa di nuovo, scoprire nuove opportunità ed ampliare il tuo network non puoi mancare alla DevFest Catania 2023!",
+    "end": "2023-11-04T19:00:00+01:00",
+    "id": "bevy:59347",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "devfest-catania-2023",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2023/",
+      "type": "bevy"
+    },
+    "start": "2023-11-03T14:00:00+01:00",
+    "title": "DevFest Catania 2023",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2023/",
+    "venue": {
+      "address": "Piazzale Asia 6",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5097513,
+        "lon": 15.1018884
+      },
+      "name": "Zō Centro Culture Contemporanee"
+    }
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "We kept you waiting, huh?\nQuesta volta tocca anche a noi!\n\n Il team Devs Make Games organizza il suo primo Community Meetup!\n\n Parleremo e discuteremo insieme dei nostri progetti passati, presenti e futuri, condividendo le nostre conoscenze in campo game development.\n\n L'evento è disponibile in streaming sul canale del GDG Catania:\nhttps://www.youtube.com/channel/UCeiMFb8u_xDDKNkN5mLenFw\n\n Ci vediamo il 10 Luglio 2018 presso l'aula 3 del DMI (Cittadella Universitaria) dalle 15:00 alle 18:00, non mancate!\n\n Programma:\n- Presentazione DMG\n- Progetto GameDev al Campus Party 2018\n- Presentazione dei progetti di Cyberlab Studios e Navi Studio Games\n\n Link al canale Telegram: https://t.me/DMG_DevsMakeGames",
+    "end": "2018-07-10T19:00:00+02:00",
+    "id": "bevy:3926",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "open-meetup-dmg",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-open-meetup-dmg/",
+      "type": "bevy"
+    },
+    "start": "2018-07-10T18:00:00+02:00",
+    "title": "Open Meetup DMG",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-open-meetup-dmg/"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Conosci la realtà del DMG (Dev makes games)? Qualsiasi sia la risposta non puoi assolutamente perdere l'appuntamento di Martedì 21 febbraio. Il DMG organizza un meetup tutto dedicato ai game developer: il TIM WCAP sarà spazio di confronto tra sviluppatori e publisher di alto livello e chiunque sia interessato all'industria videoludica.\nParleremo di come sfruttare le tecnologie Google per sviluppare un videogioco, dell'importanza delle game jam per concludere con del sano networking.\n\n Ecco il programma dell'evento:\n\n - Presentazione Google Developer Group di Fabio Arceri\n- Presentazione Devs Make Games \"Perché fare videogiochi in Italia?” di Michele Maresca e Samuele Padalino\n- Unity + Firebase di Samuele Padalino\n- Talk sulla GSuite di Samuele Sciacca\n- Come sviluppare giochi in 8K di Carmelo Ventimiglia\n- La Jam intesa come palestra per lo sviluppo di giochi di Michele Maresca\n- Networking e Showcase dei giochi della Jam",
+    "end": "2019-02-21T19:30:00+01:00",
+    "id": "bevy:3930",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "dmg-meetup-introduzione-alla-community",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-dmg-meetup-introduzione-alla-community/",
+      "type": "bevy"
+    },
+    "start": "2019-02-21T17:30:00+01:00",
+    "title": "DMG Meetup - Introduzione alla Community",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-dmg-meetup-introduzione-alla-community/"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "In questo momento particolare la Community dei GDG italiani vuole ridurre le distanze.\nPer questo motivo nasce DevParty Together!\n\n Un evento totalmente online e interattivo con talk, workshop e discussioni a tema tech.\nUn sabato e una domenica pomeriggio in cui affrontare 6 aree tematiche:\n\n - Front End\n- Mobile\n- Cloud Computing\n- Machine Learning\n- International Women's Day / Diversity\n- Soft Skill\n\n Sarà un evento totalmente gratuito e coinvolgente in cui la tecnologia ci aiuterà a sentirci vicini e parte della Community, ancora di più!\n\n Registrazioni → https://bit.ly/DevParty20-me\n\n 👩‍💻 PROGRAMMA (in costruzione)\n\n Fabio Biondi\n(Microsoft MVP | Google Expert in Web & Angular)\n\"RxJS Tips for Angular Developers\"\n\n Simone Scardapane\n(Co-founder @ Italian Association for Machine Learning)\n\"Fairness in Machine Learning & the What-If Tool\"\n\n Roberto Orgiu\n(Android Engineer @ NYTimes | Google Expert Android)\ntalk TBD\n\n ❓ INFO E FAQ\n\n - registrazioni: https://bit.ly/DevParty20-me\n- evento online libero e gratuito\n- la piattaforma di streaming verrà comunicata in seguito\n- le track tematiche saranno tenute in parallelo\n- l’orario potrebbe subire piccole variazioni\n- hashtag: #gdgdevparty\n\n 🎤 CALL FOR SPEAKER\n\n We want you!\nProponi il tuo talk in una grande conferenza nazionale insieme a Googler, GDE e altri speaker di livello!\nInfo: https://bit.ly/DevParty20-CfS-p (link CfS in fondo)\nDeadline: Venerdì 16 Aprile",
+    "end": "2020-05-03T19:00:00+02:00",
+    "id": "bevy:24293",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "gdg-devparty-together",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-devparty-together/",
+      "type": "bevy"
+    },
+    "start": "2020-05-02T15:00:00+02:00",
+    "title": "GDG DevParty Together",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-devparty-together/"
+  }
+]

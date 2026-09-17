@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/Copia%2520di%2520IOE22-Bevy-Thumbnail-1080x1080-Editable_YEJLeYi.png",
+    "description": "Tornano finalmente le conferenze in presenza del GDG nel 2022 con la Google I/O Extended! Ci vediamo Domenica 26 Giugno da CreationDose in Via Antonino di S. Giuliano, 197 (Catania).",
+    "end": "2022-06-26T19:00:00+02:00",
+    "id": "bevy:44972",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "google-i-o-extended-2022-catania",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-extended-2022-catania/",
+      "type": "bevy"
+    },
+    "start": "2022-06-26T11:00:00+02:00",
+    "title": "Google I/O Extended 2022 - Catania",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-extended-2022-catania/",
+    "venue": {
+      "address": "Via Antonino di S. Giuliano, 197",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose"
+    }
+  }
+]

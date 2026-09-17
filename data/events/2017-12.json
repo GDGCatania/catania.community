@@ -1,0 +1,54 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Per approfondire gli aspetti economici legati al mondo dello sviluppo di Videogame non perdete il nostro evento #ROADTOGGJ2018:\n\n https://www.facebook.com/events/2050928291807616/\n\n Ecco i nostri speaker:\n- Dario Fantini\nKickstarter e delle campagne di crowdfunding in generale con tutti i suoi pro e contro;\n- Sergio Bonfiglio\nMicro transazioni e di free-to-play.\n\n Vi aspettiamo venerdì 15 dicembre dalle 17:00 alle 19:00, Aula 23 del Dipartimento di Informatica e Matematica dell'Università di Catania, con una sorpresa per i partecipanti.\n#ggj2018 #ggjct2018 #gdgcatania #eludo",
+    "end": "2017-12-15T19:00:00+01:00",
+    "id": "bevy:3921",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "roadtoggj2018-i-want-big-money-il-lato-business-del-videogame",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-roadtoggj2018-i-want-big-money-il-lato-business-del-videogame/",
+      "type": "bevy"
+    },
+    "start": "2017-12-15T17:00:00+01:00",
+    "title": "#ROADTOGGJ2018: \"I want Big Money. Il lato Business del videogame\"",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-roadtoggj2018-i-want-big-money-il-lato-business-del-videogame/"
+  },
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Ultimo Meetup dell'anno per fare un bilancio di tutte le attività del 2017 e per scambiarci gli auguri di Buone Feste:\n\n https://www.facebook.com/events/519533311757947/\n\n Vi aspettiamo giovedì 21 dicembre dalle 18:00 alle 20:00 presso i locali di Vulcanìc in Viale Africa 31 a Catania.",
+    "end": "2017-12-21T20:00:00+01:00",
+    "id": "bevy:3922",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "gdg-catania-open-meetup",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-catania-open-meetup/",
+      "type": "bevy"
+    },
+    "start": "2017-12-21T18:00:00+01:00",
+    "title": "GDG Catania - Open Meetup",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-catania-open-meetup/"
+  }
+]

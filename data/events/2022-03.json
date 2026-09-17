@@ -1,0 +1,56 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/FlutterFestivals_Thumbnail_Dark_Bevy_1080x1080_4rGP0zD.png",
+    "description": "Coming soon ;-)",
+    "end": "2022-03-26T13:30:00+01:00",
+    "id": "bevy:42562",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "flutter-festival",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutter-festival/",
+      "type": "bevy"
+    },
+    "start": "2022-03-26T09:45:00+01:00",
+    "title": "Flutter Festival",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutter-festival/"
+  },
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/wtm-iwd22-bevy-icon%25402x_iJXFcDh.png",
+    "description": "Gli eventi Women Techmakers IWD in tutto il mondo vengono realizzati su misura per le comunità locali in cui sono presenti donne che lavorano o sono appassionate di tecnologia. Questi eventi sono caratterizzati dalla presenza di laboratori pratici di coding, relatori che possano ispirare, e opportunità di networking. \nIl tema dell'evento varia ogni anno e le nostre ambassador interpretano e adattano creativamente il tema per riproporlo alla loro comunità. Per il 2022, il tema è #ProgressNotPerfection e celebra tutti i tipi di progresso - grande o piccolo - e la forza che dimostriamo nel non lasciare che la paura possa impedire di realizzare i nostri sogni.\n\nGoogle sostiene e celebra le donne lavorano o sono appassionate di tecnologia attraverso iniziative come Women Techmakers, Grow with Google, Jigsaw, Google.Org Impact challenge e altro ancora. Stiamo lottando per un futuro in cui ci sia equità in tutto il mondo, pari opportunità di successo in ogni campo, e dove le donne siano al sicuro online e nel mondo fisico.\n\nIl nostro evento si svolgerà online il 27 marzo, a breve condivideremo tutti i dettagli relativi al programma.",
+    "end": "2022-03-27T20:00:00+02:00",
+    "id": "bevy:42538",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "women-techmakers-international-womens-day-2022",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-women-techmakers-international-womens-day-2022/",
+      "type": "bevy"
+    },
+    "start": "2022-03-27T16:00:00+02:00",
+    "title": "Women Techmakers International Women's Day 2022",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-women-techmakers-international-womens-day-2022/"
+  }
+]

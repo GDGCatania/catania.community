@@ -1,0 +1,29 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/icona%2520piattaforma.png",
+    "description": "Pronti a tornare nell'arena? Anche quest'anno il GDG Catania organizza un hub virtuale per riunire tutti i team del territorio che partecipano all'Hash Code. Sarà allestito un server Discord con una stanza dedicata ad ogni squadra ed alla fine della competizione ci vedremo tutti in un debrief virtuale per confrontare le nostre idee relative al problema.",
+    "end": "2022-02-24T22:00:00+01:00",
+    "id": "bevy:42557",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "gdg-catania-hash-code-2022",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-catania-hash-code-2022/",
+      "type": "bevy"
+    },
+    "start": "2022-02-24T18:30:00+01:00",
+    "title": "GDG Catania Hash Code 2022",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-catania-hash-code-2022/"
+  }
+]
