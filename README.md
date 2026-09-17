@@ -53,27 +53,38 @@ Available adapters:
 | ------------ | ----------------------------------------------------------------- |
 | `bevy`       | GDG and other chapters on the Bevy platform (public API, no auth) |
 | `ics`        | Luma, public Google Calendars, Gancio, Mobilizon, Nextcloud       |
+| `jsonld`     | Meetup, Eventbrite, and any site publishing schema.org Event      |
 | `pycatania`  | The JSON feed Python Catania publishes on its own site            |
 | `manual`     | Events curated by hand in the repository                          |
 
-**Meetup and Eventbrite are not reachable.** Meetup retired its open API and the GraphQL one now
-requires a paid Pro subscription to create an OAuth consumer; Eventbrite removed its public search
-endpoint in 2020. Communities on those platforms are covered with `manual`, by asking them for a
-public `.ics` feed, or — best of all — by reading a feed they already maintain themselves.
+**Meetup and Eventbrite have no public API, but their pages are structured.** Both publish complete
+schema.org `Event` markup as JSON-LD on every event page — dates with an explicit offset, a named
+venue with a street address, the canonical URL. `jsonld` reads that, and works on any site that
+publishes the same markup.
 
-**`pycatania` is that third case.** Python Catania runs on Meetup, but the organisers keep their site
-open at [PythonCatania/PythonCatania.github.io](https://github.com/PythonCatania/PythonCatania.github.io)
-and publish `public/data/events.json`, with the canonical Meetup link in every entry. Reading it beats
-copying their events by hand. Two caveats are baked into the adapter rather than hidden:
+It never touches a private API: Meetup's `robots.txt` disallows `/gql*`, `/api` and `/mu_api` while
+allowing the event and listing pages, so the adapter reads pages only, with the project's
+identifiable User-Agent.
+
+Configure it with `urls:` for explicit event pages, which works on any host, or `list:` for a listing
+page, accepted only for hosts with a discovery rule in the adapter. Two things to know:
+
+- **Eventbrite types its events `SocialEvent`**, a schema.org subtype of `Event`. Matching `Event`
+  exactly finds nothing there.
+- **Discovery is the fragile half.** Listing pages carry no event JSON-LD, so event URLs are
+  extracted from the HTML. A group with nothing scheduled and a page whose layout changed both yield
+  zero links, so a listing strategy first proves the page is the one it asked for, and throws when it
+  is not rather than reporting "no events".
+
+**`pycatania` is a first-party feed.** Python Catania runs on Meetup, but the organisers keep their
+site open at [PythonCatania/PythonCatania.github.io](https://github.com/PythonCatania/PythonCatania.github.io)
+and publish `public/data/events.json`, with the canonical Meetup link in every entry. Two caveats are
+baked into the adapter rather than hidden:
 
 - **It is an archive.** An entry appears _after_ the meetup — it always carries `attendees` and a photo
-  gallery. A normal run therefore collects nothing, and that is not a failure. Their upcoming events
-  will only reach the agenda if the feed starts announcing them.
+  gallery. A normal run therefore collects nothing, and that is not a failure.
 - **`date` carries no time.** The adapter publishes at the `defaultTime` declared in the community's
   YAML (18:30, their usual start) and prefers a per-entry `time` the moment the feed provides one.
-
-The adapter is named after the community on purpose: the format is theirs, not a standard. If another
-community adopts the same shape, generalise it then.
 
 **Backfilling the archive.** Past events are never re-read by the daily run, which only looks back to
 yesterday. To import an archive once:

@@ -19,6 +19,8 @@ export const PRICE_TYPES = ['free', 'donation', 'paid'] as const;
  * Precedence when the same event arrives twice: the first one wins.
  * `pycatania` sits just below `manual` because it is also a hand-curated feed —
  * written by the organisers themselves, only hosted on their site instead of here.
+ * `jsonld` sits last because it is read from a page rather than from an API or a
+ * feed: where a platform offers both, the structured endpoint is the one to trust.
  */
 export const SOURCE_PRIORITY = ['override', 'manual', 'pycatania', 'bevy', 'ics', 'jsonld'] as const;
 
@@ -103,6 +105,17 @@ export const IngestConfigSchema = z.discriminatedUnion('type', [
       .string()
       .regex(/^\d{2}:\d{2}$/, 'defaultTime must be HH:MM')
       .default('18:30'),
+  }),
+  z.object({
+    type: z.literal('jsonld'),
+    /**
+     * A listing page to discover event URLs from. Only hosts with a checked
+     * discovery rule are accepted (Meetup, Eventbrite): everywhere else, list
+     * the events explicitly.
+     */
+    list: z.url().optional(),
+    /** Explicit event URLs. Boring, stable, and works on any host. */
+    urls: z.array(z.url()).default([]),
   }),
   z.object({
     type: z.literal('manual'),

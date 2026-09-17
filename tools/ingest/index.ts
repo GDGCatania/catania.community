@@ -17,6 +17,7 @@ import { readJson, writeJsonIfChanged } from './lib/json.js';
 import { Geocoder } from './geocode.js';
 import { fetchBevy } from './adapters/bevy.js';
 import { fetchIcs } from './adapters/ics.js';
+import { fetchJsonLd } from './adapters/jsonld.js';
 import { fetchPyCatania } from './adapters/pycatania.js';
 import { fromManual } from './adapters/manual.js';
 import type { RawEvent } from './adapters/types.js';
@@ -235,6 +236,8 @@ async function runAdapter(
       return fetchBevy(ingest, community, { since });
     case 'ics':
       return fetchIcs(ingest, community, { since });
+    case 'jsonld':
+      return fetchJsonLd(ingest, community, { since });
     case 'pycatania':
       return fetchPyCatania(ingest, community, { since });
     case 'manual':
