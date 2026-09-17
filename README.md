@@ -49,16 +49,42 @@ bot's commits readable.
 
 Available adapters:
 
-| `type`   | Covers                                                            |
-| -------- | ----------------------------------------------------------------- |
-| `bevy`   | GDG and other chapters on the Bevy platform (public API, no auth) |
-| `ics`    | Luma, public Google Calendars, Gancio, Mobilizon, Nextcloud       |
-| `manual` | Events curated by hand in the repository                          |
+| `type`       | Covers                                                            |
+| ------------ | ----------------------------------------------------------------- |
+| `bevy`       | GDG and other chapters on the Bevy platform (public API, no auth) |
+| `ics`        | Luma, public Google Calendars, Gancio, Mobilizon, Nextcloud       |
+| `pycatania`  | The JSON feed Python Catania publishes on its own site            |
+| `manual`     | Events curated by hand in the repository                          |
 
 **Meetup and Eventbrite are not reachable.** Meetup retired its open API and the GraphQL one now
 requires a paid Pro subscription to create an OAuth consumer; Eventbrite removed its public search
-endpoint in 2020. Communities on those platforms are covered with `manual`, or by asking them for a
-public `.ics` feed.
+endpoint in 2020. Communities on those platforms are covered with `manual`, by asking them for a
+public `.ics` feed, or — best of all — by reading a feed they already maintain themselves.
+
+**`pycatania` is that third case.** Python Catania runs on Meetup, but the organisers keep their site
+open at [PythonCatania/PythonCatania.github.io](https://github.com/PythonCatania/PythonCatania.github.io)
+and publish `public/data/events.json`, with the canonical Meetup link in every entry. Reading it beats
+copying their events by hand. Two caveats are baked into the adapter rather than hidden:
+
+- **It is an archive.** An entry appears _after_ the meetup — it always carries `attendees` and a photo
+  gallery. A normal run therefore collects nothing, and that is not a failure. Their upcoming events
+  will only reach the agenda if the feed starts announcing them.
+- **`date` carries no time.** The adapter publishes at the `defaultTime` declared in the community's
+  YAML (18:30, their usual start) and prefers a per-entry `time` the moment the feed provides one.
+
+The adapter is named after the community on purpose: the format is theirs, not a standard. If another
+community adopts the same shape, generalise it then.
+
+**Backfilling the archive.** Past events are never re-read by the daily run, which only looks back to
+yesterday. To import an archive once:
+
+```bash
+npm run ingest -- --since 2024-01-01 --dry-run   # check first
+npm run ingest -- --since 2024-01-01
+```
+
+Run it across **every** source, without `--source`: an event that started after `--since` and whose
+source was not part of the run counts as "no longer configured" and is dropped from `data/`.
 
 ### Two behaviours worth knowing about
 

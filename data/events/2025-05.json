@@ -5,6 +5,32 @@
     "categories": [
       "tech"
     ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/16-05-2025/event-307712208.jpg",
+    "description": "Il PyCon Italia 2025 è vicinissimo ed è il momento giusto per incontrare la community di Python Catania e condividere del buon codice sorgente.",
+    "id": "pycatania:307712208",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "meetup-python-catania-get-ready-for-pycon-italia-2025",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/307712208/",
+      "type": "pycatania"
+    },
+    "start": "2025-05-16T18:30:00+02:00",
+    "title": "Meetup Python Catania - Get ready for PyCon Italia 2025!",
+    "url": "https://www.meetup.com/python-catania/events/307712208/"
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
     "communityId": "gdg-catania",
     "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/IOE25%2520Bevy%2520Thumbnail%2520-%2520Editable%2520Location_ASNLpUE.png",
     "description": "🍻 La birra ghiacciata è la cosa più buona al mondo... Sì, ma quale?\n\nSiamo curiosi di sapere qual è la tua birra preferita, ma soprattutto vogliamo assaggiarla.\n\nQuando? Al #watchparty della #GoogleIO di quest'anno!\n\nVoi portate le vostre birre preferite, noi mettiamo la location, lo spirito del GDG Catania e altre birre per vivere assieme un altro momento di condivisione, formazione e network 🥳\n\n🎥 Vi aspettiamo il 20 Maggio alle 18.30 da CreationDose\n\nN.B. possono entrare birre senza persone, ma non persone senza birre 🤣",

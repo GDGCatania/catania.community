@@ -34,5 +34,31 @@
       },
       "name": "The Level Group"
     }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/14-07-2026/event-315327982.jpg",
+    "description": "La community di Python Catania si incontra per un nuovo meetup dal titolo \"After PyCon Italia 2026\": condivisione dell'esperienza al PyCon Italia 2026, talk preparati dai nostri esperti su Python e spazio alla creatività.",
+    "id": "pycatania:315327982",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "meetup-python-catania-after-pycon-italia-2026",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/315327982/",
+      "type": "pycatania"
+    },
+    "start": "2026-07-14T18:30:00+02:00",
+    "title": "Meetup Python Catania - After PyCon Italia 2026",
+    "url": "https://www.meetup.com/python-catania/events/315327982/"
   }
 ]

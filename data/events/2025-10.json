@@ -1,0 +1,28 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/pythobrata-10-2025/event-311306942.jpg",
+    "description": "Il mese di Ottobre è l'ideale per festeggiare l'arrivo dell'autunno e organizzare un nuovo meetup della community Python Catania, dove condividere nuove tecnologie, buon codice sorgente e sempre nuove iniziative.",
+    "id": "pycatania:311306942",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "meetup-python-catania-pythobrata-2025",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/311306942/",
+      "type": "pycatania"
+    },
+    "start": "2025-10-30T18:30:00+01:00",
+    "title": "Meetup Python Catania - PythObrata 2025 🌰🍷",
+    "url": "https://www.meetup.com/python-catania/events/311306942/"
+  }
+]

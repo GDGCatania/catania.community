@@ -5,6 +5,32 @@
     "categories": [
       "tech"
     ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/17-07-2025/event-308969846.jpg",
+    "description": "In una calda serata d'estate la community Python Catania si incontra al Lido Grotta Smeralda per parlare di macchine a stati in Python e di game development con pygame.",
+    "id": "pycatania:308969846",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "meetup-python-catania-con-la-calata-del-fresco",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/308969846/",
+      "type": "pycatania"
+    },
+    "start": "2025-07-17T18:30:00+02:00",
+    "title": "Meetup Python Catania - Con la calata del fresco",
+    "url": "https://www.meetup.com/python-catania/events/308969846/"
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
     "communityId": "gdg-catania",
     "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_JjdzCEn",
     "description": "Più sale il termometro, più alziamo l'asticella degli eventi!\n\nIl Google I/O Reconnect 2025, in collaborazione con gli Amici di @fluttercatnia, è l'occasione perfetta per un ultimo meet up prima della pausa estiva, per valutare l'impatto che le novità di casa google hanno avuto sul nostro lavoro negli ultimi due mesi...e per scroccare aria condizionata agli amici di @creationdose!\n\n Vi aspettiamo per un pomeriggio di crescita e di svago il 26/07 dalle 17:30 alle 20:30 presso CreationDose!\n\n Non dimenticate di prenotare il vostro biglietto, portare il pc, tanta curiosità e idee carine su cosa fare post Reconnect, perchè si vuole fare baldoriaaaa",

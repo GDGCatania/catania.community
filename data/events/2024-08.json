@@ -1,0 +1,28 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "python-catania",
+    "coverImage": "https://catania.python.it/images/events/event-302671524.jpg",
+    "description": "In una calda serata d'estate catanese la community Python Catania si incontra per condividere novità, idee e curiosità sul nostro amato linguaggio Python.",
+    "id": "pycatania:302671524",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "meetup-python-catania-summer-edition-2024",
+    "source": {
+      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "ref": "https://www.meetup.com/python-catania/events/302671524/",
+      "type": "pycatania"
+    },
+    "start": "2024-08-30T18:30:00+02:00",
+    "title": "Meetup Python Catania - Summer Edition 2024",
+    "url": "https://www.meetup.com/python-catania/events/302671524/"
+  }
+]
