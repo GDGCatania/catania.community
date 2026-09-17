@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "wordpress-meetup-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/524952518/676x676.jpg",
+    "description": "Ciao WordPress Lover!\nVacanze finite e voglia di tornare a fare networking ed imparare?💡 Ecco un'altra grande occasione 💡\n\nIn questo appuntamento del…",
+    "end": "2025-09-25T21:00:00+02:00",
+    "id": "jsonld:meetup:311004860",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "wordpress-meetup-catania-settembre-2025-case-study-e-commerce",
+    "source": {
+      "fetchedAt": "2026-09-17T22:23:39.540Z",
+      "ref": "https://www.meetup.com/meetup-wordpress-catania/events/311004860/",
+      "type": "jsonld"
+    },
+    "start": "2025-09-25T19:00:00+02:00",
+    "title": "WordPress Meetup Catania - Settembre 2025: Case study e-commerce",
+    "url": "https://www.meetup.com/meetup-wordpress-catania/events/311004860/",
+    "venue": {
+      "address": "Via dei Piccioni, 29, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5145633,
+        "lon": 15.0626355
+      },
+      "name": "@localhost | Coworking Space"
+    }
+  }
+]

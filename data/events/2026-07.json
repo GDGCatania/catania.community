@@ -5,6 +5,42 @@
     "categories": [
       "tech"
     ],
+    "communityId": "wordpress-meetup-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/534802398/676x676.jpg",
+    "description": "Un **hacker** non ha bisogno di essere un genio. Non ha bisogno di ore. In molti casi **gli bastano pochi minuti**, strumenti gratuiti e un sito…",
+    "end": "2026-07-02T21:00:00+02:00",
+    "id": "jsonld:meetup:315313045",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "come-hackerare-e-compromettere-un-sito-wordpress",
+    "source": {
+      "fetchedAt": "2026-09-17T22:23:39.540Z",
+      "ref": "https://www.meetup.com/meetup-wordpress-catania/events/315313045/",
+      "type": "jsonld"
+    },
+    "start": "2026-07-02T19:00:00+02:00",
+    "title": "Come hackerare e compromettere un sito WordPress",
+    "url": "https://www.meetup.com/meetup-wordpress-catania/events/315313045/",
+    "venue": {
+      "address": "Via dei Piccioni, 29, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5145633,
+        "lon": 15.0626355
+      },
+      "name": "@localhost | Coworking Space"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
     "communityId": "gdg-catania",
     "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_OqwzaOH",
     "description": "Un'intera giornata gratuita per sviluppatori con l'obiettivo di apprendere le fondamenta per lo sviluppo di applicazioni agentiche con Google Gemini in applicazioni TypeScript.\n\nMattina (10-13): Masterclass\n\nLa mattina si apre con una masterclass di 3 ore dedicata all'integrazione di Gemini all'interno di applicazioni JavaScript sfruttando i più recenti modelli di Google: Google Gemini 3, VEO e Nano Banana\n\nEsploreremo casi d'uso reali e strategie di integrazione dell'AI nei progetti Frontend e Backend, per capire come trasformare applicazioni tradizionali in esperienze davvero intelligenti.\n\nArgomenti della Masterclass:\n\nGemini API in JavaScript applications: Generazione di contenuti, prompt multimodali, chatbot, streaming content, output strutturati, analisi risultati e consumi.\n\nAPI di VEO e NanoBanana: Esempi pratici di utilizzo delle API di Google Gemini 3 in applicazioni JavaScript per la generazione di contenuti, la creazione di prompt multimodali, create agenti e chat, analisi dei risultati e dei consumi. Creiamo inoltre esempi reali di integrazione delle API di Nano Banana Pro e VEO\n\nFunction Calling e MCP: Estendere le capacità di un LLM con l'integrazione di API esterne tramite il 'Function Calling', l'integrazione di MCP server di terze parti e la creazione di un MCP server\n\nPomeriggio: Workshop (14:30-18:00)\n\nNel pomeriggio avrai la possibilità di mettere in pratica quanto appreso durante la masterclass:\n\nUtilizzerai AntiGravity e/o Gemini CLI\n\nInizierai a creare le prime semplici applicazioni \"intelligenti\" in TypeScript / NodeJS che integrano funzionalità AI con le API di Gemini\n\nImparerai a configurare e utilizzare l'SDK di Gemini: generare contenuti, streaming, output strutturati, ChatBot, Interactions API, Grounding Tools e molto altro.\n\nUtilizzerai NodeJS per creare delle API REST in NodeJS che integrano funzionalità AI con Gemini SDK\n\nEffettuerai il deploy su Google Cloud.\n\nOgni partecipante verrà messo in condizione di sperimentare liberamente e gratuitamente!\n\nOrganizzeremo inoltre una \"challenge\" per il progetto migliore e ci sarà ampio spazio per il networking tra sviluppatori e con i nostri sponsor.",

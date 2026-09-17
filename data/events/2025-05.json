@@ -70,5 +70,41 @@
       },
       "name": "CreationDose Srl"
     }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "wordpress-meetup-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/524952518/676x676.jpg",
+    "description": "Ciao WordPress Lover!\nTi siamo mancati?💡 Ecco un'altra grande occasione di fare networking ed imparare/approfondire qualcosa di nuovo ed interessante 💡",
+    "end": "2025-05-29T21:00:00+02:00",
+    "id": "jsonld:meetup:307840861",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "wordpress-meetup-catania-maggio-2025-accessibilita",
+    "source": {
+      "fetchedAt": "2026-09-17T22:23:39.540Z",
+      "ref": "https://www.meetup.com/meetup-wordpress-catania/events/307840861/",
+      "type": "jsonld"
+    },
+    "start": "2025-05-29T19:00:00+02:00",
+    "title": "WordPress Meetup Catania - Maggio 2025: Accessibilità",
+    "url": "https://www.meetup.com/meetup-wordpress-catania/events/307840861/",
+    "venue": {
+      "address": "Via dei Piccioni, 29, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5145633,
+        "lon": 15.0626355
+      },
+      "name": "@localhost | Coworking Space"
+    }
   }
 ]

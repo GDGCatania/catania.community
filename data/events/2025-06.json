@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "wordpress-meetup-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/528594805/676x676.jpg",
+    "description": "**AI vs sviluppatore WordPress: minaccia o superpotere?**\n\nL’intelligenza artificiale è ovunque, anche (e soprattutto) nel lavoro degli sviluppatori…",
+    "end": "2025-06-26T21:00:00+02:00",
+    "id": "jsonld:meetup:308537700",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "wordpress-meetup-catania-giugno-2025-ai-vs-sviluppatore",
+    "source": {
+      "fetchedAt": "2026-09-17T22:23:39.540Z",
+      "ref": "https://www.meetup.com/meetup-wordpress-catania/events/308537700/",
+      "type": "jsonld"
+    },
+    "start": "2025-06-26T19:00:00+02:00",
+    "title": "WordPress Meetup Catania - Giugno 2025: AI Vs Sviluppatore",
+    "url": "https://www.meetup.com/meetup-wordpress-catania/events/308537700/",
+    "venue": {
+      "address": "Via dei Piccioni, 29, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5145633,
+        "lon": 15.0626355
+      },
+      "name": "@localhost | Coworking Space"
+    }
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "wordpress-meetup-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/532236470/676x676.jpg",
+    "description": "Ciao WordPress Lover!\nDiamo il benvenuto al 2026 esplorando ancora una volta il mondo dei builder. Questa volta la nostra attenzione si concentrerà su…",
+    "end": "2026-01-29T21:00:00+01:00",
+    "id": "jsonld:meetup:312862576",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "wp-meetup-catania-oxygen-builder-performance-come-scelta-progettuale",
+    "source": {
+      "fetchedAt": "2026-09-17T22:23:39.540Z",
+      "ref": "https://www.meetup.com/meetup-wordpress-catania/events/312862576/",
+      "type": "jsonld"
+    },
+    "start": "2026-01-29T19:00:00+01:00",
+    "title": "WP Meetup Catania - Oxygen Builder: performance come scelta progettuale",
+    "url": "https://www.meetup.com/meetup-wordpress-catania/events/312862576/",
+    "venue": {
+      "address": "Via dei Piccioni, 29, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5145633,
+        "lon": 15.0626355
+      },
+      "name": "@localhost | Coworking Space"
+    }
+  }
+]

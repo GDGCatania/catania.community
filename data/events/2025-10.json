@@ -5,6 +5,42 @@
     "categories": [
       "tech"
     ],
+    "communityId": "wordpress-meetup-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/524952518/676x676.jpg",
+    "description": "Ciao WordPress Lover!\nCadono le foglie e... anche alcune certezze sulla SEO!\n\nLa SEO non riguarda più solo Google. Oggi bisogna pensare alla *Search…",
+    "end": "2025-10-23T21:00:00+02:00",
+    "id": "jsonld:meetup:311522292",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "wp-meetup-catania-la-nuova-seo-ottimizzare-per-lai-non-solo-per-google",
+    "source": {
+      "fetchedAt": "2026-09-17T22:23:39.540Z",
+      "ref": "https://www.meetup.com/meetup-wordpress-catania/events/311522292/",
+      "type": "jsonld"
+    },
+    "start": "2025-10-23T19:00:00+02:00",
+    "title": "WP Meetup Catania - La nuova SEO: ottimizzare per l’AI, non solo per Google",
+    "url": "https://www.meetup.com/meetup-wordpress-catania/events/311522292/",
+    "venue": {
+      "address": "Via dei Piccioni, 29, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5145633,
+        "lon": 15.0626355
+      },
+      "name": "@localhost | Coworking Space"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
     "communityId": "python-catania",
     "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/530594049/676x676.jpg",
     "description": "Ciao Pycciotti!\n\nIl mese di Ottobre è l'ideale per festeggiare l'arrivo dell'autunno 🌰🍷🎉 e l'occasione per organizzare un nuovo meetup della community…",

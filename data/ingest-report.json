@@ -1,10 +1,10 @@
 {
-  "lastChangeAt": "2026-09-17T22:07:06.990Z",
+  "lastChangeAt": "2026-09-17T22:23:39.540Z",
   "preservedFromFailedSources": 0,
   "sources": [
     {
       "community": "gdg-catania",
-      "events": 4,
+      "events": 13,
       "ok": true,
       "skipped": 0,
       "type": "bevy"
@@ -18,11 +18,18 @@
     },
     {
       "community": "python-catania",
-      "events": 3,
+      "events": 8,
+      "ok": true,
+      "skipped": 0,
+      "type": "jsonld"
+    },
+    {
+      "community": "wordpress-meetup-catania",
+      "events": 10,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
     }
   ],
-  "totalEvents": 72
+  "totalEvents": 82
 }
