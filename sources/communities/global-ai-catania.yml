@@ -1,0 +1,24 @@
+# Dati verificati su https://globalai.community/chapters/catania e
+# https://www.meetup.com/global-ai-catania/ il 2026-09-17.
+# Gli eventi stanno su Meetup: la pagina del chapter non li pubblica, si limita a
+# rimandare lì.
+id: global-ai-catania
+name: Global AI Catania
+tagline: "Il chapter catanese della Global AI Community: incontri su AI, machine learning e dati."
+description: >-
+  Chapter di Catania della Global AI Community, una rete internazionale di gruppi dedicati
+  all'intelligenza artificiale. Si descrivono come un gruppo di appassionati di AI con la
+  voglia di imparare e di condividere quello che sanno. Il primo meetup è del marzo 2026.
+categories:
+  - tech
+area: citta
+since: 2026
+language: Italiano
+members: 156
+links:
+  website: https://globalai.community/chapters/catania
+  meetup: https://www.meetup.com/global-ai-catania/
+ingest:
+  - type: jsonld
+    list: https://www.meetup.com/global-ai-catania/events/
+active: true
