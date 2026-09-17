@@ -23,7 +23,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Pin to the branch tip, not to the SHA that triggered the run. When
+      # ingest.yml calls this workflow, `github.sha` is the commit the ingest run
+      # started from — the bot's data commit is created *during* that run and
+      # would be left out, publishing the state from before the collection.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-node@v4
         with:
