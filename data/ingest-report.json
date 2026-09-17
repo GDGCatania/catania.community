@@ -4,14 +4,14 @@
   "sources": [
     {
       "community": "gdg-catania",
-      "events": 59,
+      "events": 1,
       "ok": true,
       "skipped": 0,
       "type": "bevy"
     },
     {
       "community": "python-catania",
-      "events": 12,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "pycatania"
