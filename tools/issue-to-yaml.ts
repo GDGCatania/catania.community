@@ -60,6 +60,43 @@ function parseList(value: string): string[] {
     .filter(Boolean);
 }
 
+/**
+ * Meetup puts an optional locale before the group — `/it-IT/<group>/` — and
+ * organisers paste whichever URL their browser was showing: the group, its
+ * events tab, or a single event. All of them identify the same group, so all of
+ * them reduce to the same listing page.
+ */
+const MEETUP_GROUP = /^\/(?:[a-z]{2}-[a-zA-Z]{2}\/)?([^/]+)/;
+
+/**
+ * Turns an events URL into a `jsonld` source, when the host is one the adapter
+ * has a discovery rule for. Anything else returns nothing: guessing a listing
+ * strategy for an unchecked platform is how a source breaks silently.
+ */
+function jsonLdSource(eventsUrl: string): Record<string, unknown> | undefined {
+  let url: URL;
+  try {
+    url = new URL(eventsUrl);
+  } catch {
+    return undefined;
+  }
+
+  if (url.host.endsWith('meetup.com')) {
+    const group = MEETUP_GROUP.exec(url.pathname)?.[1];
+    // `/find/`, `/pro/` and friends are not groups.
+    if (!group || ['find', 'pro', 'topics', 'cities', 'members'].includes(group)) return undefined;
+    return { type: 'jsonld', list: `https://www.meetup.com/${group}/events/` };
+  }
+
+  if (/(^|\.)eventbrite\.[a-z.]+$/.test(url.host)) {
+    // An organiser page lists events; a single event page is just itself.
+    if (url.pathname.startsWith('/o/')) return { type: 'jsonld', list: url.href };
+    if (url.pathname.startsWith('/e/')) return { type: 'jsonld', urls: [url.href] };
+  }
+
+  return undefined;
+}
+
 function detectIngest(eventsUrl: string, icsUrl: string) {
   const ingest: Array<Record<string, unknown>> = [];
 
@@ -70,6 +107,9 @@ function detectIngest(eventsUrl: string, icsUrl: string) {
   if (/gdg\.community\.dev|\.bevy\.com/.test(eventsUrl)) {
     ingest.push({ type: 'bevy', chapter: 0, _todo: `chapter id to be read from ${eventsUrl}` });
   }
+
+  const jsonLd = jsonLdSource(eventsUrl);
+  if (jsonLd) ingest.push(jsonLd);
 
   if (ingest.length === 0) ingest.push({ type: 'manual' });
 

@@ -53,8 +53,9 @@ body:
       label: Dove pubblicate gli eventi
       description: >-
         La pagina da cui leggere gli eventi. Funzionano in automatico i feed .ics,
-        gdg.community.dev, Luma, Gancio e Mobilizon. Meetup ed Eventbrite hanno
-        chiuso le API pubbliche: da lì dobbiamo copiare a mano.
+        gdg.community.dev, Luma, Gancio, Mobilizon, Meetup ed Eventbrite. Per
+        Meetup va bene il link del gruppo; per Eventbrite quello del profilo
+        organizzatore. Da altre piattaforme dobbiamo copiare a mano.
       placeholder: https://
     validations:
       required: true
