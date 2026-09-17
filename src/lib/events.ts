@@ -147,6 +147,8 @@ function dayLabel(key: string, todayKey: string, tomorrowKey: string): string {
     weekday: 'long',
     day: 'numeric',
     month: 'short',
+    // Same rule as the lists: the year shows up only once it is not this one.
+    ...(key.slice(0, 4) !== todayKey.slice(0, 4) ? { year: 'numeric' as const } : {}),
     timeZone: 'UTC',
   }).format(date);
 
@@ -177,21 +179,33 @@ export function formatTime(iso: string): string {
   return iso.slice(11, 16);
 }
 
-export function formatDateLong(iso: string): string {
+/**
+ * Whether a date needs its year spelled out: only when it is not the current
+ * one. This is what keeps an archive readable — the communities here run
+ * recurring meetups, so a list of "14 LUG · 23 APR · 14 LUG" gives no way to
+ * tell three editions apart. Within the current year the year is noise.
+ */
+function isOtherYear(iso: string, now: Date): boolean {
+  return iso.slice(0, 4) !== localDayKey(now).slice(0, 4);
+}
+
+export function formatDateLong(iso: string, now = new Date()): string {
   return capitalise(
     new Intl.DateTimeFormat(localeTag, {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
+      ...(isOtherYear(iso, now) ? { year: 'numeric' as const } : {}),
       timeZone: 'UTC',
     }).format(new Date(`${iso.slice(0, 10)}T12:00:00Z`))
   );
 }
 
-export function formatDayMonth(iso: string): string {
+export function formatDayMonth(iso: string, now = new Date()): string {
   return new Intl.DateTimeFormat(localeTag, {
     day: '2-digit',
     month: 'short',
+    ...(isOtherYear(iso, now) ? { year: 'numeric' as const } : {}),
     timeZone: 'UTC',
   })
     .format(new Date(`${iso.slice(0, 10)}T12:00:00Z`))
