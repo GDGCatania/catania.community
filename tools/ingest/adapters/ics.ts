@@ -1,6 +1,7 @@
 import { sync as icalSync, type VEvent, type ParameterValue } from 'node-ical';
 import { fetchText } from '../lib/fetch.js';
 import { htmlToText, slugify, truncate, normalizeForCompare } from '../lib/text.js';
+import { DEFAULT_TZ, timeZoneOffsetMinutes } from '../lib/time.js';
 import type { Community, IngestConfig } from '../../../src/lib/schema.js';
 import type { RawEvent } from './types.js';
 
@@ -10,9 +11,6 @@ import type { RawEvent } from './types.js';
  * Calendars, Gancio, Mobilizon, Nextcloud. This is the source to prefer,
  * because it is a standard rather than an API that can be shut off.
  */
-
-/** Reference timezone: feeds without one are read as Italian local time. */
-const DEFAULT_TZ = 'Europe/Rome';
 
 export async function fetchIcs(
   config: Extract<IngestConfig, { type: 'ics' }>,
@@ -126,36 +124,6 @@ function toIsoWithOffset(date: Date & { tz?: string }, allDay: boolean): string 
     `${local.getUTCFullYear()}-${pad(local.getUTCMonth() + 1)}-${pad(local.getUTCDate())}` +
     `T${time}${sign}${pad(Math.floor(abs / 60))}:${pad(abs % 60)}`
   );
-}
-
-/** A timezone's offset in minutes at a given date (handles daylight saving). */
-function timeZoneOffsetMinutes(date: Date, timeZone: string): number {
-  const parts = Object.fromEntries(
-    new Intl.DateTimeFormat('en-US', {
-      timeZone,
-      hour12: false,
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    })
-      .formatToParts(date)
-      .map((part) => [part.type, part.value])
-  );
-
-  const asUtc = Date.UTC(
-    Number(parts.year),
-    Number(parts.month) - 1,
-    Number(parts.day),
-    // Intl can return "24" for midnight in some combinations.
-    Number(parts.hour === '24' ? '0' : parts.hour),
-    Number(parts.minute),
-    Number(parts.second)
-  );
-
-  return Math.round((asUtc - date.getTime()) / 60_000);
 }
 
 function pickUrl(vevent: VEvent, feedUrl: string): string {
