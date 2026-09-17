@@ -6,9 +6,10 @@
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/event-301402271.jpg",
-    "description": "La community Python Catania si incontra per condividere le esperienze e i talk del PyCon Italia 2024.",
-    "id": "pycatania:301402271",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/521583599/676x676.jpg",
+    "description": "Ciao!\n\nLa community Python Catania 🐘🐍 si incontra nuovamente il\n\n**📅** **17/06/2024 📅**\n\nper condividere novità, idee e curiosità sul nostro amato…",
+    "end": "2024-06-17T21:00:00+02:00",
+    "id": "jsonld:meetup:301402271",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -17,12 +18,21 @@
     },
     "slug": "meetup-python-catania-after-pycon-italia-2024",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:20:20.024Z",
       "ref": "https://www.meetup.com/python-catania/events/301402271/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
-    "start": "2024-06-17T18:30:00+02:00",
+    "start": "2024-06-17T19:00:00+02:00",
     "title": "Meetup Python Catania - After PyCon Italia 2024",
-    "url": "https://www.meetup.com/python-catania/events/301402271/"
+    "url": "https://www.meetup.com/python-catania/events/301402271/",
+    "venue": {
+      "address": "Via dei Piccioni, 29, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5145633,
+        "lon": 15.0626355
+      },
+      "name": "Via dei Piccioni 29"
+    }
   }
 ]

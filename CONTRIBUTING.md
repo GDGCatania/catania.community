@@ -68,9 +68,10 @@ not set `source`: `tools/ingest/normalize.ts` does that. Four rules:
 3. **Do not invent data.** No guessed prices, no venues parsed out of prose. A missing venue shows as
    "no location"; a wrong one puts a pin on the map that nobody verified. Where an approximation is
    unavoidable, declare it in the community YAML rather than burying it in the code.
-4. **Name it after the standard, or after the community.** `ics` is a standard. `pycatania` is one
-   community's bespoke JSON: naming it after them is honest, and it can be generalised the day a
-   second community adopts the same shape.
+4. **Name it after the standard, or after the community.** `ics` and `jsonld` are standards, and a
+   standard covers every platform that speaks it: one `jsonld` parser reads both Meetup and
+   Eventbrite. Name an adapter after a single community only when the format really is theirs alone,
+   and generalise it the day a second community adopts the same shape.
 
 Registering a new one touches four places: `IngestConfigSchema` and `SOURCE_PRIORITY` in
 `src/lib/schema.ts`, `runAdapter` in `tools/ingest/index.ts`, and the adapter table in the README.

@@ -9,6 +9,10 @@
     "lat": 37.5008196,
     "lon": 15.092701
   },
+  "viaantonellodamessina1195021acicastelloctacicastelloitalia": {
+    "lat": 37.5412248,
+    "lon": 15.1343911
+  },
   "viaantoninodisangiuliano197cataniaitalia": {
     "lat": 37.50498,
     "lon": 15.0895881
@@ -23,9 +27,25 @@
     "lat": 37.515083,
     "lon": 15.0758541
   },
+  "viacesarebeccaria14cataniacataniactcataniaitalia": {
+    "lat": 37.5150154,
+    "lon": 15.0759419
+  },
+  "viadeipiccioni29cataniactcataniaitalia": {
+    "lat": 37.5145633,
+    "lon": 15.0626355
+  },
+  "viadusmet50cataniactcataniaitalia": {
+    "lat": 37.5019346,
+    "lon": 15.094753
+  },
   "viafimia34cataniaitalia": {
     "lat": 37.5250131,
     "lon": 15.0846532
+  },
+  "vialeafrica31cataniactcataniaitalia": {
+    "lat": 37.512206,
+    "lon": 15.1033077
   },
   "vialeafrica31cataniaitalia": {
     "lat": 37.512206,
@@ -34,6 +54,10 @@
   "vialeafrica31ecataniaitalia": {
     "lat": 37.51033,
     "lon": 15.1021602
+  },
+  "vialeandreadoria6cataniactcataniaitalia": {
+    "lat": 37.5266727,
+    "lon": 15.0777875
   },
   "viaursino58cataniaitalia": {
     "lat": 37.5097051,

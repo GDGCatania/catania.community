@@ -6,9 +6,10 @@
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/09-12-2025-oh-oh-oh/event-312066711.jpg",
-    "description": "Edizione natalizia speciale della community Python Catania: presentazione agli studenti universitari, ultime novità Python e PyDinner finale.",
-    "id": "pycatania:312066711",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/531376728/676x676.jpg",
+    "description": "Carissimmi Pycciotti,\n\nsta per passare un 2025 che è stato strepitoso per la nostra community! 🥳 Ci rimane poco tempo per organizzare un nuovo meetup…",
+    "end": "2025-12-09T19:00:00+01:00",
+    "id": "jsonld:meetup:312066711",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -17,13 +18,22 @@
     },
     "slug": "meetup-python-catania-ho-ho-python-code",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:23:37.039Z",
       "ref": "https://www.meetup.com/python-catania/events/312066711/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
-    "start": "2025-12-09T18:30:00+01:00",
-    "title": "Meetup Python Catania - Ho! Ho! Python Code! 🎅🎄",
-    "url": "https://www.meetup.com/python-catania/events/312066711/"
+    "start": "2025-12-09T17:00:00+01:00",
+    "title": "Meetup Python Catania - Ho! Ho! Python Code!🎅🎄🧑‍🎄🎄",
+    "url": "https://www.meetup.com/python-catania/events/312066711/",
+    "venue": {
+      "address": "viale Andrea Doria, 6, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5266727,
+        "lon": 15.0777875
+      },
+      "name": "@DMI"
+    }
   },
   {
     "area": "citta",

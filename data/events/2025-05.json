@@ -6,9 +6,10 @@
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/16-05-2025/event-307712208.jpg",
-    "description": "Il PyCon Italia 2025 è vicinissimo ed è il momento giusto per incontrare la community di Python Catania e condividere del buon codice sorgente.",
-    "id": "pycatania:307712208",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/527829496/676x676.jpg",
+    "description": "Ciao Pycciotty!\n\nil PyCon Italia 2025 è vicinissimo ed è il momento giusto per incontrare la community di Python Catania e condividere del buon codice…",
+    "end": "2025-05-16T20:30:00+02:00",
+    "id": "jsonld:meetup:307712208",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -17,13 +18,22 @@
     },
     "slug": "meetup-python-catania-get-ready-for-pycon-italia-2025",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:20:20.024Z",
       "ref": "https://www.meetup.com/python-catania/events/307712208/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
-    "start": "2025-05-16T18:30:00+02:00",
+    "start": "2025-05-16T19:00:00+02:00",
     "title": "Meetup Python Catania - Get ready for PyCon Italia 2025!",
-    "url": "https://www.meetup.com/python-catania/events/307712208/"
+    "url": "https://www.meetup.com/python-catania/events/307712208/",
+    "venue": {
+      "address": "Via Antonino di Sangiuliano, 197, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose"
+    }
   },
   {
     "area": "citta",

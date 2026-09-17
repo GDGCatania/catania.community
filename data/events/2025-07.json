@@ -1,14 +1,15 @@
 [
   {
-    "area": "citta",
+    "area": "provincia",
     "cancelled": false,
     "categories": [
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/17-07-2025/event-308969846.jpg",
-    "description": "In una calda serata d'estate la community Python Catania si incontra al Lido Grotta Smeralda per parlare di macchine a stati in Python e di game development con pygame.",
-    "id": "pycatania:308969846",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/528974611/676x676.jpg",
+    "description": "Ciao Pycciotty!\n\nIn una calda serata d'estate 🌞⛱️🥵 la community Python Catania si incontra con un nuovo strepitoso meetup, alla ricerca di un poco di…",
+    "end": "2025-07-17T22:00:00+02:00",
+    "id": "jsonld:meetup:308969846",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -17,13 +18,22 @@
     },
     "slug": "meetup-python-catania-con-la-calata-del-fresco",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:20:20.024Z",
       "ref": "https://www.meetup.com/python-catania/events/308969846/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
-    "start": "2025-07-17T18:30:00+02:00",
+    "start": "2025-07-17T20:00:00+02:00",
     "title": "Meetup Python Catania - Con la calata del fresco",
-    "url": "https://www.meetup.com/python-catania/events/308969846/"
+    "url": "https://www.meetup.com/python-catania/events/308969846/",
+    "venue": {
+      "address": "via Antonello da Messina, 11 95021, Aci Castello, CT",
+      "city": "Aci Castello",
+      "geo": {
+        "lat": 37.5412248,
+        "lon": 15.1343911
+      },
+      "name": "Lido Grotta Smeralda"
+    }
   },
   {
     "area": "citta",

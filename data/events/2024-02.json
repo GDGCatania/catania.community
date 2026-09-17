@@ -6,9 +6,10 @@
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/event-298457913.jpg",
-    "description": "La community di Python Catania si incontra nuovamente per condividere insieme le novità legate al mondo del linguaggio Python e prepararsi al PyCon Italia 2024.",
-    "id": "pycatania:298457913",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/518416083/676x676.jpg",
+    "description": "La community di Python Catania 🐘🐍 si incontra nuovamente per condividere insieme le novità legate al mondo del linguaggio Python, per prepararci al…",
+    "end": "2024-02-01T21:00:00+01:00",
+    "id": "jsonld:meetup:298457913",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -17,12 +18,21 @@
     },
     "slug": "python-meetup-catania-back-to-python-future",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:20:20.024Z",
       "ref": "https://www.meetup.com/python-catania/events/298457913/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
-    "start": "2024-02-01T18:30:00+01:00",
+    "start": "2024-02-01T19:00:00+01:00",
     "title": "Python Meetup Catania - Back to Python Future",
-    "url": "https://www.meetup.com/python-catania/events/298457913/"
+    "url": "https://www.meetup.com/python-catania/events/298457913/",
+    "venue": {
+      "address": "Via dei Piccioni, 29, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5145633,
+        "lon": 15.0626355
+      },
+      "name": "Via dei Piccioni 29"
+    }
   }
 ]

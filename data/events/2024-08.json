@@ -6,9 +6,10 @@
       "tech"
     ],
     "communityId": "python-catania",
-    "coverImage": "https://catania.python.it/images/events/event-302671524.jpg",
-    "description": "In una calda serata d'estate catanese la community Python Catania si incontra per condividere novità, idee e curiosità sul nostro amato linguaggio Python.",
-    "id": "pycatania:302671524",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/522883708/676x676.jpg",
+    "description": "Ciao!\n\nIn una calda serata d'estate Catanese la community Python Catania 🐘🐍 si incontra nuovamente il\n\n**📅** **30/08/2024 📅**\n\nper condividere novità…",
+    "end": "2024-08-30T20:30:00+02:00",
+    "id": "jsonld:meetup:302671524",
     "language": "Italiano",
     "online": false,
     "price": {
@@ -17,12 +18,21 @@
     },
     "slug": "meetup-python-catania-summer-edition-2024",
     "source": {
-      "fetchedAt": "2026-09-17T08:31:13.443Z",
+      "fetchedAt": "2026-09-17T21:22:37.643Z",
       "ref": "https://www.meetup.com/python-catania/events/302671524/",
-      "type": "pycatania"
+      "type": "jsonld"
     },
     "start": "2024-08-30T18:30:00+02:00",
     "title": "Meetup Python Catania - Summer Edition 2024",
-    "url": "https://www.meetup.com/python-catania/events/302671524/"
+    "url": "https://www.meetup.com/python-catania/events/302671524/",
+    "venue": {
+      "address": "viale Africa 31, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.512206,
+        "lon": 15.1033077
+      },
+      "name": "Paradigma SpA"
+    }
   }
 ]

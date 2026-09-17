@@ -1,11 +1,10 @@
 # Dati verificati su https://catania.python.it/ e https://www.meetup.com/python-catania/
 # il 2026-09-17.
-# Gli eventi stanno su Meetup, che non è raggiungibile da un crawler, ma gli
-# organizzatori mantengono il sito in chiaro su GitHub
-# (PythonCatania/PythonCatania.github.io) e pubblicano public/data/events.json,
-# con il link canonico al meetup in ogni voce: l'adapter legge quello.
-# Attenzione: quel file è un archivio, le voci compaiono DOPO l'incontro. Finché
-# resta così, l'agenda non mostrerà i loro eventi in arrivo.
+# Gli eventi stanno su Meetup, che pubblica schema.org Event in JSON-LD su ogni
+# pagina evento.
+# I due `urls` sono eventi del 2024 che la lista non mostra più: la paginazione
+# di Meetup si ferma a una decina. Elencarli esplicitamente è ciò che li tiene
+# raggiungibili da un backfill.
 id: python-catania
 name: Python Catania
 tagline: Il posto giusto dove incontrare gli appassionati del linguaggio Python di Catania.
@@ -30,6 +29,9 @@ links:
   mastodon: https://social.python.it/@pycatania
   github: https://github.com/PythonCatania
 ingest:
-  - type: pycatania
-    defaultTime: '18:30'
+  - type: jsonld
+    list: https://www.meetup.com/python-catania/events/
+    urls:
+      - https://www.meetup.com/python-catania/events/298457913/
+      - https://www.meetup.com/python-catania/events/301402271/
 active: true
