@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/wtm-iwd23-bevy-icon%25402x_ZS86DJV.png",
+    "description": "Gli eventi Women Techmakers IWD in tutto il mondo vengono realizzati su misura per le comunità locali con l'obiettivo di unire e sostenere le donne e le categorie poco rappresentate con l'obiettivo di condividere, promuovere la parità di genere e dare visibilità a chi vuole creare impatto nel mondo e nella community.\n\nQuesti eventi sono caratterizzati dalla presenza di laboratori pratici, temi che possano ispirare e far riflettere e preziose opportunità di networking.\n\nIl tema di quest'anno, #DareToBe, ci invita a camminare nel mondo con coraggio e fiducia, ad uscire dalla nostra zona di comfort ed essere disposti a correre dei rischi pur di raggiungere i nostri obiettivi.\n\nGoogle sostiene e celebra le donne che lavorano o sono appassionate di tecnologia attraverso iniziative come Women Techmakers, Grow with Google, Jigsaw, Google.Org Impact challenge e altro ancora. Stiamo lottando per un futuro in cui ci sia equità in tutto il mondo, pari opportunità di successo in ogni campo, e dove le donne siano al sicuro online e nel mondo fisico.\n\nIl nostro evento si svolgerà sabato 22 Aprile, a partire dalle ore 10:00.\n\nEcco il programma dell'evento:\n\n📅 sabato 22 aprile 2023 📅\n\n🕜 10:00 @ Talk Room\n\n⭐️ OPENING\n\nAccrediti e presentazione iniziale.\n\n🙂 GDG Catania, Partners\n\n🕜 11:00 @ Talk Room\n\n⭐️ HOW A WOMAN MET TECHNOLOGY. UNA DONNA ALLA SCOPERTA DELLA TECNOLOGIA\n\nWhy do so few women train and work in STEM? I will try to answer through the story of my recent experience in this field.\n\nPerché così poche donne si formano e lavorano in ambito STEM? Cercherò di rispondere attraverso il racconto della mia recente esperienza in questo settore.\n\n🙂 Elena Zingale\n\n🕜 11:00 @ Workshop Room\n\n⭐️ INTRO A DART 🎯\n\nCosa è un programma? Come si scrive codice? Come facciamo a convincere un computer a fare quello che vogliamo? In questo workshop vedremo le basi di programmazione utilizzando Dart, uno dei tanti linguaggi a disposizione che ci consentirà di impartire dei semplici comandi al nostro computer! Workshop adatto a chi non ha esperienze di programmazione ma vorrebbe imparare!\n\n🙂 Carlo Lucera\n\n🕜 11:40 @ Talk Room\n\n⭐️ L'USO DELL'INTELLIGENZA ARTIFICIALE NEL RILEVAMENTO ANOMALIE.\n\nTitle in English: \"Artificial Intelligence and Metaheuristics for Anomaly Detection\"\n\nIl seminario tratterà tematiche riguardanti l'Anomaly Detection, l'integrazione delle Metauristiche nel campo Machine Learning e algoritmi di ottimizzazione.\n\n🙂 Claudia Cavallaro\n\n🕜 12:20 @ Talk Room\n\n⭐️ DARE TO BE THE NEXT ONE ON STAGE\n\nPresentations have been used for decades to deliver our points structurally and strategically while engaging with the audience. Whether it’s an audience of 3 people or 3000 people, the skills you’ll need are the same. To make things even better, those skills are used in a lot of other aspects of your life without even realizing it, for instance, in a job interview! During this talk, we will cover not only how to structure and prepare any presentation but also how to prepare mentally for delivery, as well as some of the most important elements and tips of public speaking.\n\n🙂 Eliza Camber\n\n🕜 14:00 @ Talk Room\n\n⭐️ ORGANIZATIONAL BEHAVIOR E TIME MANAGEMENT\n\nDurante questo speech, spiegherò quali elementi possano creare blocchi di produttività e presenterò alcune tecniche relative al time management. Un focus su comunicazione efficace ed interpersonale, benessere organizzativo e gestione della propria agenda. Strategie per implementare e ottimizzare la propria performance lavorativa.\n\n🙂 Elisa Toscano\n\n🕜 14:40 @ Talk Room\n\n⭐️ SRE E DESIGN THINKING: CREARE UNA CULTURA AZIENDALE INCLUSIVA E COLLABORATIVA.\n\nCome la cultura SRE, in combinazione al Design Thinking, può rappresentare un approccio innovativo allo sviluppo software e creare una cultura aziendale inclusiva e senza barriere.\n\n🙂 Francesca Motisi, Federica Cutrera",
+    "end": "2023-04-22T16:00:00+02:00",
+    "id": "bevy:54296",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "international-womens-day-2023",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-international-womens-day-2023/",
+      "type": "bevy"
+    },
+    "start": "2023-04-22T10:00:00+02:00",
+    "title": "International Women’s Day 2023",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-international-womens-day-2023/",
+    "venue": {
+      "address": "Viale Africa 31",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.512206,
+        "lon": 15.1033077
+      },
+      "name": "Paradigma"
+    }
+  }
+]

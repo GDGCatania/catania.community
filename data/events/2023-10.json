@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/3.%25201920x1080%2520%25281%25294_DDKh6Rb.png",
+    "description": "La community di developer catanese si ritrova a Catania presso Paradigma il 6 ottobre 2023 per un meetup organizzato da Codemotion, GDG Catania e AWS UG Catania 💜\n\nCon la collaborazione di Devmy e il supporto di Paradigma.\n\nSarà un momento di incontro, scambio e networking tra le tech community catanesi.",
+    "end": "2023-10-06T20:30:00+02:00",
+    "id": "bevy:60051",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "aperitech-catania",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-aperitech-catania/",
+      "type": "bevy"
+    },
+    "start": "2023-10-06T18:30:00+02:00",
+    "title": "#AperiTech Catania",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-aperitech-catania/",
+    "venue": {
+      "address": "Viale Africa 31",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.512206,
+        "lon": 15.1033077
+      },
+      "name": "Paradigma"
+    }
+  }
+]

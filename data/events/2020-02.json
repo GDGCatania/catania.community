@@ -1,0 +1,54 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Vieni a scoprire LaTeX, il linguaggio di markup fondamentale per la produzione di articoli scientifici di alta qualità. Consente di scrivere formule matematiche molto complesse, ha istruzioni che automatizzano la stesura di bibliografie, riferimenti e tanto altro ancora.",
+    "end": "2020-02-13T19:00:00+01:00",
+    "id": "bevy:3937",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "latex-overview",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-latex-overview/",
+      "type": "bevy"
+    },
+    "start": "2020-02-13T17:00:00+01:00",
+    "title": "LaTeX Overview",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-latex-overview/"
+  },
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "[NON SAI COME TROVARE LA LOCATION? GUARDA QUESTO VIDEO: https://drive.google.com/file/d/16pVchIjMOrFy2ByayZEVMiqBzdJABFQv/view?usp=sharing]\n----\n!!IMPORTANTE!!\nSe sei interessato a unirti al nostro hub, trova un team (da 2 a 4 persone) e assicurati di registrarti su g.co/hashcode (la registrazione è aperta solo fino al 19 Febbraio, affrettati!).\nDovrai quindi selezionare “GDG Catania @ PED” dall’elenco degli hub nel sistema dei giudici.\n-----\nGDG Catania e PED ospiteranno un hub presso gli uffici di PED per il Round di qualificazione online di #HashCode, una competizione di programmazione di team organizzata da Google per studenti e professionisti di tutto il mondo.\nScegli il tuo team e il linguaggio di programmazione e Google sceglierà un problema di ingegneria da risolvere!\nIl Round di qualificazione online si svolgerà il 20 febbraio 2020 alle 17.30 e i team registrati di Catania sono invitati a partecipare dal nostro hub, che si svolgerà presso PED.\n\n Programma dell’evento :\n- Greetings e registrazione: 17:30 -> 18:15\n- Hashcode for dummies: come funziona e consigli per affrontare l’hashcode: 18:15 -> 18:25\n- Start hashcode: 18:25 -> 18:30\n- Termine hashcode e ringraziamenti. 22:30 -> 22:45",
+    "end": "2020-02-20T22:30:00+01:00",
+    "id": "bevy:3938",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "hashcode-2020",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-hashcode-2020/",
+      "type": "bevy"
+    },
+    "start": "2020-02-20T17:30:00+01:00",
+    "title": "Hashcode 2020",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-hashcode-2020/"
+  }
+]

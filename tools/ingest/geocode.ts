@@ -1,7 +1,7 @@
 import { fetchJson } from './lib/fetch.js';
 import { readJson, writeJsonIfChanged } from './lib/json.js';
 import { PATHS } from './lib/paths.js';
-import { GeoSchema, type Geo, type Venue } from '../../src/lib/schema.js';
+import { GeoSchema, type CuratedVenue, type Geo } from '../../src/lib/schema.js';
 import { normalizeForCompare } from './lib/text.js';
 
 /**
@@ -23,11 +23,14 @@ export class Geocoder {
   #lookups = 0;
   #dirty = false;
 
-  static async load(curatedVenues: Venue[]): Promise<Geocoder> {
+  static async load(curatedVenues: CuratedVenue[]): Promise<Geocoder> {
     const geocoder = new Geocoder();
     geocoder.#cache = await readJson<Cache>(PATHS.geocache, {});
     for (const venue of curatedVenues) {
-      if (venue.geo) geocoder.#curated.set(normalizeForCompare(venue.name), venue.geo);
+      if (!venue.geo) continue;
+      for (const name of [venue.name, ...(venue.aliases ?? [])]) {
+        geocoder.#curated.set(normalizeForCompare(name), venue.geo);
+      }
     }
     return geocoder;
   }

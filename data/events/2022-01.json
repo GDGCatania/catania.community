@@ -1,0 +1,29 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/https%2520_cdn.evbuc.com_images_195101509_31432184823_1_original.20211202-095050_tjcEbfG.jpg",
+    "description": "Dopo il grandissimo successo delle scorse edizioni la E-Ludo Lab ripropone Catania per il tredicesimo anno come il maggiore polo di sviluppo videoludico indipendente nel Mediterraneo. La GGJ è una manifestazione che consentirà agli sviluppatori (programmatori, musicisti, grafici, designer, scrittori) di ritrovarsi nelle sedi accreditate in tutto il mondo per una no-stop in cui i partecipanti potranno dare il meglio di loro stessi per sviluppare un videogioco. La partecipazione all'evento è totalmente libera e gratuita. L'unico fine della Global Game Jam consiste nel diffondere lo sviluppo del videogioco indipendente nel mondo, far conoscere gli sviluppatori videoludici al grande pubblico ed infine a far conoscere gli sviluppatori fra di loro. \n\nAspiranti game developer questa edizione sarà veramente speciale. A causa del diffondersi delle nuove varianti del Covid-19 l'evento si sposterà interamente online. Stiamo lavorando per accogliervi all'interno di una piattaforma che sarà la nostra sede online in cui poterci divertire insieme. E le novità non sono ancora finite.\n\nNoi non vediamo l'ora che arrivi e voi?",
+    "end": "2022-01-30T20:00:00+01:00",
+    "id": "bevy:41729",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "global-game-jam-devfest-catania-2022",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-global-game-jam-devfest-catania-2022/",
+      "type": "bevy"
+    },
+    "start": "2022-01-27T10:00:00+01:00",
+    "title": "Global Game Jam & DevFest Catania 2022",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-global-game-jam-devfest-catania-2022/"
+  }
+]

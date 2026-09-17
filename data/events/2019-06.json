@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "La community DMG Catania vi aspetta all'Etna Comics, per tutta la durata della manifestazione (dal 6 al 9 giugno), per discutere di videogiochi e Google Stadia al padiglione C2, presso l'Area Indie. Non mancate!",
+    "end": "2019-06-09T22:00:00+02:00",
+    "id": "bevy:3933",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "devs-make-games-etna-comics-2019",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devs-make-games-etna-comics-2019/",
+      "type": "bevy"
+    },
+    "start": "2019-06-06T10:00:00+02:00",
+    "title": "Devs Make Games @ Etna Comics 2019",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devs-make-games-etna-comics-2019/"
+  }
+]

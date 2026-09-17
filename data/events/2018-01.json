@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Il GDG Catania è lieto di invitarvi al primo Open Meetup del 2018!!! L'evento sarà dedicato alla Global Game Jam, manifestazione che avverrà in contemporanea mondiale dal 26 al 28 gennaio 2018 presso i locali di TIM #WCAP a Catania 😉\n\n Qualche anticipazione? Rivivremo insieme agli organizzatori le otto passate edizioni catanesi insieme a tutti coloro che hanno partecipato e saranno loro stessi a raccontarci come sopravvivere ad una GGJ. Invitiamo tutti i nuovi iscritti a non mancare, ci sarà da divertirsi e... ...non vi resta che partecipare per sapere il resto!\n\n Stay hungry, stay googlish 😉",
+    "end": "2018-01-18T20:00:00+01:00",
+    "id": "bevy:3923",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "gdg-catania-open-meetup-2018-01-18",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-catania-open-meetup-1/",
+      "type": "bevy"
+    },
+    "start": "2018-01-18T18:00:00+01:00",
+    "title": "GDG Catania - Open Meetup",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-catania-open-meetup-1/"
+  }
+]

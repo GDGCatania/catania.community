@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/Liotro%2520SWG%2520NATALE_IcE5Bz8.png",
+    "description": "🥂 Un brindisi con il GDG Catania con il XMASYNC! \n\nBrinda con tutta la Community il 15 dicembre dalle 17:00 alle 21:00 presso la splendida location di Paradigma, in Viale Africa 31/E, Catania.\n\nPartecipa a questo evento unico, dove potrai stare con noi, fare networking sotto il vischio 🎊 e goderti un divertimento natalizio senza precedenti tra giochi e tanti gadget! 🎁 \n\nNon vediamo l'ora di sollevare insieme i calici e condividere momenti indimenticabili e divertenti!\n\n🎟 Prenota il tuo biglietto adesso per garantirti un posto all'evento.\n\nL'ingresso è gratuito! Ci vediamo là!\n\n🌟 Un ringraziamento speciale ai nostri partner e sponsor: Paradigma, E-Ludo Lab, Fudeo e Accussì, che rendono possibile questo straordinario brindisi natalizio.\n\nSeguiteci per tutte le ultime novità e aggiornamenti 🤩\n\nUnisciti al nostro canale Telegram 😎 ➡️ https://t.me/GDGCatania\n\nE non dimenticate di seguirci su Instagram ➡️ https://www.instagram.com/gdgcatania/",
+    "end": "2023-12-15T21:00:00+01:00",
+    "id": "bevy:61814",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "xmasync-un-brindisi-col-gdg",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-xmasync-un-brindisi-col-gdg/",
+      "type": "bevy"
+    },
+    "start": "2023-12-15T17:00:00+01:00",
+    "title": "XMASYNC - Un brindisi col GDG!",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-xmasync-un-brindisi-col-gdg/",
+    "venue": {
+      "address": "Viale Africa 31",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.512206,
+        "lon": 15.1033077
+      },
+      "name": "Paradigma"
+    }
+  }
+]

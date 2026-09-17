@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Con il workshop #IamREMARKABLE miriamo a fare in modo che le persone siano più motivate e disinvolte ad autopromuoversi e a mettere in discussione il modo in cui la società percepisce l'autopromozione. Il seminario evidenzierà l'importanza dell'autopromozione nelle carriere dei partecipanti e fornirà loro gli strumenti per esercitare questa abilità.\nEvento a num chiuso: max 15 partecipanti",
+    "end": "2019-10-25T20:30:00+02:00",
+    "id": "bevy:3935",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "iamremarkable",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-iamremarkable/",
+      "type": "bevy"
+    },
+    "start": "2019-10-25T18:30:00+02:00",
+    "title": "#IamRemarkable",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-iamremarkable/"
+  }
+]

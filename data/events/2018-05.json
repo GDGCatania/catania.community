@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Google I/O è un evento dedicato agli sviluppatori che hanno l’opportunità di seguire talk tecnici di aggiornamento su tecnologie Google e di poter condividere conoscenza ed esperienze con i Googler. Inoltre, La Google I/O fa in modo di connettere tra loro le varie community Google per sperimentare insieme, in tempo reale, il Keynote I/O.\n\n Il #GDGCatania organizza un Open Meetup ricco di speech informativi e forum di discussione dedicati ai principali topic.\n\n Ecco la scaletta con gli interventi:\n\n 14.30 - Registrazione partecipanti\n15.00 - Presentazione GDG Catania - Fabio Arceri\n15.20 - Il \"computer\" gioca meglio di noi? - Samuele Padalino\n16.00 - Shader Nodes: codice modulare su GPU - Lorenzo Catania\n16.40 - break 10 minuti\n16.50 - Java vs Kotlin: Android wars - Michele Bontorno\n17.30 - Promuoverti correttamente sui social media e tool che ti salveranno la vita! - Martina Chillura\n18.10 - React.js su browser - Erika Molino\n18.50 - Chiusura e saluti finali - Carmelo Ventimiglia\n\n Il 07 maggio non puoi perdere l’appuntamento presso l'Aula Magna del Dipartimento di Matematica e Informatica di Catania.\n#staytuned #staygooglish.",
+    "end": "2018-05-07T19:00:00+02:00",
+    "id": "bevy:3925",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "open-meetup-i-o-extended-2018-catania",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-open-meetup-io-extended-2018-catania/",
+      "type": "bevy"
+    },
+    "start": "2018-05-07T14:30:00+02:00",
+    "title": "Open Meetup: I/O Extended 2018 - Catania",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-open-meetup-io-extended-2018-catania/"
+  }
+]

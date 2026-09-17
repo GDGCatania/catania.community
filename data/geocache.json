@@ -1,5 +1,9 @@
 {
   "aithosoftwarefactorycataniaitalia": null,
+  "piazzaleasia6cataniaitalia": {
+    "lat": 37.5097513,
+    "lon": 15.1018884
+  },
   "tbdcataniaitalia": null,
   "vecchiadoganacataniaitalia": {
     "lat": 37.5008196,
@@ -11,6 +15,10 @@
   },
   "viacardinaledusmet2cataniaitalia": null,
   "viacardinaledusmetsnccataniaitalia": null,
+  "viacatania83augustaitalia": {
+    "lat": 37.242562,
+    "lon": 15.2242833
+  },
   "viacesarebeccaria14acataniaitalia": {
     "lat": 37.515083,
     "lon": 15.0758541

@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "La primavera si avvicina e con lei anche l’International Women’s Day 2019 Catania.\nUnisciti a noi: ti aspettiamo per creare nuove sinergie, conoscere nuove opportunità, ispirare e lasciarsi ispirare.\nDonne impegnate nel mondo tech, digital e non solo, attraverso workshop e speech motivazionali, racconteranno le loro storie per dimostrare che si può e si deve essere #remarkable.\n#IamRemarkable, infatti, è l’iniziativa Google che consente alle donne e ai gruppi sottorappresentati di celebrare i loro successi sul posto di lavoro e nella quotidianità per costruire insieme il futuro che vogliamo, un futuro di pari opportunità per tutti.\n\n Gdg Catania e Women Techmakers Catania vi aspettano il 30 marzo 2019 presso Vulcanìc dalle 10:00 alle 17:00\nL'ingresso è gratuito per tutti gli interessati, ma è richiesta la registrazione.\n\n Trovate i biglietti al seguente link eventbrite:\nhttps://www.eventbrite.it/e/biglietti-iwd-international-womens-day-2019-catania-58556903274\n\n Women Techmakers (WTM) è una comunità internazionale promossa da Google che organizza eventi per incoraggiare più donne a essere presenti nel mondo delle STEM (scienza, tecnologia, ingegneria e matematica). I team WTM dedicano l’intero mese di marzo all’International Women’s Day.\nLe community WTM e GDG sono presenti in più di 80 paesi, si incontrano e organizzano eventi per far conoscere e promuovere nuove tecnologie e servizi Google.",
+    "end": "2019-03-30T17:00:00+01:00",
+    "id": "bevy:3931",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "iwd-catania-2019",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-iwd-catania-2019/",
+      "type": "bevy"
+    },
+    "start": "2019-03-30T10:00:00+01:00",
+    "title": "IWD Catania 2019",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-iwd-catania-2019/"
+  }
+]

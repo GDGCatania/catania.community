@@ -1,0 +1,107 @@
+[
+  {
+    "area": "provincia",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "An introduction to web development course for student of the IIS Ruiz institute of Augusta \n\nhttps://github.com/GabrieleMessina/introduction-to-web-development-course-for-iis-ruiz",
+    "end": "2023-05-08T19:00:00+02:00",
+    "id": "bevy:56627",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "introduction-to-web-development-for-iis-ruiz-augusta",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-introduction-to-web-development-for-iis-ruiz-augusta/",
+      "type": "bevy"
+    },
+    "start": "2023-05-08T15:00:00+02:00",
+    "title": "Introduction to Web Development for IIS Ruiz (Augusta)",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-introduction-to-web-development-for-iis-ruiz-augusta/",
+    "venue": {
+      "address": "Via Catania 83",
+      "city": "Augusta",
+      "geo": {
+        "lat": 37.242562,
+        "lon": 15.2242833
+      },
+      "name": "Via Catania, 83"
+    }
+  },
+  {
+    "area": "provincia",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "An introduction to web development course for student of the IIS Ruiz institute of Augusta \n\nhttps://github.com/GabrieleMessina/introduction-to-web-development-course-for-iis-ruiz",
+    "end": "2023-05-17T19:00:00+02:00",
+    "id": "bevy:56628",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "introduction-to-web-development-for-iis-ruiz-augusta-2023-05-17",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-introduction-to-web-development-for-iis-ruiz-augusta-1/",
+      "type": "bevy"
+    },
+    "start": "2023-05-17T15:00:00+02:00",
+    "title": "Introduction to Web Development for IIS Ruiz (Augusta)",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-introduction-to-web-development-for-iis-ruiz-augusta-1/",
+    "venue": {
+      "address": "Via Catania 83",
+      "city": "Augusta",
+      "geo": {
+        "lat": 37.242562,
+        "lon": 15.2242833
+      },
+      "name": "Via Catania, 83"
+    }
+  },
+  {
+    "area": "provincia",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "An introduction to web development course for student of the IIS Ruiz institute of Augusta \n\nhttps://github.com/GabrieleMessina/introduction-to-web-development-course-for-iis-ruiz",
+    "end": "2023-05-18T19:00:00+02:00",
+    "id": "bevy:56629",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "introduction-to-web-development-for-iis-ruiz-augusta-2023-05-18-2",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-introduction-to-web-development-for-iis-ruiz-augusta-2/",
+      "type": "bevy"
+    },
+    "start": "2023-05-18T15:00:00+02:00",
+    "title": "Introduction to Web Development for IIS Ruiz (Augusta)",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-introduction-to-web-development-for-iis-ruiz-augusta-2/",
+    "venue": {
+      "address": "Via Catania 83",
+      "city": "Augusta",
+      "geo": {
+        "lat": 37.242562,
+        "lon": 15.2242833
+      },
+      "name": "Via Catania, 83"
+    }
+  }
+]

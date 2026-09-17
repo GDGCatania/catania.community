@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/IOE23-Badge-Expressive_kiB7CEl.png",
+    "description": "Anche quest'anno torna l'appuntamento con le novità Google, ci vediamo sabato 10 giugno presso Zō Centro Culture Contemporanee, dalle 15 alle 19!",
+    "end": "2023-06-10T19:00:00+02:00",
+    "id": "bevy:55154",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "google-i-o-extended-2023",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-extended-2023/",
+      "type": "bevy"
+    },
+    "start": "2023-06-10T15:00:00+02:00",
+    "title": "Google I/O Extended 2023",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-extended-2023/",
+    "venue": {
+      "address": "Piazzale Asia 6",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5097513,
+        "lon": 15.1018884
+      },
+      "name": "Zō Centro Culture Contemporanee"
+    }
+  }
+]

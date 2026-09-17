@@ -1,0 +1,27 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "end": "2017-09-14T21:00:00+02:00",
+    "id": "bevy:3918",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "gdd-europe-2017-extended-catania",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdd-europe-2017-extended-catania/",
+      "type": "bevy"
+    },
+    "start": "2017-09-14T18:00:00+02:00",
+    "title": "GDD Europe 2017 Extended – Catania",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdd-europe-2017-extended-catania/"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "Il GDG Catania è lieto di invitarvi a questo ultimo e spettacolare Open Meetup della stagione, un evento pensato per regalare a voi, che siete la community più bella della città, un momento di condivisione e di sorprese finali 😉\n\n Stay hungry, stay googlish :-)",
+    "end": "2018-11-15T21:00:00+01:00",
+    "id": "bevy:3927",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "open-meetup-gdg",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-open-meetup-gdg/",
+      "type": "bevy"
+    },
+    "start": "2018-11-15T19:00:00+01:00",
+    "title": "Open Meetup GDG",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-open-meetup-gdg/"
+  }
+]

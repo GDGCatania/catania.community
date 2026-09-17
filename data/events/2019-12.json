@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "EVENTO GRATUITO.\nMercoledì 11 dicembre.\nPresso l'Aula n.4 del Dipartimento di Matematica e Informatica dell'Università degli Studi di Catania.\n\n PROGRAMMA:\n- Check-in e gadget ORE 14:00\n- Apertura insieme al FlutterExp\n- WTF (What the Flutter) is Flutter? - Introduzione a Flutter\n- Keynote: live streaming from Brooklyn\n- Break\n- Live Experience (per la partecipazione è consigliato l'uso di un laptop con connessione a internet e browser Chrome)\n- Conclusione\n\n #FlutterInteract #Flutter\nhttps://developers.google.com/events/flutter-interact",
+    "end": "2019-12-11T18:00:00+01:00",
+    "id": "bevy:3936",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "flutter-interact-viewing-parties",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutter-interact-viewing-parties/",
+      "type": "bevy"
+    },
+    "start": "2019-12-11T14:00:00+01:00",
+    "title": "Flutter Interact: Viewing Parties",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutter-interact-viewing-parties/"
+  }
+]

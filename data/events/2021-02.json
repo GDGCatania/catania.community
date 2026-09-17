@@ -1,0 +1,29 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/GDGEventLogo_PlsmnXJ.png",
+    "description": "Anche quest'anno il GDG Catania ha registrato un hub con lo scopo di partecipare tutti insieme ma rigorosamente ONLINE.\n\nCos'è l'Hashcode? Si tratta di un hackathon organizzato annualmente da Google. Scegli la tua squadra e il tuo linguaggio di programmazione per risolvere un engineering problem in poche ore. Sei pronto per la sfida?\n\nClicca qui per maggiori info: https://codingcompetitions.withgoogle.com/hashcode/\n\nL'evento si svolgerà all'interno del server Discord del GDG Catania: https://discord.gg/vGGYAnur5r\n\nSe vuoi darci una mano a livello organizzativo o promozionale, scrivi la tua disponibilità sul gruppo Telegram @GDGCatania.\n\n** Come iscriversi alla competizione **\n\n1. Registrati all'hashcode con il tuo account personale su https://codingcompetitions.withgoogle.com/hashcode/\n\nLa registrazione personale va fatta entro il 24 Febbraio alle 12:00.\n\nRicordatevi di selezionare come hub quello del GDG Catania!\n\n2. Seleziona l'hub del GDG Catania e crea il tuo team su https://hashcodejudge.withgoogle.com/\n\nPotrai registrarti entro le 18.30 del 25 febbraio.\n\n** After-LIVE **\n\nTerminato l'evento ci incontreremo su Discord per discutere insieme delle soluzioni proposte dai vari team! Sarà possibile seguire la LIVE su Twitch: https://www.twitch.tv/devsmakegames",
+    "end": "2021-02-25T22:00:00+01:00",
+    "id": "bevy:35993",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "hashcode-2021",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-hashcode-2021/",
+      "type": "bevy"
+    },
+    "start": "2021-02-25T17:30:00+01:00",
+    "title": "Hashcode 2021",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-hashcode-2021/"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "# Tickets here\n\n https://www.eventbrite.it/e/biglietti-gdg-devfest-catania-2018-53145980057\n\n # GDG DevFest Season 2018\nAug 1 - Nov 30, Global\n\n GDG DevFests are large, community-run developer events happening around the globe focused on community building and learning about Google’s technologies.\n\n # GDG DevFest Catania 2018\nDec[masked], Catania\n\n GDG DevFest Catania 2018 is our annual all-day developer conference that offers speaker sessions across multiple product areas, codelabs, hackathon and more, a conference run every year in Southern Italy involving many italian GDGs focusing not only on Google technologies -- we focus on: development/design/marketing methodologies, tools, and platforms; UX / UI design; non-Google technologies; competition, inspiring, and team building sessions; entertainment and prize games; and so on.\n\n The event's program is still a work in progress but... we are working hard to make this event something you will not forget so soon ;-)\n\n # Code of conduct\n\n Please, be sure to read our participation policy before taking part in the event ----> https://docs.google.com/document/d/1FSR-yJxp0qcD4XokQrYtTe-nQJksKLO14vwZRG2jJpM/edit?usp=sharing\n\n Thank you\n\n # Product name's topics\n\n actions on google, assistant sdk, google assistant\nandroid, kotlin\ncloud, GCP, Google Cloud Platform, App Engine\ncodelab\ndevfest\nfirebase\ngde\nhackathon\nandroid things, devkit, dev kit, iot\nartificial intelligence, machine learning, tensorflow\nmaps, geo\nmaterial design\nweb, progressive web apps, pwa, chrome\nvirtual reality, augmented reality, daydream, tango",
+    "end": "2018-12-16T23:00:00+01:00",
+    "id": "bevy:3928",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "devfest-catania-2018",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2018/",
+      "type": "bevy"
+    },
+    "start": "2018-12-14T15:00:00+01:00",
+    "title": "DevFest Catania 2018",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2018/"
+  }
+]

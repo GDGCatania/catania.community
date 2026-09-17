@@ -1,0 +1,53 @@
+[
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "end": "2017-11-01T11:55:00+01:00",
+    "id": "bevy:3919",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "devfest17-roadshow-tappa-itis-cannizzaro-catania",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest17-roadshow-tappa-itis-cannizzaro-catania/",
+      "type": "bevy"
+    },
+    "start": "2017-11-01T09:55:00+01:00",
+    "title": "#DevFest17 Roadshow, Tappa ITIS Cannizzaro, Catania",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest17-roadshow-tappa-itis-cannizzaro-catania/"
+  },
+  {
+    "area": "online",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "description": "========================================================================\n\n ATTENZIONE: PER PARTECIPARE ALL'EVENTO È INDISPENSABILE PRENDERE IL BIGLIETTO (GRATUITO) QUI: http://devfestmed.com/catania\n\n ========================================================================\n\n »» TRE GIORNI DI FORMAZIONE SU MARKETING, SVILUPPO E DESIGN TARGATI GOOGLE\n\n Ci siamo. Torna Google a Catania. Anche quest'anno la città dell'Elefante si tinge di blu, rosso, giallo e verde. Nel capoluogo etneo infatti, i prossimi[masked] novembre, andrà in scena la seconda tappa della GDG DevFest Mediterranean, l'evento più atteso dai Google developers del Mediterraneo. Una tre-giorni da non perdere dove, oltre agli interventi tecnici, si alterneranno attività libere di lavoro e progettazione, attività di device testing, showcase di progetti indipendenti, attività di job recruiting e ben due competizioni: un torneo di e-sport ed una competizione incentrata sulla creazione di un videogioco. Tre splendide giornate di festa dunque quelle che vi aspettano, ricche di intrattenimento, allegria, produttività e aggiornamento professionale sullo stato dell’arte dell’industria ICT e dell’universo delle tecnologie di casa Google, in compagnia di tre ospiti speciali: Carlo Cozza (Campus Party Italia), Azzurra Ragone (Google), Jessica Tibaldi (Microsoft) e Daniele Maggio(Microsoft). Insomma: un evento che non dimenticherete tanto facilmente ;-)\n\n »» IL PROGRAMMA\n\n Docker e Kubernetes su Azure, Progressive Web Apps, Kotlin, Google Assistant, robot, Android Things, Architecture Components, React Native, Python, bot Telegram, realtà virtuale, sviluppo di videogame, Continuous Integration sono solo alcuni dei topic trattati in questa edizione dal tema quantomeno singolare tanto nella forma quanto nella sostanza: you can play, if you may.\n\n Quest’anno inoltre, per la felicità di imprenditori ed economisti, largo al marketing e all’informatica giuridica: SEO, SEM, Google Analytics, AdWords, creazione di funnel, lean startup methodology, identificazione delle buyer personas, copyright, legge sul diritto d’autore, tutela del software, brevetti e altro ancora saranno i protagonisti di questa passerella di strumenti del marketing 2.0 made in Google.\n\n Il programma dettagliato, con speaker, giorni e orari, è attualmente in via di definizione.\n\n #DevFest17 #DevFestMed\n\n »» RIFERIMENTI\n\n Tickets: https://goo.gl/xXsjFU\nBooklet: https://goo.gl/D7kVhx\nLanding page: http://devfestmed.com/catania\nStrutture convenzionate per fuori sede: scrivere a [masked]\n\n -- Stay hungry, stay googlish... stay tuned!\n\n »» KEYWORDS\n\n actions on google, assistant sdk, google assistant, assistant, android, android wear, android TV, android studio, kotlin, cloud, backend, architecture, codelab, devfest, firebase, gde, hackathon, Android Things, AIY Project, weave, cloud iot, devkit, dev kit, iot, ai, artificial intelligence, machine learning, tensorflow, ml, tf, material design, web, progressive web apps, pwa, vr/ar, vr, ar, virtual reality, augmented reality",
+    "end": "2017-11-17T17:00:00+01:00",
+    "id": "bevy:3920",
+    "language": "Italiano",
+    "online": true,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "gdg-devfest-mediterranean-2017-cap-2",
+    "source": {
+      "fetchedAt": "2026-09-17T11:29:50.393Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-devfest-mediterranean-2017-cap-2/",
+      "type": "bevy"
+    },
+    "start": "2017-11-17T14:00:00+01:00",
+    "title": "GDG DevFest Mediterranean 2017 Cap. 2",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-gdg-devfest-mediterranean-2017-cap-2/"
+  }
+]
