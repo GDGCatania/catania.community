@@ -29,5 +29,41 @@
       "city": "Catania",
       "name": "Aitho Software Factory"
     }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "global-ai-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/533043991/676x676.jpg",
+    "description": "### Global AI Catania Launch Meetup + MCP SDK per C#\n\nSiamo felici di invitarti al primo meetup ufficiale di **Global AI Catania**, un nuovo punto di…",
+    "end": "2026-03-18T20:30:00+01:00",
+    "id": "jsonld:meetup:313630893",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "global-ai-catania-launch-meetup-mcp-sdk-per-c",
+    "source": {
+      "fetchedAt": "2026-09-17T22:07:06.990Z",
+      "ref": "https://www.meetup.com/global-ai-catania/events/313630893/",
+      "type": "jsonld"
+    },
+    "start": "2026-03-18T18:30:00+01:00",
+    "title": "Global AI Catania Launch Meetup + MCP SDK per C#",
+    "url": "https://www.meetup.com/global-ai-catania/events/313630893/",
+    "venue": {
+      "address": "viale Africa 31, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.512206,
+        "lon": 15.1033077
+      },
+      "name": "Paradigma SpA"
+    }
   }
 ]
