@@ -77,7 +77,7 @@ const config = {
   },
 
   /** Placeholder example shown in the "add your community" form. */
-  exampleCommunityName: 'Python Catania',
+  exampleCommunityName: 'GDG Catania',
 } as const;
 
 export default config;
