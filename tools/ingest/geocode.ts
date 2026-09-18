@@ -2,6 +2,7 @@ import { fetchJson } from './lib/fetch.js';
 import { readJson, writeJsonIfChanged } from './lib/json.js';
 import { PATHS } from './lib/paths.js';
 import { GeoSchema, type CuratedVenue, type Geo } from '../../src/lib/schema.js';
+import { DEFAULT_CITY, COUNTRY_NAME } from '../../src/lib/site.js';
 import { normalizeForCompare } from './lib/text.js';
 
 /**
@@ -50,15 +51,15 @@ export class Geocoder {
       if (curated) return curated;
     }
 
-    const city = venue.city ?? 'Catania';
+    const city = venue.city ?? DEFAULT_CITY;
 
     // Two attempts, most precise first: the address, then the venue name. The
     // name often works exactly where the address fails, because well-known
     // places are mapped in OSM as points of interest even when the street
     // number is not (e.g. "Vecchia Dogana" at the port of Catania).
     const queries = [
-      venue.address ? `${venue.address}, ${city}, Italia` : null,
-      venue.name ? `${venue.name}, ${city}, Italia` : null,
+      venue.address ? `${venue.address}, ${city}, ${COUNTRY_NAME}` : null,
+      venue.name ? `${venue.name}, ${city}, ${COUNTRY_NAME}` : null,
     ].filter((q): q is string => q !== null);
 
     for (const query of queries) {

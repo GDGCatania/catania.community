@@ -7,12 +7,13 @@ import {
   type Override,
   type SourceType,
 } from '../../src/lib/schema.js';
+import { DEFAULT_CITY } from '../../src/lib/site.js';
 import type { RawEvent } from './adapters/types.js';
 import { normalizeForCompare } from './lib/text.js';
 import type { Geocoder } from './geocode.js';
 
 /** Towns counted as the city itself; everything else in the province is "provincia". */
-const CITY_NAMES = new Set(['catania']);
+const CITY_NAMES = new Set([normalizeForCompare(DEFAULT_CITY)]);
 
 /**
  * Decides an event's area. Not cosmetic: this drives the

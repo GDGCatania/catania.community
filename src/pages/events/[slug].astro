@@ -8,7 +8,7 @@ import { breadcrumbJsonLd, eventJsonLd } from '../../lib/jsonld';
 import { absoluteUrl } from '../../lib/urls';
 import * as m from '../../paraglide/messages.js';
 import { categoryLabel, priceLabel } from '../../i18n/labels';
-import { ISSUE_URLS, ROUTES } from '../../lib/site';
+import { DEFAULT_CITY, ISSUE_URLS, ROUTES } from '../../lib/site';
 import Message from '../../components/Message.astro';
 
 export const getStaticPaths = (async () => {
@@ -42,8 +42,8 @@ const description = event.description
   : m.eventPage_metaFallback({
       title: event.title,
       date: formatDateLong(event.start),
-      city: event.venue?.city ?? 'Catania',
-      community: community?.name ?? 'Catania',
+      city: event.venue?.city ?? DEFAULT_CITY,
+      community: community?.name ?? DEFAULT_CITY,
     });
 
 const when = `${formatDateLong(event.start)}, ${formatTime(event.start)}${

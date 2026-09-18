@@ -4,7 +4,7 @@ import { breadcrumbJsonLd } from '../lib/jsonld';
 import { CATEGORIES, AREAS } from '../lib/schema';
 import * as m from '../paraglide/messages.js';
 import { areaLabel, categoryLabel } from '../i18n/labels';
-import { ISSUE_URLS, ROUTES } from '../lib/site';
+import { EXAMPLE_COMMUNITY_NAME, ISSUE_URLS, ROUTES } from '../lib/site';
 import Message from '../components/Message.astro';
 ---
 
@@ -44,7 +44,7 @@ import Message from '../components/Message.astro';
 
         <label>
           <span class="label">{m.submit_fieldName()} <em>{m.submit_required()}</em></span>
-          <input type="text" name="name" required maxlength="120" placeholder="Python Catania" />
+          <input type="text" name="name" required maxlength="120" placeholder={EXAMPLE_COMMUNITY_NAME} />
         </label>
 
         <label>
