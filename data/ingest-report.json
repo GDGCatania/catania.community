@@ -4,28 +4,28 @@
   "sources": [
     {
       "community": "gdg-catania",
-      "events": 13,
+      "events": 1,
       "ok": true,
       "skipped": 0,
       "type": "bevy"
     },
     {
       "community": "global-ai-catania",
-      "events": 1,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
     },
     {
       "community": "python-catania",
-      "events": 8,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
     },
     {
       "community": "wordpress-meetup-catania",
-      "events": 10,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
