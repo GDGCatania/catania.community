@@ -1,5 +1,6 @@
 ---
 import * as m from '../paraglide/messages.js';
+import { MAP_CENTER, MAP_ZOOM } from '../lib/site';
 
 export interface Props {
   /** Height of the map box. */
@@ -15,6 +16,8 @@ const { height = '320px', caption = m.map_caption() } = Astro.props;
     <div
       id="event-map"
       data-event-map
+      data-map-center={JSON.stringify(MAP_CENTER)}
+      data-map-zoom={MAP_ZOOM}
       role="application"
       aria-label={caption}
     ></div>
@@ -133,8 +136,10 @@ const { height = '320px', caption = m.map_caption() } = Astro.props;
   if (container) {
     if (fallback) fallback.hidden = true;
 
-    // Centred on Catania: a default is needed when nothing is geolocated.
-    const map = L.map(container, { scrollWheelZoom: false }).setView([37.5079, 15.083], 13);
+    // Default centre and zoom from site.config.ts, passed via data attributes.
+    const center = JSON.parse(container.dataset.mapCenter ?? '[37.5079, 15.083]') as [number, number];
+    const zoom = Number(container.dataset.mapZoom ?? 13);
+    const map = L.map(container, { scrollWheelZoom: false }).setView(center, zoom);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,

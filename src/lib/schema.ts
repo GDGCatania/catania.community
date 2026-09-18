@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import cfg from '../../site.config';
 
 /**
  * Schema shared by the crawlers (`tools/ingest`) and the site build.
@@ -9,10 +10,13 @@ import { z } from 'zod';
  * The identifiers below (`citta`, `provincia`, `impresa`…) stay in Italian on
  * purpose: they are domain vocabulary that also appears in the YAML files
  * people edit by hand. Their human-readable labels live in `src/i18n`.
+ *
+ * Categories, areas, bounding box, default language and currency are all
+ * derived from `site.config.ts` so that a fork only edits that one file.
  */
 
-export const CATEGORIES = ['tech', 'design', 'impresa', 'cultura', 'sociale'] as const;
-export const AREAS = ['citta', 'provincia', 'online'] as const;
+export const CATEGORIES = cfg.categories;
+export const AREAS = cfg.areas;
 export const PRICE_TYPES = ['free', 'donation', 'paid'] as const;
 
 /**
@@ -38,10 +42,10 @@ export const SlugSchema = z
 export const DateTimeSchema = z.iso.datetime({ offset: true });
 
 export const GeoSchema = z.object({
-  // Loose bounding box over eastern Sicily. It catches swapped lat/lon pairs
+  // Bounding box from site.config.ts. It catches swapped lat/lon pairs
   // and geocoding that wandered off to another country entirely.
-  lat: z.number().min(36.5).max(38.5),
-  lon: z.number().min(14.0).max(15.8),
+  lat: z.number().min(cfg.boundingBox.lat.min).max(cfg.boundingBox.lat.max),
+  lon: z.number().min(cfg.boundingBox.lon.min).max(cfg.boundingBox.lon.max),
 });
 
 export const VenueSchema = z.object({
@@ -61,7 +65,7 @@ export const CuratedVenueSchema = VenueSchema.extend({
 export const PriceSchema = z.object({
   type: z.enum(PRICE_TYPES),
   amount: z.number().nonnegative().optional(),
-  currency: z.literal('EUR').default('EUR'),
+  currency: z.literal(cfg.currency).default(cfg.currency),
 });
 
 export const LinksSchema = z.object({
@@ -116,7 +120,7 @@ export const CommunitySchema = z.object({
   area: AreaSchema,
   since: z.number().int().min(1990).max(2100).optional(),
   cadence: z.string().max(120).optional(),
-  language: z.string().max(40).default('Italiano'),
+  language: z.string().max(40).default(cfg.defaultLanguage),
   members: z.number().int().nonnegative().optional(),
   usualVenue: z.string().max(200).optional(),
   links: LinksSchema.default({}),
@@ -141,7 +145,7 @@ export const EventSchema = z.object({
   area: AreaSchema,
   price: PriceSchema,
   categories: z.array(CategorySchema).default([]),
-  language: z.string().max(40).default('Italiano'),
+  language: z.string().max(40).default(cfg.defaultLanguage),
   beginnerFriendly: z.boolean().optional(),
   seatsLeft: z.number().int().nonnegative().optional(),
   coverImage: z.url().optional(),
@@ -175,7 +179,7 @@ export const ManualEventSchema = z.object({
   description: z.string().max(5000).optional(),
   venue: VenueSchema.optional(),
   online: z.boolean().default(false),
-  price: PriceSchema.default({ type: 'free', currency: 'EUR' }),
+  price: PriceSchema.default({ type: 'free', currency: cfg.currency }),
   categories: z.array(CategorySchema).optional(),
   language: z.string().max(40).optional(),
   beginnerFriendly: z.boolean().optional(),

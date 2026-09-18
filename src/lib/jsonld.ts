@@ -7,7 +7,7 @@ import type { Community, Event } from './schema';
  * block in the source, Google shows no rich results for the events and half the
  * point of an aggregator is lost.
  */
-import { SITE_URL, ROUTES } from './site';
+import { SITE_URL, ROUTES, DEFAULT_CITY, DEFAULT_REGION, DEFAULT_COUNTRY, DEFAULT_LANGUAGE } from './site';
 
 export function eventJsonLd(event: Event, community: Community | undefined, url: string) {
   const location = event.online
@@ -23,9 +23,9 @@ export function eventJsonLd(event: Event, community: Community | undefined, url:
               address: {
                 '@type': 'PostalAddress',
                 ...(event.venue.address ? { streetAddress: event.venue.address } : {}),
-                addressLocality: event.venue.city ?? 'Catania',
-                addressRegion: 'CT',
-                addressCountry: 'IT',
+                addressLocality: event.venue.city ?? DEFAULT_CITY,
+                addressRegion: DEFAULT_REGION,
+                addressCountry: DEFAULT_COUNTRY,
               },
             }
           : {}),
@@ -73,7 +73,7 @@ export function eventJsonLd(event: Event, community: Community | undefined, url:
       // Registration happens elsewhere: point at the source.
       url: event.url,
     },
-    inLanguage: event.language === 'Italiano' ? 'it' : event.language,
+    inLanguage: event.language === DEFAULT_LANGUAGE ? 'it' : event.language,
     isAccessibleForFree: event.price.type !== 'paid',
     url,
   };
@@ -96,9 +96,9 @@ export function communityJsonLd(community: Community, url: string) {
       '@type': 'Place',
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'Catania',
-        addressRegion: 'CT',
-        addressCountry: 'IT',
+        addressLocality: DEFAULT_CITY,
+        addressRegion: DEFAULT_REGION,
+        addressCountry: DEFAULT_COUNTRY,
       },
     },
   };

@@ -2,9 +2,10 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
+import cfg from './site.config';
 
 export default defineConfig({
-  site: 'https://catania.community',
+  site: cfg.url,
   output: 'static',
   trailingSlash: 'never',
 
