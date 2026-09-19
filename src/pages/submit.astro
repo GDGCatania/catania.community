@@ -421,7 +421,7 @@ import Message from '../components/Message.astro';
     } catch {
       // The fallback is not a dead end: we send the person to GitHub with their
       // answers already filled in, so the work they did is not lost.
-      const fallback = new URL('https://github.com/raffb/catania.community/issues/new');
+      const fallback = new URL('https://github.com/GDGCatania/catania.community/issues/new');
       fallback.searchParams.set('labels', 'nuova-community');
       fallback.searchParams.set('title', `Nuova community: ${name}`);
       fallback.searchParams.set(
