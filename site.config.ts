@@ -17,7 +17,7 @@ const config = {
   url: 'https://catania.community',
 
   /** GitHub (or similar) repository URL. */
-  repo: 'https://github.com/raffb/catania.community',
+  repo: 'https://github.com/GDGCatania/catania.community',
 
   /** IANA timezone for event dates. */
   timezone: 'Europe/Rome',
