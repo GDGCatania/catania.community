@@ -1,7 +1,7 @@
 ---
 import * as m from '../paraglide/messages.js';
 import Message from './Message.astro';
-import { REPO_URL, ROUTES } from '../lib/site';
+import { REPO_URL, ROUTES, SITE_NAME, FOOTER_ABOUT } from '../lib/site';
 
 const year = new Date().getFullYear();
 ---
@@ -9,8 +9,8 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container inner">
     <div class="col">
-      <p class="eyebrow">catania.community</p>
-      <p class="note">{m.footer_about()}</p>
+      <p class="eyebrow">{SITE_NAME}</p>
+      <p class="note">{FOOTER_ABOUT}</p>
     </div>
 
     <div class="col">

@@ -12,7 +12,7 @@ import {
   eventsPerDay,
   eventCount,
 } from '../lib/events';
-import { ROUTES } from '../lib/site';
+import { ROUTES, HEADLINE, HEADLINE_ACCENT, META_DESCRIPTION, metaDescriptionForCount } from '../lib/site';
 import Message from '../components/Message.astro';
 import * as m from '../paraglide/messages.js';
 
@@ -31,15 +31,15 @@ const numbered = new Map(events.map((event) => [event.id, ++pin]));
 
 const description =
   events.length > 0
-    ? m.home_metaDescriptionCount({ count: events.length })
-    : m.home_metaDescription();
+    ? metaDescriptionForCount(events.length)
+    : META_DESCRIPTION;
 
 const communityCount = m.communities_count({ count: allCommunities.length });
 ---
 
 <BaseLayout title={m.home_title()} description={description}>
   <section class="container hero">
-    <h1>{m.home_headline()}<br /><span>{m.home_headlineAccent()}</span></h1>
+    <h1>{HEADLINE}<br /><span>{HEADLINE_ACCENT}</span></h1>
     <p class="lede">{m.home_intro()}</p>
   </section>
 
