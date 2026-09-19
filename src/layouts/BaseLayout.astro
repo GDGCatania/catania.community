@@ -5,7 +5,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import { absoluteUrl } from '../lib/urls';
 import { locale, localeTag } from '../i18n';
 import * as m from '../paraglide/messages.js';
-import { ROUTES } from '../lib/site';
+import { ROUTES, FEED_TITLE } from '../lib/site';
 
 export interface Props {
   title: string;
@@ -51,13 +51,13 @@ const fullTitle = title === 'catania.community' ? title : `${title} · catania.c
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={m.feed_rssTitle()}
+      title={FEED_TITLE}
       href={ROUTES.feedRss}
     />
     <link
       rel="alternate"
       type="text/calendar"
-      title={m.feed_calendarName()}
+      title={FEED_TITLE}
       href={ROUTES.feedIcs}
     />
 

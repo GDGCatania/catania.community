@@ -37,6 +37,21 @@ export const MAP_ZOOM = cfg.map.zoom;
 /** Placeholder example for the submit form. */
 export const EXAMPLE_COMMUNITY_NAME = cfg.exampleCommunityName;
 
+// ── Branding copy ──────────────────────────────────────────────────────────
+
+export const HEADLINE = cfg.headline;
+export const HEADLINE_ACCENT = cfg.headlineAccent;
+export const TAGLINE = cfg.tagline;
+export const META_DESCRIPTION = cfg.metaDescription;
+export const FEED_TITLE = cfg.feedTitle;
+export const FEED_DESCRIPTION = cfg.feedDescription;
+export const FOOTER_ABOUT = cfg.footerAbout;
+
+/** Home meta description with the event count filled in. */
+export function metaDescriptionForCount(count: number): string {
+  return cfg.metaDescriptionWithCount.replace('{count}', String(count));
+}
+
 /** Internal routes. English slugs, one set — the site ships in one language. */
 export const ROUTES = {
   home: '/',

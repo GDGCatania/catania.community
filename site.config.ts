@@ -78,6 +78,42 @@ const config = {
 
   /** Placeholder example shown in the "add your community" form. */
   exampleCommunityName: 'GDG Catania',
+
+  // ── Branding copy ──────────────────────────────────────────────────────
+  // The editorial voice of this specific instance. A fork rewrites these
+  // in its own language — they are not run through i18n because they are
+  // the *identity* of the site, not translatable interface labels.
+
+  /** Main headline on the home page. */
+  headline: 'Tutte le community tech di catania.',
+
+  /** Second line of the headline, rendered with accent colour. */
+  headlineAccent: 'Un solo calendario.',
+
+  /** One-liner shown under the site name in the footer and in the header. */
+  tagline: 'Agenda delle community di Catania e provincia',
+
+  /** `<meta name="description">` when there are no upcoming events. */
+  metaDescription:
+    'Gli eventi delle community di Catania e provincia, raccolti in una pagina sola.',
+
+  /**
+   * `<meta name="description">` when there are upcoming events.
+   * `{count}` is replaced at build time with the actual number.
+   */
+  metaDescriptionWithCount:
+    '{count} eventi in arrivo dalle community di Catania e provincia: meetup, workshop e incontri. Aggiornato automaticamente.',
+
+  /** Title of the RSS and iCal feeds. */
+  feedTitle: 'Eventi delle community di Catania',
+
+  /** Description shown in RSS readers. */
+  feedDescription:
+    'Meetup, workshop e incontri delle community di Catania e provincia.',
+
+  /** Short paragraph in the footer explaining what the site does. */
+  footerAbout:
+    'Agenda delle community di Catania e provincia. Facciamo da specchio: iscrizioni e biglietti restano sulle piattaforme di chi organizza.',
 } as const;
 
 export default config;
