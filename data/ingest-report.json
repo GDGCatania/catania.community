@@ -1,10 +1,10 @@
 {
-  "lastChangeAt": "2026-09-17T22:23:39.540Z",
+  "lastChangeAt": "2026-09-25T20:01:49.272Z",
   "preservedFromFailedSources": 0,
   "sources": [
     {
       "community": "gdg-catania",
-      "events": 1,
+      "events": 2,
       "ok": true,
       "skipped": 0,
       "type": "bevy"
@@ -31,5 +31,5 @@
       "type": "jsonld"
     }
   ],
-  "totalEvents": 82
+  "totalEvents": 83
 }

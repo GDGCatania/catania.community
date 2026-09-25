@@ -1,0 +1,38 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "gdg-catania",
+    "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_UBkBlaY",
+    "description": "Catania Mobile Day arriva il 17 ottobre! 📱\n\nUna serata dedicata allo sviluppo mobile in tutte le sue forme: Flutter, Android, iOS, Kotlin, Swift, React Native e non solo.\nTalk, community e networking, con developer che lavorano ogni giorno su tecnologie e piattaforme diverse, ma con la stessa passione per il mobile.",
+    "end": "2026-10-17T20:30:00+02:00",
+    "id": "bevy:128491",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "catania-mobile-day",
+    "source": {
+      "fetchedAt": "2026-09-25T20:01:49.272Z",
+      "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-catania-mobile-day/",
+      "type": "bevy"
+    },
+    "start": "2026-10-17T17:30:00+02:00",
+    "title": "Catania Mobile Day",
+    "url": "https://gdg.community.dev/events/details/google-gdg-catania-presents-catania-mobile-day/",
+    "venue": {
+      "address": "Via Antonino di Sangiuliano 197",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose Srl"
+    }
+  }
+]
