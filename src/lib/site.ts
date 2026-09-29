@@ -79,6 +79,7 @@ export const ROUTES = {
   communities: '/communities',
   community: (id: string) => `/communities/${id}`,
   submit: '/submit',
+  howItWorks: '/how-it-works',
   feedIcs: '/events.ics',
   feedRss: '/events.xml',
   feedJson: '/events.json',

@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Message from '../components/Message.astro';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+import * as m from '../paraglide/messages.js';
+import { DEFAULT_CITY, ISSUE_URLS, ROUTES, SITE_HOST, SITE_URL } from '../lib/site';
+
+// `webcal://` hands the feed to the system calendar app as a subscription
+// rather than a one-off download. Google Calendar ignores it, so the plain
+// https address is what people copy.
+const feedUrl = `${SITE_URL}${ROUTES.feedIcs}`;
+const webcalUrl = `webcal://${SITE_HOST}${ROUTES.feedIcs}`;
+
+const apps = [
+  { title: m.howto_googleTitle(), steps: [m.howto_google1(), m.howto_google2(), m.howto_google3()] },
+  { title: m.howto_appleTitle(), steps: [m.howto_apple1(), m.howto_apple2()] },
+  { title: m.howto_outlookTitle(), steps: [m.howto_outlook1(), m.howto_outlook2()] },
+  { title: m.howto_otherTitle(), steps: [m.howto_other1()] },
+];
+---
+
+<BaseLayout
+  title={m.howto_title()}
+  description={m.howto_metaDescription({ city: DEFAULT_CITY })}
+  jsonLd={breadcrumbJsonLd([
+    { name: m.nav_events(), path: ROUTES.home },
+    { name: m.howto_title(), path: ROUTES.howItWorks },
+  ])}
+>
+  <div class="container head">
+    <h1>{m.howto_title()}</h1>
+    <p class="lede">{m.howto_intro()}</p>
+  </div>
+
+  <div class="container body">
+    <section class="block">
+      <h2>{m.howto_subscribeTitle()}</h2>
+      <p>{m.howto_subscribeBody()}</p>
+
+      <div class="feed">
+        <label for="feed-url" class="eyebrow">{m.howto_feedLabel()}</label>
+        <div class="feed__row">
+          <input id="feed-url" class="mono" type="text" value={feedUrl} readonly data-feed-url />
+          <button
+            type="button"
+            class="btn btn--ghost"
+            data-copy
+            data-copied={m.howto_copied()}
+            hidden
+          >
+            {m.howto_copyButton()}
+          </button>
+          <a class="btn btn--primary" href={webcalUrl}>{m.howto_subscribeButton()}</a>
+        </div>
+      </div>
+
+      <div class="apps">
+        {
+          apps.map((app) => (
+            <div class="card">
+              <h3>{app.title}</h3>
+              <ol>
+                {app.steps.map((step) => (
+                  <li>{step}</li>
+                ))}
+              </ol>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="hint">{m.howto_refreshNote()}</p>
+    </section>
+
+    <section class="block">
+      <h2>{m.howto_singleTitle()}</h2>
+      <p>{m.howto_singleBody()}</p>
+      <ul>
+        <li>{m.howto_singleIcs()}</li>
+        <li>{m.howto_singleGoogle()}</li>
+      </ul>
+      <p class="hint">{m.howto_singleNote()}</p>
+    </section>
+
+    <section class="block">
+      <h2>{m.howto_browseTitle()}</h2>
+      <ul>
+        <li>{m.howto_browseFilters()}</li>
+        <li>{m.howto_browseCalendar()}</li>
+        <li>{m.howto_browseMap()}</li>
+        <li>{m.howto_browseRegistration()}</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2>{m.howto_formatsTitle()}</h2>
+      <p>
+        <Message of={m.howto_formatsBody} links={{ rss: ROUTES.feedRss, json: ROUTES.feedJson }} />
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>{m.howto_missingTitle()}</h2>
+      <p>
+        <Message
+          of={m.howto_missingBody}
+          links={{ submit: ROUTES.submit, fix: ISSUE_URLS.correction('') }}
+        />
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .head {
+    padding-block: var(--space-7) var(--space-4);
+  }
+
+  .head h1 {
+    font-size: var(--step-4);
+    margin-bottom: var(--space-3);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding-block: var(--space-4) var(--space-7);
+  }
+
+  .block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 880px;
+  }
+
+  .block h2 {
+    font-size: var(--step-2);
+    padding-bottom: var(--space-2);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .block > p,
+  .block > ul {
+    max-width: var(--measure);
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  .block > ul {
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .feed {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .feed__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .feed input {
+    flex: 1 1 280px;
+    min-width: 0;
+    padding: var(--space-3);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: var(--step--1);
+  }
+
+  .feed input:focus-visible {
+    border-color: var(--accent);
+  }
+
+  .apps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .card h3 {
+    font-size: var(--step-0);
+  }
+
+  .card ol {
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 700px) {
+    .apps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // The copy button needs the Clipboard API, so it stays hidden without it:
+  // the address is in a plain text field and can always be selected by hand.
+  const button = document.querySelector<HTMLButtonElement>('[data-copy]');
+  const input = document.querySelector<HTMLInputElement>('[data-feed-url]');
+
+  if (button && input && navigator.clipboard) {
+    const label = button.textContent ?? '';
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(input.value);
+        button.textContent = button.dataset.copied ?? label;
+        setTimeout(() => (button.textContent = label), 2000);
+      } catch {
+        input.select();
+      }
+    });
+    input.addEventListener('focus', () => input.select());
+  }
+</script>

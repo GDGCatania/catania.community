@@ -180,8 +180,8 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
                   .toISOString()
                   .replace(/[-:]/g, '')
                   .slice(0, 15)}Z`,
-                details: `Dettagli: ${event.url}`,
-                location: event.online ? 'Online' : [event.venue?.name, address].filter(Boolean).join(', '),
+                details: m.feed_detailsAt({ url: event.url }),
+                location: event.online ? m.status_online() : [event.venue?.name, address].filter(Boolean).join(', '),
               })}`}
             >
               Google
