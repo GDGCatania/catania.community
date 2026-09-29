@@ -1,0 +1,35 @@
+name: Correction
+description: An event or a community has something wrong
+title: 'Correction: '
+labels: [correction]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The data comes from the communities' public pages, so now and then it is
+        incomplete or wrong. Corrections entered here **take precedence over the
+        crawlers**: once applied, they are not overwritten again.
+
+  - type: input
+    id: page
+    attributes:
+      label: Affected page
+      description: Paste the address of the page on this site.
+      placeholder: https://
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      placeholder: It says 19:00 but the event starts at 18:30.
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Where the correct information is
+      description: A link to the official source lets us fix it straight away.
+      placeholder: https://

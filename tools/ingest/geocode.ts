@@ -2,7 +2,7 @@ import { fetchJson } from './lib/fetch.js';
 import { readJson, writeJsonIfChanged } from './lib/json.js';
 import { PATHS } from './lib/paths.js';
 import { GeoSchema, type CuratedVenue, type Geo } from '../../src/lib/schema.js';
-import { DEFAULT_CITY, COUNTRY_NAME } from '../../src/lib/site.js';
+import { DEFAULT_CITY, COUNTRY_NAME, DEFAULT_LANGUAGE_CODE } from '../../src/lib/site.js';
 import { normalizeForCompare } from './lib/text.js';
 
 /**
@@ -96,7 +96,7 @@ export class Geocoder {
       format: 'jsonv2',
       limit: '5',
       addressdetails: '1',
-      'accept-language': 'it',
+      'accept-language': DEFAULT_LANGUAGE_CODE,
     })}`;
 
     const wanted = normalizeForCompare(expectedCity);

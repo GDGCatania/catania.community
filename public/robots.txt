@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://catania.community/sitemap-index.xml

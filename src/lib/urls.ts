@@ -12,7 +12,9 @@ export function normalizePath(pathname: string): string {
   return p;
 }
 
+import { SITE_URL } from './site';
+
 export function absoluteUrl(pathname: string, site: URL | undefined): string {
-  const base = site ?? new URL('https://catania.community');
+  const base = site ?? new URL(SITE_URL);
   return new URL(normalizePath(pathname), base).href;
 }

@@ -1,10 +1,12 @@
+import { SITE_NAME, SITE_URL } from '../../../src/lib/site.js';
+
 /**
  * Well-behaved fetching: an identifiable User-Agent, one request at a time per
  * host, at least a second between two requests to the same host, and retries
  * with backoff. The sources are free community services: do not hammer them.
  */
 
-export const USER_AGENT = 'catania.community-bot/1.0 (+https://catania.community)';
+export const USER_AGENT = `${SITE_NAME}-bot/1.0 (+${SITE_URL})`;
 
 const MIN_INTERVAL_MS = 1_000;
 const DEFAULT_TIMEOUT_MS = 25_000;

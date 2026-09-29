@@ -2,7 +2,7 @@
 import ThemeToggle from './ThemeToggle.astro';
 import { normalizePath } from '../lib/urls';
 import * as m from '../paraglide/messages.js';
-import { ROUTES } from '../lib/site';
+import { ROUTES, SITE_NAME } from '../lib/site';
 
 const path = normalizePath(Astro.url.pathname);
 
@@ -26,7 +26,7 @@ const nav = [
   <div class="container inner">
     <a class="brand" href={ROUTES.home}>
       <span class="brand__mark" aria-hidden="true"></span>
-      <span class="brand__name">catania.community</span>
+      <span class="brand__name">{SITE_NAME}</span>
     </a>
 
     <nav class="nav" aria-label={m.site_sections()}>

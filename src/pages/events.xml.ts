@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCommunityMap, getUpcomingEvents, formatDateLong, formatTime } from '../lib/events';
 
-import { SITE_URL, ROUTES } from '../lib/site';
+import { SITE_URL, ROUTES, FEED_TITLE, FEED_DESCRIPTION } from '../lib/site';
 import { localeTag } from '../i18n';
 import * as m from '../paraglide/messages.js';
 
@@ -50,9 +50,9 @@ export const GET: APIRoute = async () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXml(m.feed_rssTitle())}</title>
+    <title>${escapeXml(FEED_TITLE)}</title>
     <link>${SITE_URL}</link>
-    <description>${escapeXml(m.feed_rssDescription())}</description>
+    <description>${escapeXml(FEED_DESCRIPTION)}</description>
     <language>${localeTag}</language>
     <atom:link href="${SITE_URL}${ROUTES.feedRss}" rel="self" type="application/rss+xml" />
 ${items}

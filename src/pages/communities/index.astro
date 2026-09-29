@@ -5,7 +5,7 @@ import { getCommunities, getUpcomingEvents, formatDayMonth } from '../../lib/eve
 import { breadcrumbJsonLd } from '../../lib/jsonld';
 import * as m from '../../paraglide/messages.js';
 import { areaLabel, categoryLabel } from '../../i18n/labels';
-import { ISSUE_URLS, ROUTES } from '../../lib/site';
+import { DEFAULT_CITY, ISSUE_URLS, ROUTES } from '../../lib/site';
 
 const [communities, upcoming] = await Promise.all([getCommunities(), getUpcomingEvents()]);
 
@@ -19,7 +19,7 @@ const active = communities.filter((community) => community.active);
 
 <BaseLayout
   title={m.communities_count({ count: active.length })}
-  description={m.communities_metaDescription()}
+  description={m.communities_metaDescription({ city: DEFAULT_CITY })}
   jsonLd={breadcrumbJsonLd([
     { name: m.nav_events(), path: ROUTES.home },
     { name: m.nav_communities(), path: ROUTES.communities },

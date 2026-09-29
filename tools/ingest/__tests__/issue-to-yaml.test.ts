@@ -3,54 +3,54 @@ import { parse } from 'yaml';
 import { stringify } from 'yaml';
 import { buildCommunity, parseIssueForm } from '../../issue-to-yaml.js';
 
-const body = `### Nome della community
+const body = `### Community name
 
 AperiTech #42 Catania
 
-### In una riga
+### In one line
 
 Talk brevi e aperitivo: 100% pratica, 0% slide di vendita
 
-### Argomenti
+### Topics
 
 tech, design
 
-### Dove vi trovate di solito
+### Where you usually meet
 
 citta
 
-### Dove pubblicate gli eventi
+### Where you publish your events
 
 https://gdg.community.dev/gdg-catania/
 
-### Feed .ics, se ce l'avete
+### .ics feed, if you have one
 
 _No response_
 
-### Sito
+### Website
 
 https://esempio.org
 
-### Altri contatti
+### Other contacts
 
 https://t.me/esempio
 https://www.instagram.com/esempio
 
-### Conferma
+### Confirmation
 
-- [X] So che i dati inseriti finiscono in un repository pubblico
+- [X] I understand that this data ends up in a public repository
 `;
 
 describe('parseIssueForm', () => {
   it('extracts the fields from the headings GitHub generates', () => {
     const fields = parseIssueForm(body);
 
-    expect(fields['nome della community']).toBe('AperiTech #42 Catania');
-    expect(fields['dove vi trovate di solito']).toBe('citta');
+    expect(fields['community name']).toBe('AperiTech #42 Catania');
+    expect(fields['where you usually meet']).toBe('citta');
   });
 
   it('treats _No response_ as an empty field', () => {
-    expect(parseIssueForm(body)["feed .ics, se ce l'avete"]).toBe('');
+    expect(parseIssueForm(body)['.ics feed, if you have one']).toBe('');
   });
 });
 

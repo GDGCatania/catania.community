@@ -7,7 +7,7 @@ import type { Community, Event } from './schema';
  * block in the source, Google shows no rich results for the events and half the
  * point of an aggregator is lost.
  */
-import { SITE_URL, ROUTES, DEFAULT_CITY, DEFAULT_REGION, DEFAULT_COUNTRY, DEFAULT_LANGUAGE } from './site';
+import { SITE_URL, ROUTES, DEFAULT_CITY, DEFAULT_REGION, DEFAULT_COUNTRY, DEFAULT_LANGUAGE, DEFAULT_LANGUAGE_CODE } from './site';
 
 export function eventJsonLd(event: Event, community: Community | undefined, url: string) {
   const location = event.online
@@ -73,7 +73,7 @@ export function eventJsonLd(event: Event, community: Community | undefined, url:
       // Registration happens elsewhere: point at the source.
       url: event.url,
     },
-    inLanguage: event.language === DEFAULT_LANGUAGE ? 'it' : event.language,
+    inLanguage: event.language === DEFAULT_LANGUAGE ? DEFAULT_LANGUAGE_CODE : event.language,
     isAccessibleForFree: event.price.type !== 'paid',
     url,
   };

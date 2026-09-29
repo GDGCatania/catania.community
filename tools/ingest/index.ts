@@ -11,6 +11,7 @@ import {
   type Override,
   type SourceType,
 } from '../../src/lib/schema.js';
+import { TIMEZONE } from '../../src/lib/site.js';
 import { loadYamlDir } from './lib/yaml.js';
 import { PATHS, REPO_ROOT } from './lib/paths.js';
 import { readJson, writeJsonIfChanged } from './lib/json.js';
@@ -285,7 +286,7 @@ function printPreview(events: Event[], communities: Community[]): void {
   console.log('\n  Upcoming events:');
   for (const event of upcoming) {
     const when = new Date(event.start).toLocaleString('en-GB', {
-      timeZone: 'Europe/Rome',
+      timeZone: TIMEZONE,
       day: '2-digit',
       month: 'short',
       hour: '2-digit',

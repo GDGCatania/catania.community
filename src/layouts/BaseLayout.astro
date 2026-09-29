@@ -5,7 +5,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import { absoluteUrl } from '../lib/urls';
 import { locale, localeTag } from '../i18n';
 import * as m from '../paraglide/messages.js';
-import { ROUTES } from '../lib/site';
+import { ROUTES, FEED_TITLE, SITE_NAME, DEFAULT_OG_IMAGE } from '../lib/site';
 
 export interface Props {
   title: string;
@@ -17,11 +17,11 @@ export interface Props {
   noindex?: boolean;
 }
 
-const { title, description, ogImage = '/og-default.png', jsonLd, noindex = false } = Astro.props;
+const { title, description, ogImage = DEFAULT_OG_IMAGE, jsonLd, noindex = false } = Astro.props;
 
 const canonical = absoluteUrl(Astro.url.pathname, Astro.site);
-const ogUrl = new URL(ogImage, Astro.site).href;
-const fullTitle = title === 'catania.community' ? title : `${title} · catania.community`;
+const ogUrl = ogImage ? new URL(ogImage, Astro.site).href : null;
+const fullTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
 ---
 
 <!doctype html>
@@ -36,13 +36,13 @@ const fullTitle = title === 'catania.community' ? title : `${title} · catania.c
     {noindex && <meta name="robots" content="noindex, follow" />}
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="catania.community" />
+    <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:locale" content={localeTag.replace('-', '_')} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogUrl} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {ogUrl && <meta property="og:image" content={ogUrl} />}
+    <meta name="twitter:card" content={ogUrl ? 'summary_large_image' : 'summary'} />
 
     <link rel="stylesheet" href="/fonts/fonts.css" />
     <link rel="preload" href="/fonts/archivo-2.woff2" as="font" type="font/woff2" crossorigin />
@@ -51,13 +51,13 @@ const fullTitle = title === 'catania.community' ? title : `${title} · catania.c
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={m.feed_rssTitle()}
+      title={FEED_TITLE}
       href={ROUTES.feedRss}
     />
     <link
       rel="alternate"
       type="text/calendar"
-      title={m.feed_calendarName()}
+      title={FEED_TITLE}
       href={ROUTES.feedIcs}
     />
 

@@ -1,7 +1,7 @@
 ---
-import { CATEGORIES } from '../lib/schema';
+import { AREAS, CATEGORIES } from '../lib/schema';
 import * as m from '../paraglide/messages.js';
-import { categoryLabel } from '../i18n/labels';
+import { areaLabel, categoryLabel } from '../i18n/labels';
 
 export interface Props {
   /** Categories actually present in the events: no filter leads to nothing. */
@@ -24,9 +24,13 @@ const categories = CATEGORIES.filter((category) => availableCategories.includes(
   </div>
 
   <div class="group" role="group" aria-label={m.filters_where()}>
-    <button type="button" aria-pressed="false" data-filter="area" data-value="citta">{m.area_citta()}</button>
-    <button type="button" aria-pressed="false" data-filter="area" data-value="provincia">{m.area_provincia()}</button>
-    <button type="button" aria-pressed="false" data-filter="area" data-value="online">{m.area_online()}</button>
+    {
+      AREAS.map((area) => (
+        <button type="button" aria-pressed="false" data-filter="area" data-value={area}>
+          {areaLabel[area]()}
+        </button>
+      ))
+    }
   </div>
 
   <div class="group" role="group" aria-label={m.filters_cost()}>
@@ -119,6 +123,7 @@ const categories = CATEGORIES.filter((category) => availableCategories.includes(
   // script imports the two it needs, which also gets the plural rules right
   // without reimplementing them here.
   import { event_count } from '../paraglide/messages.js';
+  import { TIMEZONE } from '../lib/site';
 
   /**
    * Client-side filtering over HTML that is already on the page.
@@ -198,7 +203,7 @@ const categories = CATEGORIES.filter((category) => availableCategories.includes(
 
     function isoDay(date: Date): string {
       return new Intl.DateTimeFormat('en-CA', {
-        timeZone: 'Europe/Rome',
+        timeZone: TIMEZONE,
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',

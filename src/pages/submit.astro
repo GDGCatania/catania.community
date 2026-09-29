@@ -4,13 +4,24 @@ import { breadcrumbJsonLd } from '../lib/jsonld';
 import { CATEGORIES, AREAS } from '../lib/schema';
 import * as m from '../paraglide/messages.js';
 import { areaLabel, categoryLabel } from '../i18n/labels';
-import { EXAMPLE_COMMUNITY_NAME, ISSUE_URLS, ROUTES } from '../lib/site';
+import {
+  DEFAULT_CITY,
+  EXAMPLE_COMMUNITY_NAME,
+  ISSUE_URLS,
+  ROUTES,
+  SUBMIT_ENDPOINT,
+} from '../lib/site';
 import Message from '../components/Message.astro';
+
+// With no endpoint the form is a pre-filler for the GitHub Issue Form: the
+// contact field has nowhere to go (the GitHub account is the way back), and a
+// second "open an issue" button would do the same thing as the first.
+const viaGithub = !SUBMIT_ENDPOINT;
 ---
 
 <BaseLayout
   title={m.submit_title()}
-  description={m.submit_metaDescription()}
+  description={m.submit_metaDescription({ city: DEFAULT_CITY })}
   jsonLd={breadcrumbJsonLd([
     { name: m.nav_events(), path: ROUTES.home },
     { name: m.submit_title(), path: ROUTES.submit },
@@ -37,6 +48,7 @@ import Message from '../components/Message.astro';
     openIssue: m.submit_openIssue(),
     failed: m.submit_failed(),
     failedLink: m.submit_failedLink(),
+    redirecting: m.submit_redirecting(),
   })}
 >
       <fieldset>
@@ -111,6 +123,7 @@ import Message from '../components/Message.astro';
         </label>
       </fieldset>
 
+      {!viaGithub && (
       <fieldset>
         <legend class="eyebrow">{m.submit_sectionContact()}</legend>
         <label>
@@ -119,13 +132,22 @@ import Message from '../components/Message.astro';
           <span class="help">{m.submit_contactHelp()}</span>
         </label>
       </fieldset>
+      )}
 
       <div class="actions">
-        <button class="btn btn--primary" type="submit">{m.submit_button()}</button>
-        <a class="btn btn--ghost" href={ISSUE_URLS.newCommunity} rel="noopener">
-          {m.submit_buttonIssue()}
-        </a>
+        <button class="btn btn--primary" type="submit">
+          {viaGithub ? m.submit_buttonGithub() : m.submit_button()}
+        </button>
+        {
+          !viaGithub && (
+            <a class="btn btn--ghost" href={ISSUE_URLS.newCommunity} rel="noopener">
+              {m.submit_buttonIssue()}
+            </a>
+          )
+        }
       </div>
+
+      {viaGithub && <p class="help">{m.submit_githubNote()}</p>}
 
       <p class="status" data-form-status role="status" aria-live="polite" hidden></p>
 
@@ -150,7 +172,7 @@ import Message from '../components/Message.astro';
       <div class="card">
         <h2>{m.submit_fixTitle()}</h2>
         <p class="hint">{m.submit_fixBody()}</p>
-        <a class="btn btn--ghost" href={ISSUE_URLS.correction('Correzione: ')} rel="noopener">
+        <a class="btn btn--ghost" href={ISSUE_URLS.correction('')} rel="noopener">
           {m.submit_fixButton()}
         </a>
       </div>
@@ -336,12 +358,14 @@ import Message from '../components/Message.astro';
 </style>
 
 <script>
-  /**
-   * The form posts to a Worker that opens the issue on the sender's behalf, so
-   * no GitHub account is needed. The site stays static: this is just a fetch.
-   */
-  const ENDPOINT = 'https://segnala.catania.community/submit';
+  import { ISSUE_LABELS, ISSUE_TITLES, SUBMIT_ENDPOINT, issueFormUrl } from '../lib/site';
 
+  /**
+   * With an endpoint, the form posts to a Worker that opens the issue on the
+   * sender's behalf, so no GitHub account is needed. Without one — or when the
+   * Worker fails — it sends the person to the GitHub Issue Form with their
+   * answers already filled in. Either way the site stays static.
+   */
   const form = document.querySelector<HTMLFormElement>('[data-submit-form]');
   const status = document.querySelector<HTMLElement>('[data-form-status]');
 
@@ -363,9 +387,8 @@ import Message from '../components/Message.astro';
     const data = new FormData(form);
     const categories = data.getAll('categories').map(String);
 
-    // Minimal client-side validation: the Worker revalidates everything with
-    // the same Zod schema as the rest of the project. This only avoids a
-    // pointless round trip.
+    // Minimal client-side validation: the Worker, or the Issue Form's required
+    // fields, check again. This only avoids a pointless round trip.
     const name = String(data.get('name') ?? '').trim();
     const eventsUrl = String(data.get('eventsUrl') ?? '').trim();
     const missing: string[] = [];
@@ -383,23 +406,45 @@ import Message from '../components/Message.astro';
       return;
     }
 
+    const answers = {
+      name,
+      tagline: String(data.get('tagline') ?? '').trim(),
+      categories,
+      area: String(data.get('area') ?? ''),
+      eventsUrl,
+      icsUrl: String(data.get('icsUrl') ?? '').trim(),
+      contacts: String(data.get('contacts') ?? '').trim(),
+    };
+
+    // Keyed by the field ids of the new-community Issue Form, so the issue that
+    // comes out is one tools/issue-to-yaml.ts can read.
+    const issueUrl = issueFormUrl(ISSUE_LABELS.newCommunity, ISSUE_TITLES.newCommunity(name), {
+      name: answers.name,
+      tagline: answers.tagline,
+      categories: answers.categories.join(','),
+      area: answers.area,
+      events_url: answers.eventsUrl,
+      ics_url: answers.icsUrl,
+      contacts: answers.contacts,
+    });
+
+    if (!SUBMIT_ENDPOINT) {
+      show(copy.redirecting ?? '', 'info');
+      window.location.assign(issueUrl);
+      return;
+    }
+
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (button) button.disabled = true;
     show(copy.sending ?? '', 'info');
 
     try {
-      const response = await fetch(ENDPOINT, {
+      const response = await fetch(SUBMIT_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          kind: 'nuova-community',
-          name,
-          tagline: String(data.get('tagline') ?? '').trim(),
-          categories,
-          area: String(data.get('area') ?? 'citta'),
-          eventsUrl,
-          icsUrl: String(data.get('icsUrl') ?? '').trim(),
-          contacts: String(data.get('contacts') ?? '').trim(),
+          kind: ISSUE_LABELS.newCommunity,
+          ...answers,
           contact: String(data.get('contact') ?? '').trim(),
         }),
       });
@@ -421,17 +466,10 @@ import Message from '../components/Message.astro';
     } catch {
       // The fallback is not a dead end: we send the person to GitHub with their
       // answers already filled in, so the work they did is not lost.
-      const fallback = new URL('https://github.com/GDGCatania/catania.community/issues/new');
-      fallback.searchParams.set('labels', 'nuova-community');
-      fallback.searchParams.set('title', `Nuova community: ${name}`);
-      fallback.searchParams.set(
-        'body',
-        `Link agli eventi: ${eventsUrl}\nArgomenti: ${categories.join(', ')}`
-      );
       show(copy.failed ?? '', 'error');
       if (status) {
         const link = document.createElement('a');
-        link.href = fallback.href;
+        link.href = issueUrl;
         link.rel = 'noopener';
         link.textContent = copy.failedLink ?? '';
         status.append(link);
