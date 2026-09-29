@@ -4,14 +4,15 @@ There are two doors into this project, and only one of them needs code.
 
 ## Reporting a community or a mistake
 
-No GitHub account, no code: **[the form on the site](https://catania.community/submit)**. If you do
-have an account, the [Issue Forms](../../issues/new/choose) work just as well.
+No code needed: **[the form on the site](https://catania.community/submit)** takes your answers and
+opens the [Issue Form](../../issues/new/choose) on GitHub already filled in. You need a GitHub account
+to confirm it.
 
 A report about a new community becomes a pull request with the YAML file already written — merging it
 is the approval. A correction lands in `data/overrides/` and from then on wins over every crawler.
 
-Those surfaces are in **Italian on purpose**: they are the contribution surface for local organisers.
-Everything below is in English, because code should be readable by anyone.
+The form on the site speaks the site's language; the Issue Forms and everything below are in English,
+so that anyone can read them and any fork can reuse them.
 
 ## Working on the code
 
@@ -120,8 +121,9 @@ published them.
 
 ## Conventions
 
-**Language.** Code, comments, URL slugs, commit messages and branch names are in English. What the
-public reads — site copy, Issue Forms, the bodies of automated pull requests — is in Italian.
+**Language.** Code, comments, URL slugs, commit messages and branch names are in English. So are the
+Issue Forms and what the automation writes on issues and pull requests. The site copy follows
+`baseLocale` (Italian here).
 
 **Commits** follow [Conventional Commits](https://www.conventionalcommits.org), in English:
 

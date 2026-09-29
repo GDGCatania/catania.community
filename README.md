@@ -141,8 +141,9 @@ of the message files — they are configuration, not copy.
 Event titles, descriptions and venue names are **not** translated: they belong to the communities
 that published them and stay in their own language.
 
-Code, comments and URL slugs are in English so that anyone can contribute. The Issue Forms are in
-Italian because they are the contribution surface for local organisers.
+Code, comments, URL slugs, the Issue Forms and the automation's messages are in English, so that anyone
+can contribute and any fork can reuse them as they are. Local organisers get the form on the site,
+which follows `baseLocale` and pre-fills the Issue Form for them.
 
 ## Run it for your city
 
@@ -172,8 +173,9 @@ Every key is documented in the file. A few are worth reading twice:
   what they mean — the city itself, the rest of the area, online. Change their labels, not the keys.
 - Adding or renaming a category also means adding its `category_<key>` message and its entry in
   `src/i18n/labels.ts`; the type checker points at every place that is missing it.
-- `submitEndpoint` is the service behind the "add your community" form. It is not part of this
-  repository; set it to `null` and the form sends people to GitHub with their answers pre-filled.
+- `submitEndpoint` is `null` by default: the "add your community" form then takes people to the
+  GitHub Issue Form with their answers pre-filled, which needs a GitHub account. Point it at a service
+  that opens the issue on their behalf (not part of this repository) and no account is needed.
 - `ogImage` is `null` until you add a 1200×630 image under `public/` and point it there.
 - `repo` is where "Source code" in the footer points. The credit line at the very bottom ("free
   software, see the project") always links the original repository instead.
@@ -187,17 +189,23 @@ but read `messages/<locale>.json` once with your area in mind (for instance `are
 `public/CNAME` (or delete the file if you stay on `github.io`). `robots.txt`, the sitemap, canonical
 URLs and iCal identifiers follow `url` on their own.
 
-**4. The Issue Forms** — `.github/ISSUE_TEMPLATE/*.yml` are the contribution surface for local
-organisers, so they are written in the local language and point at the site. Translate them if
-needed, but keep the field labels of `nuova-community.yml` in sync with `tools/issue-to-yaml.ts`,
-which reads the issue by those labels, and keep the file names equal to `issueLabels`.
+**4. The Issue Forms** — `.github/ISSUE_TEMPLATE/*.yml` are in English and name no city, so they
+work as they are. Three things are tied together if you change them:
+
+- the field **labels** of `new-community.yml` and the ones `tools/issue-to-yaml.ts` reads the issue
+  by (GitHub writes labels into the issue body, not ids);
+- the field **ids**, which the form on the site pre-fills;
+- the **file names**, the `labels:` they apply, `issueLabels` in the config and the label that
+  triggers `.github/workflows/issue-to-pr.yml`.
+
+The `categories` options must list the same keys as the config.
 
 **5. The data** — empty `sources/communities/`, `sources/events/`, `sources/venues/` and `data/`, then
 add your first community (see [CONTRIBUTING.md](CONTRIBUTING.md#adding-a-community)) and run
 `npm run ingest`.
 
 **6. Hosting** — enable GitHub Pages with *GitHub Actions* as the source, create the
-`nuova-community` and `correzione` labels (or whatever `issueLabels` says), and allow Actions to
+`new-community` and `correction` labels (or whatever `issueLabels` says), and allow Actions to
 open pull requests. The two ingest runs a day start on their own.
 
 Then `npm test && npm run check && npm run build`: the schema validates every YAML file against the
@@ -206,8 +214,8 @@ new config, so a coordinate outside the bounding box or an unknown category fail
 ## Contributing
 
 **Your community is missing, or something is wrong?**
-[Open a report](https://catania.community/submit) — no GitHub account needed. If you have one, the
-[Issue Forms](../../issues/new/choose) work just as well.
+[Open a report](https://catania.community/submit): the form on the site pre-fills the
+[Issue Form](../../issues/new/choose) on GitHub for you, or you can open it directly.
 
 Every report becomes a pull request with the YAML file already written: merging it is the approval.
 

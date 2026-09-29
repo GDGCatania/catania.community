@@ -17,9 +17,9 @@ import { PATHS } from './ingest/lib/paths.js';
  * quotes would come back as "AperiTech", because `#` opens a comment — data
  * lost in silence, which is the worst way to lose it.
  *
- * The field labels below are Italian because the Issue Forms are: they are the
- * contribution surface for local organisers. Translating a form means
- * translating these labels alongside it.
+ * GitHub writes the field *labels* into the issue body, not their ids, so the
+ * labels below must match `.github/ISSUE_TEMPLATE/new-community.yml` exactly
+ * (case aside). Renaming a field there means renaming it here too.
  */
 
 /**
@@ -117,20 +117,20 @@ function detectIngest(eventsUrl: string, icsUrl: string) {
 }
 
 export function buildCommunity(fields: Record<string, string>) {
-  const name = pick(fields, 'Nome della community', 'name');
+  const name = pick(fields, 'Community name', 'name');
   if (!name) throw new Error('The issue has no community name.');
 
-  const eventsUrl = pick(fields, 'Dove pubblicate gli eventi', 'events_url');
-  const icsUrl = pick(fields, "Feed .ics, se ce l'avete", 'ics_url');
-  const website = pick(fields, 'Sito', 'website');
-  const tagline = pick(fields, 'In una riga', 'tagline');
+  const eventsUrl = pick(fields, 'Where you publish your events', 'events_url');
+  const icsUrl = pick(fields, '.ics feed, if you have one', 'ics_url');
+  const website = pick(fields, 'Website', 'website');
+  const tagline = pick(fields, 'In one line', 'tagline');
 
-  const categories = parseList(pick(fields, 'Argomenti', 'categories')).filter(
+  const categories = parseList(pick(fields, 'Topics', 'categories')).filter(
     (category): category is (typeof CATEGORIES)[number] =>
       (CATEGORIES as readonly string[]).includes(category)
   );
 
-  const areaRaw = pick(fields, 'Dove vi trovate di solito', 'area').toLowerCase();
+  const areaRaw = pick(fields, 'Where you usually meet', 'area').toLowerCase();
   const area = (AREAS as readonly string[]).includes(areaRaw) ? areaRaw : 'citta';
 
   const links: Record<string, string> = {};
@@ -138,7 +138,7 @@ export function buildCommunity(fields: Record<string, string>) {
   // The events URL doubles as the website when no website was given.
   if (!website && /^https?:\/\//.test(eventsUrl)) links.website = eventsUrl;
 
-  for (const line of pick(fields, 'Altri contatti', 'contacts').split('\n')) {
+  for (const line of pick(fields, 'Other contacts', 'contacts').split('\n')) {
     const url = line.trim();
     if (!/^https?:\/\//.test(url)) continue;
     if (url.includes('t.me') || url.includes('telegram')) links.telegram = url;

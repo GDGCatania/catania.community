@@ -80,10 +80,14 @@ const config = {
    */
   areas: ['citta', 'provincia', 'online'] as const,
 
-  /** GitHub issue labels used to build ISSUE_URLS. */
+  /**
+   * GitHub issue labels. Each one is also the file name of its Issue Form in
+   * `.github/ISSUE_TEMPLATE/`, and `newCommunity` is what triggers
+   * `.github/workflows/issue-to-pr.yml`: rename all three together.
+   */
   issueLabels: {
-    newCommunity: 'nuova-community',
-    correction: 'correzione',
+    newCommunity: 'new-community',
+    correction: 'correction',
   },
 
   /** Placeholder example shown in the "add your community" form. */
@@ -91,10 +95,11 @@ const config = {
 
   /**
    * Endpoint the "add your community" form posts to: a small service that
-   * opens the GitHub issue on the sender's behalf. Set it to `null` and the
-   * form sends people straight to GitHub with their answers pre-filled.
+   * opens the GitHub issue on the sender's behalf, so no GitHub account is
+   * needed. It is not part of this repository. With `null` the form sends
+   * people to the GitHub Issue Form with their answers pre-filled.
    */
-  submitEndpoint: 'https://segnala.catania.community/submit' as string | null,
+  submitEndpoint: null as string | null,
 
   /**
    * Default social preview image (1200×630), a path under `public/`. `null`

@@ -1,0 +1,96 @@
+name: New community
+description: Add a community to the calendar
+title: 'New community: '
+labels: [new-community]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. This report automatically becomes a pull request with the file
+        already written: once it is merged the community is online and its events
+        start coming in on their own.
+
+  # The field labels below are what tools/issue-to-yaml.ts reads the issue by:
+  # change one here and change it there too. The ids are what the form on the
+  # site pre-fills.
+
+  - type: input
+    id: name
+    attributes:
+      label: Community name
+      placeholder: Python User Group
+    validations:
+      required: true
+
+  - type: input
+    id: tagline
+    attributes:
+      label: In one line
+      description: What you do, in a few words.
+      placeholder: Data, backend and automation. One meetup a month.
+
+  - type: dropdown
+    id: categories
+    attributes:
+      label: Topics
+      multiple: true
+      options: [tech, design, impresa, cultura, sociale]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where you usually meet
+      description: '`citta` is the city itself, `provincia` the rest of the area around it.'
+      options:
+        - citta
+        - provincia
+        - online
+    validations:
+      required: true
+
+  - type: input
+    id: events_url
+    attributes:
+      label: Where you publish your events
+      description: >-
+        The page to read events from. These work automatically: .ics feeds,
+        gdg.community.dev, Luma, Gancio, Mobilizon, Meetup and Eventbrite. For
+        Meetup the group link is enough; for Eventbrite, the organiser profile.
+        Anything else has to be copied by hand.
+      placeholder: https://
+    validations:
+      required: true
+
+  - type: input
+    id: ics_url
+    attributes:
+      label: .ics feed, if you have one
+      description: The best way to stay up to date without you having to do anything.
+      placeholder: https://.../events.ics
+
+  - type: input
+    id: website
+    attributes:
+      label: Website
+      placeholder: https://
+
+  - type: textarea
+    id: contacts
+    attributes:
+      label: Other contacts
+      description: Telegram, Instagram, LinkedIn, Mastodon… one per line.
+      placeholder: |
+        https://t.me/...
+        https://instagram.com/...
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: >-
+            I understand that this data ends up in a public repository under the
+            ODbL licence, and that this site does not handle sign-ups or tickets.
+          required: true

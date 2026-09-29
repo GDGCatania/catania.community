@@ -11,7 +11,8 @@ permissions:
 
 jobs:
   create-pr:
-    if: github.event.label.name == 'nuova-community'
+    # Must match `issueLabels.newCommunity` in site.config.ts.
+    if: github.event.label.name == 'new-community'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -63,27 +64,27 @@ jobs:
           git push --force -u origin "$BRANCH"
 
           cat > /tmp/pr-body.md <<'EOF'
-          Generata automaticamente da una segnalazione.
+          Generated automatically from a report.
 
-          **Prima del merge, controllare:**
+          **Before merging, check:**
 
-          - [ ] I link portano davvero alla community giusta
-          - [ ] Gli argomenti scelti sono sensati
-          - [ ] Se l'adapter è `bevy`, il campo `chapter` è stato compilato con l'id
-                numerico (si legge da `https://gdg.community.dev/<slug>/`, cercando
-                `chapter/<id>`) e la riga `_todo` è stata rimossa
-          - [ ] Se l'adapter è `jsonld`, l'indirizzo in `list` è davvero la pagina degli
-                eventi del gruppo, e `npm run ingest -- --source <slug> --dry-run` la
-                legge (zero eventi è normale se non hanno nulla in programma)
+          - [ ] The links really lead to the right community
+          - [ ] The chosen topics make sense
+          - [ ] If the adapter is `bevy`, `chapter` has been filled in with the numeric
+                id (read it from `https://gdg.community.dev/<slug>/`, looking for
+                `chapter/<id>`) and the `_todo` line has been removed
+          - [ ] If the adapter is `jsonld`, the address in `list` really is the group's
+                events page, and `npm run ingest -- --source <slug> --dry-run` reads it
+                (zero events is normal if nothing is scheduled)
 
-          Al merge la community è online e i suoi eventi vengono raccolti al run successivo.
+          Once merged the community is online and its events are collected on the next run.
           EOF
-          printf '\nChiude #%s\n' "$ISSUE" >> /tmp/pr-body.md
+          printf '\nCloses #%s\n' "$ISSUE" >> /tmp/pr-body.md
 
           # On a retry the pull request may already be open; the force push above
           # has just updated it, so reuse it instead of failing.
           URL=$(gh pr create \
-            --title "Nuova community: $SLUG" \
+            --title "New community: $SLUG" \
             --body-file /tmp/pr-body.md \
             --base main \
             --head "$BRANCH" 2>/dev/null) || URL=$(gh pr view "$BRANCH" --json url --jq .url)
@@ -107,24 +108,24 @@ jobs:
 
             if (pr) {
               body = [
-                `Grazie. La segnalazione è diventata una pull request: ${pr}`,
+                `Thank you. The report is now a pull request: ${pr}`,
                 '',
-                'Al merge la community sarà online e i suoi eventi verranno raccolti automaticamente.',
+                'Once it is merged the community will be online and its events collected automatically.',
               ].join('\n');
             } else if (slug) {
               body = [
-                'Grazie. Il file della community è pronto sul branch',
+                'Thank you. The community file is ready on the branch',
                 `[\`community/${slug}\`](https://github.com/${repo}/tree/community/${slug}),`,
-                'ma non sono riuscito ad aprire la pull request da solo.',
+                'but I could not open the pull request myself.',
                 '',
-                `**[Aprila qui](https://github.com/${repo}/compare/main...community/${slug}?expand=1)**:`,
-                'il lavoro è fatto, manca un clic.',
+                `**[Open it here](https://github.com/${repo}/compare/main...community/${slug}?expand=1)**:`,
+                'the work is done, it is one click away.',
               ].join('\n');
             } else {
               body = [
-                'Non sono riuscito a generare il file dalla segnalazione.',
+                'I could not generate the file from this report.',
                 failure ? `\n\`\`\`\n${failure}\n\`\`\`` : '',
-                '\nNiente di grave: la segnalazione resta valida e la lavoriamo a mano.',
+                '\nNothing serious: the report still stands and we will handle it by hand.',
               ].join('\n');
             }
 

@@ -7,13 +7,16 @@ import { areaLabel, categoryLabel } from '../i18n/labels';
 import {
   DEFAULT_CITY,
   EXAMPLE_COMMUNITY_NAME,
-  ISSUE_LABELS,
   ISSUE_URLS,
-  REPO_URL,
   ROUTES,
   SUBMIT_ENDPOINT,
 } from '../lib/site';
 import Message from '../components/Message.astro';
+
+// With no endpoint the form is a pre-filler for the GitHub Issue Form: the
+// contact field has nowhere to go (the GitHub account is the way back), and a
+// second "open an issue" button would do the same thing as the first.
+const viaGithub = !SUBMIT_ENDPOINT;
 ---
 
 <BaseLayout
@@ -45,12 +48,8 @@ import Message from '../components/Message.astro';
     openIssue: m.submit_openIssue(),
     failed: m.submit_failed(),
     failedLink: m.submit_failedLink(),
-    fallbackTitle: m.submit_fallbackTitle({ name: '__name__' }),
-    fallbackBody: m.submit_fallbackBody({ url: '__url__', topics: '__topics__' }),
+    redirecting: m.submit_redirecting(),
   })}
-  data-endpoint={SUBMIT_ENDPOINT ?? ''}
-  data-issue-url={`${REPO_URL}/issues/new`}
-  data-issue-label={ISSUE_LABELS.newCommunity}
 >
       <fieldset>
         <legend class="eyebrow">{m.submit_sectionCommunity()}</legend>
@@ -124,6 +123,7 @@ import Message from '../components/Message.astro';
         </label>
       </fieldset>
 
+      {!viaGithub && (
       <fieldset>
         <legend class="eyebrow">{m.submit_sectionContact()}</legend>
         <label>
@@ -132,13 +132,22 @@ import Message from '../components/Message.astro';
           <span class="help">{m.submit_contactHelp()}</span>
         </label>
       </fieldset>
+      )}
 
       <div class="actions">
-        <button class="btn btn--primary" type="submit">{m.submit_button()}</button>
-        <a class="btn btn--ghost" href={ISSUE_URLS.newCommunity} rel="noopener">
-          {m.submit_buttonIssue()}
-        </a>
+        <button class="btn btn--primary" type="submit">
+          {viaGithub ? m.submit_buttonGithub() : m.submit_button()}
+        </button>
+        {
+          !viaGithub && (
+            <a class="btn btn--ghost" href={ISSUE_URLS.newCommunity} rel="noopener">
+              {m.submit_buttonIssue()}
+            </a>
+          )
+        }
       </div>
+
+      {viaGithub && <p class="help">{m.submit_githubNote()}</p>}
 
       <p class="status" data-form-status role="status" aria-live="polite" hidden></p>
 
@@ -163,7 +172,7 @@ import Message from '../components/Message.astro';
       <div class="card">
         <h2>{m.submit_fixTitle()}</h2>
         <p class="hint">{m.submit_fixBody()}</p>
-        <a class="btn btn--ghost" href={ISSUE_URLS.correction('Correzione: ')} rel="noopener">
+        <a class="btn btn--ghost" href={ISSUE_URLS.correction('')} rel="noopener">
           {m.submit_fixButton()}
         </a>
       </div>
@@ -349,13 +358,15 @@ import Message from '../components/Message.astro';
 </style>
 
 <script>
+  import { ISSUE_LABELS, ISSUE_TITLES, SUBMIT_ENDPOINT, issueFormUrl } from '../lib/site';
+
   /**
-   * The form posts to a Worker that opens the issue on the sender's behalf, so
-   * no GitHub account is needed. The site stays static: this is just a fetch.
-   * With no endpoint configured, every submission takes the GitHub fallback.
+   * With an endpoint, the form posts to a Worker that opens the issue on the
+   * sender's behalf, so no GitHub account is needed. Without one — or when the
+   * Worker fails — it sends the person to the GitHub Issue Form with their
+   * answers already filled in. Either way the site stays static.
    */
   const form = document.querySelector<HTMLFormElement>('[data-submit-form]');
-  const endpoint = form?.dataset.endpoint ?? '';
   const status = document.querySelector<HTMLElement>('[data-form-status]');
 
   // Copy translated at build time, handed over as JSON on a data attribute:
@@ -376,9 +387,8 @@ import Message from '../components/Message.astro';
     const data = new FormData(form);
     const categories = data.getAll('categories').map(String);
 
-    // Minimal client-side validation: the Worker revalidates everything with
-    // the same Zod schema as the rest of the project. This only avoids a
-    // pointless round trip.
+    // Minimal client-side validation: the Worker, or the Issue Form's required
+    // fields, check again. This only avoids a pointless round trip.
     const name = String(data.get('name') ?? '').trim();
     const eventsUrl = String(data.get('eventsUrl') ?? '').trim();
     const missing: string[] = [];
@@ -396,25 +406,45 @@ import Message from '../components/Message.astro';
       return;
     }
 
+    const answers = {
+      name,
+      tagline: String(data.get('tagline') ?? '').trim(),
+      categories,
+      area: String(data.get('area') ?? ''),
+      eventsUrl,
+      icsUrl: String(data.get('icsUrl') ?? '').trim(),
+      contacts: String(data.get('contacts') ?? '').trim(),
+    };
+
+    // Keyed by the field ids of the new-community Issue Form, so the issue that
+    // comes out is one tools/issue-to-yaml.ts can read.
+    const issueUrl = issueFormUrl(ISSUE_LABELS.newCommunity, ISSUE_TITLES.newCommunity(name), {
+      name: answers.name,
+      tagline: answers.tagline,
+      categories: answers.categories.join(','),
+      area: answers.area,
+      events_url: answers.eventsUrl,
+      ics_url: answers.icsUrl,
+      contacts: answers.contacts,
+    });
+
+    if (!SUBMIT_ENDPOINT) {
+      show(copy.redirecting ?? '', 'info');
+      window.location.assign(issueUrl);
+      return;
+    }
+
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (button) button.disabled = true;
     show(copy.sending ?? '', 'info');
 
     try {
-      if (!endpoint) throw new Error('no submit endpoint configured');
-
-      const response = await fetch(endpoint, {
+      const response = await fetch(SUBMIT_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          kind: 'nuova-community',
-          name,
-          tagline: String(data.get('tagline') ?? '').trim(),
-          categories,
-          area: String(data.get('area') ?? 'citta'),
-          eventsUrl,
-          icsUrl: String(data.get('icsUrl') ?? '').trim(),
-          contacts: String(data.get('contacts') ?? '').trim(),
+          kind: ISSUE_LABELS.newCommunity,
+          ...answers,
           contact: String(data.get('contact') ?? '').trim(),
         }),
       });
@@ -436,19 +466,10 @@ import Message from '../components/Message.astro';
     } catch {
       // The fallback is not a dead end: we send the person to GitHub with their
       // answers already filled in, so the work they did is not lost.
-      const fallback = new URL(form.dataset.issueUrl ?? '');
-      fallback.searchParams.set('labels', form.dataset.issueLabel ?? '');
-      fallback.searchParams.set('title', (copy.fallbackTitle ?? '').replace('__name__', name));
-      fallback.searchParams.set(
-        'body',
-        (copy.fallbackBody ?? '')
-          .replace('__url__', eventsUrl)
-          .replace('__topics__', categories.join(', '))
-      );
       show(copy.failed ?? '', 'error');
       if (status) {
         const link = document.createElement('a');
-        link.href = fallback.href;
+        link.href = issueUrl;
         link.rel = 'noopener';
         link.textContent = copy.failedLink ?? '';
         status.append(link);
