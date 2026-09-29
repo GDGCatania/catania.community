@@ -1,0 +1,27 @@
+---
+import { formatDateLong, formatDayMonth } from '../lib/dates';
+
+export interface Props {
+  /** ISO date or datetime of the event. */
+  iso: string;
+  format: 'long' | 'daymonth';
+}
+
+const { iso, format } = Astro.props;
+const text = format === 'long' ? formatDateLong(iso) : formatDayMonth(iso);
+---
+
+<time datetime={iso} data-local-date={format}>{text}</time>
+
+<script>
+  import { formatDateLong, formatDayMonth } from '../lib/dates';
+
+  // Whether the year is spelled out depends on the current one, and the page
+  // may have been built last year: format again against the viewer's clock.
+  const now = new Date();
+  for (const element of document.querySelectorAll<HTMLTimeElement>('[data-local-date]')) {
+    const iso = element.dateTime;
+    element.textContent =
+      element.dataset.localDate === 'long' ? formatDateLong(iso, now) : formatDayMonth(iso, now);
+  }
+</script>

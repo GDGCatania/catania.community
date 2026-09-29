@@ -5,7 +5,6 @@ import Badge from '../../components/Badge.astro';
 import {
   getCommunities,
   getEventsByCommunity,
-  formatDayMonth,
   formatTime,
   formatNumber,
 } from '../../lib/events';
@@ -15,6 +14,7 @@ import * as m from '../../paraglide/messages.js';
 import { areaLabel, categoryLabel } from '../../i18n/labels';
 import { DEFAULT_CITY, ISSUE_URLS, ROUTES } from '../../lib/site';
 import Message from '../../components/Message.astro';
+import LocalDate from '../../components/LocalDate.astro';
 
 export const getStaticPaths = (async () => {
   const communities = await getCommunities();
@@ -101,47 +101,45 @@ const description =
     <div class="main">
       <section>
         <h2>{m.community_upcoming()}</h2>
-        {
-          upcoming.length === 0 ? (
-            <p class="empty">{m.community_noUpcoming()}</p>
-          ) : (
-            <ul class="events">
-              {upcoming.map((event) => (
-                <li>
-                  <span class="date mono">
-                    {formatDayMonth(event.start)}
-                    <span class="hour">{formatTime(event.start)}</span>
-                  </span>
-                  <span class="info">
-                    <a href={ROUTES.event(event.slug)}>{event.title}</a>
-                    <span class="place">
-                      {event.online ? m.status_online() : (event.venue?.name ?? m.community_venueTbc())}
-                    </span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )
-        }
+        {/* Both lists and the empty state are always rendered: the page is
+            only rebuilt when the data changes, so the script below moves the
+            events that have ended since into the archive. */}
+        <p class="empty" data-upcoming-empty hidden={upcoming.length > 0}>
+          {m.community_noUpcoming()}
+        </p>
+        <ul class="events" data-upcoming hidden={upcoming.length === 0}>
+          {upcoming.map((event) => (
+            <li data-ends={event.end ?? event.start}>
+              <span class="date mono">
+                <LocalDate iso={event.start} format="daymonth" />
+                <span class="hour" data-upcoming-only>{formatTime(event.start)}</span>
+              </span>
+              <span class="info">
+                <a href={ROUTES.event(event.slug)}>{event.title}</a>
+                <span class="place" data-upcoming-only>
+                  {event.online ? m.status_online() : (event.venue?.name ?? m.community_venueTbc())}
+                </span>
+              </span>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      {
-        past.length > 0 && (
-          <section class="archive">
-            <h2>{m.community_past()}</h2>
-            <ul class="events events--past">
-              {past.map((event) => (
-                <li>
-                  <span class="date mono">{formatDayMonth(event.start)}</span>
-                  <span class="info">
-                    <a href={ROUTES.event(event.slug)}>{event.title}</a>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )
-      }
+      <section class="archive" data-archive hidden={past.length === 0}>
+        <h2>{m.community_past()}</h2>
+        <ul class="events events--past" data-past>
+          {past.map((event) => (
+            <li>
+              <span class="date mono">
+                <LocalDate iso={event.start} format="daymonth" />
+              </span>
+              <span class="info">
+                <a href={ROUTES.event(event.slug)}>{event.title}</a>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
 
     <aside class="side">
@@ -194,6 +192,31 @@ const description =
     </aside>
   </div>
 </BaseLayout>
+
+<script>
+  const upcomingList = document.querySelector<HTMLElement>('[data-upcoming]');
+  const pastList = document.querySelector<HTMLElement>('[data-past]');
+  const archive = document.querySelector<HTMLElement>('[data-archive]');
+  const empty = document.querySelector<HTMLElement>('[data-upcoming-empty]');
+
+  if (upcomingList && pastList && archive && empty) {
+    const now = new Date();
+    // Upcoming is sorted oldest first, the archive newest first: whatever
+    // ended goes on top of the archive, in reverse.
+    const ended = [...upcomingList.querySelectorAll<HTMLElement>('li[data-ends]')].filter(
+      (item) => new Date(item.dataset.ends ?? '') < now
+    );
+    for (const item of ended) {
+      for (const detail of item.querySelectorAll('[data-upcoming-only]')) detail.remove();
+      pastList.prepend(item);
+    }
+
+    const remaining = upcomingList.children.length;
+    upcomingList.hidden = remaining === 0;
+    empty.hidden = remaining > 0;
+    archive.hidden = pastList.children.length === 0;
+  }
+</script>
 
 <style>
   .crumbs {

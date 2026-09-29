@@ -4,6 +4,7 @@ import { parse as parseYaml } from 'yaml';
 import { CommunitySchema, EventFileSchema, type Community, type Event } from './schema';
 import { TIMEZONE } from './site';
 import { localeTag } from '../i18n';
+import { dayLabel, formatDateLong, formatDayMonth, localDayKey } from './dates';
 import * as m from '../paraglide/messages.js';
 
 /**
@@ -15,7 +16,7 @@ const ROOT = path.resolve(process.cwd());
 const EVENTS_DIR = path.join(ROOT, 'data/events');
 const COMMUNITIES_DIR = path.join(ROOT, 'sources/communities');
 
-export { TIMEZONE };
+export { TIMEZONE, localDayKey, formatDateLong, formatDayMonth };
 
 let cache: { events: Event[]; communities: Community[] } | null = null;
 
@@ -128,89 +129,20 @@ export function groupByDay(events: Event[], now = new Date()): EventDay[] {
     else days.set(key, [event]);
   }
 
-  const todayKey = localDayKey(now);
-  const tomorrowKey = localDayKey(new Date(now.getTime() + 86_400_000));
-
   return [...days.entries()]
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([key, dayEvents]) => ({
       key,
       date: new Date(`${key}T12:00:00Z`),
-      label: dayLabel(key, todayKey, tomorrowKey),
+      label: dayLabel(key, now),
       events: dayEvents,
     }));
-}
-
-function dayLabel(key: string, todayKey: string, tomorrowKey: string): string {
-  const date = new Date(`${key}T12:00:00Z`);
-  const formatted = new Intl.DateTimeFormat(localeTag, {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'short',
-    // Same rule as the lists: the year shows up only once it is not this one.
-    ...(key.slice(0, 4) !== todayKey.slice(0, 4) ? { year: 'numeric' as const } : {}),
-    timeZone: 'UTC',
-  }).format(date);
-
-  if (key === todayKey) return `${m.event_today()} · ${formatted}`;
-  if (key === tomorrowKey) return `${m.event_tomorrow()} · ${formatted}`;
-  return capitalise(formatted);
-}
-
-/** Italian weekday names come out lowercase from Intl; English already caps. */
-function capitalise(value: string): string {
-  return value.charAt(0).toUpperCase() + value.slice(1);
-}
-
-/** `YYYY-MM-DD` of an instant, in the events' timezone. */
-export function localDayKey(date: Date): string {
-  // en-CA gives ISO-ordered output regardless of the site language.
-  return new Intl.DateTimeFormat('en-CA', {
-    timeZone: TIMEZONE,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).format(date);
 }
 
 export function formatTime(iso: string): string {
   // The offset is already in the string: read the local time as written rather
   // than converting, so the time shown is the event's own.
   return iso.slice(11, 16);
-}
-
-/**
- * Whether a date needs its year spelled out: only when it is not the current
- * one. This is what keeps an archive readable — the communities here run
- * recurring meetups, so a list of "14 LUG · 23 APR · 14 LUG" gives no way to
- * tell three editions apart. Within the current year the year is noise.
- */
-function isOtherYear(iso: string, now: Date): boolean {
-  return iso.slice(0, 4) !== localDayKey(now).slice(0, 4);
-}
-
-export function formatDateLong(iso: string, now = new Date()): string {
-  return capitalise(
-    new Intl.DateTimeFormat(localeTag, {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      ...(isOtherYear(iso, now) ? { year: 'numeric' as const } : {}),
-      timeZone: 'UTC',
-    }).format(new Date(`${iso.slice(0, 10)}T12:00:00Z`))
-  );
-}
-
-export function formatDayMonth(iso: string, now = new Date()): string {
-  return new Intl.DateTimeFormat(localeTag, {
-    day: '2-digit',
-    month: 'short',
-    ...(isOtherYear(iso, now) ? { year: 'numeric' as const } : {}),
-    timeZone: 'UTC',
-  })
-    .format(new Date(`${iso.slice(0, 10)}T12:00:00Z`))
-    .toUpperCase()
-    .replace('.', '');
 }
 
 export function formatNumber(value: number): string {
