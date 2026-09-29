@@ -1,5 +1,6 @@
 import * as m from '../paraglide/messages.js';
 import type { Area, Category, Price } from '../lib/schema';
+import { DEFAULT_CITY } from '../lib/site';
 
 export const categoryLabel: Record<Category, () => string> = {
   tech: m.category_tech,
@@ -10,7 +11,7 @@ export const categoryLabel: Record<Category, () => string> = {
 };
 
 export const areaLabel: Record<Area, () => string> = {
-  citta: m.area_citta,
+  citta: () => m.area_citta({ city: DEFAULT_CITY }),
   provincia: m.area_provincia,
   online: m.area_online,
 };

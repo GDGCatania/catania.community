@@ -1,7 +1,7 @@
 ---
 import * as m from '../paraglide/messages.js';
 import Message from './Message.astro';
-import { REPO_URL, ROUTES, SITE_NAME, FOOTER_ABOUT } from '../lib/site';
+import { REPO_URL, ROUTES, SITE_NAME, FOOTER_ABOUT, DEFAULT_CITY } from '../lib/site';
 
 const year = new Date().getFullYear();
 ---
@@ -50,7 +50,7 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="container bottom">
-    <span class="mono">{year} · {m.footer_madeIn()}</span>
+    <span class="mono">{year} · {m.footer_madeIn({ city: DEFAULT_CITY })}</span>
   </div>
 </footer>
 

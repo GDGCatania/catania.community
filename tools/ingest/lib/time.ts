@@ -1,3 +1,5 @@
+import { TIMEZONE } from '../../../src/lib/site.js';
+
 /**
  * Timezone helpers shared by the adapters.
  *
@@ -7,8 +9,8 @@
  * the offset has to be computed for the event's own date, never hardcoded.
  */
 
-/** Reference timezone: sources without one are read as Italian local time. */
-export const DEFAULT_TZ = 'Europe/Rome';
+/** Reference timezone (`site.config.ts`): sources without one are read as local time. */
+export const DEFAULT_TZ = TIMEZONE;
 
 const pad = (n: number) => String(n).padStart(2, '0');
 

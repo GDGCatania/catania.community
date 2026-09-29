@@ -13,7 +13,7 @@ import { breadcrumbJsonLd, communityJsonLd } from '../../lib/jsonld';
 import { absoluteUrl } from '../../lib/urls';
 import * as m from '../../paraglide/messages.js';
 import { areaLabel, categoryLabel } from '../../i18n/labels';
-import { ISSUE_URLS, ROUTES } from '../../lib/site';
+import { DEFAULT_CITY, ISSUE_URLS, ROUTES } from '../../lib/site';
 import Message from '../../components/Message.astro';
 
 export const getStaticPaths = (async () => {
@@ -50,7 +50,7 @@ const links = Object.entries(community.links).filter(
 
 const description =
   community.description?.slice(0, 155) ??
-  m.community_metaFallback({ name: community.name, count: upcoming.length });
+  m.community_metaFallback({ name: community.name, count: upcoming.length, city: DEFAULT_CITY });
 ---
 
 <BaseLayout

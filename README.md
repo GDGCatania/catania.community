@@ -11,7 +11,8 @@ GitHub Actions twice a day and commit their results back into the repository, so
 the site stays online with the last good data.
 
 > The deployed site is in Italian. The interface is fully translated (see [Languages](#languages)),
-> so a fork elsewhere can ship in English by changing one line.
+> and everything specific to Catania lives in one config file: see
+> [Run it for your city](#run-it-for-your-city).
 
 ## Development
 
@@ -142,6 +143,63 @@ that published them and stay in their own language.
 
 Code, comments and URL slugs are in English so that anyone can contribute. The Issue Forms are in
 Italian because they are the contribution surface for local organisers.
+
+## Run it for your city
+
+The code knows nothing about Catania: the city, the copy and the data live in a handful of files. A
+fork for another city touches exactly these.
+
+**1. `site.config.ts`** — the only source file to edit.
+
+| Group | Keys |
+| --- | --- |
+| Identity | `name`, `url`, `repo` |
+| Place | `city`, `region`, `country`, `countryName`, `timezone`, `boundingBox`, `map` |
+| Language and money | `defaultLanguage`, `defaultLanguageCode`, `currency` |
+| Vocabulary | `categories`, `areas` |
+| Branding copy | `headline`, `headlineAccent`, `metaDescription`, `metaDescriptionWithCount`, `feedTitle`, `feedDescription`, `footerAbout` |
+| Contributions | `issueLabels`, `exampleCommunityName`, `submitEndpoint` |
+| Social preview | `ogImage` |
+
+Every key is documented in the file. A few are worth reading twice:
+
+- `timezone` is how every date without an explicit offset is read, at ingest and on the page. Get it
+  wrong and events are shifted by an hour or more, silently.
+- `city` is also what the geocoder checks every result against, and `defaultLanguageCode` is the
+  language place names are requested in: spell the city the way OpenStreetMap does in that language.
+- `boundingBox` rejects coordinates outside it. Draw it loosely around the whole area you cover.
+- `areas` keeps its three keys (`citta`, `provincia`, `online`), because the ingest logic depends on
+  what they mean — the city itself, the rest of the area, online. Change their labels, not the keys.
+- Adding or renaming a category also means adding its `category_<key>` message and its entry in
+  `src/i18n/labels.ts`; the type checker points at every place that is missing it.
+- `submitEndpoint` is the service behind the "add your community" form. It is not part of this
+  repository; set it to `null` and the form sends people to GitHub with their answers pre-filled.
+- `ogImage` is `null` until you add a 1200×630 image under `public/` and point it there.
+
+**2. The interface language** — `baseLocale` in `project.inlang/settings.json` (see
+[Languages](#languages)). A handful of messages mention the place: they take `{city}` from the config,
+but read `messages/<locale>.json` once with your area in mind (for instance `area_provincia`,
+`communities_metaDescription`).
+
+**3. The domain** — set the custom domain in the repository's Pages settings and put the same host in
+`public/CNAME` (or delete the file if you stay on `github.io`). `robots.txt`, the sitemap, canonical
+URLs and iCal identifiers follow `url` on their own.
+
+**4. The Issue Forms** — `.github/ISSUE_TEMPLATE/*.yml` are the contribution surface for local
+organisers, so they are written in the local language and point at the site. Translate them if
+needed, but keep the field labels of `nuova-community.yml` in sync with `tools/issue-to-yaml.ts`,
+which reads the issue by those labels, and keep the file names equal to `issueLabels`.
+
+**5. The data** — empty `sources/communities/`, `sources/events/`, `sources/venues/` and `data/`, then
+add your first community (see [CONTRIBUTING.md](CONTRIBUTING.md#adding-a-community)) and run
+`npm run ingest`.
+
+**6. Hosting** — enable GitHub Pages with *GitHub Actions* as the source, create the
+`nuova-community` and `correzione` labels (or whatever `issueLabels` says), and allow Actions to
+open pull requests. The two ingest runs a day start on their own.
+
+Then `npm test && npm run check && npm run build`: the schema validates every YAML file against the
+new config, so a coordinate outside the bounding box or an unknown category fails the build.
 
 ## Contributing
 

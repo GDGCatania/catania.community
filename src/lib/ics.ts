@@ -1,11 +1,12 @@
 import type { Community, Event } from './schema';
 import * as m from '../paraglide/messages.js';
+import { DEFAULT_LANGUAGE_CODE, SITE_HOST, SITE_NAME, TIMEZONE } from './site';
 
 /**
  * Outgoing iCalendar generation.
  *
  * The project consumes open standards, so it republishes them: anyone who wants
- * Catania's events in their own calendar should not have to come back here.
+ * these events in their own calendar should not have to come back here.
  */
 
 /** RFC 5545: lines must not exceed 75 octets. */
@@ -51,7 +52,7 @@ function toIcsUtc(iso: string): string {
 export function eventToVevent(event: Event, community?: Community): string[] {
   const lines = [
     'BEGIN:VEVENT',
-    `UID:${event.id.replace(/[^\w:.-]/g, '-')}@catania.community`,
+    `UID:${event.id.replace(/[^\w:.-]/g, '-')}@${SITE_HOST}`,
     `DTSTAMP:${toIcsUtc(event.source.fetchedAt)}`,
     `DTSTART:${toIcsUtc(event.start)}`,
   ];
@@ -95,11 +96,11 @@ export function buildCalendar(
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//catania.community//agenda//IT',
+    `PRODID:-//${SITE_NAME}//agenda//${DEFAULT_LANGUAGE_CODE.toUpperCase()}`,
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     `X-WR-CALNAME:${escapeText(calendarName)}`,
-    'X-WR-TIMEZONE:Europe/Rome',
+    `X-WR-TIMEZONE:${TIMEZONE}`,
   ];
 
   for (const event of events) {

@@ -4,13 +4,21 @@ import { breadcrumbJsonLd } from '../lib/jsonld';
 import { CATEGORIES, AREAS } from '../lib/schema';
 import * as m from '../paraglide/messages.js';
 import { areaLabel, categoryLabel } from '../i18n/labels';
-import { EXAMPLE_COMMUNITY_NAME, ISSUE_URLS, ROUTES } from '../lib/site';
+import {
+  DEFAULT_CITY,
+  EXAMPLE_COMMUNITY_NAME,
+  ISSUE_LABELS,
+  ISSUE_URLS,
+  REPO_URL,
+  ROUTES,
+  SUBMIT_ENDPOINT,
+} from '../lib/site';
 import Message from '../components/Message.astro';
 ---
 
 <BaseLayout
   title={m.submit_title()}
-  description={m.submit_metaDescription()}
+  description={m.submit_metaDescription({ city: DEFAULT_CITY })}
   jsonLd={breadcrumbJsonLd([
     { name: m.nav_events(), path: ROUTES.home },
     { name: m.submit_title(), path: ROUTES.submit },
@@ -37,7 +45,12 @@ import Message from '../components/Message.astro';
     openIssue: m.submit_openIssue(),
     failed: m.submit_failed(),
     failedLink: m.submit_failedLink(),
+    fallbackTitle: m.submit_fallbackTitle({ name: '__name__' }),
+    fallbackBody: m.submit_fallbackBody({ url: '__url__', topics: '__topics__' }),
   })}
+  data-endpoint={SUBMIT_ENDPOINT ?? ''}
+  data-issue-url={`${REPO_URL}/issues/new`}
+  data-issue-label={ISSUE_LABELS.newCommunity}
 >
       <fieldset>
         <legend class="eyebrow">{m.submit_sectionCommunity()}</legend>
@@ -339,10 +352,10 @@ import Message from '../components/Message.astro';
   /**
    * The form posts to a Worker that opens the issue on the sender's behalf, so
    * no GitHub account is needed. The site stays static: this is just a fetch.
+   * With no endpoint configured, every submission takes the GitHub fallback.
    */
-  const ENDPOINT = 'https://segnala.catania.community/submit';
-
   const form = document.querySelector<HTMLFormElement>('[data-submit-form]');
+  const endpoint = form?.dataset.endpoint ?? '';
   const status = document.querySelector<HTMLElement>('[data-form-status]');
 
   // Copy translated at build time, handed over as JSON on a data attribute:
@@ -388,7 +401,9 @@ import Message from '../components/Message.astro';
     show(copy.sending ?? '', 'info');
 
     try {
-      const response = await fetch(ENDPOINT, {
+      if (!endpoint) throw new Error('no submit endpoint configured');
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -421,12 +436,14 @@ import Message from '../components/Message.astro';
     } catch {
       // The fallback is not a dead end: we send the person to GitHub with their
       // answers already filled in, so the work they did is not lost.
-      const fallback = new URL('https://github.com/GDGCatania/catania.community/issues/new');
-      fallback.searchParams.set('labels', 'nuova-community');
-      fallback.searchParams.set('title', `Nuova community: ${name}`);
+      const fallback = new URL(form.dataset.issueUrl ?? '');
+      fallback.searchParams.set('labels', form.dataset.issueLabel ?? '');
+      fallback.searchParams.set('title', (copy.fallbackTitle ?? '').replace('__name__', name));
       fallback.searchParams.set(
         'body',
-        `Link agli eventi: ${eventsUrl}\nArgomenti: ${categories.join(', ')}`
+        (copy.fallbackBody ?? '')
+          .replace('__url__', eventsUrl)
+          .replace('__topics__', categories.join(', '))
       );
       show(copy.failed ?? '', 'error');
       if (status) {

@@ -31,6 +31,7 @@ npm run ingest -- --dry-run   # collect events, write nothing
 
 | Path                      | What it is                                                              |
 | ------------------------- | ----------------------------------------------------------------------- |
+| `site.config.ts`          | Everything specific to this instance: city, timezone, vocabulary, copy.  |
 | `sources/communities/`    | One community per file. The editorial heart of the project.             |
 | `sources/events/`         | Events curated by hand, for communities on closed platforms.            |
 | `sources/venues/`         | Venues with hand-checked coordinates. These always beat the geocoder.   |
@@ -52,7 +53,8 @@ npm run ingest -- --source <slug> --dry-run
 ```
 
 Some field values (`citta`, `provincia`, `impresa`…) stay in Italian: they are domain vocabulary that
-also appears in the YAML people edit by hand. Their human-readable labels live in `src/i18n`.
+also appears in the YAML people edit by hand. The lists are in `site.config.ts`, their human-readable
+labels in `messages/*.json` and `src/i18n/labels.ts`.
 
 ### Writing an adapter
 
@@ -103,8 +105,11 @@ the second run produce a diff, that is a bug: it turns the bot's commits into un
 
 ### Interface copy
 
-No user-facing string in a `.astro` file. Copy lives in `messages/*.json` and is compiled into typed
-functions under `src/paraglide/`. Links go *inside* the sentence, so a translator can move them:
+No user-facing string in a `.astro` file. Interface copy lives in `messages/*.json` and is compiled
+into typed functions under `src/paraglide/`. The instance's own voice — headline, meta descriptions,
+feed titles, footer paragraph — lives in `site.config.ts` instead, because a fork rewrites it rather
+than translating it. Nothing that names the city goes in either place as a literal: messages take
+`{city}` and are called with `DEFAULT_CITY`, code reads `src/lib/site.ts`. Links go *inside* the sentence, so a translator can move them:
 
 ```json
 "footer_license": "Mappe © collaboratori {#link to=$osm}OpenStreetMap{/link}."

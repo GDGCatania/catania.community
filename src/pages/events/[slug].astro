@@ -57,7 +57,7 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
   title={event.title}
   description={description}
   jsonLd={jsonLd}
-  ogImage={event.coverImage ?? '/og-default.png'}
+  ogImage={event.coverImage}
 >
   <div class="container">
     <nav class="crumbs" aria-label={m.site_sections()}>

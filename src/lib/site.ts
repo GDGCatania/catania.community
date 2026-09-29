@@ -27,6 +27,9 @@ export const COUNTRY_NAME = cfg.countryName;
 /** Default event/community language label. */
 export const DEFAULT_LANGUAGE = cfg.defaultLanguage;
 
+/** BCP 47 code of the default language, also used for geocoding. */
+export const DEFAULT_LANGUAGE_CODE = cfg.defaultLanguageCode;
+
 /** Default currency code. */
 export const DEFAULT_CURRENCY = cfg.currency;
 
@@ -36,6 +39,15 @@ export const MAP_ZOOM = cfg.map.zoom;
 
 /** Placeholder example for the submit form. */
 export const EXAMPLE_COMMUNITY_NAME = cfg.exampleCommunityName;
+
+/** Where the submit form posts; `null` means GitHub only. */
+export const SUBMIT_ENDPOINT = cfg.submitEndpoint;
+
+/** Default social preview image, or `null` for none. */
+export const DEFAULT_OG_IMAGE = cfg.ogImage;
+
+/** Bare hostname, for identifiers such as iCal UIDs. */
+export const SITE_HOST = new URL(cfg.url).host;
 
 // ── Branding copy ──────────────────────────────────────────────────────────
 
@@ -64,6 +76,9 @@ export const ROUTES = {
   feedRss: '/events.xml',
   feedJson: '/events.json',
 } as const;
+
+/** GitHub issue labels, also the names of the Issue Form templates. */
+export const ISSUE_LABELS = cfg.issueLabels;
 
 export const ISSUE_URLS = {
   newCommunity: `${REPO_URL}/issues/new?labels=${encodeURIComponent(cfg.issueLabels.newCommunity)}&template=${encodeURIComponent(cfg.issueLabels.newCommunity)}.yml`,
