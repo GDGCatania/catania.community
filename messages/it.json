@@ -5,6 +5,8 @@
   "calendar_aria": "Calendario di {month}",
   "calendar_dayAria": "{day}: {events}",
   "calendar_legend": "un pallino = un evento in quel giorno",
+  "calendar_next": "Mese successivo",
+  "calendar_prev": "Mese precedente",
   "calendar_weekdays": "L,M,M,G,V,S,D",
   "category_cultura": "Cultura",
   "category_design": "Design",
