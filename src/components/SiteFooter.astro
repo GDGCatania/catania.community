@@ -51,9 +51,15 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="container bottom">
-    <span class="mono">{year} · <Message of={m.footer_freeSoftware} links={{ repo: UPSTREAM_REPO_URL }} /></span>
+    <span class="mono"><span data-current-year>{year}</span> · <Message of={m.footer_freeSoftware} links={{ repo: UPSTREAM_REPO_URL }} /></span>
   </div>
 </footer>
+
+<script>
+  // The page may have been built last year.
+  const year = document.querySelector('[data-current-year]');
+  if (year) year.textContent = String(new Date().getFullYear());
+</script>
 
 <style>
   .site-footer {

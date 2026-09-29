@@ -152,7 +152,11 @@ const categories = CATEGORIES.filter((category) => availableCategories.includes(
     // the right state even before this script runs.
     const buttons = [...form.querySelectorAll<HTMLButtonElement>('[data-filter]')];
 
-    function matches(row: HTMLElement, todayIso: string, horizonIso: string): boolean {
+    function matches(row: HTMLElement, now: Date, todayIso: string, horizonIso: string): boolean {
+      // The page is only rebuilt when the data changes, so it can still list
+      // events that ended after the build. Not a filter: they are always out.
+      if (new Date(row.dataset.end ?? '') < now) return false;
+
       if (selected.area.size > 0 && !selected.area.has(row.dataset.area ?? '')) return false;
       if (selected.price.has('free') && row.dataset.price !== 'free') return false;
 
@@ -176,8 +180,10 @@ const categories = CATEGORIES.filter((category) => availableCategories.includes(
       const horizonIso = isoDay(new Date(now.getTime() + 30 * 86_400_000));
 
       let visible = 0;
+      let upcoming = 0;
       for (const row of rows) {
-        const ok = matches(row, todayIso, horizonIso);
+        if (new Date(row.dataset.end ?? '') >= now) upcoming++;
+        const ok = matches(row, now, todayIso, horizonIso);
         row.hidden = !ok;
         if (ok) visible++;
       }
@@ -190,7 +196,13 @@ const categories = CATEGORIES.filter((category) => availableCategories.includes(
         if (counter) counter.textContent = event_count({ count });
       }
 
-      if (emptyState) emptyState.hidden = visible > 0;
+      if (emptyState) {
+        emptyState.hidden = visible > 0;
+        const reason = upcoming === 0 ? 'none' : 'filtered';
+        for (const message of emptyState.querySelectorAll<HTMLElement>('[data-empty]')) {
+          message.hidden = message.dataset.empty !== reason;
+        }
+      }
 
       const active = Object.values(selected).some((set) => set.size > 0);
       if (resetButton) resetButton.hidden = !active;

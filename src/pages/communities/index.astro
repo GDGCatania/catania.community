@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Badge from '../../components/Badge.astro';
 import { getCommunities, getUpcomingEvents, formatDayMonth } from '../../lib/events';
+import type { Event } from '../../lib/schema';
 import { breadcrumbJsonLd } from '../../lib/jsonld';
 import * as m from '../../paraglide/messages.js';
 import { areaLabel, categoryLabel } from '../../i18n/labels';
@@ -9,9 +10,13 @@ import { DEFAULT_CITY, ISSUE_URLS, ROUTES } from '../../lib/site';
 
 const [communities, upcoming] = await Promise.all([getCommunities(), getUpcomingEvents()]);
 
-const nextByCommunity = new Map<string, (typeof upcoming)[number]>();
+// Every upcoming event, not just the next one: the page is only rebuilt when
+// the data changes, so the script below skips the ones that ended since.
+const upcomingByCommunity = new Map<string, Event[]>();
 for (const event of upcoming) {
-  if (!nextByCommunity.has(event.communityId)) nextByCommunity.set(event.communityId, event);
+  const list = upcomingByCommunity.get(event.communityId) ?? [];
+  list.push(event);
+  upcomingByCommunity.set(event.communityId, list);
 }
 
 const active = communities.filter((community) => community.active);
@@ -37,7 +42,8 @@ const active = communities.filter((community) => community.active);
     <ul class="grid">
       {
         active.map((community) => {
-          const next = nextByCommunity.get(community.id);
+          const events = upcomingByCommunity.get(community.id) ?? [];
+          const next = events[0];
           return (
             <li class="card">
               <a class="name" href={ROUTES.community(community.id)}>
@@ -54,10 +60,16 @@ const active = communities.filter((community) => community.active);
 
               <p class="meta mono">
                 {community.members ? m.communities_members({ count: community.members }) : null}
-                {community.members && next ? ' · ' : null}
-                {next
-                  ? m.communities_next({ date: formatDayMonth(next.start) })
-                  : m.communities_noUpcoming()}
+                {community.members ? ' · ' : null}
+                <span
+                  data-next-event={JSON.stringify(
+                    events.map((event) => ({ start: event.start, end: event.end ?? event.start }))
+                  )}
+                >
+                  {next
+                    ? m.communities_next({ date: formatDayMonth(next.start) })
+                    : m.communities_noUpcoming()}
+                </span>
               </p>
             </li>
           );
@@ -77,6 +89,20 @@ const active = communities.filter((community) => community.active);
     </ul>
   </div>
 </BaseLayout>
+
+<script>
+  import { communities_next, communities_noUpcoming } from '../../paraglide/messages.js';
+  import { formatDayMonth } from '../../lib/dates';
+
+  const now = new Date();
+  for (const element of document.querySelectorAll<HTMLElement>('[data-next-event]')) {
+    const events = JSON.parse(element.dataset.nextEvent ?? '[]') as { start: string; end: string }[];
+    const next = events.find((event) => new Date(event.end) >= now);
+    element.textContent = next
+      ? communities_next({ date: formatDayMonth(next.start, now) })
+      : communities_noUpcoming();
+  }
+</script>
 
 <style>
   .head {

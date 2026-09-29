@@ -25,6 +25,7 @@ const where = event.online
   data-event-row
   data-index={index}
   data-day={event.start.slice(0, 10)}
+  data-end={event.end ?? event.start}
   data-area={event.area}
   data-price={event.price.type}
   data-categories={event.categories.join(' ')}

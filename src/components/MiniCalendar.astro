@@ -6,85 +6,122 @@ import * as m from '../paraglide/messages.js';
 export interface Props {
   /** Events per day, keyed by `YYYY-MM-DD`. */
   counts: Record<string, number>;
-  /** Month to render (`YYYY-MM`). Defaults to the current one. */
-  month?: string;
 }
 
+const { counts } = Astro.props;
+
+// The page is only rebuilt when the data changes, so the month the viewer is
+// in may not be the build's. Every month from the build's to the last one with
+// events is rendered (at least two, to cover a month boundary), and the client
+// script shows the right one. Without JavaScript the build's month stays.
 const now = new Date();
-const { counts, month = localDayKey(now).slice(0, 7) } = Astro.props;
-
-const [year, monthNumber] = month.split('-').map(Number);
-const first = new Date(Date.UTC(year!, monthNumber! - 1, 1));
-const daysInMonth = new Date(Date.UTC(year!, monthNumber!, 0)).getUTCDate();
-
-// getUTCDay(): 0 = Sunday. The week starts on Monday here.
-const leadingBlanks = (first.getUTCDay() + 6) % 7;
-
-const monthLabel = new Intl.DateTimeFormat(localeTag, {
-  month: 'long',
-  year: 'numeric',
-  timeZone: 'UTC',
-}).format(first);
-
 const todayKey = localDayKey(now);
+const firstMonth = todayKey.slice(0, 7);
+const lastMonth = [nextMonth(firstMonth), ...Object.keys(counts).map((key) => key.slice(0, 7))]
+  .sort()
+  .at(-1)!;
 
-const cells = [
-  ...Array.from({ length: leadingBlanks }, () => null),
-  ...Array.from({ length: daysInMonth }, (_, i) => {
-    const day = i + 1;
-    const key = `${month}-${String(day).padStart(2, '0')}`;
-    return { day, key, count: counts[key] ?? 0, isToday: key === todayKey };
-  }),
-];
+const months: string[] = [];
+for (let month = firstMonth; month <= lastMonth; month = nextMonth(month)) months.push(month);
 
-const totalInMonth = Object.entries(counts)
-  .filter(([key]) => key.startsWith(month))
-  .reduce((sum, [, count]) => sum + count, 0);
+function nextMonth(month: string): string {
+  const [year, monthNumber] = month.split('-').map(Number);
+  return new Date(Date.UTC(year!, monthNumber!, 1)).toISOString().slice(0, 7);
+}
+
+const calendars = months.map((month) => {
+  const [year, monthNumber] = month.split('-').map(Number);
+  const first = new Date(Date.UTC(year!, monthNumber! - 1, 1));
+  const daysInMonth = new Date(Date.UTC(year!, monthNumber!, 0)).getUTCDate();
+
+  // getUTCDay(): 0 = Sunday. The week starts on Monday here.
+  const leadingBlanks = (first.getUTCDay() + 6) % 7;
+
+  const label = new Intl.DateTimeFormat(localeTag, {
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(first);
+
+  const cells = [
+    ...Array.from({ length: leadingBlanks }, () => null),
+    ...Array.from({ length: daysInMonth }, (_, i) => {
+      const day = i + 1;
+      const key = `${month}-${String(day).padStart(2, '0')}`;
+      return { day, key, count: counts[key] ?? 0, isToday: key === todayKey };
+    }),
+  ];
+
+  const total = Object.entries(counts)
+    .filter(([key]) => key.startsWith(month))
+    .reduce((sum, [, count]) => sum + count, 0);
+
+  return { month, label, cells, total };
+});
 ---
 
-<section class="calendar" aria-label={m.calendar_aria({ month: monthLabel })}>
-  <header>
-    <h3 class="month">{monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1)}</h3>
-    <span class="eyebrow">{eventCount(totalInMonth)}</span>
-  </header>
+{
+  calendars.map(({ month, label, cells, total }, index) => (
+    <section
+      class="calendar"
+      data-calendar-month={month}
+      hidden={index > 0}
+      aria-label={m.calendar_aria({ month: label })}
+    >
+      <header>
+        <h3 class="month">{label.charAt(0).toUpperCase() + label.slice(1)}</h3>
+        <span class="eyebrow" data-calendar-total>{eventCount(total)}</span>
+      </header>
 
-  <div class="weekdays" aria-hidden="true">
-    {m.calendar_weekdays().split(',').map((initial) => <span>{initial}</span>)}
-  </div>
+      <div class="weekdays" aria-hidden="true">
+        {m.calendar_weekdays().split(',').map((initial) => <span>{initial}</span>)}
+      </div>
 
-  <div class="grid">
-    {
-      cells.map((cell) =>
-        cell === null ? (
-          <span class="cell cell--blank"></span>
-        ) : cell.count > 0 ? (
-          <button
-            type="button"
-            class:list={['cell', 'cell--has', { 'cell--today': cell.isToday }]}
-            data-calendar-day={cell.key}
-            aria-label={m.calendar_dayAria({ day: cell.day, events: eventCount(cell.count) })}
-          >
-            {cell.day}
-            <span class="dots" aria-hidden="true">
-              {Array.from({ length: Math.min(cell.count, 3) }, () => (
-                <span class="dot"></span>
-              ))}
-            </span>
-          </button>
-        ) : (
-          <span class:list={['cell', { 'cell--today': cell.isToday }]}>{cell.day}</span>
-        )
-      )
-    }
-  </div>
+      <div class="grid">
+        {
+          cells.map((cell) =>
+            cell === null ? (
+              <span class="cell cell--blank"></span>
+            ) : cell.count > 0 ? (
+              <button
+                type="button"
+                class:list={['cell', 'cell--has', { 'cell--today': cell.isToday }]}
+                data-calendar-day={cell.key}
+                data-calendar-count={cell.count}
+                aria-label={m.calendar_dayAria({ day: cell.day, events: eventCount(cell.count) })}
+              >
+                {cell.day}
+                <span class="dots" aria-hidden="true">
+                  {Array.from({ length: Math.min(cell.count, 3) }, () => (
+                    <span class="dot"></span>
+                  ))}
+                </span>
+              </button>
+            ) : (
+              <span
+                class:list={['cell', { 'cell--today': cell.isToday }]}
+                data-calendar-day={cell.key}
+              >
+                {cell.day}
+              </span>
+            )
+          )
+        }
+      </div>
 
-  <p class="legend">
-    <span class="dot" aria-hidden="true"></span>
-    {m.calendar_legend()}
-  </p>
-</section>
+      <p class="legend">
+        <span class="dot" aria-hidden="true"></span>
+        {m.calendar_legend()}
+      </p>
+    </section>
+  ))
+}
 
 <style>
+  .calendar[hidden] {
+    display: none;
+  }
+
   .calendar {
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
@@ -149,7 +186,7 @@ const totalInMonth = Object.entries(counts)
     cursor: pointer;
   }
 
-  .cell--has:hover {
+  .cell--has:not(.cell--past):hover {
     border-color: var(--accent);
     color: var(--accent);
   }
@@ -157,6 +194,19 @@ const totalInMonth = Object.entries(counts)
   .cell--today {
     box-shadow: inset 0 0 0 1px var(--accent);
     color: var(--accent);
+  }
+
+  /* A day with events that ended after the build: shown like any empty day. */
+  .cell--past {
+    color: var(--ink-3);
+    font-weight: 400;
+    border-color: transparent;
+    background: transparent;
+    cursor: default;
+  }
+
+  .cell--past .dots {
+    display: none;
   }
 
   .dots {
@@ -194,9 +244,47 @@ const totalInMonth = Object.entries(counts)
 </style>
 
 <script>
+  import { event_count } from '../paraglide/messages.js';
+  import { localDayKey } from '../lib/dates';
+
+  // Everything relative to today was computed at build time: fix it against
+  // the viewer's clock. Keys are YYYY-MM-DD, so string comparison is correct.
+  const todayKey = localDayKey(new Date());
+  const todayMonth = todayKey.slice(0, 7);
+  const calendars = [...document.querySelectorAll<HTMLElement>('[data-calendar-month]')];
+
+  // The viewer's month, or the nearest rendered one if it falls outside.
+  const shown =
+    calendars.find((calendar) => calendar.dataset.calendarMonth === todayMonth) ??
+    (todayMonth < (calendars[0]?.dataset.calendarMonth ?? '') ? calendars[0] : calendars.at(-1));
+
+  for (const calendar of calendars) {
+    calendar.hidden = calendar !== shown;
+
+    let total = 0;
+    for (const cell of calendar.querySelectorAll<HTMLElement>('[data-calendar-day]')) {
+      const key = cell.dataset.calendarDay ?? '';
+      cell.classList.toggle('cell--today', key === todayKey);
+
+      const count = Number(cell.dataset.calendarCount ?? 0);
+      if (count === 0) continue;
+
+      // Those events are already hidden from the list: nothing to scroll to.
+      if (key < todayKey) {
+        cell.classList.add('cell--past');
+        (cell as HTMLButtonElement).disabled = true;
+      } else {
+        total += count;
+      }
+    }
+
+    const counter = calendar.querySelector<HTMLElement>('[data-calendar-total]');
+    if (counter) counter.textContent = event_count({ count: total });
+  }
+
   // Clicking a day with events scrolls to that day's heading. The calendar is
   // a navigation aid, not a hidden filter.
-  for (const cell of document.querySelectorAll<HTMLElement>('[data-calendar-day]')) {
+  for (const cell of document.querySelectorAll<HTMLButtonElement>('button[data-calendar-day]')) {
     cell.addEventListener('click', () => {
       document.dispatchEvent(
         new CustomEvent('agenda:selectday', { detail: { day: cell.dataset.calendarDay } })

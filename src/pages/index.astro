@@ -53,7 +53,7 @@ const communityCount = m.communities_count({ count: allCommunities.length });
         days.map((day) => (
           <section class="day" data-day-group={day.key}>
             <header class="day-head">
-              <h2 class="day-label">{day.label}</h2>
+              <h2 class="day-label" data-day-label={day.key}>{day.label}</h2>
               <span class="eyebrow" data-day-count>
                 {eventCount(day.events.length)}
               </span>
@@ -71,13 +71,12 @@ const communityCount = m.communities_count({ count: allCommunities.length });
       }
 
       <p class="empty" data-empty-state hidden={events.length > 0}>
-        {
-          events.length === 0 ? (
-            <Message of={m.home_empty} links={{ submit: ROUTES.submit }} />
-          ) : (
-            m.home_emptyFiltered()
-          )
-        }
+        {/* Both are rendered: the filter script picks one, since events that
+            ended after the build can empty the list with no filter active. */}
+        <span data-empty="none" hidden={events.length > 0}>
+          <Message of={m.home_empty} links={{ submit: ROUTES.submit }} />
+        </span>
+        <span data-empty="filtered" hidden={events.length === 0}>{m.home_emptyFiltered()}</span>
       </p>
     </div>
 
@@ -93,6 +92,17 @@ const communityCount = m.communities_count({ count: allCommunities.length });
     </aside>
   </div>
 </BaseLayout>
+
+<script>
+  import { dayLabel } from '../lib/dates';
+
+  // "Today" and "Tomorrow" were decided at build time, and the page is only
+  // rebuilt when the data changes: recompute them against the viewer's clock.
+  const now = new Date();
+  for (const heading of document.querySelectorAll<HTMLElement>('[data-day-label]')) {
+    heading.textContent = dayLabel(heading.dataset.dayLabel ?? '', now);
+  }
+</script>
 
 <style>
   .hero {

@@ -10,6 +10,7 @@ import * as m from '../../paraglide/messages.js';
 import { categoryLabel, priceLabel } from '../../i18n/labels';
 import { DEFAULT_CITY, ISSUE_URLS, ROUTES } from '../../lib/site';
 import Message from '../../components/Message.astro';
+import LocalDate from '../../components/LocalDate.astro';
 
 export const getStaticPaths = (async () => {
   const [events, communities] = await Promise.all([getAllEvents(), getCommunityMap()]);
@@ -27,7 +28,8 @@ export const getStaticPaths = (async () => {
 const { event, community } = Astro.props;
 
 const canonical = absoluteUrl(Astro.url.pathname, Astro.site);
-const isPast = new Date(event.end ?? event.start) < new Date();
+const ends = event.end ?? event.start;
+const isPast = new Date(ends) < new Date();
 
 const jsonLd = [
   eventJsonLd(event, community, canonical),
@@ -46,9 +48,7 @@ const description = event.description
       community: community?.name ?? DEFAULT_CITY,
     });
 
-const when = `${formatDateLong(event.start)}, ${formatTime(event.start)}${
-  event.end ? ` – ${formatTime(event.end)}` : ''
-}`;
+const hours = `${formatTime(event.start)}${event.end ? ` – ${formatTime(event.end)}` : ''}`;
 
 const address = [event.venue?.address, event.venue?.city].filter(Boolean).join(', ');
 ---
@@ -76,9 +76,13 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
   <div class="container layout">
     <article class="main">
       {
-        (isPast || event.cancelled) && (
-          <p class="notice" role="status">
-            {event.cancelled ? m.eventPage_cancelledNotice() : m.eventPage_pastNotice()}
+        event.cancelled ? (
+          <p class="notice" role="status">{m.eventPage_cancelledNotice()}</p>
+        ) : (
+          // Always rendered: the page is only rebuilt when the data changes,
+          // so the script below shows it once the event is over.
+          <p class="notice" role="status" data-past-notice={ends} hidden={!isPast}>
+            {m.eventPage_pastNotice()}
           </p>
         )
       }
@@ -140,7 +144,7 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
       <div class="card">
         <div class="field">
           <span class="eyebrow">{m.eventPage_when()}</span>
-          <p class="when">{when}</p>
+          <p class="when"><LocalDate iso={event.start} format="long" />, {hours}</p>
         </div>
 
         <hr />
@@ -212,6 +216,11 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
     </aside>
   </div>
 </BaseLayout>
+
+<script>
+  const notice = document.querySelector<HTMLElement>('[data-past-notice]');
+  if (notice) notice.hidden = new Date(notice.dataset.pastNotice ?? '') >= new Date();
+</script>
 
 <style>
   .crumbs {
