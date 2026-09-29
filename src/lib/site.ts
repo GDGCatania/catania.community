@@ -41,7 +41,6 @@ export const EXAMPLE_COMMUNITY_NAME = cfg.exampleCommunityName;
 
 export const HEADLINE = cfg.headline;
 export const HEADLINE_ACCENT = cfg.headlineAccent;
-export const TAGLINE = cfg.tagline;
 export const META_DESCRIPTION = cfg.metaDescription;
 export const FEED_TITLE = cfg.feedTitle;
 export const FEED_DESCRIPTION = cfg.feedDescription;

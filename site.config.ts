@@ -85,13 +85,10 @@ const config = {
   // the *identity* of the site, not translatable interface labels.
 
   /** Main headline on the home page. */
-  headline: 'Tutte le community tech di catania.',
+  headline: 'Tutte le community tech di Catania.',
 
   /** Second line of the headline, rendered with accent colour. */
   headlineAccent: 'Un solo calendario.',
-
-  /** One-liner shown under the site name in the footer and in the header. */
-  tagline: 'Agenda delle community di Catania e provincia',
 
   /** `<meta name="description">` when there are no upcoming events. */
   metaDescription:

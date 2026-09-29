@@ -5,7 +5,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import { absoluteUrl } from '../lib/urls';
 import { locale, localeTag } from '../i18n';
 import * as m from '../paraglide/messages.js';
-import { ROUTES, FEED_TITLE } from '../lib/site';
+import { ROUTES, FEED_TITLE, SITE_NAME } from '../lib/site';
 
 export interface Props {
   title: string;
@@ -21,7 +21,7 @@ const { title, description, ogImage = '/og-default.png', jsonLd, noindex = false
 
 const canonical = absoluteUrl(Astro.url.pathname, Astro.site);
 const ogUrl = new URL(ogImage, Astro.site).href;
-const fullTitle = title === 'catania.community' ? title : `${title} · catania.community`;
+const fullTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
 ---
 
 <!doctype html>
@@ -36,7 +36,7 @@ const fullTitle = title === 'catania.community' ? title : `${title} · catania.c
     {noindex && <meta name="robots" content="noindex, follow" />}
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="catania.community" />
+    <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:locale" content={localeTag.replace('-', '_')} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
