@@ -9,6 +9,13 @@ export const SITE_NAME = cfg.name;
 export const SITE_URL = cfg.url;
 export const REPO_URL = cfg.repo;
 
+/**
+ * The original project, credited in the footer of every instance. Not in
+ * `site.config.ts` on purpose: a fork links its own code via `repo`, and
+ * still points here for where the software comes from.
+ */
+export const UPSTREAM_REPO_URL = 'https://github.com/GDGCatania/catania.community';
+
 /** Timezone the events are published in. */
 export const TIMEZONE = cfg.timezone;
 

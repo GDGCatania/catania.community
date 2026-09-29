@@ -175,6 +175,8 @@ Every key is documented in the file. A few are worth reading twice:
 - `submitEndpoint` is the service behind the "add your community" form. It is not part of this
   repository; set it to `null` and the form sends people to GitHub with their answers pre-filled.
 - `ogImage` is `null` until you add a 1200×630 image under `public/` and point it there.
+- `repo` is where "Source code" in the footer points. The credit line at the very bottom ("free
+  software, see the project") always links the original repository instead.
 
 **2. The interface language** — `baseLocale` in `project.inlang/settings.json` (see
 [Languages](#languages)). A handful of messages mention the place: they take `{city}` from the config,
