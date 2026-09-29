@@ -5,6 +5,8 @@
   "calendar_aria": "Calendar for {month}",
   "calendar_dayAria": "{day}: {events}",
   "calendar_legend": "one dot = one event that day",
+  "calendar_next": "Next month",
+  "calendar_prev": "Previous month",
   "calendar_weekdays": "M,T,W,T,F,S,S",
   "category_cultura": "Culture",
   "category_design": "Design",

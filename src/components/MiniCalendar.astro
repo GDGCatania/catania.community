@@ -71,6 +71,15 @@ const calendars = months.map((month) => {
       <header>
         <h3 class="month">{label.charAt(0).toUpperCase() + label.slice(1)}</h3>
         <span class="eyebrow" data-calendar-total>{eventCount(total)}</span>
+        {/* Hidden until the script runs: without it only one month is shown. */}
+        <nav class="nav" data-calendar-nav hidden>
+          <button type="button" data-calendar-step="-1" aria-label={m.calendar_prev()}>
+            <span aria-hidden="true">‹</span>
+          </button>
+          <button type="button" data-calendar-step="1" aria-label={m.calendar_next()}>
+            <span aria-hidden="true">›</span>
+          </button>
+        </nav>
       </header>
 
       <div class="weekdays" aria-hidden="true">
@@ -141,6 +150,45 @@ const calendars = months.map((month) => {
     font-size: var(--step-0);
     font-weight: 700;
     letter-spacing: -0.01em;
+  }
+
+  header .eyebrow {
+    margin-left: auto;
+  }
+
+  .nav {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .nav[hidden] {
+    display: none;
+  }
+
+  .nav button {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: var(--step-0);
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .nav button:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .nav button:disabled {
+    color: var(--ink-3);
+    border-color: var(--border-soft);
+    cursor: default;
   }
 
   .weekdays,
@@ -281,6 +329,32 @@ const calendars = months.map((month) => {
     const counter = calendar.querySelector<HTMLElement>('[data-calendar-total]');
     if (counter) counter.textContent = event_count({ count: total });
   }
+
+  // Month navigation, from the viewer's month forward: earlier months only
+  // hold events that are already over.
+  const reachable = calendars.slice(Math.max(calendars.indexOf(shown!), 0));
+
+  reachable.forEach((calendar, index) => {
+    const nav = calendar.querySelector<HTMLElement>('[data-calendar-nav]');
+    if (!nav || reachable.length < 2) return;
+    nav.hidden = false;
+
+    for (const button of nav.querySelectorAll<HTMLButtonElement>('[data-calendar-step]')) {
+      const step = Number(button.dataset.calendarStep);
+      const target = reachable[index + step];
+      button.disabled = !target;
+      button.addEventListener('click', () => {
+        if (!target) return;
+        calendar.hidden = true;
+        target.hidden = false;
+        // Keep the keyboard where it was; at the end of the range, fall back
+        // to the other arrow.
+        const same = target.querySelector<HTMLButtonElement>(`[data-calendar-step="${step}"]`);
+        const other = target.querySelector<HTMLButtonElement>(`[data-calendar-step="${-step}"]`);
+        (same && !same.disabled ? same : other)?.focus();
+      });
+    }
+  });
 
   // Clicking a day with events scrolls to that day's heading. The calendar is
   // a navigation aid, not a hidden filter.
