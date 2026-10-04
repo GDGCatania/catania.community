@@ -34,5 +34,41 @@
       },
       "name": "CreationDose Srl"
     }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "python-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/536423474/676x676.jpg",
+    "description": "Ciao Pycciotti!\n\nLa community **Python Catania** 🐘🐍 si incontra nuovamente per un nuovo meetup!\n\nLa data da fissare sul calendario è il\n\n**📅…",
+    "end": "2026-10-21T20:00:00+02:00",
+    "id": "jsonld:meetup:316796896",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "meetup-python-catania-non-si-babbia",
+    "source": {
+      "fetchedAt": "2026-10-04T10:37:15.281Z",
+      "ref": "https://www.meetup.com/python-catania/events/316796896/",
+      "type": "jsonld"
+    },
+    "start": "2026-10-21T18:00:00+02:00",
+    "title": "Meetup Python Catania - Non si babbIA! 🤖🐍",
+    "url": "https://www.meetup.com/python-catania/events/316796896/",
+    "venue": {
+      "address": "Via Antonino di Sangiuliano, 197, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose"
+    }
   }
 ]
