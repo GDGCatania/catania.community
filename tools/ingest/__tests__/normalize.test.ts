@@ -131,6 +131,19 @@ describe('applyOverrides', () => {
     expect(result.events[0]!.title).toBe('Titolo corretto');
   });
 
+  /**
+   * Parsed through the schema, as the ingest reads them: a field the override
+   * does not name must not come back as its default and overwrite the event.
+   */
+  it('leaves alone the fields it does not name, defaults included', () => {
+    const original = event({ online: true, cancelled: true, categories: ['design'], language: 'English' });
+    const override = OverrideSchema.parse({ id: 'bevy:1', title: 'Titolo corretto' });
+
+    const [patched] = applyOverrides([original], [override]).events;
+
+    expect(patched).toEqual({ ...original, title: 'Titolo corretto' });
+  });
+
   it('hides an event with drop', () => {
     const result = applyOverrides([event()], [{ id: 'bevy:1', drop: true }]);
 
