@@ -211,7 +211,8 @@ async function main(): Promise<number> {
     `\n  ${finalEvents.length} events in total ` +
       `(${merged.preserved} preserved from failing sources, ` +
       `${deduped.duplicates} duplicates removed, ${overridden.applied} overrides applied` +
-      `${overridden.dropped ? `, ${overridden.dropped} hidden` : ''})`
+      `${overridden.dropped ? `, ${overridden.dropped} hidden` : ''}` +
+      `${overridden.aliased ? `, ${overridden.aliased} merged as aliases` : ''})`
   );
 
   for (const id of overridden.unmatched) {

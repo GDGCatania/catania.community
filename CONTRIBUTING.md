@@ -103,6 +103,19 @@ Two exceptions:
   An override sets the whole list, it does not append to it. The list may leave out `communityId`,
   for an event that was only published on that feed. Hand-curated events in `sources/events/` take
   `hostIds` directly. Every id must exist in `sources/communities/`, or the ingest fails.
+- **The same evening on two communities' feeds** becomes one event organised by both. When title, day
+  and venue match, the ingest does it on its own: the more reliable source keeps the record, and the
+  other community joins its `hostIds`. When they are written differently, say which record is an
+  alias of which:
+
+  ```yaml
+  - id: jsonld:meetup:311234567
+    aliasOf: bevy:119593
+  ```
+
+  The alias disappears and its community becomes an organiser of the event it points to.
+  Corrections go on that event, not on the alias. An alias that a source no longer lists is fine;
+  an event to point to that does not exist is reported, like any override that matches nothing.
 - **A one-off backfill** may be committed by hand, in its own commit, because the scheduled run only
   looks back to yesterday and will never pick up an archive. Run it across **every** source:
 

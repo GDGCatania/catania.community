@@ -6,6 +6,7 @@ import {
   type Event,
   type Override,
   type SourceType,
+  eventHostIds,
 } from '../../src/lib/schema.js';
 import { DEFAULT_CITY } from '../../src/lib/site.js';
 import type { RawEvent } from './adapters/types.js';
@@ -86,23 +87,45 @@ const PRIORITY = new Map<SourceType, number>(
  * Removes duplicates across sources. The same event can arrive both from an API
  * and from an ICS feed: the more reliable source wins (the order lives in
  * SOURCE_PRIORITY), not whichever was seen first.
+ *
+ * When the duplicate came from another community's feed, that community is an
+ * organiser too: the surviving record takes it in `hostIds` rather than losing
+ * it.
  */
 export function dedupe(events: Event[]): { events: Event[]; duplicates: number } {
-  const byId = new Map<string, Event>();
-  for (const event of events) {
-    const existing = byId.get(event.id);
-    if (!existing || wins(event, existing)) byId.set(event.id, event);
-  }
-
-  const byLogicalKey = new Map<string, Event>();
-  for (const event of byId.values()) {
-    const key = dedupKey(event);
-    const existing = byLogicalKey.get(key);
-    if (!existing || wins(event, existing)) byLogicalKey.set(key, event);
-  }
-
-  const deduped = [...byLogicalKey.values()];
+  const byId = collapse(events, (event) => event.id);
+  const deduped = collapse(byId, dedupKey);
   return { events: deduped, duplicates: events.length - deduped.length };
+}
+
+function collapse(events: Event[], keyOf: (event: Event) => string): Event[] {
+  const groups = new Map<string, Event[]>();
+  for (const event of events) {
+    const key = keyOf(event);
+    groups.set(key, [...(groups.get(key) ?? []), event]);
+  }
+
+  return [...groups.values()].map((group) => {
+    const winner = group.reduce((best, event) => (wins(event, best) ? event : best));
+    return withHostsOf(
+      winner,
+      group.filter((event) => event !== winner)
+    );
+  });
+}
+
+/**
+ * `event`, organised also by whoever organises `others`. Its own organisers
+ * come first; the others follow sorted, so the order does not depend on which
+ * feed answered first and two runs produce the same file. Nothing changes when
+ * every record came from the same community.
+ */
+export function withHostsOf(event: Event, others: Event[]): Event {
+  const own = eventHostIds(event);
+  const extra = [...new Set(others.flatMap(eventHostIds))]
+    .filter((id) => !own.includes(id))
+    .sort();
+  return extra.length === 0 ? event : { ...event, hostIds: [...own, ...extra] };
 }
 
 function wins(candidate: Event, incumbent: Event): boolean {
@@ -132,12 +155,22 @@ function richness(event: Event): number {
 export function applyOverrides(
   events: Event[],
   overrides: Override[]
-): { events: Event[]; applied: number; dropped: number; unmatched: string[] } {
+): { events: Event[]; applied: number; dropped: number; aliased: number; unmatched: string[] } {
   if (overrides.length === 0) {
-    return { events, applied: 0, dropped: 0, unmatched: [] };
+    return { events, applied: 0, dropped: 0, aliased: 0, unmatched: [] };
   }
 
-  const byId = new Map(overrides.map((override) => [override.id, override]));
+  // Aliases first: a correction written on the canonical event then applies to
+  // the merged one, and `hostIds` written there still has the last word.
+  const aliases = resolveAliases(
+    events,
+    overrides.filter((override) => override.aliasOf)
+  );
+  events = aliases.events;
+
+  const byId = new Map(
+    overrides.filter((override) => !override.aliasOf).map((override) => [override.id, override])
+  );
   const used = new Set<string>();
   const output: Event[] = [];
   let applied = 0;
@@ -175,7 +208,63 @@ export function applyOverrides(
     events: output,
     applied,
     dropped,
-    unmatched: overrides.filter((o) => !used.has(o.id)).map((o) => o.id),
+    aliased: aliases.aliased,
+    unmatched: [
+      ...aliases.unmatched,
+      ...[...byId.values()].filter((o) => !used.has(o.id)).map((o) => o.id),
+    ],
+  };
+}
+
+/**
+ * The same evening published on two feeds, with a title or a venue written
+ * differently enough that `dedupe` cannot tell. An override marks one record as
+ * an alias of the other: the alias disappears and its community joins the
+ * organisers of the event it points to.
+ *
+ * An alias of an alias resolves to the end of the chain. An alias that did not
+ * arrive this run is fine: past events are no longer listed by their source,
+ * and the merged record is already in the archive with both organisers. An
+ * event to point to that does not exist is a typo, or an event that is gone:
+ * the alias is kept and the override reported as unmatched.
+ */
+function resolveAliases(
+  events: Event[],
+  aliases: Override[]
+): { events: Event[]; aliased: number; unmatched: string[] } {
+  const target = new Map(aliases.map((alias) => [alias.id, alias.aliasOf!]));
+  const byId = new Map(events.map((event) => [event.id, event]));
+
+  const canonicalOf = (id: string): string => {
+    const seen = new Set<string>();
+    let current = id;
+    while (target.has(current) && !seen.has(current)) {
+      seen.add(current);
+      current = target.get(current)!;
+    }
+    return current;
+  };
+
+  const absorbed = new Map<string, Event[]>();
+  const unmatched: string[] = [];
+
+  for (const alias of aliases) {
+    const canonicalId = canonicalOf(alias.id);
+    if (!byId.has(canonicalId) || canonicalId === alias.id) {
+      unmatched.push(alias.id);
+      continue;
+    }
+    if (!byId.has(alias.id)) continue;
+    absorbed.set(canonicalId, [...(absorbed.get(canonicalId) ?? []), byId.get(alias.id)!]);
+  }
+
+  const gone = new Set([...absorbed.values()].flat().map((event) => event.id));
+  return {
+    events: events
+      .filter((event) => !gone.has(event.id))
+      .map((event) => withHostsOf(event, absorbed.get(event.id) ?? [])),
+    aliased: gone.size,
+    unmatched,
   };
 }
 
