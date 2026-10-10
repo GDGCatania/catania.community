@@ -1,0 +1,25 @@
+# Dati verificati su https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026
+# il 2026-10-10.
+# I raduni stanno su una pagina di Wikipedia, senza feed: gli eventi si
+# aggiungono a mano in sources/events/. Quelli che coinvolgono anche
+# OpenStreetMap sono su osmcal e arrivano da openstreetmap-catania; quando un
+# evento potrà avere più organizzatori (#7), andranno attribuiti anche qui.
+# La pagina dei raduni cambia nome ogni anno (…_in_Sicilia_2027).
+id: wikimediani-in-sicilia
+name: Wikimediani in Sicilia
+tagline: Volontari di Wikipedia, Wikimedia Commons e Wikidata in Sicilia.
+description: >-
+  Il gruppo dei volontari dei progetti Wikimedia in Sicilia, legato a Wikimedia
+  Italia. Organizza editathon, incontri per scrivere voci insieme, il compleanno
+  di Wikipedia e le uscite fotografiche di Wiki Loves Monuments. Aperto a chi non
+  ha mai modificato una voce.
+categories:
+  - cultura
+  - tech
+area: citta
+links:
+  website: https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026
+  telegram: https://t.me/WikimedianiSicilia
+ingest:
+  - type: manual
+active: true
