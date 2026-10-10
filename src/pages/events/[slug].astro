@@ -3,7 +3,14 @@ import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Badge from '../../components/Badge.astro';
 import VenueMap from '../../components/VenueMap.astro';
-import { getAllEvents, getCommunityMap, formatDateLong, formatTime } from '../../lib/events';
+import {
+  eventHosts,
+  formatDateLong,
+  formatNames,
+  formatTime,
+  getAllEvents,
+  getCommunityMap,
+} from '../../lib/events';
 import { breadcrumbJsonLd, eventJsonLd } from '../../lib/jsonld';
 import { absoluteUrl } from '../../lib/urls';
 import * as m from '../../paraglide/messages.js';
@@ -19,20 +26,20 @@ export const getStaticPaths = (async () => {
   // community's archive.
   return events.map((event) => ({
     params: { slug: event.slug },
-    props: { event, community: communities.get(event.communityId) },
+    props: { event, hosts: eventHosts(event, communities) },
   }));
 }) satisfies GetStaticPaths;
 
 // Prop types come from getStaticPaths; redeclaring them here would only
 // duplicate them.
-const { event, community } = Astro.props;
+const { event, hosts } = Astro.props;
 
 const canonical = absoluteUrl(Astro.url.pathname, Astro.site);
 const ends = event.end ?? event.start;
 const isPast = new Date(ends) < new Date();
 
 const jsonLd = [
-  eventJsonLd(event, community, canonical),
+  eventJsonLd(event, hosts, canonical),
   breadcrumbJsonLd([
     { name: m.nav_events(), path: ROUTES.home },
     { name: event.title, path: ROUTES.event(event.slug) },
@@ -45,7 +52,7 @@ const description = event.description
       title: event.title,
       date: formatDateLong(event.start),
       city: event.venue?.city ?? DEFAULT_CITY,
-      community: community?.name ?? DEFAULT_CITY,
+      community: hosts.length > 0 ? formatNames(hosts.map((host) => host.name)) : DEFAULT_CITY,
     });
 
 const hours = `${formatTime(event.start)}${event.end ? ` – ${formatTime(event.end)}` : ''}`;
@@ -89,11 +96,17 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
 
       <header class="head">
         {
-          community && (
+          hosts.length > 0 && (
             <p class="org">
-              <a href={ROUTES.community(community.id)}>{community.name}</a>
-              {community.since ? (
-                <span class="since">{m.eventPage_communitySince({ year: community.since })}</span>
+              {hosts.map((host, i) => (
+                <>
+                  {i > 0 ? <span aria-hidden="true"> · </span> : null}
+                  <a href={ROUTES.community(host.id)}>{host.name}</a>
+                </>
+              ))}
+              {/* "Since" describes one community: with several it would be ambiguous. */}
+              {hosts.length === 1 && hosts[0]!.since ? (
+                <span class="since">{m.eventPage_communitySince({ year: hosts[0]!.since })}</span>
               ) : null}
             </p>
           )
@@ -195,16 +208,18 @@ const address = [event.venue?.address, event.venue?.city].filter(Boolean).join('
       </div>
 
       {
-        community && (
+        hosts.map((host) => (
           <div class="card">
-            <span class="eyebrow">{m.eventPage_organiser()}</span>
-            <p class="orgname">{community.name}</p>
-            {community.tagline ? <p class="hint">{community.tagline}</p> : null}
-            <a class="btn btn--ghost" href={ROUTES.community(community.id)}>
+            <span class="eyebrow">
+              {hosts.length === 1 ? m.eventPage_organiser() : m.eventPage_coOrganiser()}
+            </span>
+            <p class="orgname">{host.name}</p>
+            {host.tagline ? <p class="hint">{host.tagline}</p> : null}
+            <a class="btn btn--ghost" href={ROUTES.community(host.id)}>
               {m.eventPage_seeCommunity()}
             </a>
           </div>
-        )
+        ))
       }
 
       <p class="source">

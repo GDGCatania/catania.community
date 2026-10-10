@@ -10,6 +10,7 @@ import {
   type ManualEvent,
   type Override,
   type SourceType,
+  eventHostIds,
 } from '../../src/lib/schema.js';
 import { TIMEZONE } from '../../src/lib/site.js';
 import { loadYamlDir } from './lib/yaml.js';
@@ -98,17 +99,24 @@ async function main(): Promise<number> {
     loadOverrides(),
   ]);
 
-  // An event written for a community that does not exist would never be read:
-  // valid YAML, merged, and silently missing from the site.
+  // An event written for a community that does not exist would never be read,
+  // and an organiser that does not exist would credit it to nobody: valid YAML,
+  // merged, and silently wrong on the site.
   const known = new Map(communitiesAll.map((c) => [c.id, c]));
-  const orphans = manualEvents.filter((event) => !known.has(event.communityId));
-  if (orphans.length > 0) {
-    for (const event of orphans) {
-      console.error(
-        `✗ sources/events: "${event.title}" belongs to "${event.communityId}", ` +
-          'which is not in sources/communities/'
-      );
-    }
+  const unknown = [
+    ...manualEvents.flatMap((event) =>
+      [event.communityId, ...(event.hostIds ?? [])]
+        .filter((id) => !known.has(id))
+        .map((id) => `sources/events: "${event.title}" names "${id}"`)
+    ),
+    ...overrides.flatMap((override) =>
+      (override.hostIds ?? [])
+        .filter((id) => !known.has(id))
+        .map((id) => `data/overrides: "${override.id}" names "${id}"`)
+    ),
+  ];
+  if (unknown.length > 0) {
+    for (const line of unknown) console.error(`✗ ${line}, which is not in sources/communities/`);
     return 1;
   }
   for (const event of manualEvents) {
@@ -316,7 +324,11 @@ function printPreview(events: Event[], communities: Community[]): void {
     const geo = event.venue?.geo ? '📍' : '  ';
     console.log(
       `  ${geo} ${when}  ${event.title.slice(0, 58).padEnd(58)} ` +
-        `${(names.get(event.communityId) ?? event.communityId).slice(0, 18).padEnd(18)} ${where}`
+        `${eventHostIds(event)
+          .map((id) => names.get(id) ?? id)
+          .join(' + ')
+          .slice(0, 18)
+          .padEnd(18)} ${where}`
     );
   }
 }

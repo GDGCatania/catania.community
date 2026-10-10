@@ -1,3 +1,4 @@
+import { eventHosts, formatNames } from './events';
 import type { Community, Event } from './schema';
 import * as m from '../paraglide/messages.js';
 import { DEFAULT_LANGUAGE_CODE, SITE_HOST, SITE_NAME, TIMEZONE } from './site';
@@ -49,7 +50,7 @@ function toIcsUtc(iso: string): string {
   return `${new Date(iso).toISOString().replace(/[-:]/g, '').slice(0, 15)}Z`;
 }
 
-export function eventToVevent(event: Event, community?: Community): string[] {
+export function eventToVevent(event: Event, hosts: Community[]): string[] {
   const lines = [
     'BEGIN:VEVENT',
     `UID:${event.id.replace(/[^\w:.-]/g, '-')}@${SITE_HOST}`,
@@ -66,7 +67,7 @@ export function eventToVevent(event: Event, community?: Community): string[] {
 
   const description = [
     event.description,
-    community ? m.feed_organiser({ name: community.name }) : null,
+    hosts.length > 0 ? m.feed_organiser({ name: formatNames(hosts.map((h) => h.name)) }) : null,
     m.feed_detailsAt({ url: event.url }),
   ]
     .filter(Boolean)
@@ -82,7 +83,8 @@ export function eventToVevent(event: Event, community?: Community): string[] {
 
   lines.push(`URL:${event.url}`);
   lines.push(`STATUS:${event.cancelled ? 'CANCELLED' : 'CONFIRMED'}`);
-  if (community) lines.push(`CATEGORIES:${escapeText(community.categories.join(','))}`);
+  const categories = [...new Set(hosts.flatMap((host) => host.categories))];
+  if (categories.length > 0) lines.push(`CATEGORIES:${escapeText(categories.join(','))}`);
 
   lines.push('END:VEVENT');
   return lines;
@@ -104,7 +106,7 @@ export function buildCalendar(
   ];
 
   for (const event of events) {
-    lines.push(...eventToVevent(event, communities.get(event.communityId)));
+    lines.push(...eventToVevent(event, eventHosts(event, communities)));
   }
 
   lines.push('END:VCALENDAR');

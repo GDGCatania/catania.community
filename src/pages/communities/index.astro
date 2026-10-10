@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Badge from '../../components/Badge.astro';
 import { getCommunities, getUpcomingEvents, formatDayMonth } from '../../lib/events';
-import type { Event } from '../../lib/schema';
+import { eventHostIds, type Event } from '../../lib/schema';
 import { breadcrumbJsonLd } from '../../lib/jsonld';
 import * as m from '../../paraglide/messages.js';
 import { areaLabel, categoryLabel } from '../../i18n/labels';
@@ -14,9 +14,12 @@ const [communities, upcoming] = await Promise.all([getCommunities(), getUpcoming
 // the data changes, so the script below skips the ones that ended since.
 const upcomingByCommunity = new Map<string, Event[]>();
 for (const event of upcoming) {
-  const list = upcomingByCommunity.get(event.communityId) ?? [];
-  list.push(event);
-  upcomingByCommunity.set(event.communityId, list);
+  // A co-organised event counts as next for each of its organisers.
+  for (const id of eventHostIds(event)) {
+    const list = upcomingByCommunity.get(id) ?? [];
+    list.push(event);
+    upcomingByCommunity.set(id, list);
+  }
 }
 
 const active = communities.filter((community) => community.active);

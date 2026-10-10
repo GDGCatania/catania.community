@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { formatDateLong, formatDayMonth, groupByDay } from './events.js';
-import { ValidatedEventSchema, type Event } from './schema.js';
+import { ValidatedEventSchema, eventHostIds, type Event } from './schema.js';
+import { stableStringify } from '../../tools/ingest/lib/json.js';
 
 /**
  * The assertions look for the presence of a four-digit year rather than for an
@@ -83,5 +84,26 @@ describe('groupByDay', () => {
 
     expect(days[0]!.label).not.toBe(days[1]!.label);
     expect(days.map((day) => day.key)).toEqual(['2026-09-17', '2026-09-18']);
+  });
+});
+describe('eventHostIds', () => {
+  it('falls back to the publishing community', () => {
+    expect(eventHostIds(event('2026-10-01T19:00:00+02:00'))).toEqual(['community-di-prova']);
+  });
+
+  it('prefers the curated organisers, even without the publisher', () => {
+    const coOrganised = { ...event('2026-10-01T19:00:00+02:00'), hostIds: ['flutter-catania'] };
+
+    expect(eventHostIds(coOrganised)).toEqual(['flutter-catania']);
+  });
+
+  /**
+   * The archive is never rewritten: an event that does not use the field must
+   * serialise exactly as before, or every file in data/events/ would change.
+   */
+  it('leaves events without organisers byte-identical on disk', () => {
+    const parsed = event('2026-10-01T19:00:00+02:00');
+
+    expect(stableStringify(parsed)).not.toContain('hostIds');
   });
 });

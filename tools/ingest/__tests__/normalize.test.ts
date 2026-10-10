@@ -116,6 +116,24 @@ describe('applyOverrides', () => {
     expect(result.events).toHaveLength(1);
   });
 
+  it('sets the organisers of a co-organised event, replacing the list', () => {
+    const once = applyOverrides([event()], [{ id: 'bevy:1', hostIds: ['gdg-catania', 'flutter-catania'] }]);
+    const again = applyOverrides(once.events, [{ id: 'bevy:1', hostIds: ['flutter-catania'] }]);
+
+    expect(once.events[0]!.hostIds).toEqual(['gdg-catania', 'flutter-catania']);
+    // Declarative: an override states the whole list, it does not append.
+    expect(again.events[0]!.hostIds).toEqual(['flutter-catania']);
+    // Provenance stays where it was.
+    expect(again.events[0]!.communityId).toBe(event().communityId);
+  });
+
+  it('refuses an organiser listed twice', () => {
+    const result = applyOverrides([event()], [{ id: 'bevy:1', hostIds: ['a', 'a'] }]);
+
+    expect(result.applied).toBe(0);
+    expect(result.events[0]!.hostIds).toBeUndefined();
+  });
+
   it('does not lose the event when an override makes it invalid', () => {
     // start without an offset: fails the schema.
     const result = applyOverrides([event()], [{ id: 'bevy:1', start: 'non-una-data' }]);

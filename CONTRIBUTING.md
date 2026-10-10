@@ -90,6 +90,19 @@ Two exceptions:
 
 - **Corrections** go in `data/overrides/*.yml`, keyed by event id. They take precedence over every
   crawler, so a value that is wrong at the source gets fixed without waiting for the source.
+- **Co-organised events** use `hostIds`, the same way. `communityId` always says whose feed an event
+  came from; `hostIds`, when present, is the complete list of organisers, in the order written, and
+  takes precedence over it on the site and in the feeds. So a Flutter meetup published on the GDG's
+  Bevy reads:
+
+  ```yaml
+  - id: bevy:91081
+    hostIds: [gdg-catania, flutter-catania]
+  ```
+
+  An override sets the whole list, it does not append to it. The list may leave out `communityId`,
+  for an event that was only published on that feed. Hand-curated events in `sources/events/` take
+  `hostIds` directly. Every id must exist in `sources/communities/`, or the ingest fails.
 - **A one-off backfill** may be committed by hand, in its own commit, because the scheduled run only
   looks back to yesterday and will never pick up an archive. Run it across **every** source:
 

@@ -35,6 +35,7 @@ export function fromManual(
       end: event.end,
       url: event.url,
       communityId: community.id,
+      hostIds: event.hostIds,
       venue: event.venue
         ? {
             name: event.venue.name,

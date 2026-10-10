@@ -1,7 +1,13 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
-import { CommunitySchema, EventFileSchema, type Community, type Event } from './schema';
+import {
+  CommunitySchema,
+  EventFileSchema,
+  eventHostIds,
+  type Community,
+  type Event,
+} from './schema';
 import { TIMEZONE } from './site';
 import { localeTag } from '../i18n';
 import { dayLabel, formatDateLong, formatDayMonth, localDayKey } from './dates';
@@ -97,9 +103,24 @@ export async function getEventsByCommunity(
 ): Promise<{ upcoming: Event[]; past: Event[] }> {
   const [upcoming, past] = await Promise.all([getUpcomingEvents(now), getPastEvents(now)]);
   return {
-    upcoming: upcoming.filter((event) => event.communityId === communityId),
-    past: past.filter((event) => event.communityId === communityId),
+    upcoming: upcoming.filter((event) => eventHostIds(event).includes(communityId)),
+    past: past.filter((event) => eventHostIds(event).includes(communityId)),
   };
+}
+
+/**
+ * The communities organising an event, in the order curated. A host missing
+ * from `sources/communities/` is left out rather than shown as a bare slug;
+ * the ingest refuses such references, so this only happens to a community
+ * removed after the fact.
+ */
+export function eventHosts(event: Event, communities: Map<string, Community>): Community[] {
+  return eventHostIds(event).flatMap((id) => communities.get(id) ?? []);
+}
+
+/** "GDG Catania e Flutter Catania": names joined the way the language does it. */
+export function formatNames(names: string[]): string {
+  return new Intl.ListFormat(localeTag, { style: 'long', type: 'conjunction' }).format(names);
 }
 
 /** Local `YYYY-MM-DD` of an event, read from the offset it carries. */
