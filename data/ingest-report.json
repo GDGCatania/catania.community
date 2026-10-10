@@ -1,13 +1,34 @@
 {
-  "lastChangeAt": "2026-10-04T10:37:15.281Z",
+  "lastChangeAt": "2026-10-10T18:10:44.863Z",
   "preservedFromFailedSources": 0,
   "sources": [
+    {
+      "community": "aps-palestra-per-la-mente",
+      "events": 1,
+      "ok": true,
+      "skipped": 0,
+      "type": "jsonld"
+    },
+    {
+      "community": "aps-palestra-per-la-mente",
+      "events": 0,
+      "ok": true,
+      "skipped": 0,
+      "type": "manual"
+    },
     {
       "community": "gdg-catania",
       "events": 2,
       "ok": true,
       "skipped": 0,
       "type": "bevy"
+    },
+    {
+      "community": "gdg-catania",
+      "events": 0,
+      "ok": true,
+      "skipped": 0,
+      "type": "manual"
     },
     {
       "community": "global-ai-catania",
@@ -17,8 +38,29 @@
       "type": "jsonld"
     },
     {
+      "community": "global-ai-catania",
+      "events": 0,
+      "ok": true,
+      "skipped": 0,
+      "type": "manual"
+    },
+    {
       "community": "python-catania",
       "events": 1,
+      "ok": true,
+      "skipped": 0,
+      "type": "jsonld"
+    },
+    {
+      "community": "python-catania",
+      "events": 0,
+      "ok": true,
+      "skipped": 0,
+      "type": "manual"
+    },
+    {
+      "community": "wordpress-meetup-catania",
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -28,8 +70,8 @@
       "events": 0,
       "ok": true,
       "skipped": 0,
-      "type": "jsonld"
+      "type": "manual"
     }
   ],
-  "totalEvents": 84
+  "totalEvents": 85
 }
