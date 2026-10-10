@@ -45,6 +45,10 @@
     "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_JjdzCEn",
     "description": "Più sale il termometro, più alziamo l'asticella degli eventi!\n\nIl Google I/O Reconnect 2025, in collaborazione con gli Amici di @fluttercatnia, è l'occasione perfetta per un ultimo meet up prima della pausa estiva, per valutare l'impatto che le novità di casa google hanno avuto sul nostro lavoro negli ultimi due mesi...e per scroccare aria condizionata agli amici di @creationdose!\n\n Vi aspettiamo per un pomeriggio di crescita e di svago il 26/07 dalle 17:30 alle 20:30 presso CreationDose!\n\n Non dimenticate di prenotare il vostro biglietto, portare il pc, tanta curiosità e idee carine su cosa fare post Reconnect, perchè si vuole fare baldoriaaaa",
     "end": "2025-07-26T20:30:00+02:00",
+    "hostIds": [
+      "gdg-catania",
+      "flutter-catania"
+    ],
     "id": "bevy:96568",
     "language": "Italiano",
     "online": false,
@@ -54,7 +58,7 @@
     },
     "slug": "google-i-o-reconnect-26-luglio-2025",
     "source": {
-      "fetchedAt": "2026-07-27T23:49:51.859Z",
+      "fetchedAt": "2026-10-10T23:35:12.390Z",
       "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-google-io-reconnect-26-luglio-2025/",
       "type": "bevy"
     },
@@ -69,6 +73,42 @@
         "lon": 15.0895881
       },
       "name": "CreationDose Srl"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "flutter-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/528959699/676x676.jpg",
+    "description": "🌡Più sale il termometro, più alziamo l'asticella degli eventi!\n\nIl Google I/O Reconnect 2025, in collaborazione con gli Amici del [GDG…",
+    "end": "2025-07-26T19:30:00+02:00",
+    "id": "jsonld:meetup:308966840",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "google-i-o-reconnect-26-luglio-2025-2025-07-26",
+    "source": {
+      "fetchedAt": "2026-10-10T23:35:12.390Z",
+      "ref": "https://www.meetup.com/meetup-group-poliomfw/events/308966840/",
+      "type": "jsonld"
+    },
+    "start": "2025-07-26T17:30:00+02:00",
+    "title": "Google I/O Reconnect - 26 Luglio 2025",
+    "url": "https://www.meetup.com/meetup-group-poliomfw/events/308966840/",
+    "venue": {
+      "address": "Via Antonino di Sangiuliano, 197, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.50498,
+        "lon": 15.0895881
+      },
+      "name": "CreationDose"
     }
   }
 ]

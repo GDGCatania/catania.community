@@ -45,6 +45,10 @@
     "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_soiZ8au",
     "description": "➡️ Programma ⬅️\n\nTi ricordi cosa stavi facendo 15 anni fa? 🤔\nForse andavi al liceo; forse eri impegnato a salvare la principessa Peach; forse streammavi la prima puntata di The Walking Dead o forse avevi convinto i tuoi amici a investire in una nuova scintillante moneta virtuale, il Bitcoin...\n\nNoi del GDG Catania, 15 anni fa, stavamo premendo per la prima volta F5 avviando quel programma che evento dopo evento, anno dopo anno, meet up dopo meet up, è diventata la community più calda e vivace del sud Italia.\n\nBuon compleanno GDG Catania! 🎂\n\nE cosa c'è di meglio che festeggiare assieme durante la prossima DevFest?\nInviare Bitcoin ai lead del GDG Nulla!\n\nQuindi rimanete connessi per scoprire tutte le info della DevFest 2025!\nNovembre è alle porte e noi siamo carichi!",
     "end": "2025-11-15T23:00:00+01:00",
+    "hostIds": [
+      "gdg-catania",
+      "flutter-catania"
+    ],
     "id": "bevy:98789",
     "language": "Italiano",
     "online": false,
@@ -54,7 +58,7 @@
     },
     "slug": "devfest-catania-2025",
     "source": {
-      "fetchedAt": "2026-07-27T23:49:51.859Z",
+      "fetchedAt": "2026-10-10T23:35:12.390Z",
       "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2025/",
       "type": "bevy"
     },
@@ -70,6 +74,33 @@
       },
       "name": "Vecchia Dogana"
     }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "flutter-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/531154181/676x676.jpg",
+    "description": "### **[➡️ Programma ⬅️](https://gdg.community.dev/forum/devfest-catania-2025-341994/topic/devfest-catania-2025-programma-1530/)**\n\nTi ricordi cosa stavi…",
+    "end": "2025-11-15T19:00:00+01:00",
+    "id": "jsonld:meetup:311883542",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "devfest-catania-2025-2025-11-15",
+    "source": {
+      "fetchedAt": "2026-10-10T23:35:12.390Z",
+      "ref": "https://www.meetup.com/meetup-group-poliomfw/events/311883542/",
+      "type": "jsonld"
+    },
+    "start": "2025-11-15T09:00:00+01:00",
+    "title": "DevFest Catania 2025",
+    "url": "https://www.meetup.com/meetup-group-poliomfw/events/311883542/"
   },
   {
     "area": "citta",

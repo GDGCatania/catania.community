@@ -9,6 +9,10 @@
     "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/Event%2520Promo%2520T2%25281080%2520x%25201080%2529_wLYjG6A.png",
     "description": "Unisciti a noi l'11 Gennaio per il #FlutterInProduction Extended Catania!\n\nGuarderemo insieme il VOD di #FlutterInProduction, esplorando le migliori pratiche e le ultime novità nello sviluppo mobile e multipiattaforma con Flutter.\n\nA seguire, avremo esperti del settore che condivideranno esempi concreti di Flutter in produzione, presentando casi d’uso reali e fornendo consigli pratici per migliorare le tue competenze di sviluppo.\n\nL'evento è aperto a programmatori di tutti i livelli, dai principianti agli sviluppatori più esperti. Non perdere questa occasione per far parte della comunità Flutter, imparare, connetterti con altri appassionati e contribuire a un evento tech inclusivo e collaborativo!\n\n📅 Quando: 11 Gennaio, dalle 17:30 alle 20:30\n\n📍 Dove: Paradigma, Viale Africa 31/E, Catania",
     "end": "2025-01-11T20:30:00+01:00",
+    "hostIds": [
+      "gdg-catania",
+      "flutter-catania"
+    ],
     "id": "bevy:80828",
     "language": "Italiano",
     "online": false,
@@ -18,7 +22,7 @@
     },
     "slug": "flutterinproduction-extended-catania",
     "source": {
-      "fetchedAt": "2026-07-27T23:49:51.859Z",
+      "fetchedAt": "2026-10-10T23:35:12.390Z",
       "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-flutterinproduction-extended-catania/",
       "type": "bevy"
     },
@@ -33,6 +37,42 @@
         "lon": 15.1033077
       },
       "name": "Paradigma"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "flutter-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/525169685/676x676.jpg",
+    "description": "Unisciti a noi l'**11 Gennaio** per il **#FlutterInProduction Extended Catania**!\nGuarderemo insieme il **VOD di #FlutterInProduction**, esplorando le…",
+    "end": "2025-01-11T20:30:00+01:00",
+    "id": "jsonld:meetup:305034665",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "flutterinproduction-extended-catania-2025-01-11",
+    "source": {
+      "fetchedAt": "2026-10-10T23:35:12.390Z",
+      "ref": "https://www.meetup.com/meetup-group-poliomfw/events/305034665/",
+      "type": "jsonld"
+    },
+    "start": "2025-01-11T17:30:00+01:00",
+    "title": "#FlutterInProduction Extended Catania",
+    "url": "https://www.meetup.com/meetup-group-poliomfw/events/305034665/",
+    "venue": {
+      "address": "viale Africa 31, Catania, CT",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.512206,
+        "lon": 15.1033077
+      },
+      "name": "Paradigma SpA"
     }
   },
   {

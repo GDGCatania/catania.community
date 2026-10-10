@@ -1,5 +1,5 @@
 {
-  "lastChangeAt": "2026-10-10T22:31:24.204Z",
+  "lastChangeAt": "2026-10-10T23:35:12.390Z",
   "preservedFromFailedSources": 0,
   "sources": [
     {
@@ -17,8 +17,22 @@
       "type": "manual"
     },
     {
+      "community": "flutter-catania",
+      "events": 8,
+      "ok": true,
+      "skipped": 0,
+      "type": "jsonld"
+    },
+    {
+      "community": "flutter-catania",
+      "events": 0,
+      "ok": true,
+      "skipped": 0,
+      "type": "manual"
+    },
+    {
       "community": "gdg-catania",
-      "events": 5,
+      "events": 60,
       "ok": true,
       "skipped": 0,
       "type": "bevy"
@@ -60,7 +74,7 @@
     },
     {
       "community": "python-catania",
-      "events": 4,
+      "events": 13,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -81,7 +95,7 @@
     },
     {
       "community": "wordpress-meetup-catania",
-      "events": 5,
+      "events": 10,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -94,5 +108,5 @@
       "type": "manual"
     }
   ],
-  "totalEvents": 98
+  "totalEvents": 105
 }

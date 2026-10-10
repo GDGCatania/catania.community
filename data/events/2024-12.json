@@ -45,6 +45,10 @@
     "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/photo_5913420203197318743_y_sutO2UU.jpg",
     "description": "Natale significa solo una cosa: XMASYNC del GDG Catania.\n\nAnche quest'anno a ridosso delle feste vogliamo invitarvi a un aperitivo natalizio per brindare assieme, scambiarsi gli auguri e rafforzare il legame della nostra community sempre più grande 🫂\n\nUn'occasione per rivedersi dopo il successo della DevFest 2024 e continuare a divertirsi e fare network tra giochi, gadget e buona compagnia!\n\n📍Vi aspettiamo il 7 dicembre dalle 17:30 alle 20:30 da CreationDose in Via Antonino di Sangiuliano 197, Catania\n\n ⛔️ Vietato l'ingresso a chi non ha un cappello di natale trash e il biglietto... ma soprattutto a chi viene senza cappello 🤶",
     "end": "2024-12-07T20:30:00+01:00",
+    "hostIds": [
+      "gdg-catania",
+      "flutter-catania"
+    ],
     "id": "bevy:79131",
     "language": "Italiano",
     "online": false,
@@ -54,7 +58,7 @@
     },
     "slug": "xmasync-2024-un-brindisi-col-gdg",
     "source": {
-      "fetchedAt": "2026-07-27T23:49:51.859Z",
+      "fetchedAt": "2026-10-10T23:35:12.390Z",
       "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-xmasync-2024-un-brindisi-col-gdg/",
       "type": "bevy"
     },
@@ -70,5 +74,32 @@
       },
       "name": "CreationDose Srl"
     }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "flutter-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/524911802/676x676.jpg",
+    "description": "Il Natale porta una grande novità: Flutter Catania!\n\nSiamo entusiasti di annunciare che Flutter Catania prenderà ufficialmente il volo durante lo XMASYNC…",
+    "end": "2024-12-07T21:00:00+01:00",
+    "id": "jsonld:meetup:304782661",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "flutter-catania-xmasync",
+    "source": {
+      "fetchedAt": "2026-10-10T23:35:12.390Z",
+      "ref": "https://www.meetup.com/meetup-group-poliomfw/events/304782661/",
+      "type": "jsonld"
+    },
+    "start": "2024-12-07T19:00:00+01:00",
+    "title": "Flutter Catania @ XMASync",
+    "url": "https://www.meetup.com/meetup-group-poliomfw/events/304782661/"
   }
 ]
