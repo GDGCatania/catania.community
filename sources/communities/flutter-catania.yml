@@ -1,0 +1,25 @@
+# Dati verificati su https://www.meetup.com/meetup-group-poliomfw/ il 2026-10-11.
+# Il gruppo Meetup ripubblica anche le serate che stanno sul Bevy del GDG: la
+# stessa serata arriva dai due feed e diventa un evento solo, organizzato da
+# entrambe le community (dedupe quando titolo, giorno e luogo coincidono,
+# altrimenti `aliasOf` in data/overrides/flutter-catania.yml). Meetup elenca
+# solo gli eventi futuri: le serate passate sono attribuite con `hostIds` nello
+# stesso file.
+id: flutter-catania
+name: Flutter Catania
+tagline: Sviluppo multipiattaforma con Flutter, dai principianti agli esperti.
+description: >-
+  Community di sviluppatori, appassionati e professionisti che lavorano con Flutter su
+  Android, iOS, desktop, web ed embedded. Organizza meetup, workshop pratici e momenti di
+  networking, spesso insieme al GDG Catania. Fa parte del Flutter Meetup Network.
+categories:
+  - tech
+area: citta
+members: 171
+links:
+  meetup: https://www.meetup.com/meetup-group-poliomfw/
+  instagram: https://www.instagram.com/fluttercatania
+ingest:
+  - type: jsonld
+    list: https://www.meetup.com/meetup-group-poliomfw/events/
+active: true
