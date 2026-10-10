@@ -81,33 +81,6 @@
     "categories": [
       "tech"
     ],
-    "communityId": "flutter-catania",
-    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/531154181/676x676.jpg",
-    "description": "### **[➡️ Programma ⬅️](https://gdg.community.dev/forum/devfest-catania-2025-341994/topic/devfest-catania-2025-programma-1530/)**\n\nTi ricordi cosa stavi…",
-    "end": "2025-11-15T19:00:00+01:00",
-    "id": "jsonld:meetup:311883542",
-    "language": "Italiano",
-    "online": false,
-    "price": {
-      "currency": "EUR",
-      "type": "free"
-    },
-    "slug": "devfest-catania-2025-2025-11-15",
-    "source": {
-      "fetchedAt": "2026-10-10T23:35:12.390Z",
-      "ref": "https://www.meetup.com/meetup-group-poliomfw/events/311883542/",
-      "type": "jsonld"
-    },
-    "start": "2025-11-15T09:00:00+01:00",
-    "title": "DevFest Catania 2025",
-    "url": "https://www.meetup.com/meetup-group-poliomfw/events/311883542/"
-  },
-  {
-    "area": "citta",
-    "cancelled": false,
-    "categories": [
-      "tech"
-    ],
     "communityId": "wordpress-meetup-catania",
     "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/524952518/676x676.jpg",
     "description": "Ciao WordPress Lover!\nPreparati perchè abbiamo confezionato per te un evento esplosivo!\n\nNon uno ma due talk da non perdere, assolutamente attuali e che…",

@@ -74,41 +74,5 @@
       },
       "name": "CreationDose Srl"
     }
-  },
-  {
-    "area": "citta",
-    "cancelled": false,
-    "categories": [
-      "tech"
-    ],
-    "communityId": "flutter-catania",
-    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/528959699/676x676.jpg",
-    "description": "🌡Più sale il termometro, più alziamo l'asticella degli eventi!\n\nIl Google I/O Reconnect 2025, in collaborazione con gli Amici del [GDG…",
-    "end": "2025-07-26T19:30:00+02:00",
-    "id": "jsonld:meetup:308966840",
-    "language": "Italiano",
-    "online": false,
-    "price": {
-      "currency": "EUR",
-      "type": "free"
-    },
-    "slug": "google-i-o-reconnect-26-luglio-2025-2025-07-26",
-    "source": {
-      "fetchedAt": "2026-10-10T23:35:12.390Z",
-      "ref": "https://www.meetup.com/meetup-group-poliomfw/events/308966840/",
-      "type": "jsonld"
-    },
-    "start": "2025-07-26T17:30:00+02:00",
-    "title": "Google I/O Reconnect - 26 Luglio 2025",
-    "url": "https://www.meetup.com/meetup-group-poliomfw/events/308966840/",
-    "venue": {
-      "address": "Via Antonino di Sangiuliano, 197, Catania, CT",
-      "city": "Catania",
-      "geo": {
-        "lat": 37.50498,
-        "lon": 15.0895881
-      },
-      "name": "CreationDose"
-    }
   }
 ]

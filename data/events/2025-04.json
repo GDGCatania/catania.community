@@ -38,41 +38,5 @@
       },
       "name": "CreationDose Srl"
     }
-  },
-  {
-    "area": "citta",
-    "cancelled": false,
-    "categories": [
-      "tech"
-    ],
-    "communityId": "flutter-catania",
-    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/527178337/676x676.jpg",
-    "description": "🎯 Flutter Catania Meetup – Edizione di Aprile\n📍 CreationDose, Via Antonino di Sangiuliano 197 – Catania\n📅 Sabato 12 Aprile – Ore 17:30 - 19:30\n\nSiamo…",
-    "end": "2025-04-12T19:30:00+02:00",
-    "id": "jsonld:meetup:307127318",
-    "language": "Italiano",
-    "online": false,
-    "price": {
-      "currency": "EUR",
-      "type": "free"
-    },
-    "slug": "flutter-catania-meetup-aprile-25-2025-04-12",
-    "source": {
-      "fetchedAt": "2026-10-10T23:35:12.390Z",
-      "ref": "https://www.meetup.com/meetup-group-poliomfw/events/307127318/",
-      "type": "jsonld"
-    },
-    "start": "2025-04-12T17:30:00+02:00",
-    "title": "Flutter Catania Meetup - Aprile '25",
-    "url": "https://www.meetup.com/meetup-group-poliomfw/events/307127318/",
-    "venue": {
-      "address": "Via Antonino di Sangiuliano, 197, Catania, CT",
-      "city": "Catania",
-      "geo": {
-        "lat": 37.50498,
-        "lon": 15.0895881
-      },
-      "name": "CreationDose"
-    }
   }
 ]

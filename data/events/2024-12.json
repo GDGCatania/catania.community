@@ -74,32 +74,5 @@
       },
       "name": "CreationDose Srl"
     }
-  },
-  {
-    "area": "citta",
-    "cancelled": false,
-    "categories": [
-      "tech"
-    ],
-    "communityId": "flutter-catania",
-    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/524911802/676x676.jpg",
-    "description": "Il Natale porta una grande novità: Flutter Catania!\n\nSiamo entusiasti di annunciare che Flutter Catania prenderà ufficialmente il volo durante lo XMASYNC…",
-    "end": "2024-12-07T21:00:00+01:00",
-    "id": "jsonld:meetup:304782661",
-    "language": "Italiano",
-    "online": false,
-    "price": {
-      "currency": "EUR",
-      "type": "free"
-    },
-    "slug": "flutter-catania-xmasync",
-    "source": {
-      "fetchedAt": "2026-10-10T23:35:12.390Z",
-      "ref": "https://www.meetup.com/meetup-group-poliomfw/events/304782661/",
-      "type": "jsonld"
-    },
-    "start": "2024-12-07T19:00:00+01:00",
-    "title": "Flutter Catania @ XMASync",
-    "url": "https://www.meetup.com/meetup-group-poliomfw/events/304782661/"
   }
 ]
