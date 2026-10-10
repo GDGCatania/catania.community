@@ -6,6 +6,37 @@
       "tech",
       "sociale"
     ],
+    "communityId": "openstreetmap-catania",
+    "description": "Tu, noi, un caffè, e il pulsante \"modifica\": ecco il 6° appuntamento dei volontari di Wikipedia a Catania. Il principio è semplicissimo: ci vediamo in un posto tranquillo, portiamo i nostri propri laptop, e ci mettiamo su Wikipedia (ma anche Commons, Wikidata, OSM...) a fare delle modifiche.\n\nCon o senza un tema particolare in base all'evento, e con l'aiuto di Wikipediani esperti, potrai apportare i tuoi primi miglioramenti sull'enciclopedia o continuare a lavorare sul tuo argomento preferito.\nEvent Website: https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Modifichiamo_Wiki_e_OSM_insieme!_-_Catania,_10_ottobre",
+    "end": "2026-10-10T12:00:00+02:00",
+    "id": "ics:osmcal-5178",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "modifichiamo-wiki-e-osm-insieme-catania-2026-10-10",
+    "source": {
+      "fetchedAt": "2026-10-10T20:22:58.340Z",
+      "ref": "https://osmcal.org/events.ics?in=IT",
+      "type": "ics"
+    },
+    "start": "2026-10-10T10:00:00+02:00",
+    "title": "Modifichiamo Wiki e OSM insieme! - Catania",
+    "url": "https://osmcal.org/events.ics?in=IT",
+    "venue": {
+      "address": "4, Via Biblioteca, Centro storico, Catania, Sicily, Italy",
+      "name": "Biblioteche Riunite Civica e A. Ursino Recupero"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech",
+      "sociale"
+    ],
     "communityId": "aps-palestra-per-la-mente",
     "coverImage": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1194744451%2F145023443352%2F1%2Foriginal.20260930-172942?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=0dc133429a6d6534112cd5c581e71486",
     "description": "Non chiedere soltanto all’IA. Impara a farci qualcosa: 6 ore di laboratorio pratico gratuito per giovani dai 19 ai 24…",

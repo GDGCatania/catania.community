@@ -1,0 +1,71 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech",
+      "sociale"
+    ],
+    "communityId": "openstreetmap-catania",
+    "description": "Tu, noi, un caffè, e il pulsante \"modifica\": ecco il 5° appuntamento dei volontari di Wikipedia a Catania. Il principio è semplicissimo: ci vediamo in un posto tranquillo, portiamo i nostri propri laptop, e ci mettiamo su Wikipedia (ma anche Commons, Wikidata, OSM...) a fare delle modifiche.\n\nCon o senza un tema particolare in base all'evento, e con l'aiuto di Wikipediani esperti, potrai apportare i tuoi primi miglioramenti sull'enciclopedia o continuare a lavorare sul tuo argomento preferito.\nEvent Website: https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Wiki_Loves_Monuments_-_1-30_settembre",
+    "end": "2026-09-18T22:00:00+02:00",
+    "id": "ics:osmcal-5175",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "modifichiamo-wiki-e-osm-insieme-catania",
+    "source": {
+      "fetchedAt": "2026-10-10T20:22:58.340Z",
+      "ref": "https://osmcal.org/events.ics?in=IT",
+      "type": "ics"
+    },
+    "start": "2026-09-18T19:00:00+02:00",
+    "title": "Modifichiamo Wiki e OSM insieme! - Catania",
+    "url": "https://osmcal.org/events.ics?in=IT",
+    "venue": {
+      "address": "via Fimia 34, 95128 Catania (CT), 34, Via Fimia, Borgo-Sanzio, Catania, Sicily, Italy",
+      "geo": {
+        "lat": 37.5249491,
+        "lon": 15.0845881
+      },
+      "name": "Centro Atena"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech",
+      "sociale"
+    ],
+    "communityId": "openstreetmap-catania",
+    "description": "Nell'ambito della settimana europea della mobilità sostenibile, cogliamo l'occasione di mappare le nuove piste ciclabili di Catania su OpenStreetMap, in collaborazione con il gruppo di ciclisti Ruote Libere.\n\nPartiamo da piazza Roma in bici o monopattino con un tracker GPS e faremo un giro nel centro storico per mappare le piste ciclabili e corsie bus.\n\nEvento inserito nel portale [EUROPEAN MOBILITY WEEK](https://mobilityweek.eu/mobilityactions/?action%20uid=Rnt6fHnm)\nEvent Website: https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Mappiamo_le_piste_ciclabili_-_Catania,_22_settembre",
+    "id": "ics:osmcal-5176",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "mappiamo-le-piste-ciclabili-catania",
+    "source": {
+      "fetchedAt": "2026-10-10T20:22:58.340Z",
+      "ref": "https://osmcal.org/events.ics?in=IT",
+      "type": "ics"
+    },
+    "start": "2026-09-22T21:15:00+02:00",
+    "title": "Mappiamo le piste ciclabili - Catania",
+    "url": "https://osmcal.org/events.ics?in=IT",
+    "venue": {
+      "address": "Catania (Punto di incontro), Via Cantarella, Borgo-Sanzio, Catania, Sicily, Italy",
+      "geo": {
+        "lat": 37.5132497,
+        "lon": 15.0828898
+      },
+      "name": "Piazza Roma"
+    }
+  }
+]
