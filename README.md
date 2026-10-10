@@ -43,7 +43,9 @@ bot's commits readable.
 
 - `sources/communities/*.yml` — one community per file, including how to collect its events. This is
   the editorial heart of the project.
-- `sources/events/*.yml` — events curated by hand, for communities on closed platforms.
+- `sources/events/*.yml` — events curated by hand, for one-off reports and closed platforms. Every
+  community reads them, whatever its `ingest` list says; an event for a community that does not exist
+  fails the build.
 - `sources/venues/*.yml` — venues with hand-checked coordinates. These always beat the geocoder.
 - `data/` — crawler output, committed by the bot. Do not edit by hand: use `data/overrides/*.yml`,
   which takes precedence over everything.
@@ -192,7 +194,7 @@ URLs and iCal identifiers follow `url` on their own.
 **4. The Issue Forms** — `.github/ISSUE_TEMPLATE/*.yml` are in English and name no city, so they
 work as they are. Three things are tied together if you change them:
 
-- the field **labels** of `new-community.yml` and the ones `tools/issue-to-yaml.ts` reads the issue
+- the field **labels** of `new-community.yml` and `new-event.yml` and the ones `tools/issue-to-yaml.ts` reads the issue
   by (GitHub writes labels into the issue body, not ids);
 - the field **ids**, which the form on the site pre-fills;
 - the **file names**, the `labels:` they apply, `issueLabels` in the config and the label that
@@ -205,7 +207,7 @@ add your first community (see [CONTRIBUTING.md](CONTRIBUTING.md#adding-a-communi
 `npm run ingest`.
 
 **6. Hosting** — enable GitHub Pages with *GitHub Actions* as the source, create the
-`new-community` and `correction` labels (or whatever `issueLabels` says), and allow Actions to
+`new-community`, `new-event` and `correction` labels (or whatever `issueLabels` says), and allow Actions to
 open pull requests. The two ingest runs a day start on their own.
 
 Then `npm test && npm run check && npm run build`: the schema validates every YAML file against the
@@ -213,8 +215,8 @@ new config, so a coordinate outside the bounding box or an unknown category fail
 
 ## Contributing
 
-**Your community is missing, or something is wrong?**
-[Open a report](https://catania.community/submit): the form on the site pre-fills the
+**Your community is missing, an event is not listed, or something is wrong?**
+[Open a report](https://catania.community/submit) or [submit an event](https://catania.community/submit/event): the form on the site pre-fills the
 [Issue Form](../../issues/new/choose) on GitHub for you, or you can open it directly.
 
 Every report becomes a pull request with the YAML file already written: merging it is the approval.

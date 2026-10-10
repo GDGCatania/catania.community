@@ -1,16 +1,31 @@
 #!/usr/bin/env node
-import { writeFile, mkdir } from 'node:fs/promises';
+import { access, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { stringify } from 'yaml';
-import { CommunitySchema, CATEGORIES, AREAS } from '../src/lib/schema.js';
+import {
+  CommunitySchema,
+  ManualEventSchema,
+  CATEGORIES,
+  AREAS,
+  PRICE_TYPES,
+  type Community,
+} from '../src/lib/schema.js';
+import type { z } from 'zod';
 import { slugify } from './ingest/lib/text.js';
 import { PATHS } from './ingest/lib/paths.js';
+import { localIsoWithOffset } from './ingest/lib/time.js';
+import { loadYamlDir } from './ingest/lib/yaml.js';
 
 /**
- * Turns the body of an Issue Form into a community YAML file.
+ * Turns the body of an Issue Form into YAML files.
  *
- * Reads the body from stdin, writes `sources/communities/<slug>.yml`, and
- * prints the slug on stdout for the next step of the workflow.
+ *   tools/issue-to-yaml.ts            → `sources/communities/<slug>.yml`
+ *   tools/issue-to-yaml.ts event      → `sources/events/<date>-<slug>.yml`,
+ *                                       plus the community file when the
+ *                                       organiser is not listed yet
+ *
+ * Reads the body from stdin. For a community it prints the slug on stdout; for
+ * an event, `key=value` lines ready to append to `$GITHUB_OUTPUT`.
  *
  * Important: the YAML is produced with the library's `stringify`, never by
  * concatenating strings. A name like "AperiTech #42" written by hand without
@@ -177,25 +192,236 @@ export function buildCommunity(fields: Record<string, string>) {
   return community;
 }
 
+function tryUrl(value: string): URL | undefined {
+  if (!/^https?:\/\//i.test(value)) return undefined;
+  try {
+    return new URL(value);
+  } catch {
+    return undefined;
+  }
+}
+
+/** `https://www.Example.org/group/` and `example.org/group` are the same page. */
+function comparableUrl(url: URL): string {
+  return `${url.host.replace(/^www\./, '')}${url.pathname.replace(/\/+$/, '')}`.toLowerCase();
+}
+
+/**
+ * Finds the community a reporter meant. Issue Forms cannot offer a dropdown
+ * filled at runtime, so this is free text: a slug, a name, a page of this site
+ * or one of the community's own links. No fuzzy matching: a wrong guess would
+ * credit the event to someone else, which is worse than asking.
+ */
+export function matchCommunity(query: string, communities: Community[]): Community | undefined {
+  const value = query.trim();
+  if (!value) return undefined;
+
+  const url = tryUrl(value);
+  if (url) {
+    const ownPage = /\/communities\/([a-z0-9-]+)/.exec(url.pathname)?.[1];
+    const byPage = ownPage ? communities.find((c) => c.id === ownPage) : undefined;
+    if (byPage) return byPage;
+
+    const target = comparableUrl(url);
+    return communities.find((c) =>
+      Object.values(c.links).some((link) => {
+        const linkUrl = tryUrl(String(link));
+        return linkUrl !== undefined && comparableUrl(linkUrl) === target;
+      })
+    );
+  }
+
+  const slug = slugify(value, 60);
+  return communities.find((c) => c.id === slug || slugify(c.name, 60) === slug);
+}
+
+const DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
+// "18.30" is how times are often written in Italy: accept it as "18:30".
+const TIME = /^(\d{1,2})[:.](\d{2})$/;
+
+function parseDate(value: string): string {
+  const match = DATE.exec(value.trim());
+  const [year, month, day] = match ? match.slice(1).map(Number) : [];
+  const date = match ? new Date(Date.UTC(year!, month! - 1, day!)) : undefined;
+
+  if (!date || date.getUTCMonth() !== month! - 1 || date.getUTCDate() !== day) {
+    throw new Error(`The date "${value}" is not valid: write it as YYYY-MM-DD, e.g. 2026-11-14.`);
+  }
+  return value.trim();
+}
+
+function parseTime(value: string, label: string): string {
+  const match = TIME.exec(value.trim());
+  const hour = Number(match?.[1]);
+  const minute = Number(match?.[2]);
+
+  if (!match || hour > 23 || minute > 59) {
+    throw new Error(`The ${label} "${value}" is not valid: write it as HH:MM, e.g. 18:30.`);
+  }
+  return `${String(hour).padStart(2, '0')}:${match[2]}`;
+}
+
+/** A yes/no dropdown, or a checkbox (which arrives as a task list: `- [X] label`). */
+function isYes(value: string): boolean {
+  return /^yes$/i.test(value.trim()) || /\[x\]/i.test(value);
+}
+
+export interface BuiltEvent {
+  /** What is written is what was given, without the schema's defaults filled in. */
+  event: z.input<typeof ManualEventSchema>;
+  /** `sources/events/<file>`: one file per event, so two reports never conflict. */
+  file: string;
+  /** Set when the organiser is not listed yet and has to be added too. */
+  community?: ReturnType<typeof buildCommunity>;
+}
+
+export function buildEvent(fields: Record<string, string>, communities: Community[]): BuiltEvent {
+  const title = pick(fields, 'Event title', 'event_title');
+  if (!title) throw new Error('The issue has no event title.');
+
+  const communityQuery = pick(fields, 'Organising community', 'community');
+  if (!communityQuery) throw new Error('The issue does not say which community organises the event.');
+
+  const communityUrl = pick(fields, 'Community website, if it is not listed yet', 'community_url');
+
+  const categories = parseList(pick(fields, 'Topics', 'categories')).filter(
+    (category): category is (typeof CATEGORIES)[number] =>
+      (CATEGORIES as readonly string[]).includes(category)
+  );
+
+  const online = isYes(pick(fields, 'Online', 'online'));
+
+  const existing =
+    matchCommunity(communityQuery, communities) ??
+    (communityUrl ? matchCommunity(communityUrl, communities) : undefined);
+
+  let community: BuiltEvent['community'];
+  if (!existing) {
+    if (!communityUrl || tryUrl(communityQuery)) {
+      throw new Error(
+        `No community on the site matches "${communityQuery}". ` +
+          'If it is not listed yet, give its name and its website, and the pull request will add it too.'
+      );
+    }
+
+    community = buildCommunity({
+      'community name': communityQuery,
+      'where you publish your events': communityUrl,
+      topics: categories.join(', '),
+      'where you usually meet': online ? 'online' : 'citta',
+    });
+  }
+
+  const communityId = existing?.id ?? community!.id;
+
+  const date = parseDate(pick(fields, 'Date', 'date'));
+  const start = localIsoWithOffset(date, parseTime(pick(fields, 'Start time', 'start_time'), 'start time'));
+  const endTime = pick(fields, 'End time', 'end_time');
+  const end = endTime ? localIsoWithOffset(date, parseTime(endTime, 'end time')) : undefined;
+
+  if (end && Date.parse(end) <= Date.parse(start)) {
+    throw new Error(
+      `The event ends (${endTime}) before it starts: if it runs past midnight, ` +
+        'leave the end time empty and mention it in the description.'
+    );
+  }
+
+  const venueName = pick(fields, 'Venue name', 'venue');
+  const address = pick(fields, 'Address', 'address');
+  const description = pick(fields, 'Description', 'description');
+
+  const priceRaw = pick(fields, 'Price', 'price').toLowerCase();
+  const priceType = (PRICE_TYPES as readonly string[]).includes(priceRaw)
+    ? (priceRaw as (typeof PRICE_TYPES)[number])
+    : 'free';
+
+  const event: BuiltEvent['event'] = {
+    title,
+    communityId,
+    start,
+    ...(end ? { end } : {}),
+    url: pick(fields, 'Event page', 'url'),
+    ...(description ? { description } : {}),
+    // An address with no name still places the event: it becomes the name.
+    ...(venueName || address
+      ? { venue: { name: venueName || address, ...(venueName && address ? { address } : {}) } }
+      : {}),
+    online,
+    price: { type: priceType },
+    // Left out, the event inherits the community's topics at ingest.
+    ...(categories.length > 0 ? { categories } : {}),
+  };
+
+  // Same rule as for communities: fail in the workflow, not in the PR.
+  const parsed = ManualEventSchema.safeParse(event);
+  if (!parsed.success) {
+    const issues = parsed.error.issues
+      .map((issue) => `  · ${issue.path.join('.') || '(root)'}: ${issue.message}`)
+      .join('\n');
+    throw new Error(`The issue does not describe a valid event:\n${issues}`);
+  }
+
+  return {
+    event,
+    file: `${date}-${slugify(title, 60)}.yml`,
+    community,
+  };
+}
+
+const HEADER = [
+  '# Generated by tools/issue-to-yaml.ts from an Issue Form.',
+  '# Before merging: check the links and resolve any _todo entries.',
+  '',
+].join('\n');
+
+async function writeCommunity(community: ReturnType<typeof buildCommunity>): Promise<string> {
+  const file = path.join(PATHS.communities, `${community.id}.yml`);
+  await mkdir(PATHS.communities, { recursive: true });
+  await writeFile(file, HEADER + stringify(community, { lineWidth: 100 }), 'utf8');
+  return file;
+}
+
+async function exists(file: string): Promise<boolean> {
+  return access(file).then(
+    () => true,
+    () => false
+  );
+}
+
 async function main(): Promise<void> {
   const chunks: Buffer[] = [];
   for await (const chunk of process.stdin) chunks.push(Buffer.from(chunk));
   const body = Buffer.concat(chunks).toString('utf8');
+  const fields = parseIssueForm(body);
 
-  const community = buildCommunity(parseIssueForm(body));
+  if (process.argv[2] !== 'event') {
+    const community = buildCommunity(fields);
+    await writeCommunity(community);
+    // The workflow uses the slug to name the branch and the pull request.
+    process.stdout.write(community.id);
+    return;
+  }
 
-  const header = [
-    '# Generated by tools/issue-to-yaml.ts from an Issue Form.',
-    '# Before merging: check the links and resolve any _todo entries.',
-    '',
-  ].join('\n');
+  const communities = await loadYamlDir(PATHS.communities, CommunitySchema);
+  const { event, file, community } = buildEvent(fields, communities);
 
-  const file = path.join(PATHS.communities, `${community.id}.yml`);
-  await mkdir(PATHS.communities, { recursive: true });
-  await writeFile(file, header + stringify(community, { lineWidth: 100 }), 'utf8');
+  const eventFile = path.join(PATHS.manualEvents, file);
+  if (await exists(eventFile)) {
+    throw new Error(`sources/events/${file} already exists: the event is probably listed already.`);
+  }
 
-  // The workflow uses the slug to name the branch and the pull request.
-  process.stdout.write(community.id);
+  await mkdir(PATHS.manualEvents, { recursive: true });
+  await writeFile(eventFile, HEADER + stringify([event], { lineWidth: 100 }), 'utf8');
+  const communityFile = community ? await writeCommunity(community) : undefined;
+
+  const relative = (p: string) => path.relative(process.cwd(), p);
+  process.stdout.write(
+    [
+      `slug=${file.replace(/\.yml$/, '')}`,
+      `paths=${[eventFile, communityFile].filter(Boolean).map((p) => relative(p!)).join(' ')}`,
+      `community=${community?.id ?? ''}`,
+    ].join('\n') + '\n'
+  );
 }
 
 // Only runs from the command line: importing it from a test does nothing.

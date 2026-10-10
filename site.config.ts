@@ -82,11 +82,14 @@ const config = {
 
   /**
    * GitHub issue labels. Each one is also the file name of its Issue Form in
-   * `.github/ISSUE_TEMPLATE/`, and `newCommunity` is what triggers
-   * `.github/workflows/issue-to-pr.yml`: rename all three together.
+   * `.github/ISSUE_TEMPLATE/`, and `newCommunity` and `newEvent` are what
+   * trigger `.github/workflows/issue-to-pr.yml`: rename all three together.
+   * The labels must exist on the repository: GitHub silently skips a template
+   * label that does not, and the report arrives unlabelled.
    */
   issueLabels: {
     newCommunity: 'new-community',
+    newEvent: 'new-event',
     correction: 'correction',
   },
 

@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 import { stringify } from 'yaml';
-import { buildCommunity, parseIssueForm } from '../../issue-to-yaml.js';
+import { buildCommunity, buildEvent, matchCommunity, parseIssueForm } from '../../issue-to-yaml.js';
+import { CommunitySchema, type Community } from '../../../src/lib/schema.js';
 
 const body = `### Community name
 
@@ -155,5 +156,148 @@ describe('buildCommunity', () => {
     const roundTrip = parse(stringify(community)) as { name: string };
 
     expect(roundTrip.name).toBe('AperiTech #42 Catania');
+  });
+});
+
+const communities: Community[] = [
+  CommunitySchema.parse({
+    id: 'gdg-catania',
+    name: 'GDG Catania',
+    categories: ['tech'],
+    area: 'citta',
+    links: { website: 'https://gdg.community.dev/gdg-catania/' },
+  }),
+  CommunitySchema.parse({
+    id: 'python-catania',
+    name: 'Python Catania',
+    categories: ['tech'],
+    area: 'citta',
+  }),
+];
+
+const eventBody = (overrides: Record<string, string> = {}) => {
+  const fields: Record<string, string> = {
+    'Event title': 'Hack #3: Etna Edition',
+    'Organising community': 'GDG Catania',
+    'Community website, if it is not listed yet': '_No response_',
+    Date: '2026-11-14',
+    'Start time': '18:30',
+    'End time': '21:00',
+    'Event page': 'https://example.org/hack-3',
+    'Venue name': 'Impact Hub',
+    Address: 'Via Example 1, Catania',
+    Online: 'no',
+    Price: 'free',
+    Topics: '_No response_',
+    Description: '_No response_',
+    Confirmation: '- [X] I understand',
+    ...overrides,
+  };
+  return Object.entries(fields)
+    .map(([label, value]) => `### ${label}\n\n${value}`)
+    .join('\n\n');
+};
+
+const event = (overrides: Record<string, string> = {}) =>
+  buildEvent(parseIssueForm(eventBody(overrides)), communities);
+
+describe('matchCommunity', () => {
+  it('matches by slug, by name and by a page of this site', () => {
+    expect(matchCommunity('gdg-catania', communities)?.id).toBe('gdg-catania');
+    expect(matchCommunity('  gdg catania ', communities)?.id).toBe('gdg-catania');
+    expect(
+      matchCommunity('https://catania.community/communities/python-catania', communities)?.id
+    ).toBe('python-catania');
+  });
+
+  it("matches by one of the community's own links, whatever the trailing slash or www", () => {
+    expect(matchCommunity('https://www.gdg.community.dev/gdg-catania', communities)?.id).toBe(
+      'gdg-catania'
+    );
+  });
+
+  it('does not guess', () => {
+    expect(matchCommunity('GDG', communities)).toBeUndefined();
+    expect(matchCommunity('https://example.org/', communities)).toBeUndefined();
+  });
+});
+
+describe('buildEvent', () => {
+  it('builds a valid event for a listed community', () => {
+    const built = event();
+
+    expect(built.community).toBeUndefined();
+    expect(built.file).toBe('2026-11-14-hack-3-etna-edition.yml');
+    expect(built.event).toMatchObject({
+      title: 'Hack #3: Etna Edition',
+      communityId: 'gdg-catania',
+      url: 'https://example.org/hack-3',
+      venue: { name: 'Impact Hub', address: 'Via Example 1, Catania' },
+      online: false,
+      price: { type: 'free' },
+    });
+    // No topics given: the event inherits the community's at ingest.
+    expect(built.event).not.toHaveProperty('categories');
+  });
+
+  /** The offset is the one in force on the event's date, never asked to the reporter. */
+  it('writes the local time with the summer or winter offset of that date', () => {
+    expect(event().event.start).toBe('2026-11-14T18:30:00+01:00');
+    expect(event({ Date: '2026-07-14' }).event.start).toBe('2026-07-14T18:30:00+02:00');
+    expect(event().event.end).toBe('2026-11-14T21:00:00+01:00');
+  });
+
+  it('accepts 18.30 as well as 18:30', () => {
+    expect(event({ 'Start time': '9.05' }).event.start).toBe('2026-11-14T09:05:00+01:00');
+  });
+
+  it('rejects a malformed date or time with a message the reporter can act on', () => {
+    expect(() => event({ Date: '14/11/2026' })).toThrow(/YYYY-MM-DD/);
+    expect(() => event({ Date: '2026-02-30' })).toThrow(/YYYY-MM-DD/);
+    expect(() => event({ 'Start time': '25:00' })).toThrow(/HH:MM/);
+  });
+
+  it('rejects an event that ends before it starts', () => {
+    expect(() => event({ 'End time': '17:00' })).toThrow(/before it starts/);
+  });
+
+  it('reads online, the price and the topics', () => {
+    const built = event({
+      Online: 'yes',
+      Price: 'donation',
+      Topics: 'design, sociale',
+      'Venue name': '_No response_',
+      Address: '_No response_',
+    });
+
+    expect(built.event.online).toBe(true);
+    expect(built.event.price).toEqual({ type: 'donation' });
+    expect(built.event.categories).toEqual(['design', 'sociale']);
+    expect(built.event).not.toHaveProperty('venue');
+  });
+
+  it('adds a community that is not listed yet when its website is given', () => {
+    const built = event({
+      'Organising community': 'Etna Hackers',
+      'Community website, if it is not listed yet': 'https://etnahackers.example.org',
+    });
+
+    expect(built.community).toMatchObject({
+      id: 'etna-hackers',
+      name: 'Etna Hackers',
+      links: { website: 'https://etnahackers.example.org' },
+      ingest: [{ type: 'manual' }],
+    });
+    expect(built.event.communityId).toBe('etna-hackers');
+  });
+
+  it('fails rather than guess when the community is unknown and has no website', () => {
+    expect(() => event({ 'Organising community': 'Etna Hackers' })).toThrow(/No community/);
+  });
+
+  it('serialises a title containing # to YAML without losing data', () => {
+    const roundTrip = parse(stringify([event().event])) as Array<{ title: string }>;
+
+    expect(roundTrip[0]?.title).toBe('Hack #3: Etna Edition');
   });
 });

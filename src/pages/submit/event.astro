@@ -1,0 +1,285 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../lib/jsonld';
+import { CATEGORIES, PRICE_TYPES } from '../../lib/schema';
+import { getCommunities } from '../../lib/events';
+import * as m from '../../paraglide/messages.js';
+import { categoryLabel } from '../../i18n/labels';
+import { DEFAULT_CITY, ISSUE_URLS, ROUTES, SUBMIT_ENDPOINT } from '../../lib/site';
+import Message from '../../components/Message.astro';
+import '../../styles/submit.css';
+
+// Same rule as /submit: with no endpoint the form only pre-fills the GitHub
+// Issue Form, so there is no contact field and no second GitHub button.
+const viaGithub = !SUBMIT_ENDPOINT;
+
+// Suggested as the reporter types. The issue gets the name, and
+// tools/issue-to-yaml.ts matches it back to the community by slug or name.
+const communities = (await getCommunities()).filter((community) => community.active);
+
+const priceLabel = {
+  free: m.submitEvent_priceFree,
+  donation: m.submitEvent_priceDonation,
+  paid: m.submitEvent_pricePaid,
+} as const;
+---
+
+<BaseLayout
+  title={m.submitEvent_title()}
+  description={m.submitEvent_metaDescription({ city: DEFAULT_CITY })}
+  jsonLd={breadcrumbJsonLd([
+    { name: m.nav_events(), path: ROUTES.home },
+    { name: m.submit_title(), path: ROUTES.submit },
+    { name: m.submitEvent_title(), path: ROUTES.submitEvent },
+  ])}
+>
+  <div class="submit">
+    <div class="container head">
+      <h1>{m.submitEvent_title()}</h1>
+      <p class="lede">
+        <Message of={m.submitEvent_intro} links={{ community: ROUTES.submit }} />
+      </p>
+    </div>
+
+    <div class="container layout">
+      <form
+        class="form"
+        data-submit-event-form
+        novalidate
+        data-i18n={JSON.stringify({
+          missing: m.submit_missing({ fields: '__f__' }),
+          missingTitle: m.submitEvent_missingTitle(),
+          missingCommunity: m.submitEvent_missingCommunity(),
+          missingDate: m.submitEvent_missingDate(),
+          missingStart: m.submitEvent_missingStart(),
+          missingUrl: m.submitEvent_missingUrl(),
+          sending: m.submit_sending(),
+          okWithLink: m.submit_okWithLink(),
+          ok: m.submit_ok(),
+          openIssue: m.submit_openIssue(),
+          failed: m.submit_failed(),
+          failedLink: m.submit_failedLink(),
+          redirecting: m.submit_redirecting(),
+        })}
+      >
+        <fieldset>
+          <legend class="eyebrow">{m.submitEvent_sectionEvent()}</legend>
+
+          <label>
+            <span class="label">{m.submitEvent_fieldTitle()} <em>{m.submit_required()}</em></span>
+            <input
+              type="text"
+              name="title"
+              required
+              maxlength="300"
+              placeholder={m.submitEvent_fieldTitlePlaceholder()}
+            />
+          </label>
+
+          <div class="row">
+            <label>
+              <span class="label">{m.submitEvent_fieldDate()} <em>{m.submit_required()}</em></span>
+              <input type="date" name="date" required />
+            </label>
+            <label>
+              <span class="label">{m.submitEvent_fieldStart()} <em>{m.submit_required()}</em></span>
+              <input type="time" name="startTime" required />
+            </label>
+            <label>
+              <span class="label">{m.submitEvent_fieldEnd()}</span>
+              <input type="time" name="endTime" />
+            </label>
+          </div>
+
+          <label>
+            <span class="label">{m.submitEvent_fieldUrl()} <em>{m.submit_required()}</em></span>
+            <input type="url" name="url" required placeholder="https://…" />
+            <span class="help">{m.submitEvent_fieldUrlHelp()}</span>
+          </label>
+
+          <label>
+            <span class="label">{m.submitEvent_fieldDescription()}</span>
+            <textarea name="description" maxlength="5000" rows="4"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend class="eyebrow">{m.submitEvent_sectionCommunity()}</legend>
+
+          <label>
+            <span class="label">{m.submitEvent_fieldCommunity()} <em>{m.submit_required()}</em></span>
+            <input
+              type="text"
+              name="community"
+              required
+              maxlength="120"
+              list="known-communities"
+              autocomplete="off"
+            />
+            <datalist id="known-communities">
+              {communities.map((community) => <option value={community.name} />)}
+            </datalist>
+            <span class="help">{m.submitEvent_fieldCommunityHelp()}</span>
+          </label>
+
+          <label>
+            <span class="label">{m.submitEvent_fieldCommunityUrl()}</span>
+            <input type="url" name="communityUrl" placeholder="https://…" />
+            <span class="help">{m.submitEvent_fieldCommunityUrlHelp()}</span>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend class="eyebrow">{m.submitEvent_sectionWhere()}</legend>
+
+          <div class="row">
+            <label>
+              <span class="label">{m.submitEvent_fieldVenue()}</span>
+              <input type="text" name="venue" maxlength="200" placeholder="Impact Hub" />
+            </label>
+            <label>
+              <span class="label">{m.submitEvent_fieldAddress()}</span>
+              <input type="text" name="address" maxlength="300" />
+            </label>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" name="online" value="yes" />
+            {m.submitEvent_fieldOnline()}
+          </label>
+
+          <label>
+            <span class="label">{m.submitEvent_fieldPrice()}</span>
+            <span class="checks">
+              {
+                PRICE_TYPES.map((price) => (
+                  <label class="check">
+                    <input type="radio" name="price" value={price} checked={price === 'free'} />
+                    {priceLabel[price]()}
+                  </label>
+                ))
+              }
+            </span>
+          </label>
+
+          <label>
+            <span class="label">{m.submit_fieldTopics()}</span>
+            <span class="checks">
+              {
+                CATEGORIES.map((category) => (
+                  <label class="check">
+                    <input type="checkbox" name="categories" value={category} />
+                    {categoryLabel[category]()}
+                  </label>
+                ))
+              }
+            </span>
+            <span class="help">{m.submitEvent_fieldTopicsHelp()}</span>
+          </label>
+        </fieldset>
+
+        {!viaGithub && (
+          <fieldset>
+            <legend class="eyebrow">{m.submit_sectionContact()}</legend>
+            <label>
+              <span class="label">{m.submit_fieldContact()}</span>
+              <input type="text" name="contact" maxlength="200" placeholder={m.submit_fieldContactPlaceholder()} />
+              <span class="help">{m.submit_contactHelp()}</span>
+            </label>
+          </fieldset>
+        )}
+
+        <div class="actions">
+          <button class="btn btn--primary" type="submit">
+            {viaGithub ? m.submit_buttonGithub() : m.submit_button()}
+          </button>
+          {
+            !viaGithub && (
+              <a class="btn btn--ghost" href={ISSUE_URLS.newEvent} rel="noopener">
+                {m.submit_buttonIssue()}
+              </a>
+            )
+          }
+        </div>
+
+        {viaGithub && <p class="help">{m.submit_githubNote()}</p>}
+
+        <p class="status" data-form-status role="status" aria-live="polite" hidden></p>
+
+        <noscript>
+          <p class="notice">
+            <Message of={m.submit_noScript} links={{ issue: ISSUE_URLS.newEvent }} />
+          </p>
+        </noscript>
+      </form>
+
+      <aside class="side">
+        <div class="card">
+          <h2>{m.submit_nextTitle()}</h2>
+          <ol>
+            <li>{m.submit_next1()}</li>
+            <li>{m.submit_next2()}</li>
+            <li>{m.submitEvent_next3()}</li>
+          </ol>
+          <p class="hint">{m.submit_nextHint()}</p>
+        </div>
+
+        <div class="card">
+          <h2>{m.submitEvent_recurringTitle()}</h2>
+          <p class="hint">{m.submitEvent_recurringBody()}</p>
+          <a class="btn btn--ghost" href={ROUTES.submit}>{m.submitEvent_recurringButton()}</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { ISSUE_LABELS, ISSUE_TITLES, issueFormUrl } from '../../lib/site';
+  import { text, wireSubmitForm } from '../../lib/submit-form';
+
+  const form = document.querySelector<HTMLFormElement>('[data-submit-event-form]');
+
+  if (form) {
+    const copy: Record<string, string> = JSON.parse(form.dataset.i18n ?? '{}');
+
+    // Keyed by the field ids of the new-event Issue Form, so the issue that
+    // comes out is one tools/issue-to-yaml.ts can read. The browser already
+    // hands date and time over as 2026-11-14 and 18:30, the formats it expects.
+    // Not `title`: that query parameter is the issue's own title.
+    const fields = (data: FormData) => ({
+      event_title: text(data, 'title'),
+      community: text(data, 'community'),
+      community_url: text(data, 'communityUrl'),
+      date: text(data, 'date'),
+      start_time: text(data, 'startTime'),
+      end_time: text(data, 'endTime'),
+      url: text(data, 'url'),
+      venue: text(data, 'venue'),
+      address: text(data, 'address'),
+      online: data.get('online') ? 'yes' : 'no',
+      price: text(data, 'price'),
+      categories: data.getAll('categories').map(String).join(','),
+      description: text(data, 'description'),
+    });
+
+    wireSubmitForm(form, {
+      kind: ISSUE_LABELS.newEvent,
+      requiredInputs: ['title', 'community', 'date', 'startTime', 'url'],
+      missing: (data) => {
+        const missing: string[] = [];
+        if (!text(data, 'title')) missing.push(copy.missingTitle ?? '');
+        if (!text(data, 'community')) missing.push(copy.missingCommunity ?? '');
+        if (!text(data, 'date')) missing.push(copy.missingDate ?? '');
+        if (!text(data, 'startTime')) missing.push(copy.missingStart ?? '');
+        if (!text(data, 'url')) missing.push(copy.missingUrl ?? '');
+        return missing;
+      },
+      answers: fields,
+      issueUrl: (data) => {
+        const answers = fields(data);
+        return issueFormUrl(ISSUE_LABELS.newEvent, ISSUE_TITLES.newEvent(answers.event_title), answers);
+      },
+    });
+  }
+</script>

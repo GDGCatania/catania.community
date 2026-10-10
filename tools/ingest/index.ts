@@ -13,13 +13,13 @@ import {
 } from '../../src/lib/schema.js';
 import { TIMEZONE } from '../../src/lib/site.js';
 import { loadYamlDir } from './lib/yaml.js';
-import { PATHS, REPO_ROOT } from './lib/paths.js';
+import { PATHS } from './lib/paths.js';
 import { readJson, writeJsonIfChanged } from './lib/json.js';
 import { Geocoder } from './geocode.js';
 import { fetchBevy } from './adapters/bevy.js';
 import { fetchIcs } from './adapters/ics.js';
 import { fetchJsonLd } from './adapters/jsonld.js';
-import { fromManual } from './adapters/manual.js';
+import { fromManual, withImplicitManual } from './adapters/manual.js';
 import type { RawEvent } from './adapters/types.js';
 import { applyOverrides, dedupe, normalizeEvent, uniqueSlugs } from './normalize.js';
 import {
@@ -29,7 +29,6 @@ import {
   readAllEvents,
   writeEvents,
 } from './store.js';
-import path from 'node:path';
 
 /**
  * The collection orchestrator.
@@ -99,6 +98,27 @@ async function main(): Promise<number> {
     loadOverrides(),
   ]);
 
+  // An event written for a community that does not exist would never be read:
+  // valid YAML, merged, and silently missing from the site.
+  const known = new Map(communitiesAll.map((c) => [c.id, c]));
+  const orphans = manualEvents.filter((event) => !known.has(event.communityId));
+  if (orphans.length > 0) {
+    for (const event of orphans) {
+      console.error(
+        `✗ sources/events: "${event.title}" belongs to "${event.communityId}", ` +
+          'which is not in sources/communities/'
+      );
+    }
+    return 1;
+  }
+  for (const event of manualEvents) {
+    if (known.get(event.communityId)?.active === false) {
+      console.warn(
+        `  ⚠ sources/events: "${event.title}" belongs to "${event.communityId}", which is archived`
+      );
+    }
+  }
+
   const communities = values.source
     ? communitiesAll.filter((c) => c.id === values.source)
     : communitiesAll.filter((c) => c.active);
@@ -122,7 +142,7 @@ async function main(): Promise<number> {
   const configured = new Set<string>();
 
   for (const community of communities) {
-    for (const ingest of community.ingest) {
+    for (const ingest of withImplicitManual(community.ingest)) {
       const origin = originKey(community.id, ingest.type);
       configured.add(origin);
 
@@ -263,7 +283,7 @@ async function normalizeAll(
 }
 
 async function loadManualEvents(): Promise<ManualEvent[]> {
-  const files = await loadYamlDir(path.join(REPO_ROOT, 'sources/events'), ManualEventFileSchema);
+  const files = await loadYamlDir(PATHS.manualEvents, ManualEventFileSchema);
   return files.flat();
 }
 
