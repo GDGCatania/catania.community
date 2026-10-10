@@ -1,0 +1,19 @@
+# Serate pubblicate sul Bevy del GDG Catania e, come proprie, anche sul gruppo
+# Meetup di Flutter Catania: co-organizzate. Verificato il 2026-10-11 sulla
+# lista degli eventi di https://www.meetup.com/meetup-group-poliomfw/.
+- id: bevy:79131 # XMASYNC 2024, 7 dicembre 2024
+  hostIds: [gdg-catania, flutter-catania]
+- id: bevy:80828 # #FlutterInProduction Extended Catania, 11 gennaio 2025
+  hostIds: [gdg-catania, flutter-catania]
+- id: bevy:91081 # Flutter Catania Meetup - Aprile '25
+  hostIds: [gdg-catania, flutter-catania]
+- id: bevy:96568 # Google I/O Reconnect, 26 luglio 2025
+  hostIds: [gdg-catania, flutter-catania]
+- id: bevy:98789 # DevFest Catania 2025
+  hostIds: [gdg-catania, flutter-catania]
+- id: bevy:108569 # XMASYNC 2025, 20 dicembre 2025
+  hostIds: [gdg-catania, flutter-catania]
+- id: bevy:119593 # Flutter Catania Meetup - Aprile '26
+  hostIds: [gdg-catania, flutter-catania]
+- id: bevy:128491 # Catania Mobile Day, 17 ottobre 2026
+  hostIds: [gdg-catania, flutter-catania]
