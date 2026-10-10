@@ -1,0 +1,16 @@
+# Dal programma su https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026,
+# verificato il 2026-10-10.
+- title: Compleanno di Wikipedia 25 a Catania
+  communityId: wikimediani-in-sicilia
+  start: '2026-01-24T15:00:00+01:00'
+  end: '2026-01-24T19:00:00+01:00'
+  url: https://it.wikipedia.org/wiki/Evento:Compleanno_di_Wikipedia_25_a_Catania
+  description: 'Un pomeriggio per i 25 anni di Wikipedia: presentazione di Wikipedia, Wikimedia Commons
+    e Wikidata, con un focus su come migliorare le informazioni sull''ambiente in Sicilia per Wiki Loves
+    Earth, e poi la torta.'
+  venue:
+    name: Legambiente Catania
+    address: Piazza Cavour 19, Catania
+    city: Catania
+  price:
+    type: free

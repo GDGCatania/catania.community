@@ -1,0 +1,15 @@
+# Dal programma su https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026,
+# verificato il 2026-10-10.
+- title: Editathon "Voci di carta, voci digitali"
+  communityId: wikimediani-in-sicilia
+  start: '2026-05-07T14:00:00+02:00'
+  end: '2026-05-07T18:00:00+02:00'
+  url: https://it.wikipedia.org/wiki/Evento:Editathon_%22Voci_di_carta,_voci_digitali%22
+  description: 'Editathon sugli autori della letteratura italiana contemporanea, con il DISUM dell''Università
+    di Catania e Wikimedia Italia: seminario introduttivo su Wikipedia alle 14, poi lavoro sulle voci.'
+  venue:
+    name: Monastero dei Benedettini, Aula A2
+    address: Piazza Dante 32, Catania
+    city: Catania
+  price:
+    type: free

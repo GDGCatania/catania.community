@@ -1,0 +1,16 @@
+# Dal programma su https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026,
+# verificato il 2026-10-10.
+- title: Modifichiamo Wikipedia insieme!
+  communityId: wikimediani-in-sicilia
+  start: '2026-03-13T20:00:00+01:00'
+  end: '2026-03-13T22:00:00+01:00'
+  url: https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Modifichiamo_Wikipedia_insieme!_Catania,_13_marzo
+  description: 'Tu, noi, un caffè e il pulsante "modifica": si porta il proprio laptop e si modifica Wikipedia
+    (ma anche Commons, Wikidata, OSM) con l''aiuto di wikipediani esperti. Tema facoltativo: figure femminili
+    a Catania.'
+  venue:
+    name: Verso Coffice
+    address: Via Monserrato 116, 95128 Catania
+    city: Catania
+  price:
+    type: free

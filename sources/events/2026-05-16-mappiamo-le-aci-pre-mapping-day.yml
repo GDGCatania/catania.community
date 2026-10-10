@@ -1,0 +1,14 @@
+# Dal programma su https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026,
+# verificato il 2026-10-10.
+- title: Mappiamo le Aci - Pre-Mapping Day
+  communityId: openstreetmap-catania
+  start: '2026-05-16T17:30:00+02:00'
+  end: '2026-05-16T20:00:00+02:00'
+  url: https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Mappiamo_le_Aci_-_Acireale_16-17_maggio
+  description: Serata di formazione su OpenStreetMap e sugli editor per mappare, in vista del Mapping
+    Day del giorno dopo.
+  venue:
+    name: CAI Acireale
+    city: Acireale
+  price:
+    type: free
