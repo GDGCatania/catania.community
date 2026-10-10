@@ -1,9 +1,10 @@
 # Serate pubblicate sul Bevy del GDG Catania e, come proprie, anche sul gruppo
 # Meetup di Flutter Catania: co-organizzate. Verificato il 2026-10-11 sulla
 # lista degli eventi di https://www.meetup.com/meetup-group-poliomfw/.
-# Servono per le serate passate, che Meetup non elenca più. Quelle future
-# arrivano da entrambi i feed e si uniscono da sole; se titolo o luogo sono
-# scritti diversamente, va aggiunto qui un `aliasOf`.
+# Le stesse serate arrivano anche dal Meetup di Flutter, con il luogo scritto
+# diversamente ("CreationDose" invece di "CreationDose Srl", "TBD", nessuno):
+# gli `aliasOf` in fondo le uniscono all'evento del GDG. `hostIds` resta
+# perché l'attribuzione non dipenda dal fatto che Meetup risponda.
 - id: bevy:79131 # XMASYNC 2024, 7 dicembre 2024
   hostIds: [gdg-catania, flutter-catania]
 - id: bevy:80828 # #FlutterInProduction Extended Catania, 11 gennaio 2025
@@ -20,3 +21,19 @@
   hostIds: [gdg-catania, flutter-catania]
 - id: bevy:128491 # Catania Mobile Day, 17 ottobre 2026
   hostIds: [gdg-catania, flutter-catania]
+
+# Le copie su Meetup delle stesse serate.
+- id: jsonld:meetup:304782661 # Flutter Catania @ XMASync
+  aliasOf: bevy:79131
+- id: jsonld:meetup:305034665
+  aliasOf: bevy:80828
+- id: jsonld:meetup:307127318
+  aliasOf: bevy:91081
+- id: jsonld:meetup:308966840
+  aliasOf: bevy:96568
+- id: jsonld:meetup:311883542
+  aliasOf: bevy:98789
+- id: jsonld:meetup:312143342
+  aliasOf: bevy:108569
+- id: jsonld:meetup:313883639
+  aliasOf: bevy:119593
