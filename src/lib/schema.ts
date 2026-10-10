@@ -41,6 +41,12 @@ export const SlugSchema = z
 /** ISO 8601 with an explicit offset. Without one the time would be ambiguous. */
 export const DateTimeSchema = z.iso.datetime({ offset: true });
 
+/** Organisers of an event: at least one, no repeats. */
+export const HostIdsSchema = z
+  .array(SlugSchema)
+  .min(1)
+  .refine((ids) => new Set(ids).size === ids.length, 'a community is listed twice');
+
 export const GeoSchema = z.object({
   // Bounding box from site.config.ts. It catches swapped lat/lon pairs
   // and geocoding that wandered off to another country entirely.
@@ -139,7 +145,16 @@ export const EventSchema = z.object({
   end: DateTimeSchema.optional(),
   /** Link to the organiser's platform: no sign-ups happen on this site. */
   url: z.url(),
+  /** The community whose feed this record came from: provenance, never rewritten. */
   communityId: SlugSchema,
+  /**
+   * Who organises the event, when that is not just `communityId`: co-organised
+   * evenings, or an event published on one community's feed for another.
+   * When present it is the complete list and takes precedence over
+   * `communityId`, in the order written. Optional and never defaulted, so the
+   * events that do not need it stay byte-identical on disk.
+   */
+  hostIds: HostIdsSchema.optional(),
   venue: VenueSchema.optional(),
   online: z.boolean().default(false),
   area: AreaSchema,
@@ -173,6 +188,8 @@ export const EventFileSchema = z.array(ValidatedEventSchema);
 export const ManualEventSchema = z.object({
   title: z.string().min(1).max(300),
   communityId: SlugSchema,
+  /** Every organiser, when there is more than one. See `EventSchema.hostIds`. */
+  hostIds: HostIdsSchema.optional(),
   start: DateTimeSchema,
   end: DateTimeSchema.optional(),
   url: z.url(),
@@ -208,5 +225,10 @@ export type Links = z.infer<typeof LinksSchema>;
 export type IngestConfig = z.infer<typeof IngestConfigSchema>;
 export type Community = z.infer<typeof CommunitySchema>;
 export type Event = z.infer<typeof EventSchema>;
+
+/** Who organises an event: `hostIds` when curated, otherwise the publishing community. */
+export function eventHostIds(event: Pick<Event, 'communityId' | 'hostIds'>): string[] {
+  return event.hostIds ?? [event.communityId];
+}
 export type ManualEvent = z.infer<typeof ManualEventSchema>;
 export type Override = z.infer<typeof OverrideSchema>;

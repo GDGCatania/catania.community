@@ -11,6 +11,7 @@ import {
   groupByDay,
   eventsPerDay,
   eventCount,
+  eventHosts,
 } from '../lib/events';
 import { ROUTES, SITE_NAME, HEADLINE, HEADLINE_ACCENT, META_DESCRIPTION, metaDescriptionForCount } from '../lib/site';
 import Message from '../components/Message.astro';
@@ -62,7 +63,7 @@ const communityCount = m.communities_count({ count: allCommunities.length });
             {day.events.map((event) => (
               <EventRow
                 event={event}
-                community={communities.get(event.communityId)}
+                hosts={eventHosts(event, communities)}
                 index={numbered.get(event.id) ?? 0}
               />
             ))}

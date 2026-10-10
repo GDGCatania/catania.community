@@ -1,5 +1,12 @@
 import type { APIRoute } from 'astro';
-import { getCommunityMap, getUpcomingEvents, formatDateLong, formatTime } from '../lib/events';
+import {
+  eventHosts,
+  formatDateLong,
+  formatNames,
+  formatTime,
+  getCommunityMap,
+  getUpcomingEvents,
+} from '../lib/events';
 
 import { SITE_URL, ROUTES, FEED_TITLE, FEED_DESCRIPTION } from '../lib/site';
 import { localeTag } from '../i18n';
@@ -20,7 +27,7 @@ export const GET: APIRoute = async () => {
 
   const items = events
     .map((event) => {
-      const community = communities.get(event.communityId);
+      const hosts = eventHosts(event, communities);
       const where = event.online
         ? m.status_online()
         : [event.venue?.name, event.venue?.city].filter(Boolean).join(', ');
@@ -28,7 +35,7 @@ export const GET: APIRoute = async () => {
       const summary = [
         m.feed_at({ date: formatDateLong(event.start), time: formatTime(event.start) }),
         where ? m.feed_where({ place: where }) : null,
-        community ? m.feed_organiser({ name: community.name }) : null,
+        hosts.length > 0 ? m.feed_organiser({ name: formatNames(hosts.map((h) => h.name)) }) : null,
         event.description,
       ]
         .filter(Boolean)

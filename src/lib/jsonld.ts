@@ -9,7 +9,15 @@ import type { Community, Event } from './schema';
  */
 import { SITE_URL, ROUTES, DEFAULT_CITY, DEFAULT_REGION, DEFAULT_COUNTRY, DEFAULT_LANGUAGE, DEFAULT_LANGUAGE_CODE } from './site';
 
-export function eventJsonLd(event: Event, community: Community | undefined, url: string) {
+function organization(community: Community) {
+  return {
+    '@type': 'Organization',
+    name: community.name,
+    url: community.links.website ?? `${SITE_URL}${ROUTES.community(community.id)}`,
+  };
+}
+
+export function eventJsonLd(event: Event, hosts: Community[], url: string) {
   const location = event.online
     ? {
         '@type': 'VirtualLocation',
@@ -55,13 +63,11 @@ export function eventJsonLd(event: Event, community: Community | undefined, url:
       : 'https://schema.org/OfflineEventAttendanceMode',
     location,
     ...(event.coverImage ? { image: [event.coverImage] } : {}),
-    ...(community
+    // schema.org takes a list of organizers; a single one stays an object, as
+    // Google's examples write it.
+    ...(hosts.length > 0
       ? {
-          organizer: {
-            '@type': 'Organization',
-            name: community.name,
-            url: community.links.website ?? `${SITE_URL}${ROUTES.community(community.id)}`,
-          },
+          organizer: hosts.length === 1 ? organization(hosts[0]!) : hosts.map(organization),
         }
       : {}),
     offers: {

@@ -1,5 +1,5 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { getAllEvents, getCommunityMap } from '../../lib/events';
+import { eventHosts, getAllEvents, getCommunityMap } from '../../lib/events';
 import { buildCalendar } from '../../lib/ics';
 import type { Community, Event } from '../../lib/schema';
 
@@ -9,15 +9,14 @@ export const getStaticPaths = (async () => {
 
   return events.map((event) => ({
     params: { slug: event.slug },
-    props: { event, community: communities.get(event.communityId) },
+    props: { event, hosts: eventHosts(event, communities) },
   }));
 }) satisfies GetStaticPaths;
 
 export const GET: APIRoute = ({ props }) => {
-  const { event, community } = props as { event: Event; community?: Community };
+  const { event, hosts } = props as { event: Event; hosts: Community[] };
 
-  const communities = new Map<string, Community>();
-  if (community) communities.set(community.id, community);
+  const communities = new Map(hosts.map((host) => [host.id, host]));
 
   return new Response(buildCalendar([event], communities, event.title), {
     headers: {

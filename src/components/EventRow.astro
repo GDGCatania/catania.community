@@ -1,6 +1,6 @@
 ---
 import Badge from './Badge.astro';
-import { formatTime } from '../lib/events';
+import { formatNames, formatTime } from '../lib/events';
 import { ROUTES } from '../lib/site';
 import * as m from '../paraglide/messages.js';
 import { categoryLabel, priceLabel } from '../i18n/labels';
@@ -8,12 +8,15 @@ import type { Community, Event } from '../lib/schema';
 
 export interface Props {
   event: Event;
-  community?: Community;
+  /** Every organiser, in the order curated. */
+  hosts: Community[];
   /** Number shown in the bullet; matches the pin on the map. */
   index: number;
 }
 
-const { event, community, index } = Astro.props;
+const { event, hosts, index } = Astro.props;
+
+const organisers = formatNames(hosts.map((host) => host.name));
 
 const where = event.online
   ? m.status_online()
@@ -44,8 +47,8 @@ const where = event.online
     </h3>
 
     <p class="meta">
-      {community ? <span class="org">{community.name}</span> : null}
-      {community && where ? <span class="dot" aria-hidden="true">·</span> : null}
+      {organisers ? <span class="org">{organisers}</span> : null}
+      {organisers && where ? <span class="dot" aria-hidden="true">·</span> : null}
       {where ? <span>{where}</span> : null}
     </p>
 

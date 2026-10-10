@@ -70,6 +70,7 @@
   "eventPage_beginnerFriendly": "Beginner friendly",
   "eventPage_breadcrumb": "← All events",
   "eventPage_cancelledNotice": "This event was cancelled.",
+  "eventPage_coOrganiser": "Co-organised by",
   "eventPage_communitySince": " · community since {year}",
   "eventPage_dataSource": "Imported from the community’s public pages. Something off? {#link to=$report}Report it{/link}.",
   "eventPage_metaFallback": "{title} — {date} in {city}. Organised by {community}.",
