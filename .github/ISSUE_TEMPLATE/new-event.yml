@@ -1,0 +1,132 @@
+name: New event
+description: Add a single event to the calendar
+title: 'New event: '
+labels: [new-event]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For one event — a hackathon, a conference, a one-off talk — organised on a
+        platform we do not read. If the community publishes its events regularly,
+        adding the community instead keeps the calendar up to date on its own.
+
+        This report automatically becomes a pull request with the file already
+        written: once it is merged the event is online.
+
+  # The field labels below are what tools/issue-to-yaml.ts reads the issue by:
+  # change one here and change it there too. The ids are what the form on the
+  # site pre-fills.
+
+  - type: input
+    id: event_title
+    attributes:
+      label: Event title
+      placeholder: DevFest Catania 2026
+    validations:
+      required: true
+
+  - type: input
+    id: community
+    attributes:
+      label: Organising community
+      description: >-
+        Its name or its page on this site. Every event is credited to the
+        community that organises it.
+      placeholder: GDG Catania
+    validations:
+      required: true
+
+  - type: input
+    id: community_url
+    attributes:
+      label: Community website, if it is not listed yet
+      description: >-
+        Only for a community that is not on this site yet: its website or social
+        page. The pull request adds it too.
+      placeholder: https://
+
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      description: Year, month, day.
+      placeholder: '2026-11-14'
+    validations:
+      required: true
+
+  - type: input
+    id: start_time
+    attributes:
+      label: Start time
+      description: Local time, 24-hour clock.
+      placeholder: '18:30'
+    validations:
+      required: true
+
+  - type: input
+    id: end_time
+    attributes:
+      label: End time
+      placeholder: '21:00'
+
+  - type: input
+    id: url
+    attributes:
+      label: Event page
+      description: >-
+        The organiser's page, where people sign up. This site is a mirror: an
+        event without a page to send people to cannot be listed.
+      placeholder: https://
+    validations:
+      required: true
+
+  - type: input
+    id: venue
+    attributes:
+      label: Venue name
+      placeholder: Impact Hub
+
+  - type: input
+    id: address
+    attributes:
+      label: Address
+      placeholder: Via Example 1, Catania
+
+  # A dropdown, not a checkbox: GitHub cannot pre-fill checkboxes from the URL,
+  # and the form on the site needs to.
+  - type: dropdown
+    id: online
+    attributes:
+      label: Online
+      options: ['no', 'yes']
+      default: 0
+
+  - type: dropdown
+    id: price
+    attributes:
+      label: Price
+      options: [free, donation, paid]
+      default: 0
+
+  - type: dropdown
+    id: categories
+    attributes:
+      label: Topics
+      description: Leave empty to use the community's own.
+      multiple: true
+      options: [tech, design, impresa, cultura, sociale]
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: >-
+            I understand that this data ends up in a public repository under the
+            ODbL licence, and that this site does not handle sign-ups or tickets.
+          required: true

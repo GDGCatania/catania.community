@@ -11,9 +11,12 @@ permissions:
 
 jobs:
   create-pr:
-    # Must match `issueLabels.newCommunity` in site.config.ts.
-    if: github.event.label.name == 'new-community'
+    # Must match `issueLabels.newCommunity` and `issueLabels.newEvent` in
+    # site.config.ts.
+    if: github.event.label.name == 'new-community' || github.event.label.name == 'new-event'
     runs-on: ubuntu-latest
+    env:
+      KIND: ${{ github.event.label.name == 'new-event' && 'event' || 'community' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -32,38 +35,85 @@ jobs:
           set -o pipefail
           # The body goes through stdin: inlining it would expose it to shell
           # interpretation.
-          if ! SLUG=$(printf '%s' "$ISSUE_BODY" | npx tsx tools/issue-to-yaml.ts 2> /tmp/err.txt); then
+          if [ "$KIND" = event ]; then
+            ARGS=event
+          else
+            ARGS=
+          fi
+
+          if ! OUT=$(printf '%s' "$ISSUE_BODY" | npx tsx tools/issue-to-yaml.ts $ARGS 2> /tmp/err.txt); then
+            # Validation errors span several lines: a plain `key=value` would
+            # cut them at the first one.
             {
-              echo "error=$(cat /tmp/err.txt)"
+              echo 'error<<__ERROR__'
+              cat /tmp/err.txt
+              echo '__ERROR__'
             } >> "$GITHUB_OUTPUT"
             exit 1
           fi
-          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
 
-      - name: Check the project still builds with the new community
+          if [ "$KIND" = event ]; then
+            # `slug=`, `paths=` and `community=`, one per line.
+            printf '%s\n' "$OUT" >> "$GITHUB_OUTPUT"
+          else
+            {
+              echo "slug=$OUT"
+              echo "paths=sources/communities/$OUT.yml"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check the project still builds with the new data
         run: |
           npm test
           npm run build
+          npm run ingest -- --dry-run
 
       - name: Open the pull request
         id: pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLUG: ${{ steps.generate.outputs.slug }}
+          PATHS: ${{ steps.generate.outputs.paths }}
+          NEW_COMMUNITY: ${{ steps.generate.outputs.community }}
           ISSUE: ${{ github.event.issue.number }}
         run: |
-          BRANCH="community/$SLUG"
+          BRANCH="$KIND/$SLUG"
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git checkout -b "$BRANCH"
-          git add "sources/communities/$SLUG.yml"
-          git commit -m "feat(community): add $SLUG (closes #$ISSUE)"
-          # `community/<slug>` is reserved for this bot and its content is derived
-          # from the issue on every run, so replacing the branch is safe. It is also
-          # what lets a retry work after a failed run left a branch behind.
+          # Word splitting is wanted: PATHS is a space-separated list of files
+          # whose names are slugs.
+          git add $PATHS
+          git commit -m "feat($KIND): add $SLUG (closes #$ISSUE)"
+          # `community/<slug>` and `event/<slug>` are reserved for this bot and
+          # their content is derived from the issue on every run, so replacing the
+          # branch is safe. It is also what lets a retry work after a failed run
+          # left a branch behind.
           git push --force -u origin "$BRANCH"
 
-          cat > /tmp/pr-body.md <<'EOF'
+          if [ "$KIND" = event ]; then
+            TITLE="New event: $SLUG"
+            cat > /tmp/pr-body.md <<'EOF'
+          Generated automatically from a report.
+
+          **Before merging, check:**
+
+          - [ ] The event page belongs to the organiser, and sign-ups happen there
+          - [ ] Date, start and end time match the event page
+          - [ ] The event is credited to the right community
+          - [ ] If the venue is outside the city, `venue.city` is filled in, so the
+                event lands under the right area
+          EOF
+            if [ -n "$NEW_COMMUNITY" ]; then
+              cat >> /tmp/pr-body.md <<'EOF'
+          - [ ] The organising community was not listed, so this PR adds it too:
+                check its link and topics, and resolve any `_todo` entry
+          EOF
+            fi
+            printf '\nOnce merged the event is online after the next collection run (twice a day).\n' >> /tmp/pr-body.md
+          else
+            TITLE="New community: $SLUG"
+            cat > /tmp/pr-body.md <<'EOF'
           Generated automatically from a report.
 
           **Before merging, check:**
@@ -79,12 +129,13 @@ jobs:
 
           Once merged the community is online and its events are collected on the next run.
           EOF
+          fi
           printf '\nCloses #%s\n' "$ISSUE" >> /tmp/pr-body.md
 
           # On a retry the pull request may already be open; the force push above
           # has just updated it, so reuse it instead of failing.
           URL=$(gh pr create \
-            --title "New community: $SLUG" \
+            --title "$TITLE" \
             --body-file /tmp/pr-body.md \
             --base main \
             --head "$BRANCH" 2>/dev/null) || URL=$(gh pr view "$BRANCH" --json url --jq .url)
@@ -99,33 +150,38 @@ jobs:
             const pr = ${{ toJSON(steps.pr.outputs.url) }};
             const slug = ${{ toJSON(steps.generate.outputs.slug) }};
             const failure = ${{ toJSON(steps.generate.outputs.error) }};
+            const kind = process.env.KIND;
             const repo = `${context.repo.owner}/${context.repo.repo}`;
+            const branch = `${kind}/${slug}`;
+            const what = kind === 'event' ? 'event' : 'community';
+            const afterMerge =
+              kind === 'event'
+                ? 'Once it is merged the event will be online with the next collection run, within half a day.'
+                : 'Once it is merged the community will be online and its events collected automatically.';
 
             // Three outcomes, not two. Reporting "I could not generate the file"
             // when the file is written, committed and pushed sends whoever reported
-            // the community looking for a problem that is not there.
+            // it looking for a problem that is not there.
             let body;
 
             if (pr) {
-              body = [
-                `Thank you. The report is now a pull request: ${pr}`,
-                '',
-                'Once it is merged the community will be online and its events collected automatically.',
-              ].join('\n');
+              body = [`Thank you. The report is now a pull request: ${pr}`, '', afterMerge].join('\n');
             } else if (slug) {
               body = [
-                'Thank you. The community file is ready on the branch',
-                `[\`community/${slug}\`](https://github.com/${repo}/tree/community/${slug}),`,
+                `Thank you. The ${what} file is ready on the branch`,
+                `[\`${branch}\`](https://github.com/${repo}/tree/${branch}),`,
                 'but I could not open the pull request myself.',
                 '',
-                `**[Open it here](https://github.com/${repo}/compare/main...community/${slug}?expand=1)**:`,
+                `**[Open it here](https://github.com/${repo}/compare/main...${branch}?expand=1)**:`,
                 'the work is done, it is one click away.',
               ].join('\n');
             } else {
               body = [
                 'I could not generate the file from this report.',
                 failure ? `\n\`\`\`\n${failure}\n\`\`\`` : '',
-                '\nNothing serious: the report still stands and we will handle it by hand.',
+                kind === 'event'
+                  ? '\nYou can edit the report to fix it, then remove and re-add the `new-event` label; otherwise we will handle it by hand.'
+                  : '\nNothing serious: the report still stands and we will handle it by hand.',
               ].join('\n');
             }
 

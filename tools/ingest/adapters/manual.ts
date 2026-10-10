@@ -3,6 +3,16 @@ import type { Community, ManualEvent } from '../../../src/lib/schema.js';
 import type { RawEvent } from './types.js';
 
 /**
+ * Every community reads `sources/events/`, whether or not its `ingest` list
+ * says so: whoever writes an event by hand for a community expects it to show
+ * up. Being in the list also makes the origin count as configured, so the
+ * "no longer configured" rule in `mergeEvents` does not drop those events.
+ */
+export function withImplicitManual(ingest: Community['ingest']): Community['ingest'] {
+  return ingest.some((entry) => entry.type === 'manual') ? ingest : [...ingest, { type: 'manual' }];
+}
+
+/**
  * Events curated by hand in `sources/events/*.yml`.
  * This is the source that keeps the site standing: it covers communities on
  * closed platforms (Meetup, Eventbrite) and still works if every crawler breaks.

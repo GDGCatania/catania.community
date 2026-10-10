@@ -79,6 +79,7 @@ export const ROUTES = {
   communities: '/communities',
   community: (id: string) => `/communities/${id}`,
   submit: '/submit',
+  submitEvent: '/submit/event',
   howItWorks: '/how-it-works',
   feedIcs: '/events.ics',
   feedRss: '/events.xml',
@@ -108,11 +109,13 @@ export function issueFormUrl(
 /** Issue titles match the `title:` prefix of their template. */
 export const ISSUE_TITLES = {
   newCommunity: (name = '') => `New community: ${name}`,
+  newEvent: (title = '') => `New event: ${title}`,
   correction: (subject = '') => `Correction: ${subject}`,
 } as const;
 
 export const ISSUE_URLS = {
   newCommunity: issueFormUrl(cfg.issueLabels.newCommunity, ISSUE_TITLES.newCommunity()),
+  newEvent: issueFormUrl(cfg.issueLabels.newEvent, ISSUE_TITLES.newEvent()),
   /** `page` pre-fills the "Affected page" field with the page being reported. */
   correction: (subject: string, page = '') =>
     issueFormUrl(cfg.issueLabels.correction, ISSUE_TITLES.correction(subject), { page }),

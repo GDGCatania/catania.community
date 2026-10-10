@@ -74,7 +74,7 @@ const communityCount = m.communities_count({ count: allCommunities.length });
         {/* Both are rendered: the filter script picks one, since events that
             ended after the build can empty the list with no filter active. */}
         <span data-empty="none" hidden={events.length > 0}>
-          <Message of={m.home_empty} links={{ submit: ROUTES.submit }} />
+          <Message of={m.home_empty} links={{ submit: ROUTES.submitEvent }} />
         </span>
         <span data-empty="filtered" hidden={events.length === 0}>{m.home_emptyFiltered()}</span>
       </p>

@@ -2,14 +2,16 @@
 
 There are two doors into this project, and only one of them needs code.
 
-## Reporting a community or a mistake
+## Reporting a community, an event or a mistake
 
-No code needed: **[the form on the site](https://catania.community/submit)** takes your answers and
+No code needed: **[the form on the site](https://catania.community/submit)** — or
+**[the one for a single event](https://catania.community/submit/event)** — takes your answers and
 opens the [Issue Form](../../issues/new/choose) on GitHub already filled in. You need a GitHub account
 to confirm it.
 
-A report about a new community becomes a pull request with the YAML file already written — merging it
-is the approval. A correction lands in `data/overrides/` and from then on wins over every crawler.
+A report about a new community or a single event becomes a pull request with the YAML file already
+written — merging it is the approval. An event lands in `sources/events/<date>-<slug>.yml`; if its
+organiser is not listed yet, the same pull request adds the community too. A correction lands in `data/overrides/` and from then on wins over every crawler.
 
 The form on the site speaks the site's language; the Issue Forms and everything below are in English,
 so that anyone can read them and any fork can reuse them.
@@ -34,7 +36,7 @@ npm run ingest -- --dry-run   # collect events, write nothing
 | ------------------------- | ----------------------------------------------------------------------- |
 | `site.config.ts`          | Everything specific to this instance: city, timezone, vocabulary, copy.  |
 | `sources/communities/`    | One community per file. The editorial heart of the project.             |
-| `sources/events/`         | Events curated by hand, for communities on closed platforms.            |
+| `sources/events/`         | Events curated by hand: one-off reports and closed platforms.           |
 | `sources/venues/`         | Venues with hand-checked coordinates. These always beat the geocoder.   |
 | `data/`                   | Crawler output. Owned by the bot — see [Data](#data).                   |
 | `src/`                    | The Astro site.                                                         |

@@ -1,0 +1,239 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../lib/jsonld';
+import { CATEGORIES, AREAS } from '../../lib/schema';
+import * as m from '../../paraglide/messages.js';
+import { areaLabel, categoryLabel } from '../../i18n/labels';
+import {
+  DEFAULT_CITY,
+  EXAMPLE_COMMUNITY_NAME,
+  ISSUE_URLS,
+  ROUTES,
+  SUBMIT_ENDPOINT,
+} from '../../lib/site';
+import Message from '../../components/Message.astro';
+import '../../styles/submit.css';
+
+// With no endpoint the form is a pre-filler for the GitHub Issue Form: the
+// contact field has nowhere to go (the GitHub account is the way back), and a
+// second "open an issue" button would do the same thing as the first.
+const viaGithub = !SUBMIT_ENDPOINT;
+---
+
+<BaseLayout
+  title={m.submit_title()}
+  description={m.submit_metaDescription({ city: DEFAULT_CITY })}
+  jsonLd={breadcrumbJsonLd([
+    { name: m.nav_events(), path: ROUTES.home },
+    { name: m.submit_title(), path: ROUTES.submit },
+  ])}
+>
+  <div class="submit">
+  <div class="container head">
+    <h1>{m.submit_title()}</h1>
+    <p class="lede">{m.submit_intro()}</p>
+  </div>
+
+  <div class="container layout">
+    <form
+  class="form"
+  data-submit-form
+  novalidate
+  data-i18n={JSON.stringify({
+    missing: m.submit_missing({ fields: '__f__' }),
+    missingName: m.submit_missingName(),
+    missingUrl: m.submit_missingUrl(),
+    missingTopics: m.submit_missingTopics(),
+    sending: m.submit_sending(),
+    okWithLink: m.submit_okWithLink(),
+    ok: m.submit_ok(),
+    openIssue: m.submit_openIssue(),
+    failed: m.submit_failed(),
+    failedLink: m.submit_failedLink(),
+    redirecting: m.submit_redirecting(),
+  })}
+>
+      <fieldset>
+        <legend class="eyebrow">{m.submit_sectionCommunity()}</legend>
+
+        <label>
+          <span class="label">{m.submit_fieldName()} <em>{m.submit_required()}</em></span>
+          <input type="text" name="name" required maxlength="120" placeholder={EXAMPLE_COMMUNITY_NAME} />
+        </label>
+
+        <label>
+          <span class="label">{m.submit_fieldTagline()}</span>
+          <input
+            type="text"
+            name="tagline"
+            maxlength="200"
+            placeholder={m.submit_fieldTaglinePlaceholder()}
+          />
+        </label>
+
+        <label>
+          <span class="label">{m.submit_fieldTopics()} <em>{m.submit_required()}</em></span>
+          <span class="checks">
+            {
+              CATEGORIES.map((category) => (
+                <label class="check">
+                  <input type="checkbox" name="categories" value={category} />
+                  {categoryLabel[category]()}
+                </label>
+              ))
+            }
+          </span>
+        </label>
+
+        <label>
+          <span class="label">{m.submit_fieldArea()}</span>
+          <span class="checks">
+            {
+              AREAS.map((area) => (
+                <label class="check">
+                  <input type="radio" name="area" value={area} checked={area === 'citta'} />
+                  {areaLabel[area]()}
+                </label>
+              ))
+            }
+          </span>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend class="eyebrow">{m.submit_sectionEvents()}</legend>
+        <p class="help">{m.submit_eventsHelp()}</p>
+
+        <label>
+          <span class="label">{m.submit_fieldEventsUrl()} <em>{m.submit_required()}</em></span>
+          <input
+            type="url"
+            name="eventsUrl"
+            required
+            placeholder="https://…"
+          />
+        </label>
+
+        <label>
+          <span class="label">{m.submit_fieldIcsUrl()}</span>
+          <input type="url" name="icsUrl" placeholder="https://…/events.ics" />
+        </label>
+
+        <label>
+          <span class="label">{m.submit_fieldContacts()}</span>
+          <input type="text" name="contacts" maxlength="300" placeholder={m.submit_fieldContactsPlaceholder()} />
+        </label>
+      </fieldset>
+
+      {!viaGithub && (
+      <fieldset>
+        <legend class="eyebrow">{m.submit_sectionContact()}</legend>
+        <label>
+          <span class="label">{m.submit_fieldContact()}</span>
+          <input type="text" name="contact" maxlength="200" placeholder={m.submit_fieldContactPlaceholder()} />
+          <span class="help">{m.submit_contactHelp()}</span>
+        </label>
+      </fieldset>
+      )}
+
+      <div class="actions">
+        <button class="btn btn--primary" type="submit">
+          {viaGithub ? m.submit_buttonGithub() : m.submit_button()}
+        </button>
+        {
+          !viaGithub && (
+            <a class="btn btn--ghost" href={ISSUE_URLS.newCommunity} rel="noopener">
+              {m.submit_buttonIssue()}
+            </a>
+          )
+        }
+      </div>
+
+      {viaGithub && <p class="help">{m.submit_githubNote()}</p>}
+
+      <p class="status" data-form-status role="status" aria-live="polite" hidden></p>
+
+      <noscript>
+        <p class="notice">
+          <Message of={m.submit_noScript} links={{ issue: ISSUE_URLS.newCommunity }} />
+        </p>
+      </noscript>
+    </form>
+
+    <aside class="side">
+      <div class="card">
+        <h2>{m.submit_nextTitle()}</h2>
+        <ol>
+          <li>{m.submit_next1()}</li>
+          <li>{m.submit_next2()}</li>
+          <li>{m.submit_next3()}</li>
+        </ol>
+        <p class="hint">{m.submit_nextHint()}</p>
+      </div>
+
+      <div class="card">
+        <h2>{m.submit_fixTitle()}</h2>
+        <p class="hint">{m.submit_fixBody()}</p>
+        <a class="btn btn--ghost" href={ISSUE_URLS.correction('')} rel="noopener">
+          {m.submit_fixButton()}
+        </a>
+      </div>
+
+      <div class="card">
+        <h2>{m.submit_eventTitle()}</h2>
+        <p class="hint">{m.submit_eventBody()}</p>
+        <a class="btn btn--ghost" href={ROUTES.submitEvent}>{m.submit_eventButton()}</a>
+      </div>
+    </aside>
+  </div>
+  </div>
+</BaseLayout>
+
+
+<script>
+  import { ISSUE_LABELS, ISSUE_TITLES, issueFormUrl } from '../../lib/site';
+  import { text, wireSubmitForm } from '../../lib/submit-form';
+
+  const form = document.querySelector<HTMLFormElement>('[data-submit-form]');
+
+  if (form) {
+    const copy: Record<string, string> = JSON.parse(form.dataset.i18n ?? '{}');
+
+    const answers = (data: FormData) => ({
+      name: text(data, 'name'),
+      tagline: text(data, 'tagline'),
+      categories: data.getAll('categories').map(String),
+      area: text(data, 'area'),
+      eventsUrl: text(data, 'eventsUrl'),
+      icsUrl: text(data, 'icsUrl'),
+      contacts: text(data, 'contacts'),
+    });
+
+    wireSubmitForm(form, {
+      kind: ISSUE_LABELS.newCommunity,
+      requiredInputs: ['name', 'eventsUrl'],
+      missing: (data) => {
+        const missing: string[] = [];
+        if (!text(data, 'name')) missing.push(copy.missingName ?? '');
+        if (!text(data, 'eventsUrl')) missing.push(copy.missingUrl ?? '');
+        if (data.getAll('categories').length === 0) missing.push(copy.missingTopics ?? '');
+        return missing;
+      },
+      answers,
+      // Keyed by the field ids of the new-community Issue Form, so the issue that
+      // comes out is one tools/issue-to-yaml.ts can read.
+      issueUrl: (data) => {
+        const a = answers(data);
+        return issueFormUrl(ISSUE_LABELS.newCommunity, ISSUE_TITLES.newCommunity(a.name), {
+          name: a.name,
+          tagline: a.tagline,
+          categories: a.categories.join(','),
+          area: a.area,
+          events_url: a.eventsUrl,
+          ics_url: a.icsUrl,
+          contacts: a.contacts,
+        });
+      },
+    });
+  }
+</script>
