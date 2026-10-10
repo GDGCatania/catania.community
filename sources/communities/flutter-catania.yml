@@ -1,9 +1,10 @@
 # Dati verificati su https://www.meetup.com/meetup-group-poliomfw/ il 2026-10-11.
-# Nessuna fonte automatica, di proposito: il gruppo Meetup ripubblica le serate
-# che stanno già sul Bevy del GDG (stesso titolo, stessa data, nome del luogo
-# scritto diversamente), quindi leggerlo creerebbe dei doppioni. Quelle serate
-# arrivano da gdg-catania e sono attribuite a entrambe le community con
-# `hostIds` in data/overrides/flutter-catania.yml.
+# Il gruppo Meetup ripubblica anche le serate che stanno sul Bevy del GDG: la
+# stessa serata arriva dai due feed e diventa un evento solo, organizzato da
+# entrambe le community (dedupe quando titolo, giorno e luogo coincidono,
+# altrimenti `aliasOf` in data/overrides/flutter-catania.yml). Meetup elenca
+# solo gli eventi futuri: le serate passate sono attribuite con `hostIds` nello
+# stesso file.
 id: flutter-catania
 name: Flutter Catania
 tagline: Sviluppo multipiattaforma con Flutter, dai principianti agli esperti.
@@ -19,5 +20,6 @@ links:
   meetup: https://www.meetup.com/meetup-group-poliomfw/
   instagram: https://www.instagram.com/fluttercatania
 ingest:
-  - type: manual
+  - type: jsonld
+    list: https://www.meetup.com/meetup-group-poliomfw/events/
 active: true
