@@ -210,6 +210,14 @@ export const ManualEventFileSchema = z.array(ManualEventSchema);
 /** Manual correction: `id` is required, everything else is optional. */
 export const OverrideSchema = EventSchema.partial()
   .extend({
+    // `.partial()` keeps the defaults: without these four, an override that
+    // only fixes a title would also set `online: false`, `categories: []`,
+    // the default language and `cancelled: false` on the event. An override
+    // says only what it says.
+    online: z.boolean().optional(),
+    categories: z.array(CategorySchema).optional(),
+    language: z.string().max(40).optional(),
+    cancelled: z.boolean().optional(),
     id: z.string().min(1),
     /** Set to true to hide an event entirely (duplicate, spam, cancelled). */
     drop: z.boolean().optional(),
