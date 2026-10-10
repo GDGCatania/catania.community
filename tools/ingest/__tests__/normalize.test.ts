@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { applyOverrides, dedupe, resolveArea, uniqueSlugs } from '../normalize.js';
-import { CommunitySchema, type Community, type Event } from '../../../src/lib/schema.js';
+import {
+  CommunitySchema,
+  OverrideSchema,
+  type Community,
+  type Event,
+} from '../../../src/lib/schema.js';
 import type { RawEvent } from '../adapters/types.js';
 
 const community: Community = CommunitySchema.parse({
@@ -64,6 +69,30 @@ describe('dedupe', () => {
     expect(duplicates).toBe(1);
     expect(events).toHaveLength(1);
     expect(events[0]!.source.type).toBe('bevy');
+  });
+
+  it("keeps the other community as organiser when its copy is dropped", () => {
+    const fromMeetup = event({
+      id: 'jsonld:meetup:1',
+      communityId: 'flutter-catania',
+      source: { type: 'jsonld', fetchedAt: '2026-07-28T00:00:00+02:00' },
+    });
+    const fromBevy = event({ id: 'bevy:1', communityId: 'gdg-catania' });
+
+    // Whichever feed answered first, the result is the same.
+    for (const input of [[fromMeetup, fromBevy], [fromBevy, fromMeetup]]) {
+      const [merged] = dedupe(input).events;
+
+      expect(merged!.id).toBe('bevy:1');
+      expect(merged!.communityId).toBe('gdg-catania');
+      expect(merged!.hostIds).toEqual(['gdg-catania', 'flutter-catania']);
+    }
+  });
+
+  it('adds no organisers when the duplicates come from one community', () => {
+    const fromIcs = event({ id: 'ics:abc', source: { type: 'ics', fetchedAt: '2026-07-28T00:00:00+02:00' } });
+
+    expect(dedupe([fromIcs, event()]).events[0]!.hostIds).toBeUndefined();
   });
 
   it('does not merge same-titled events on different days', () => {
@@ -132,6 +161,75 @@ describe('applyOverrides', () => {
 
     expect(result.applied).toBe(0);
     expect(result.events[0]!.hostIds).toBeUndefined();
+  });
+
+  describe('aliasOf', () => {
+    const bevy = event({ id: 'bevy:1', communityId: 'gdg-catania' });
+    // Same evening, venue written differently: dedupe cannot tell.
+    const meetup = event({
+      id: 'jsonld:meetup:9',
+      communityId: 'flutter-catania',
+      title: 'Flutter Meetup',
+      venue: { name: 'Centro Atena' },
+      source: { type: 'jsonld', fetchedAt: '2026-07-28T00:00:00+02:00' },
+    });
+
+    it('merges the alias into the event it points to, organised by both', () => {
+      const result = applyOverrides([bevy, meetup], [{ id: 'jsonld:meetup:9', aliasOf: 'bevy:1' }]);
+
+      expect(result.aliased).toBe(1);
+      expect(result.unmatched).toEqual([]);
+      expect(result.events).toHaveLength(1);
+      expect(result.events[0]!.id).toBe('bevy:1');
+      expect(result.events[0]!.hostIds).toEqual(['gdg-catania', 'flutter-catania']);
+    });
+
+    it('then applies the corrections written on the event it points to', () => {
+      const result = applyOverrides(
+        [bevy, meetup],
+        [
+          { id: 'jsonld:meetup:9', aliasOf: 'bevy:1' },
+          { id: 'bevy:1', hostIds: ['flutter-catania', 'gdg-catania'] },
+        ]
+      );
+
+      expect(result.events[0]!.hostIds).toEqual(['flutter-catania', 'gdg-catania']);
+    });
+
+    it('follows an alias of an alias', () => {
+      const third = event({ id: 'ics:x', communityId: 'altra', title: 'X' });
+      const result = applyOverrides(
+        [bevy, meetup, third],
+        [
+          { id: 'ics:x', aliasOf: 'jsonld:meetup:9' },
+          { id: 'jsonld:meetup:9', aliasOf: 'bevy:1' },
+        ]
+      );
+
+      expect(result.events.map((e) => e.id)).toEqual(['bevy:1']);
+      expect(result.events[0]!.hostIds).toEqual(['gdg-catania', 'altra', 'flutter-catania']);
+    });
+
+    /** Past events are no longer listed by their source: nothing to merge, nothing to report. */
+    it('is quiet when the alias did not arrive this run', () => {
+      const result = applyOverrides([bevy], [{ id: 'jsonld:meetup:9', aliasOf: 'bevy:1' }]);
+
+      expect(result.events).toEqual([bevy]);
+      expect(result.unmatched).toEqual([]);
+    });
+
+    it('keeps the alias and reports it when the event it points to does not exist', () => {
+      const result = applyOverrides([meetup], [{ id: 'jsonld:meetup:9', aliasOf: 'bevy:404' }]);
+
+      expect(result.events).toEqual([meetup]);
+      expect(result.unmatched).toEqual(['jsonld:meetup:9']);
+    });
+
+    it('accepts nothing else next to aliasOf', () => {
+      expect(
+        OverrideSchema.safeParse({ id: 'jsonld:meetup:9', aliasOf: 'bevy:1', title: 'X' }).success
+      ).toBe(false);
+    });
   });
 
   it('does not lose the event when an override makes it invalid', () => {

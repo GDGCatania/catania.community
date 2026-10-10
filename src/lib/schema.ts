@@ -208,11 +208,24 @@ export const ManualEventSchema = z.object({
 export const ManualEventFileSchema = z.array(ManualEventSchema);
 
 /** Manual correction: `id` is required, everything else is optional. */
-export const OverrideSchema = EventSchema.partial().extend({
-  id: z.string().min(1),
-  /** Set to true to hide an event entirely (duplicate, spam, cancelled). */
-  drop: z.boolean().optional(),
-});
+export const OverrideSchema = EventSchema.partial()
+  .extend({
+    id: z.string().min(1),
+    /** Set to true to hide an event entirely (duplicate, spam, cancelled). */
+    drop: z.boolean().optional(),
+    /**
+     * This record is the same evening as the event with that id, published on
+     * another feed: the two become one, organised by both communities.
+     */
+    aliasOf: z.string().min(1).optional(),
+  })
+  .refine(
+    (o) => !o.aliasOf || Object.keys(o).every((key) => key === 'id' || key === 'aliasOf'),
+    {
+      error: 'an alias only says which event it is: correct the event it points to instead',
+      path: ['aliasOf'],
+    }
+  );
 
 export type Category = z.infer<typeof CategorySchema>;
 export type Area = z.infer<typeof AreaSchema>;
