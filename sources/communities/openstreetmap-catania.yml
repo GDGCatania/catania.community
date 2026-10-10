@@ -1,0 +1,31 @@
+# Dati verificati su https://wiki.openstreetmap.org/wiki/Catania,
+# https://osmcal.org e https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026
+# il 2026-10-10.
+# Gli eventi stanno su osmcal.org, che ha un feed .ics per paese ma non per
+# città: si legge quello italiano e si tengono i titoli con "Catania", che è
+# come osmcal nomina gli incontri locali ("Modifichiamo Wiki e OSM insieme! -
+# Catania"). Un evento catanese senza la città nel titolo va aggiunto a mano.
+# Gli incontri Wiki e OSM li organizzano insieme ai Wikimediani in Sicilia
+# (wikimediani-in-sicilia): qui finché un evento non potrà avere più
+# organizzatori (#7).
+id: openstreetmap-catania
+name: OpenStreetMap Catania
+tagline: Mappatori di OpenStreetMap a Catania e provincia.
+description: >-
+  La comunità locale di OpenStreetMap, la mappa libera del mondo fatta dai suoi
+  utenti. Organizza mapping party, uscite per mappare il territorio (piste
+  ciclabili, sentieri, paesi dell'Etna) e, insieme ai Wikimediani in Sicilia, gli
+  incontri mensili "Modifichiamo Wiki e OSM insieme!".
+categories:
+  - tech
+  - sociale
+area: citta
+cadence: Un incontro al mese circa
+links:
+  website: https://wiki.openstreetmap.org/wiki/Catania
+ingest:
+  - type: ics
+    url: https://osmcal.org/events.ics?in=IT
+    titleFilter: Catania
+  - type: manual
+active: true
