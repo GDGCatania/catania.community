@@ -1,0 +1,13 @@
+# Dal programma su https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026,
+# verificato il 2026-10-10.
+- title: OSM x Ruote Libere
+  communityId: openstreetmap-catania
+  start: '2026-05-12T21:00:00+02:00'
+  url: https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#OSM_x_Ruote_Libere,_Catania,_12_maggio
+  description: 'Con Ruote Libere e i Wikimediani in Sicilia: presentazione di OpenStreetMap alle 21:30,
+    poi giro in bici per Catania alle 22.'
+  venue:
+    name: Piazza Roma
+    city: Catania
+  price:
+    type: free
