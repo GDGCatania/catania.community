@@ -4,12 +4,29 @@
     "lon": 15.087379
   },
   "4viabibliotecacentrostoricocataniasicilyitalycataniaitalia": null,
+  "acirealeacirealeitalia": {
+    "lat": 37.5957062,
+    "lon": 15.1617566
+  },
   "aithosoftwarefactorycataniaitalia": null,
   "bibliotecheriunitecivicaeaursinorecuperocataniaitalia": null,
+  "caiacirealeacirealeitalia": null,
   "cataniapuntodiincontroviacantarellaborgosanziocataniasicilyitalycataniaitalia": null,
   "centroatenacataniaitalia": {
     "lat": 37.5249491,
     "lon": 15.0845881
+  },
+  "localhostcataniaitalia": {
+    "lat": 37.5139935,
+    "lon": 15.0626432
+  },
+  "piazzacavour19cataniacataniaitalia": {
+    "lat": 37.5174099,
+    "lon": 15.0835219
+  },
+  "piazzadante32cataniacataniaitalia": {
+    "lat": 37.5039274,
+    "lon": 15.080884
   },
   "piazzaleasia6cataniaitalia": {
     "lat": 37.5097513,
@@ -50,6 +67,7 @@
     "lat": 37.5145633,
     "lon": 15.0626355
   },
+  "viadeipiccioni29palazzinad95123cataniacataniaitalia": null,
   "viadusmet50cataniactcataniaitalia": {
     "lat": 37.5019346,
     "lon": 15.094753
@@ -74,6 +92,14 @@
   "vialeandreadoria6cataniactcataniaitalia": {
     "lat": 37.5266727,
     "lon": 15.0777875
+  },
+  "viamilo2895125cataniacataniaitalia": {
+    "lat": 37.5205744,
+    "lon": 15.0777321
+  },
+  "viamonserrato11695128cataniacataniaitalia": {
+    "lat": 37.5168327,
+    "lon": 15.0875261
   },
   "viaursino58cataniaitalia": {
     "lat": 37.5097051,

@@ -34,6 +34,42 @@
     "area": "citta",
     "cancelled": false,
     "categories": [
+      "cultura",
+      "tech"
+    ],
+    "communityId": "wikimediani-in-sicilia",
+    "description": "Tu, noi, un caffè e il pulsante \"modifica\": si porta il proprio laptop e si modifica Wikipedia (ma anche Commons, Wikidata, OSM) con l'aiuto di wikipediani esperti. Tema facoltativo: figure femminili a Catania.",
+    "end": "2026-03-13T22:00:00+01:00",
+    "id": "manual:wikimediani-in-sicilia:modifichiamo-wikipedia-insieme:2026-03-13",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "modifichiamo-wikipedia-insieme",
+    "source": {
+      "fetchedAt": "2026-10-10T22:31:24.204Z",
+      "ref": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Modifichiamo_Wikipedia_insieme!_Catania,_13_marzo",
+      "type": "manual"
+    },
+    "start": "2026-03-13T20:00:00+01:00",
+    "title": "Modifichiamo Wikipedia insieme!",
+    "url": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Modifichiamo_Wikipedia_insieme!_Catania,_13_marzo",
+    "venue": {
+      "address": "Via Monserrato 116, 95128 Catania",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5168327,
+        "lon": 15.0875261
+      },
+      "name": "Verso Coffice"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
       "tech"
     ],
     "communityId": "global-ai-catania",

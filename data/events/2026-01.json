@@ -3,6 +3,42 @@
     "area": "citta",
     "cancelled": false,
     "categories": [
+      "cultura",
+      "tech"
+    ],
+    "communityId": "wikimediani-in-sicilia",
+    "description": "Un pomeriggio per i 25 anni di Wikipedia: presentazione di Wikipedia, Wikimedia Commons e Wikidata, con un focus su come migliorare le informazioni sull'ambiente in Sicilia per Wiki Loves Earth, e poi la torta.",
+    "end": "2026-01-24T19:00:00+01:00",
+    "id": "manual:wikimediani-in-sicilia:compleanno-di-wikipedia-25-a-catania:2026-01-24",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "compleanno-di-wikipedia-25-a-catania",
+    "source": {
+      "fetchedAt": "2026-10-10T22:31:24.204Z",
+      "ref": "https://it.wikipedia.org/wiki/Evento:Compleanno_di_Wikipedia_25_a_Catania",
+      "type": "manual"
+    },
+    "start": "2026-01-24T15:00:00+01:00",
+    "title": "Compleanno di Wikipedia 25 a Catania",
+    "url": "https://it.wikipedia.org/wiki/Evento:Compleanno_di_Wikipedia_25_a_Catania",
+    "venue": {
+      "address": "Piazza Cavour 19, Catania",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5174099,
+        "lon": 15.0835219
+      },
+      "name": "Legambiente Catania"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
       "tech"
     ],
     "communityId": "wordpress-meetup-catania",

@@ -1,5 +1,5 @@
 {
-  "lastChangeAt": "2026-10-10T20:22:58.340Z",
+  "lastChangeAt": "2026-10-10T22:31:24.204Z",
   "preservedFromFailedSources": 0,
   "sources": [
     {
@@ -18,7 +18,7 @@
     },
     {
       "community": "gdg-catania",
-      "events": 60,
+      "events": 5,
       "ok": true,
       "skipped": 0,
       "type": "bevy"
@@ -53,14 +53,14 @@
     },
     {
       "community": "openstreetmap-catania",
-      "events": 0,
+      "events": 6,
       "ok": true,
       "skipped": 0,
       "type": "manual"
     },
     {
       "community": "python-catania",
-      "events": 13,
+      "events": 4,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -74,14 +74,14 @@
     },
     {
       "community": "wikimediani-in-sicilia",
-      "events": 0,
+      "events": 4,
       "ok": true,
       "skipped": 0,
       "type": "manual"
     },
     {
       "community": "wordpress-meetup-catania",
-      "events": 10,
+      "events": 5,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -94,5 +94,5 @@
       "type": "manual"
     }
   ],
-  "totalEvents": 88
+  "totalEvents": 98
 }

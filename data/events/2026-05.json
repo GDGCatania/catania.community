@@ -3,6 +3,176 @@
     "area": "citta",
     "cancelled": false,
     "categories": [
+      "cultura",
+      "tech"
+    ],
+    "communityId": "wikimediani-in-sicilia",
+    "description": "Editathon sugli autori della letteratura italiana contemporanea, con il DISUM dell'Università di Catania e Wikimedia Italia: seminario introduttivo su Wikipedia alle 14, poi lavoro sulle voci.",
+    "end": "2026-05-07T18:00:00+02:00",
+    "id": "manual:wikimediani-in-sicilia:editathon-voci-di-carta-voci-digitali:2026-05-07",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "editathon-voci-di-carta-voci-digitali",
+    "source": {
+      "fetchedAt": "2026-10-10T22:31:24.204Z",
+      "ref": "https://it.wikipedia.org/wiki/Evento:Editathon_%22Voci_di_carta,_voci_digitali%22",
+      "type": "manual"
+    },
+    "start": "2026-05-07T14:00:00+02:00",
+    "title": "Editathon \"Voci di carta, voci digitali\"",
+    "url": "https://it.wikipedia.org/wiki/Evento:Editathon_%22Voci_di_carta,_voci_digitali%22",
+    "venue": {
+      "address": "Piazza Dante 32, Catania",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5039274,
+        "lon": 15.080884
+      },
+      "name": "Monastero dei Benedettini, Aula A2"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech",
+      "sociale"
+    ],
+    "communityId": "openstreetmap-catania",
+    "description": "Con Ruote Libere e i Wikimediani in Sicilia: presentazione di OpenStreetMap alle 21:30, poi giro in bici per Catania alle 22.",
+    "id": "manual:openstreetmap-catania:osm-x-ruote-libere:2026-05-12",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "osm-x-ruote-libere",
+    "source": {
+      "fetchedAt": "2026-10-10T22:31:24.204Z",
+      "ref": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#OSM_x_Ruote_Libere,_Catania,_12_maggio",
+      "type": "manual"
+    },
+    "start": "2026-05-12T21:00:00+02:00",
+    "title": "OSM x Ruote Libere",
+    "url": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#OSM_x_Ruote_Libere,_Catania,_12_maggio",
+    "venue": {
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5132497,
+        "lon": 15.0828898
+      },
+      "name": "Piazza Roma"
+    }
+  },
+  {
+    "area": "provincia",
+    "cancelled": false,
+    "categories": [
+      "tech",
+      "sociale"
+    ],
+    "communityId": "openstreetmap-catania",
+    "description": "Serata di formazione su OpenStreetMap e sugli editor per mappare, in vista del Mapping Day del giorno dopo.",
+    "end": "2026-05-16T20:00:00+02:00",
+    "id": "manual:openstreetmap-catania:mappiamo-le-aci-pre-mapping-day:2026-05-16",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "mappiamo-le-aci-pre-mapping-day",
+    "source": {
+      "fetchedAt": "2026-10-10T22:31:24.204Z",
+      "ref": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Mappiamo_le_Aci_-_Acireale_16-17_maggio",
+      "type": "manual"
+    },
+    "start": "2026-05-16T17:30:00+02:00",
+    "title": "Mappiamo le Aci - Pre-Mapping Day",
+    "url": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Mappiamo_le_Aci_-_Acireale_16-17_maggio",
+    "venue": {
+      "city": "Acireale",
+      "name": "CAI Acireale"
+    }
+  },
+  {
+    "area": "provincia",
+    "cancelled": false,
+    "categories": [
+      "tech",
+      "sociale"
+    ],
+    "communityId": "openstreetmap-catania",
+    "description": "Mappatura del Comune di Acireale su OpenStreetMap, in due gruppi: a piedi con il CAI e in bici con la FIAB di Acireale.",
+    "end": "2026-05-17T14:00:00+02:00",
+    "id": "manual:openstreetmap-catania:mappiamo-le-aci-mapping-day:2026-05-17",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "mappiamo-le-aci-mapping-day",
+    "source": {
+      "fetchedAt": "2026-10-10T22:31:24.204Z",
+      "ref": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Mappiamo_le_Aci_-_Acireale_16-17_maggio",
+      "type": "manual"
+    },
+    "start": "2026-05-17T09:00:00+02:00",
+    "title": "Mappiamo le Aci - Mapping Day",
+    "url": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Mappiamo_le_Aci_-_Acireale_16-17_maggio",
+    "venue": {
+      "city": "Acireale",
+      "geo": {
+        "lat": 37.5957062,
+        "lon": 15.1617566
+      },
+      "name": "Acireale"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech",
+      "sociale"
+    ],
+    "communityId": "openstreetmap-catania",
+    "id": "manual:openstreetmap-catania:modifichiamo-wiki-e-osm-insieme-catania:2026-05-22",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "modifichiamo-wiki-e-osm-insieme-catania-2026-05-22",
+    "source": {
+      "fetchedAt": "2026-10-10T22:31:24.204Z",
+      "ref": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Modifichiamo_Wiki_e_OSM_insieme!_-_Catania,_22_maggio",
+      "type": "manual"
+    },
+    "start": "2026-05-22T19:00:00+02:00",
+    "title": "Modifichiamo Wiki e OSM insieme! - Catania",
+    "url": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Modifichiamo_Wiki_e_OSM_insieme!_-_Catania,_22_maggio",
+    "venue": {
+      "address": "Via dei Piccioni 29, Palazzina D, 95123 Catania",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5139935,
+        "lon": 15.0626432
+      },
+      "name": "@Localhost"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
       "tech"
     ],
     "communityId": "wordpress-meetup-catania",

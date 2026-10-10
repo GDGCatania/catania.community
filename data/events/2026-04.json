@@ -3,6 +3,41 @@
     "area": "citta",
     "cancelled": false,
     "categories": [
+      "cultura",
+      "tech"
+    ],
+    "communityId": "wikimediani-in-sicilia",
+    "description": "Con il Gruppo Astrofili Catanesi: le licenze libere partendo dall'astrofotografia e da Wikimedia Commons, e come contribuire a Wikipedia. Anche in streaming.",
+    "id": "manual:wikimediani-in-sicilia:astrofotografia-e-licenze-libere:2026-04-16",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "astrofotografia-e-licenze-libere",
+    "source": {
+      "fetchedAt": "2026-10-10T22:31:24.204Z",
+      "ref": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Astrofotografia_e_licenze_libere,_Gruppo_Astrofili_Catanesi,_16_aprile",
+      "type": "manual"
+    },
+    "start": "2026-04-16T20:00:00+02:00",
+    "title": "Astrofotografia e licenze libere",
+    "url": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Astrofotografia_e_licenze_libere,_Gruppo_Astrofili_Catanesi,_16_aprile",
+    "venue": {
+      "address": "Via Milo 28, 95125 Catania",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5205744,
+        "lon": 15.0777321
+      },
+      "name": "Gruppo Astrofili Catanesi"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
       "tech"
     ],
     "communityId": "gdg-catania",
@@ -68,6 +103,40 @@
         "lon": 15.094753
       },
       "name": "AITHO"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech",
+      "sociale"
+    ],
+    "communityId": "openstreetmap-catania",
+    "id": "manual:openstreetmap-catania:modifichiamo-wiki-e-osm-insieme-catania:2026-04-23",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "modifichiamo-wiki-e-osm-insieme-catania",
+    "source": {
+      "fetchedAt": "2026-10-10T22:31:24.204Z",
+      "ref": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Modifichiamo_Wiki_e_OSM_insieme!_-_Catania,_23_aprile",
+      "type": "manual"
+    },
+    "start": "2026-04-23T19:00:00+02:00",
+    "title": "Modifichiamo Wiki e OSM insieme! - Catania",
+    "url": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Modifichiamo_Wiki_e_OSM_insieme!_-_Catania,_23_aprile",
+    "venue": {
+      "address": "Via dei Piccioni 29, Palazzina D, 95123 Catania",
+      "city": "Catania",
+      "geo": {
+        "lat": 37.5139935,
+        "lon": 15.0626432
+      },
+      "name": "@Localhost"
     }
   }
 ]
