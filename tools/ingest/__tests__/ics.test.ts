@@ -125,4 +125,25 @@ describe('ICS adapter', () => {
     // it simply finds no VEVENT.
     expect(parseIcs('<html>404</html>', config, community, { since })).toEqual([]);
   });
+
+  /** osmcal.org publishes events with no DTEND, which node-ical reads as end = start. */
+  it('leaves out the end of an event that has no DTEND', () => {
+    const feed = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'BEGIN:VEVENT',
+      'UID:OSMCAL-5176',
+      'DTSTAMP:20260922T191500Z',
+      'DTSTART;TZID=Europe/Rome:20260922T211500',
+      'SUMMARY:Mappiamo le piste ciclabili - Catania',
+      'LOCATION:Piazza Roma\\, Catania',
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\r\n');
+
+    const [event] = parseIcs(feed, config, community, { since });
+
+    expect(event?.start).toBe('2026-09-22T21:15:00+02:00');
+    expect(event?.end).toBeUndefined();
+  });
 });

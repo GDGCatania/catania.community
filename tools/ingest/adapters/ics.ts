@@ -65,13 +65,21 @@ export function parseIcs(
     // our internal id keeps later runs from creating duplicates.
     const uid = vevent.uid || `${title}-${start.getTime()}`;
 
+    // With no DTEND, node-ical sets the end equal to the start (RFC 5545 reads
+    // it as an instant). That is "end unknown", not a zero-length event, and
+    // the schema would reject it: leave it out. osmcal.org does this.
+    const end =
+      vevent.end instanceof Date && vevent.end.getTime() > start.getTime()
+        ? toIsoWithOffset(vevent.end, allDay)
+        : undefined;
+
     events.push({
       id: `ics:${slugify(uid, 120) || slugify(`${title}-${start.getTime()}`)}`,
       slug: slugify(title),
       title,
       description: descriptionText ? truncate(descriptionText, 5_000) : undefined,
       start: toIsoWithOffset(start, allDay),
-      end: vevent.end instanceof Date ? toIsoWithOffset(vevent.end, allDay) : undefined,
+      end,
       url: pickUrl(vevent, config.url),
       communityId: community.id,
       venue: !online && locationRaw ? parseLocation(locationRaw) : undefined,
