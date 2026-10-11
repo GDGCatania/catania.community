@@ -18,7 +18,7 @@
     },
     {
       "community": "flutter-catania",
-      "events": 8,
+      "events": 1,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -32,7 +32,7 @@
     },
     {
       "community": "gdg-catania",
-      "events": 60,
+      "events": 2,
       "ok": true,
       "skipped": 0,
       "type": "bevy"
@@ -46,7 +46,7 @@
     },
     {
       "community": "global-ai-catania",
-      "events": 1,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -60,21 +60,21 @@
     },
     {
       "community": "openstreetmap-catania",
-      "events": 3,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "ics"
     },
     {
       "community": "openstreetmap-catania",
-      "events": 6,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "manual"
     },
     {
       "community": "python-catania",
-      "events": 13,
+      "events": 1,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -88,14 +88,14 @@
     },
     {
       "community": "wikimediani-in-sicilia",
-      "events": 4,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "manual"
     },
     {
       "community": "wordpress-meetup-catania",
-      "events": 10,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
