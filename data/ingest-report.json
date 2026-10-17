@@ -1,10 +1,10 @@
 {
-  "lastChangeAt": "2026-10-12T12:06:50.159Z",
+  "lastChangeAt": "2026-10-17T08:37:37.508Z",
   "preservedFromFailedSources": 0,
   "sources": [
     {
       "community": "aps-palestra-per-la-mente",
-      "events": 1,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -108,5 +108,5 @@
       "type": "manual"
     }
   ],
-  "totalEvents": 98
+  "totalEvents": 97
 }

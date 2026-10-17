@@ -34,43 +34,6 @@
     "area": "citta",
     "cancelled": false,
     "categories": [
-      "tech",
-      "sociale"
-    ],
-    "communityId": "aps-palestra-per-la-mente",
-    "coverImage": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1194744451%2F145023443352%2F1%2Foriginal.20260930-172942?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=0dc133429a6d6534112cd5c581e71486",
-    "description": "Non chiedere soltanto all’IA. Impara a farci qualcosa: 6 ore di laboratorio pratico gratuito per giovani dai 19 ai 24…",
-    "end": "2026-10-16T20:00:00+02:00",
-    "id": "jsonld:eventbrite:1996086826431",
-    "language": "Italiano",
-    "online": false,
-    "price": {
-      "currency": "EUR",
-      "type": "free"
-    },
-    "slug": "prompt-your-future",
-    "source": {
-      "fetchedAt": "2026-10-10T18:10:44.863Z",
-      "ref": "https://www.eventbrite.it/e/prompt-your-future-tickets-1996086826431",
-      "type": "jsonld"
-    },
-    "start": "2026-10-16T12:00:00+02:00",
-    "title": "Prompt your future",
-    "url": "https://www.eventbrite.it/e/prompt-your-future-tickets-1996086826431",
-    "venue": {
-      "address": "28 Via Etnea, 95131 Catania",
-      "city": "Catania",
-      "geo": {
-        "lat": 37.50312,
-        "lon": 15.087379
-      },
-      "name": "Ostello degli Elefanti Hostel Catania"
-    }
-  },
-  {
-    "area": "citta",
-    "cancelled": false,
-    "categories": [
       "tech"
     ],
     "communityId": "gdg-catania",
