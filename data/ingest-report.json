@@ -18,7 +18,7 @@
     },
     {
       "community": "flutter-catania",
-      "events": 1,
+      "events": 0,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -32,7 +32,7 @@
     },
     {
       "community": "gdg-catania",
-      "events": 2,
+      "events": 1,
       "ok": true,
       "skipped": 0,
       "type": "bevy"
