@@ -24,6 +24,10 @@
     "lat": 37.5139935,
     "lon": 15.0626432
   },
+  "palazzodellaculturacataniacataniaitalia": {
+    "lat": 37.5027394,
+    "lon": 15.0900581
+  },
   "piazzacavour19cataniacataniaitalia": {
     "lat": 37.5174099,
     "lon": 15.0835219
@@ -112,5 +116,6 @@
   "viaursino58cataniaitalia": {
     "lat": 37.5097051,
     "lon": 15.0979326
-  }
+  },
+  "viavittorioemanueleii119cataniaitalia": null
 }
