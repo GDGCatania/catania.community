@@ -1,5 +1,5 @@
 {
-  "lastChangeAt": "2026-10-20T20:00:16.255Z",
+  "lastChangeAt": "2026-10-26T10:13:31.768Z",
   "preservedFromFailedSources": 0,
   "sources": [
     {
@@ -88,7 +88,7 @@
     },
     {
       "community": "wikimediani-in-sicilia",
-      "events": 0,
+      "events": 1,
       "ok": true,
       "skipped": 0,
       "type": "manual"
@@ -108,5 +108,5 @@
       "type": "manual"
     }
   ],
-  "totalEvents": 97
+  "totalEvents": 98
 }

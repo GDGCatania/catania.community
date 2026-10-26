@@ -3,6 +3,42 @@
     "area": "citta",
     "cancelled": false,
     "categories": [
+      "tech",
+      "cultura",
+      "sociale"
+    ],
+    "communityId": "wikimediani-in-sicilia",
+    "description": "Durante questo incontro aperto a tutti, potrai scoprire i progetti svolti dai volontari su Wikipedia, capire come si puo’ contribuire a partire dai propri interessi e avvicinarti al mondo dell’open source e della conoscenza libera.",
+    "end": "2026-11-11T20:00:00+01:00",
+    "id": "manual:wikimediani-in-sicilia:documentare-la-cultura-e-il-patrimonio-su-wikipedia:2026-11-11",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "documentare-la-cultura-e-il-patrimonio-su-wikipedia",
+    "source": {
+      "fetchedAt": "2026-10-26T10:13:31.768Z",
+      "ref": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Incontro_%22Documentare_la_cultura_e_il_patrimonio_su_Wikipedia%22_da_Isola_Catania,_11_novembre",
+      "type": "manual"
+    },
+    "start": "2026-11-11T18:00:00+01:00",
+    "title": "Documentare la cultura e il patrimonio su Wikipedia",
+    "url": "https://it.wikipedia.org/wiki/Wikipedia:Raduni/Raduni_in_Sicilia_2026#Incontro_%22Documentare_la_cultura_e_il_patrimonio_su_Wikipedia%22_da_Isola_Catania,_11_novembre",
+    "venue": {
+      "address": "Piazza Cardinale Pappalardo, 23, 95131 Catania CT",
+      "geo": {
+        "lat": 37.5018418,
+        "lon": 15.0909091
+      },
+      "name": "Isola Catania"
+    }
+  },
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
       "tech"
     ],
     "communityId": "gdg-catania",
