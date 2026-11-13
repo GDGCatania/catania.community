@@ -43,7 +43,7 @@
     ],
     "communityId": "gdg-catania",
     "coverImage": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_46Ypuu5",
-    "description": "➡️ Programma ⬅️\n\nIT: 🇮🇹\n\nCi siamo. Il compilatore del GDG Catania è di nuovo attivo e stiamo scrivendo il codice per la DevFest Catania 2026!\n\nCosa ci sarà quest'anno? Non possiamo ancora svelarvi tutto, ma preparatevi a parlare di AI, Web, Cloud, Mobile e molto, molto altro. Stiamo preparando un programma pazzesco fatto dalle community, per le community.\n\n🎟️ Il programma è in modalità \"under construction\", ma fidatevi: non vorrete perdervela.\n\nSeguici sui nostri canali per non perderti i prossimi annunci!\n\nEN: 🇬🇧\nHere we go. The GDG Catania compiler is up and running again, and we’re writing the code for DevFest Catania 2026!\n\nWhat’s in store for this year? We can't reveal everything just yet, but get ready to talk about AI, Web, Cloud, Mobile, and much, much more. We’re building a mind-blowing schedule, made by the community, for the community.\n\n🎟️ The program is under construction, but trust us: you won't want to miss it.\n\nFollow us on our channels so you don't miss the upcoming announcements!",
+    "description": "➡️ Programma ⬅️\n\nIT: 🇮🇹\n\nCi siamo. Il compilatore del GDG Catania è di nuovo attivo e la build è riuscita: ci vediamo al Palazzo della Cultura per una giornata piena di speech, workshop e molto altro! Il 15 Novembre è vicino... non mancare!\n\nSeguici sui nostri canali per non perderti i prossimi annunci!\n\nEN: 🇬🇧\nHere we go. The GDG Catania compiler is back online and the build succeeded: see you at Palazzo della Cultura for a day full of talks, workshops, and much more! November 15th is right around the corner... don't miss it!\n\nFollow us on our channels so you don't miss the upcoming announcements!",
     "end": "2026-11-15T18:00:00+01:00",
     "id": "bevy:128373",
     "language": "Italiano",
@@ -54,7 +54,7 @@
     },
     "slug": "devfest-catania-2026",
     "source": {
-      "fetchedAt": "2026-11-10T21:48:36.800Z",
+      "fetchedAt": "2026-11-13T12:18:30.318Z",
       "ref": "https://gdg.community.dev/events/details/google-gdg-catania-presents-devfest-catania-2026/",
       "type": "bevy"
     },
