@@ -1,5 +1,5 @@
 {
-  "lastChangeAt": "2026-11-13T12:18:30.318Z",
+  "lastChangeAt": "2026-11-24T02:54:29.277Z",
   "preservedFromFailedSources": 0,
   "sources": [
     {
@@ -74,7 +74,7 @@
     },
     {
       "community": "python-catania",
-      "events": 0,
+      "events": 1,
       "ok": true,
       "skipped": 0,
       "type": "jsonld"
@@ -108,5 +108,5 @@
       "type": "manual"
     }
   ],
-  "totalEvents": 98
+  "totalEvents": 99
 }

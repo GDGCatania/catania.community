@@ -1,0 +1,34 @@
+[
+  {
+    "area": "citta",
+    "cancelled": false,
+    "categories": [
+      "tech"
+    ],
+    "communityId": "python-catania",
+    "coverImage": "https://secure-content.meetupstatic.com/images/classic-events/537273537/676x676.jpg",
+    "description": "🧑‍🎄Babbo Natale ha sentito parlare di intelligenza artificiale e ha deciso di provarla. Ha scelto l’AI di Anthropic, e da lì è iniziata la sua avventura.",
+    "end": "2026-12-04T20:30:00+01:00",
+    "id": "jsonld:meetup:317513866",
+    "language": "Italiano",
+    "online": false,
+    "price": {
+      "currency": "EUR",
+      "type": "free"
+    },
+    "slug": "santa-claude-is-coming-to-town",
+    "source": {
+      "fetchedAt": "2026-11-24T02:54:29.277Z",
+      "ref": "https://www.meetup.com/python-catania/events/317513866/",
+      "type": "jsonld"
+    },
+    "start": "2026-12-04T19:00:00+01:00",
+    "title": "Santa Claude Is Coming To Town",
+    "url": "https://www.meetup.com/python-catania/events/317513866/",
+    "venue": {
+      "address": "Viale Africa, 31/E, 95129 Catania CT, Italy, Catania, CT",
+      "city": "Catania",
+      "name": "Paradigma"
+    }
+  }
+]
